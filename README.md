@@ -49,7 +49,7 @@ To run the *mock* server as docker container, do:
 
 ```bash
   docker build .
-  docker run -d -p 10010:10010 --name transapi-srv <containerId>
+  docker run -d -p 10010:10010 --name mock-srv <containerId>
 ```
 
 ## ToDo
