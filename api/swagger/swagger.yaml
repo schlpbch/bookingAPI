@@ -21,7 +21,7 @@ consumes:
   - application/json
 produces:
   - application/json
-  - text/html  # Supported for response of annulllierungen
+
 ## Security
 #securityDefinitions:
 #  oauth:
@@ -39,9 +39,9 @@ produces:
 paths:
 
   ### Fahrplan Part
-  
+
   # ToDo: Define properly with Team VTP
-  
+
   /standorte/{name}:
     x-swagger-router-controller: standorte
     get:
@@ -88,10 +88,10 @@ paths:
           description: "unexpected error"
 
   ### Vertrieb Part
-  
+
   /angebote/{recContext}:
     x-swagger-router-controller: angebote
-    get: 
+    get:
       description: "Hole Angebote für eine VerbindungsId (ReconstructionContext)"
       operationId: getAngebote
       parameters:
@@ -108,7 +108,7 @@ paths:
               $ref: '#/definitions/angebot'
         default:
           description: "unexpected error"
-          
+
   /angebote/:
     x-swagger-router-controller: angebote
     post:
@@ -150,13 +150,13 @@ paths:
         default:
           description: "unexpected error"
 
-  /buchungen/{vorabbuchungsId}:
+  /buchungen/{buchungsId}:
     x-swagger-router-controller: buchungen
     get:
       description: "Buche die Vorabbuchung"
       operationId: getBuchungen
       parameters:
-        - name: vorabbuchungsId
+        - name: buchungsId
           in: path
           description: "Id einer Vorabbuchung"
           required: true
@@ -166,6 +166,23 @@ paths:
           description: "Buchung bestätigt"
           schema:
             $ref: '#/definitions/buchung'
+        default:
+          description: "unexpected error"
+
+    delete:
+      description: "Annuliere die Buchung"
+      operationId: deleteBuchungen
+      parameters:
+        - name: buchungsId
+          in: path
+          description: "Id einer Buchung"
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Buchung annulliert"
+          schema:
+            type: string
         default:
           description: "unexpected error"
 
@@ -185,27 +202,6 @@ paths:
           description: "Billett"
           schema:
             $ref: '#/definitions/billett'
-        default:
-          description: "unexpected error"
-
-
-  ### SAV Part
-  /annullierungen/{buchungsId}:
-    x-swagger-router-controller: annullierungen
-    get:
-      description: "Annuliere die Buchung"
-      operationId: getAnnullierungen
-      parameters:
-        - name: buchungsId
-          in: path
-          description: "Id einer Buchung"
-          required: true
-          type: string
-      responses:
-        200:
-          description: "Buchung annulliert"
-          schema:
-            type: string
         default:
           description: "unexpected error"
 
@@ -250,7 +246,7 @@ definitions:
         description: "Zeit"
         type: string
         format: dateTime
-  
+
   # ToDo: Define properly with Team VTP
   verbindung:
     type: object
@@ -265,7 +261,7 @@ definitions:
         type: string
       abfahrtsOrt:
         description: "Abfahrtsort"
-        type: string    
+        type: string
       abfahrtsDatum:
         description: "Abfahrtsdatum"
         type: string
@@ -319,7 +315,7 @@ definitions:
         enum:
          - ga
          - halbtax
-         
+
   angebotsAnfrage:
     type: object
     properties:
@@ -329,7 +325,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/person'
-          
+
   angebot:
     type: object
     required:

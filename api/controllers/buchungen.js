@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = { getBuchungen };
+module.exports = { getBuchungen, deleteBuchungen };
 
 function getBuchungen(req, res) {
   var buchungsId = {
@@ -9,12 +9,16 @@ function getBuchungen(req, res) {
       {
         'rel': "Billette für Buchung B3 holen",
         'href': "http://localhost:10010/billette/B3"
-      },
-      {
-        'rel': "Buchung B3 annullieren",
-        'href': "http://localhost:10010/annullierungen/B3"
       }
     ]
-  }
+  };
+  res.json(buchungsId);
+}
+
+function deleteBuchungen(req, res) {
+  // If everything is ok, the canceled booking id is returned.
+  var buchungsId = {
+    'buchungsId': 'B3'
+  };
   res.json(buchungsId);
 }
