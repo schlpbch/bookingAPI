@@ -1,6 +1,6 @@
 #About
 
-This a simple server Node.js based server to test the *transportationAPI*.
+This a simple Node.js based mock server to test the *transportationAPI*.
 
 
 To edit the API interactively, do:
@@ -10,7 +10,7 @@ To edit the API interactively, do:
 ```
 The browser will then provide you with tab to edit the specification.
 
-To run in a mock mode, start with:
+To run Swagger in mock mode, start with:
 
 
 ```bash
@@ -25,8 +25,16 @@ To run the tests:
 ```
 
 To run the *mock* server, do:
+
+
 ```bash
-  nodemon1 app.js
+  swagger project start
+```
+
+or simplier:
+
+```bash
+  nodemon app.js
 ```
 
 To run the *mock* server as docker container, do:
