@@ -1,13 +1,21 @@
 #About
 
-This a simple Node.js based mock server to test the *transportationAPI*.
+This a simple Node.js based mock server to test the **transportationAPI**. The mock implementation is intended for fast protoyping and to get the API right (Getting APIs right is *hard*).
 
+## Installing
+First, **Nodejs** and **npm** which comes with it is needed. Then to install all the modules, simply run:
 
+```bash
+  npm install
+```
+
+## Running and editing
 To edit the API interactively, do:
 
 ```bash
   swagger project edit
 ```
+
 The browser will then provide you with tab to edit the specification.
 
 To run Swagger in mock mode, start with:
@@ -34,7 +42,7 @@ To run the *mock* server, do:
 or simplier:
 
 ```bash
-  nodemon app.js
+  node app.js
 ```
 
 To run the *mock* server as docker container, do:
@@ -44,9 +52,9 @@ To run the *mock* server as docker container, do:
   docker run -d -p 10010:10010 --name transapi-srv <containerId>
 ```
 
-# ToDo
-
+## ToDo
+- Get API right
 - Clarify legalese
 - Setup API Management
 - Setup OAuth2
-- Align with Fahrplan Team
+- Align with Fahrplan team

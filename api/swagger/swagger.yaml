@@ -3,7 +3,7 @@ swagger: '2.0'
 ## API Information
 info:
   version: '0.0.3'
-  title: "Simple öV transportation API"
+  title: "Simple öV booking API"
   description: "A simple API to book öV tickets in Switzerland."
   contact:
     name: Team SVS Vertrieb
@@ -53,6 +53,7 @@ paths:
           description: "Name des Standortes"
           required: true
           type: string
+          default: 'Bern'
       responses:
         200:
           description: "Eine Liste von Haltepunkte Codes"
@@ -67,16 +68,42 @@ paths:
 
   /verbindungen/:
     x-swagger-router-controller: verbindungen
-    post:
+    get:
       description: "Hole Verbindungen"
-      operationId: postVerbindungen
+      operationId: getVerbindungen
       parameters:
-        - in: body
-          name: verbindungsAnfrage
-          description: "Anfrage für Verbindungen von A nach B."
-          required: true
-          schema:
-            $ref: '#/definitions/verbindungsAnfrage'
+        - name: vonUICode
+          in: query
+          description: "Abfahrtsort als UIC Code"
+          type: integer
+          default: 8507000
+
+      # ToDo: Get right later
+      #  - viaCodes:
+      #    type: array
+      #    items:
+      #      name: viaCode
+      #      in: query
+      #      description: "Via Ort als UIC Code"
+      #      type: integer
+
+        - name: nachUICode
+          description: "Ankunftsort als UIC Code"
+          in: query
+          type: integer
+          default: 8508500
+        - name: datum
+          in: query
+          description: "Datum"
+          type: string
+          format: date
+          default: '2017-01-14'
+        - name: zeit
+          in: query
+          description: "Zeit"
+          type: string
+          format: dateTime
+          default: '20:22'
       responses:
         200:
           description: "Eine Liste von Verbindungen"
@@ -89,16 +116,65 @@ paths:
 
   ### Vertrieb Part
 
-  /angebote/{recContext}:
+  /angebote/:
     x-swagger-router-controller: angebote
     get:
-      description: "Hole Angebote für eine VerbindungsId (ReconstructionContext)"
+      description: "Hole Angebote für eine VerbindungsId (ReconstructionContext oder (vonUICode, nachUICode, ViaUICode, Datum, Zeit)). Der zweite Ansatz ist Convenience."
       operationId: getAngebote
       parameters:
         - name: recContext
-          in: path
+          in: query
+          description: "Reconstruction Context wie vom Fahrplan erstellt"
           required: true
           type: string
+          default: 'RecContext-RC1'
+        - name: vonUICode
+          in: query
+          description: "Abfahrtsort als UIC Code"
+          type: integer
+          default: 8507000
+
+      # ToDo: Get right later
+      #  - viaCodes:
+      #    type: array
+      #    items:
+      #      name: viaCode
+      #      in: query
+      #      description: "Via Ort als UIC Code"
+      #      type: integer
+
+        - name: nachUICode
+          description: "Ankunftsort als UIC Code"
+          in: query
+          type: integer
+          default: 8508500
+        - name: datum
+          in: query
+          description: "Datum"
+          type: string
+          format: date
+          default: '2017-01-14'
+        - name: zeit
+          in: query
+          description: "Zeit"
+          type: string
+          format: dateTime
+          default: '20:22'
+          
+      # ToDo; Scale for more than one traveller
+        - name: alter
+          in: query
+          description: 'Alter des Reisenden'
+          type: integer
+          default: 42
+        - name: ermaessigung
+          in: query
+          description: 'Ermaessigung: {GA. Halbtax}'
+          type: string
+          default: 'halbtax'
+          enum:
+           - ga
+           - halbtax
       responses:
         200:
           description: "Eine Liste von Angeboten"
@@ -109,51 +185,48 @@ paths:
         default:
           description: "unexpected error"
 
-  /angebote/:
-    x-swagger-router-controller: angebote
     post:
-      description: "Hole Angebote"
+      description: "Vorabbucht das Angebot und erstellt eine Vorabbuchung."
       operationId: postAngebote
       parameters:
-         - name: angebotsAnfrage
+         - name: angebotsId
            in: body
-           description: "Anfrage für Angebote für eine Verbindung oder Strecke."
+           description: "Das zu vorabbuchende Angebot"
            required: true
            schema:
-              $ref: '#/definitions/angebotsAnfrage'
+              $ref: '#/definitions/angebotsId'
       responses:
         200:
-          description: "Eine Liste von Angeboten"
+          description: "Angebot vorabgebucht"
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/angebot'
+            $ref: '#/definitions/vorabbuchung'
         default:
           description: "unexpected error"
 
-  /vorabbuchungen/{angebotsId}:
+  /vorabbuchungen/:
     x-swagger-router-controller: vorabbuchungen
-    get:
-      description: "Vorabbuche das Angebot"
-      operationId: getVorabbuchungen
+    post:
+      description: "Bucht die Vorabbuchung und erstellt die Buchung."
+      operationId: postVorabbuchungen
       parameters:
-        - name: angebotsId
-          in: path
-          description: "Id eines Angebotes"
+        - name: vorabbuchungsId
+          in: body
+          description: "Die zu buchende Vorabbuchung"
           required: true
-          type: string
-      responses:
-        200:
-          description: "Vorabbuchung bestätigt"
           schema:
             $ref: '#/definitions/vorabbuchung'
+      responses:
+        200:
+          description: "Vorabbuchung gebucht"
+          schema:
+            $ref: '#/definitions/buchungsId'
         default:
           description: "unexpected error"
 
   /buchungen/{buchungsId}:
     x-swagger-router-controller: buchungen
     get:
-      description: "Buche die Vorabbuchung"
+      description: "Hole die Buchung"
       operationId: getBuchungen
       parameters:
         - name: buchungsId
@@ -161,9 +234,10 @@ paths:
           description: "Id einer Vorabbuchung"
           required: true
           type: string
+          default: "B1" # for simplier mock testing only
       responses:
         200:
-          description: "Buchung bestätigt"
+          description: "Die Buchung"
           schema:
             $ref: '#/definitions/buchung'
         default:
@@ -178,6 +252,7 @@ paths:
           description: "Id einer Buchung"
           required: true
           type: string
+          default: "B1" # for simplier mock testing only
       responses:
         200:
           description: "Buchung annulliert"
@@ -197,6 +272,15 @@ paths:
           description: "Id einer Buchung"
           required: true
           type: string
+          default: "B1" # for simplier mock testing only
+        - name: typ
+          description: "Typ des Billetts: {pdf, screen}"
+          in: query
+          type: string
+          default: 'pdf'
+          enum:
+            - pdf
+            - screen
       responses:
         200:
           description: "Billett"
@@ -219,33 +303,6 @@ definitions:
         type: string
       code:
         type: string
-  verbindungsAnfrage:
-    type: object
-    required:
-      - vonCode
-      - nachCode
-      - datum
-      - zeit
-    properties:
-      vonCode:
-        description: "Abfahrtsort als UIC Code"
-        type: integer
-      viaCodes:
-        type: array
-        items:
-          description: "Via Ort als UIC Code"
-          type: integer
-      nachCode:
-        description: "Ankunftsort als UIC Code"
-        type: integer
-      datum:
-        description: "Datum"
-        type: string
-        format: date
-      zeit:
-        description: "Zeit"
-        type: string
-        format: dateTime
 
   # ToDo: Define properly with Team VTP
   verbindung:
@@ -286,46 +343,16 @@ definitions:
         items:
           $ref: '#/definitions/link'
 
-  strecke:
+  angebotsId:
     type: object
     required:
-      - von
-      - nach
+      - angebotsId
     properties:
-      von:
-        description: "Abfahrtsort"
+      angebotsId:
+        description: "Id eines Angebotes"
         type: string
-      nach:
-        description: "Ankunftsort"
-        type: string
-      via:
-        type: array
-        items:
-          type: string
-
-  person:
-    type: object
-    required:
-      - alter
-    properties:
-      alter:
-        type: integer
-      ermaessigung:
-        type: string
-        enum:
-         - ga
-         - halbtax
-
-  angebotsAnfrage:
-    type: object
-    properties:
-      strecke:
-        $ref: '#/definitions/strecke'
-      personen:
-        type: array
-        items:
-          $ref: '#/definitions/person'
-
+        default: "A1" # for simplier mock testing only
+        
   angebot:
     type: object
     required:
@@ -347,6 +374,7 @@ definitions:
         items:
           $ref: '#/definitions/link'
 
+  
   vorabbuchung:
     type: object
     required:
@@ -355,10 +383,17 @@ definitions:
       vorabbuchungsId:
         description: "Id einer Vorabbbuchung"
         type: string
-      links:
-        type: array
-        items:
-          $ref: '#/definitions/link'
+        default: "V1" # for simplier mock testing only
+
+  buchungsId:
+    type: object
+    required:
+     - buchungsId
+    properties:
+      buchungsId:
+        description: "Id einer Buchung"
+        type: string
+        default: "B1" # for simplier mock testing only
 
   buchung:
     type: object
@@ -367,6 +402,9 @@ definitions:
     properties:
       buchungsId:
         description: "Id einer Buchung"
+        type: string
+      beschreibung:
+        description: "Beschreibung der Buchung"
         type: string
       links:
         type: array

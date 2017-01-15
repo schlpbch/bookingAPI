@@ -1,9 +1,8 @@
 'use strict';
 
-module.exports = { postVerbindungen };
+module.exports = { getVerbindungen };
 
-function postVerbindungen(req, res) {
-  //console.log(req);
+function getVerbindungen(req, res) {
   var verbindung1 = {
     'verbindungsId': 'RecContext-RC1',
     'zugNummer': 'IC 918',
@@ -15,7 +14,7 @@ function postVerbindungen(req, res) {
     'ankunftsZeit': '20:22',
     'links': [
       {
-        'rel': 'Angebot für Verbindung1 holen',
+        'rel': 'Angebot holen',
         'href': 'http://localhost:10010/angebote/RecContext-RC1'
       }
     ]

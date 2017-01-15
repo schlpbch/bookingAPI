@@ -1,16 +1,20 @@
 'use strict';
 
-module.exports = { getVorabbuchungen };
+module.exports = { postVorabbuchungen };
 
-function getVorabbuchungen(req, res) {
-  var vorabbuchungsId = {
-    'vorabbuchungsId': 'V9',
+function postVorabbuchungen(req, res) {
+  var buchung = {
+    'buchungsId': 'B1',
     'links': [
         {
-          'rel': "Vorabbuchung V9 buchen",
-          'href': "http://localhost:10010/buchungen/V9"
+          'rel': "Buchungsinformation holen",
+          'href': "http://localhost:10010/buchungen/B1"
+        },
+        {
+          'rel': "Billette holen",
+          'href': "http://localhost:10010/billette/B1"
         }
       ]
   }
-  res.json(vorabbuchungsId);
+  res.json(buchung);
 }
