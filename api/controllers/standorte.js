@@ -1,12 +1,10 @@
 'use strict';
 
-module.exports = {
-  getStandorte: getStandorte
-};
+module.exports = { getStandorte };
 
 function getStandorte(req, res) {
-  //console.log(req);
-  var standortBern = {'name': 'Bern HB', 'code': '8507000'};
-  var standorte = [standortBern];
+  var standortBernHB = {'name': 'Bern HB', 'code': '8507000'};
+  var standortBernRBS = {'name': 'Bern RBS', 'code': '8508050'};
+  var standorte = [standortBernHB, standortBernRBS];
   res.json(standorte);
 }

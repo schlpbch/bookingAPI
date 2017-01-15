@@ -2,11 +2,13 @@
 
 This a simple server Node.js based server to test the *transportationAPI*.
 
-Start with
+
+To edit the API interactively, do:
 
 ```bash
-  nodejs app.js
+  swagger project edit
 ```
+The browser will then provide you with tab to edit the specification.
 
 To run in a mock mode, start with:
 
@@ -22,6 +24,11 @@ To run the tests:
   swagger project test
 ```
 
+To run the *mock* server, do:
+```bash
+  nodemon1 app.js
+```
+
 To run the *mock* server as docker container, do:
 
 ```bash
@@ -29,4 +36,9 @@ To run the *mock* server as docker container, do:
   docker run -d -p 10010:10010 --name transapi-srv <containerId>
 ```
 
+# ToDo
 
+- Clarify legalese
+- Setup API Management
+- Setup OAuth2
+- Align with Fahrplan Team

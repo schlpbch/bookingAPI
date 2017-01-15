@@ -11,7 +11,7 @@ info:
     url: http://transportationAPI.sbb.ch/
   license:
     name: SBB
-    url: http://opensource.org/licenses/MIT
+    url: https://data.sbb.ch/page/licence/
 host: localhost:10010 #transportationAPI.sbb.ch
 basePath: /
 schemes:
@@ -21,7 +21,7 @@ consumes:
   - application/json
 produces:
   - application/json
-
+  - text/html  # Supported for response of annulllierungen
 ## Security
 #securityDefinitions:
 #  oauth:
@@ -39,6 +39,9 @@ produces:
 paths:
 
   ### Fahrplan Part
+  
+  # ToDo: Define properly with Team VTP
+  
   /standorte/{name}:
     x-swagger-router-controller: standorte
     get:
@@ -60,13 +63,16 @@ paths:
         default:
           description: "unexpected error"
 
+  # ToDo: Define properly with Team VTP
+
   /verbindungen/:
     x-swagger-router-controller: verbindungen
     post:
       description: "Hole Verbindungen"
+      operationId: postVerbindungen
       parameters:
         - in: body
-          name: verbindungsAnfrage 
+          name: verbindungsAnfrage
           description: "Anfrage für Verbindungen von A nach B."
           required: true
           schema:
@@ -82,12 +88,34 @@ paths:
           description: "unexpected error"
 
   ### Vertrieb Part
+  
+  /angebote/{recContext}:
+    x-swagger-router-controller: angebote
+    get: 
+      description: "Hole Angebote für eine VerbindungsId (ReconstructionContext)"
+      operationId: getAngebote
+      parameters:
+        - name: recContext
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Eine Liste von Angeboten"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/angebot'
+        default:
+          description: "unexpected error"
+          
   /angebote/:
     x-swagger-router-controller: angebote
     post:
       description: "Hole Angebote"
+      operationId: postAngebote
       parameters:
-         - name: angebotsAnfrage 
+         - name: angebotsAnfrage
            in: body
            description: "Anfrage für Angebote für eine Verbindung oder Strecke."
            required: true
@@ -107,18 +135,18 @@ paths:
     x-swagger-router-controller: vorabbuchungen
     get:
       description: "Vorabbuche das Angebot"
+      operationId: getVorabbuchungen
       parameters:
         - name: angebotsId
           in: path
           description: "Id eines Angebotes"
           required: true
-          type: integer
+          type: string
       responses:
         200:
           description: "Vorabbuchung bestätigt"
           schema:
-            description: "VorabbuchungsId"
-            type: string
+            $ref: '#/definitions/vorabbuchung'
         default:
           description: "unexpected error"
 
@@ -126,25 +154,26 @@ paths:
     x-swagger-router-controller: buchungen
     get:
       description: "Buche die Vorabbuchung"
+      operationId: getBuchungen
       parameters:
         - name: vorabbuchungsId
           in: path
           description: "Id einer Vorabbuchung"
           required: true
-          type: integer
+          type: string
       responses:
         200:
           description: "Buchung bestätigt"
           schema:
-            description: "BuchungsId"
-            type: string
+            $ref: '#/definitions/buchung'
         default:
           description: "unexpected error"
-          
+
   /billette/{buchungsId}:
     x-swagger-router-controller: billette
     get:
-      description: "Hole die URL, wo das Billett zu einer Buchung heruntergeladen kann. Think: PDF als Enc64 schicken?"
+      description: "Hole das Billett"
+      operationId: getBillette
       parameters:
         - name: buchungsId
           in: path
@@ -159,18 +188,40 @@ paths:
         default:
           description: "unexpected error"
 
+
+  ### SAV Part
+  /annullierungen/{buchungsId}:
+    x-swagger-router-controller: annullierungen
+    get:
+      description: "Annuliere die Buchung"
+      operationId: getAnnullierungen
+      parameters:
+        - name: buchungsId
+          in: path
+          description: "Id einer Buchung"
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Buchung annulliert"
+          schema:
+            type: string
+        default:
+          description: "unexpected error"
+
 ## Definitions
 
 definitions:
+  # ToDo: Define properly with Team VTP
   standort:
     type: object
-    required: 
+    required:
       - name
       - code
     properties:
       name:
         type: string
-      code: 
+      code:
         type: string
   verbindungsAnfrage:
     type: object
@@ -181,40 +232,81 @@ definitions:
       - zeit
     properties:
       vonCode:
-        type: string
+        description: "Abfahrtsort als UIC Code"
+        type: integer
       viaCodes:
         type: array
         items:
-          type: string
+          description: "Via Ort als UIC Code"
+          type: integer
       nachCode:
-        type: string
+        description: "Ankunftsort als UIC Code"
+        type: integer
       datum:
+        description: "Datum"
         type: string
         format: date
       zeit:
+        description: "Zeit"
         type: string
         format: dateTime
+  
+  # ToDo: Define properly with Team VTP
   verbindung:
     type: object
     required:
-      - id
+      - verbindungsId
     properties:
-      id:
+      verbindungsId:
+        description: "Id einer Verbindung (ReconstructionContext)"
         type: string
+      zugNummer:
+        description: "Zugnummer"
+        type: string
+      abfahrtsOrt:
+        description: "Abfahrtsort"
+        type: string    
+      abfahrtsDatum:
+        description: "Abfahrtsdatum"
+        type: string
+        format: date
+      abfahrtsZeit:
+        description: "Abfahrtszeit"
+        type: string
+        format: dateTime
+      ankunftsOrt:
+        description: "Ankunftsort"
+        type: string
+      ankunftsDatum:
+        description: "Ankunftsdatum"
+        type: string
+        format: date
+      ankunftsZeit:
+        description: "Ankunftszeit"
+        type: string
+        format: dateTime
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/link'
+
   strecke:
     type: object
     required:
       - von
       - nach
     properties:
-      von: 
+      von:
+        description: "Abfahrtsort"
         type: string
       nach:
+        description: "Ankunftsort"
         type: string
       via:
         type: array
-        items: 
+        items:
           type: string
+
   person:
     type: object
     required:
@@ -227,29 +319,64 @@ definitions:
         enum:
          - ga
          - halbtax
+         
   angebotsAnfrage:
     type: object
-    required:
-      - personen
-      ### + entweder Strecke oder Verbindung
     properties:
-      verbindung:
-        $ref: '#/definitions/verbindung'
       strecke:
         $ref: '#/definitions/strecke'
       personen:
         type: array
         items:
           $ref: '#/definitions/person'
+          
   angebot:
     type: object
     required:
-      - angebotId 
+      - angebotsId
+      - beschreibung
+      - preis
     properties:
-      angebotId:
+      angebotsId:
+        description: "Id eines Angebotes"
         type: string
       beschreibung:
+        description: "Beschreibung des Angebotes"
         type: string
+      preis:
+        description: "Preis des Angebotes"
+        type: integer
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/link'
+
+  vorabbuchung:
+    type: object
+    required:
+     - vorabbuchungsId
+    properties:
+      vorabbuchungsId:
+        description: "Id einer Vorabbbuchung"
+        type: string
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/link'
+
+  buchung:
+    type: object
+    required:
+     - buchungsId
+    properties:
+      buchungsId:
+        description: "Id einer Buchung"
+        type: string
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/link'
+
   billett:
     type: object
     properties:
@@ -258,6 +385,20 @@ definitions:
         enum:
         - pdf
         - screenTicket
-      url:
+      href:
         type: string
-    
+
+  ### REST level 3 support
+
+  link:
+    type: object
+    required:
+     - rel
+     - href
+    properties:
+      rel:
+        type: string
+        description: "Aktion"
+      href:
+        type: string
+        description: "URL zu Auslösung der Aktion"
