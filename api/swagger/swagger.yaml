@@ -4,7 +4,7 @@ swagger: '2.0'
 info:
   version: '0.0.3'
   title: "Simple öV transportation API"
-  description: "A simple API to book öV tickets."
+  description: "A simple API to book öV tickets in Switzerland."
   contact:
     name: Team SVS Vertrieb
     email: andreas.schlapbach@sbb.ch
