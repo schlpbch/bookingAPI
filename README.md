@@ -54,6 +54,7 @@ To run the *mock* server as docker container, do:
 
 ## ToDo
 - Get API right
+-- Change "DELETE" `buchungen/<buchungsId>` to "GET" `buchungen/<buchungsId>/delete`
 - Clarify legalese
 - Setup API Management
 - Setup OAuth2
