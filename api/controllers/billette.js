@@ -5,11 +5,12 @@ module.exports = {
 };
 
 function getBillette(req, res) {
-    var billette = {
-        'links': [{
-            'rel': "PDF zur Buchung",
-            'href': "http://localhost:10001/billete/billettB1.pdf"
-        }]
+    if ('pdf' == req.query.typ) {
+        var options = {
+            root: __dirname + '/../../public/'
+        };
+        res.sendFile('billette/billettB1.pdf', options);
+    } else {
+        res.sendStatus(415);
     }
-    res.json(billette);
 }

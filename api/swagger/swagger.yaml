@@ -21,6 +21,7 @@ consumes:
   - application/json
 produces:
   - application/json
+  - application/pdf
 
 ## Security
 #securityDefinitions:
@@ -286,8 +287,6 @@ paths:
       responses:
         200:
           description: "Billett"
-          schema:
-            $ref: '#/definitions/billett'
         default:
           description: "unexpected error"
 
