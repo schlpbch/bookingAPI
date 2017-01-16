@@ -160,7 +160,7 @@ paths:
           type: string
           format: dateTime
           default: '20:22'
-          
+
       # ToDo; Scale for more than one traveller
         - name: alter
           in: query
@@ -243,9 +243,11 @@ paths:
         default:
           description: "unexpected error"
 
-    delete:
+  /buchungen/{buchungsId}/annullieren:
+    x-swagger-router-controller: buchungen
+    get:
       description: "Annuliere die Buchung"
-      operationId: deleteBuchungen
+      operationId: getBuchungenAnnullieren
       parameters:
         - name: buchungsId
           in: path
@@ -352,7 +354,7 @@ definitions:
         description: "Id eines Angebotes"
         type: string
         default: "A1" # for simplier mock testing only
-        
+
   angebot:
     type: object
     required:
@@ -374,7 +376,7 @@ definitions:
         items:
           $ref: '#/definitions/link'
 
-  
+
   vorabbuchung:
     type: object
     required:

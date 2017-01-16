@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = { getBuchungen, deleteBuchungen };
+module.exports = { getBuchungen, getBuchungenAnnullieren };
 
 function getBuchungen(req, res) {
   var buchung = {
@@ -12,15 +12,15 @@ function getBuchungen(req, res) {
         'href': "http://localhost:10010/billette/B1"
       },
       {
-        'rel': "Buchung annulieren",
-        'href': "http://localhost:10010/billette/B1"
+        'rel': "Buchung annullieren",
+        'href': "http://localhost:10010/billette/B1/annullieren"
       }
     ]
   };
   res.json(buchung);
 }
 
-function deleteBuchungen(req, res) {
+function getBuchungenAnnullieren(req, res) {
   // If everything is ok, the canceled booking id is returned.
   var buchungsId = {
     'buchungsId': 'B1'
