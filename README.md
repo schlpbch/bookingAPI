@@ -1,6 +1,6 @@
 #About
 
-This a simple Node.js based mock server to test the **bookingAPI**. The mock implementation is intended for fast protoyping and to get the API right (Getting APIs right is *hard*).
+This a simple Node.js based mock server to test the (bookingAPI)[api/swagger/swagger.yaml). The mock implementation is intended for fast protoyping and to get the API right (Getting APIs right is *hard*).
 
 ## Installing
 First, **Nodejs** and **npm** which comes with it is needed. Then to install all the modules, simply run:
