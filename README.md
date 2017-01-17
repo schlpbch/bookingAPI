@@ -54,8 +54,9 @@ To run the *mock* server as docker container, do:
 
 ## ToDo
 - Get the API right
-- Write a client to verify the usability of the API (APIs are UIs for developers.
+- Write a client to verify the usability of the API (APIs are UIs for developers).
 - Clarify legalese
 - Setup API Management
 - Setup OAuth2
 - Align with Fahrplan team
+- Align with Open Data (better Open API) team
