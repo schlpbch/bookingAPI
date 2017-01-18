@@ -1,85 +1,139 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
-  </head>
-  <body ng-app="bookingApiClientApp">
-    <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
 
-            <a class="navbar-brand" href="#/">bookingApiClient</a>
-          </div>
+<body ng-app="firstApplication">
+  <md-content layout-padding flex>
+    <h1 class="md-display-1">booking API Test Application</h1>
+    <h1 class="md-subhead">version 0.0.1</h1>
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="Reisewunsch">
+        <md-content class="md-padding">
+          <h3 class="md-title">Reisewunsch</h3>
+          <form name="reisewunsch">
+            <div layout="row">
+              <md-input-container>
+                <label>UIC Code</label>
+                <input name="vonUICode" ng-model="angebot.vonUICode" required>
+              </md-input-container>
+              <md-input-container>
+                <label>UIC Code</label>
+                <input name="nachUICode" ng-model="angebot.nachUICode" required>
+              </md-input-container>
+            </div>
+            <div layout="row">
+              <md-input-container>
+                <md-datepicker ng-model="angebot.datum" md-placeholder="Enter date"></md-datepicker>
+              </md-input-container>
+              <md-input-container>
+                <label>Time</label>
+                <input name="zeit" ng-model="angebot.zeit" required>
+              </md-input-container>
+            </div>
+            <div layout="row">
+              <md-input-container>
+                <label>Hinfahrt</label>
+                <md-switch ng-model="angebot.istHinfahrt">
+                </md-switch>
+              </md-input-container>
+            </div>
+            <div layout="row">
+              <md-input-container>
+                <label>Alter</label>
+                <input name="alter" ng-model="angebot.alter" required>
+              </md-input-container>
+              <md-input-container>
+                <label>Ermässigung</label>
+                <md-select name="ermaessigung" ng-model="angebot.ermaessigung" required>
+                  <md-option value="none">-</md-option>
+                  <md-option value="halbtax">HalbTax</md-option>
+                  <md-option value="ga">GA</md-option>
+                </md-select>
+              </md-input-container>
+            </div>
+          </form>
+          <md-button class="md-raised md-primary" ng-href="#Angebote">Holen</md-button>
+        </md-content>
+      </md-tab>
+      <md-tab label="Angebote">
+        <md-content class="md-padding">
+          <h3 class="md-title">Angebote</h3>
+          <md-list>
+            <md-list-item class="md-3-line" ng-repeat="item in [{'angebotId': 'A1', 'beschreibung': 'DV Artikel','preis':22},{'angebotId': 'A2', 'beschreibung': 'Sparartikel','preis':42}]">
+              <div class="md-list-item-text">
+                <h3>{{item.angebotId}}</h3>
+                <p>{{item.beschreibung}}</p>
+                {{item.preis}}
+              </div>
+              <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                Checkbox 1: {{ data.cb1 }}
+              </md-checkbox>
+              <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+          </md-list>
+          <md-button class="md-primary">Zurück</md-button>
+          <md-button class="md-primary md-raised">Angebot buchen</md-button>
+        </md-content>
+      </md-tab>
+      <md-tab label="Buchungen">
+        <md-content class="md-padding">
+          <h3 class="md-title">Buchungen</h3>
+          <p>
+            Fahrt von Bern nach Thun am 14.01.2017 20:04.
+          </p>
+          <md-button class="md-primary">Zurück</md-button>
+          <md-button class="md-primary">Buchung annullieren</md-button>
+          <md-button class="md-primary md-raised">Billette holen</md-button>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
 
-          <div class="collapse">
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID
+  <script>
+    ! function(A, n, g, u, l, a, r) {
+      A.GoogleAnalyticsObject = l, A[l] = A[l] || function() {
+          (A[l].q = A[l].q || []).push(arguments)
+        }, A[l].l = +new Date, a = n.createElement(g),
+        r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+    }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+  </script>
+  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-messages.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+  <script src='src/app.js'></script>
 
-    <div class="container">
-    <div ng-view=""></div>
-    </div>
+  <script language="javascript">
+    angular
+      .module('firstApplication', ['ngMaterial'])
+      .config(function($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+          .primaryPalette('red')
+          .accentPalette('grey');
+      });
+  </script>
 
-    <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
-    </div>
-
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
-
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-messages/angular-messages.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
-
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <!-- endbuild -->
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/about.js"></script>
+  <!-- endbuild -->
 </body>
+
 </html>
