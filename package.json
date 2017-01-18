@@ -1,8 +1,8 @@
 {
-  "name": "transportationAPI",
+  "name": "bookingAPI",
   "version": "0.0.3",
   "private": true,
-  "description": "New Swagger API Project",
+  "description": "A simple API to book öV tickets in Switzerland.",
   "keywords": [],
   "author": "Andreas Schlapbach",
   "license": "SBB",
