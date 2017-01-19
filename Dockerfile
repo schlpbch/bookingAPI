@@ -1,4 +1,3 @@
 FROM node:4-onbuild
 
-EXPOSE 10010
-
+EXPOSE 8080

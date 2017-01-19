@@ -12,7 +12,7 @@ info:
   license:
     name: SBB
     url: https://data.sbb.ch/page/licence/
-host: localhost:10010 #transportationAPI.sbb.ch
+host: localhost:8080 #transportationAPI.sbb.ch
 basePath: /
 schemes:
   - http # Nur am Anfang
