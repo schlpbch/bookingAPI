@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title></title>
@@ -7,7 +8,7 @@
   <meta name="viewport" content="width=device-width">
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="styles/main.css">
 </head>
@@ -43,8 +44,7 @@
             <div layout="row">
               <md-input-container>
                 <label>Hinfahrt</label>
-                <md-switch ng-model="angebot.istHinfahrt">
-                </md-switch>
+                <md-switch ng-model="angebot.istHinfahrt"/>
               </md-input-container>
             </div>
             <div layout="row">
@@ -73,7 +73,7 @@
               <div class="md-list-item-text">
                 <h3>{{item.angebotId}}</h3>
                 <p>{{item.beschreibung}}</p>
-                {{item.preis}}
+                Preis: {{item.preis}}
               </div>
               <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
                 Checkbox 1: {{ data.cb1 }}
@@ -116,7 +116,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-aria.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-messages.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
   <script src='src/app.js'></script>
 
   <script language="javascript">
@@ -124,16 +124,15 @@
       .module('firstApplication', ['ngMaterial'])
       .config(function($mdThemingProvider) {
         $mdThemingProvider.theme('default')
-          .primaryPalette('red')
+          .primaryPalette('blue')
           .accentPalette('grey');
       });
   </script>
-
-  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+<!--
   <script src="scripts/app.js"></script>
   <script src="scripts/controllers/main.js"></script>
   <script src="scripts/controllers/about.js"></script>
-  <!-- endbuild -->
+-->
 </body>
 
 </html>
