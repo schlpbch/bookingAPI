@@ -59,10 +59,11 @@
                   <input name="zeit" ng-model="angebot.zeit" required>
                 </md-input-container>
               </div>
-              <div layout="row">
+              <div>
                 <md-input-container>
-                  <label>Hinfahrt</label>
-                  <md-switch ng-model="angebot.istHinfahrt" aria-label="Switch" />
+                  <md-switch ng-model="angebot.istAbfahrt" aria-label="Abfahrt" ng-true-value="'Abfahrt'" ng-false-value="'Ankunft'">
+                    {{angebot.istAbfahrt}}
+                  </md-switch>
                 </md-input-container>
               </div>
               <div layout="row">
