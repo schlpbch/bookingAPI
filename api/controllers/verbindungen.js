@@ -16,7 +16,7 @@ function getVerbindungen(req, res) {
         'ankunftsZeit': '20:22',
         'links': [{
             'rel': 'Angebot holen',
-            'href': 'http://localhost:10010/angebote/RecContext-RC1'
+            'href': 'http://localhost:8080/angebote/RecContext-RC1'
         }]
     };
     var verbindungen = [verbindung1];

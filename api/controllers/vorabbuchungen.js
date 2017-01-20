@@ -9,11 +9,11 @@ function postVorabbuchungen(req, res) {
         'buchungsId': 'B1',
         'links': [{
                 'rel': "Buchungsinformation holen",
-                'href': "http://localhost:10010/buchungen/B1"
+                'href': "http://localhost:8080/buchungen/B1"
             },
             {
                 'rel': "Billette holen",
-                'href': "http://localhost:10010/billette/B1"
+                'href': "http://localhost:8080/billette/B1"
             }
         ]
     }

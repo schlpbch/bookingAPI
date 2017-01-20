@@ -27,54 +27,116 @@
   <!-- Container #2 -->
   <div flex layout="row">
 
-    <!-- Container #3
+    <!-- Container #3 -->
     <md-sidenav class="md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" ng-click="app.toggleList()">
-      <users-list users="[]app.users" selected="app.selected" on-selected="app.selectUser(user)">
+      <users-list users="app.users" selected="app.selected" on-selected="app.selectUser(user)">
       </users-list>
     </md-sidenav>
-    -->
+
     <!-- Container #4 -->
     <md-content layout-padding flex>
       <md-tabs md-dynamic-height md-border-bottom>
         <md-tab label="Reisewunsch">
           <md-content class="md-padding">
-            <h3 class="md-title">Reisewunsch</h3>
+            <h3 class="md-subhead">Reisewunsch</h3>
             <form name="reisewunsch">
-              <div layout="row">
+              <div flex>
                 <md-input-container>
                   <label>UIC Code</label>
-                  <input name="vonUICode" ng-model="angebot.vonUICode" required>
+                  <input name="vonUICode" ng-model="angebot.vonUICode" placeholder="8507000" required>
                 </md-input-container>
                 <md-input-container>
                   <label>UIC Code</label>
-                  <input name="nachUICode" ng-model="angebot.nachUICode" required>
+                  <input name="nachUICode" ng-model="angebot.nachUICode" placeholder="8507100" required>
                 </md-input-container>
               </div>
-              <div layout="row">
+              <div flex>
+                <md-input-container>
+                  <md-switch ng-model="angebot.istAbfahrt" aria-label="Abfahrt/Ankunft
+                  " ng-true-value="'Abfahrt'" ng-false-value="'Ankunft'">
+                    {{angebot.istAbfahrt}}
+                    </md-switch>
+                </md-input-container>
+              </div>
+              <div flex>
                 <md-input-container>
                   <md-datepicker ng-model="angebot.datum" md-placeholder="Enter date"></md-datepicker>
                 </md-input-container>
                 <md-input-container>
                   <label>Zeit</label>
-                  <input name="zeit" ng-model="angebot.zeit" required>
+                  <input name="zeit" ng-model="angebot.zeit" placeholder="22:22" required>
                 </md-input-container>
               </div>
-              <div>
+            </form>
+            <md-button class="md-raised md-primary">Suchen</md-button>
+          </md-content>
+        </md-tab>
+        <md-tab label="verbindungen">
+          <md-content class="layout-padding">
+            <h3 class="md-subhead">Verbindungen</h3>
+            <md-list>
+              <md-list-item class="md-3-line" ng-repeat="item in [{
+                      'verbindungsId': 'RecContext-RC1',
+                      'zugNummer': 'IC 918',
+                      'abfahrtsOrt': 'Bern',
+                      'abfahrtsDatum': '2017-01-14',
+                      'abfahrtsZeit': '20:04',
+                      'ankunftsOrt': 'Thun',
+                      'ankunftsDatum': '2017-02-24',
+                      'ankunftsZeit': '20:22'
+              },{
+                      'verbindungsId': 'RecContext-RC2',
+                      'zugNummer': 'IC 918',
+                      'abfahrtsOrt': 'Bern',
+                      'abfahrtsDatum': '2017-01-14',
+                      'abfahrtsZeit': '20:34',
+                      'ankunftsOrt': 'Thun',
+                      'ankunftsDatum': '2017-02-24',
+                      'ankunftsZeit': '20:52'
+              }
+              ]">
+                <md-card>
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-subhead">VerbindungsId: {{item.verbindungsId}}</span>
+                      <span class="md-headline">Verbindung {{item.abfahrtsOrt}} &ndash; {{item.ankunftsOrt}}</span>
+                      <span class="md-subhead">
+                        Zugnummer: {{item.zugNummer}}<br>
+                        Abfahrtsdatum: {{item.abfahrtsDatum}}, Zeit: {{item.abfahrtsZeit}}<br>
+                        Ankunftsdatum: {{item.ankunftsDatum}}, Zeit: {{item.ankunftsZeit}}
+                      </span>
+                    </md-card-title-text>
+                  </md-card-title>
+                  <md-card-actions layout="row" layout-align="end center">
+                    <md-button class="md-raised md-primary">Angebot</md-button>
+                  </md-card-actions>
+                </md-card>
+                </md-list-item>
+            </md-list>
+          </md-content>
+        </md-tab>
+        <md-tab label="Personen">
+          <md-content class="layout-padding">
+            <h3 class="md-subhead">Personen</h3>
+            <form name="reisewunsch">
+              <div flex>
                 <md-input-container>
-                  <md-switch ng-model="angebot.istAbfahrt" aria-label="Abfahrt" ng-true-value="'Abfahrt'" ng-false-value="'Ankunft'">
-                    {{angebot.istAbfahrt}}
-                  </md-switch>
+                  <label>Vorname</label>
+                  <input name="vorname" ng-model="angebot.vorname" placeholder="Endo" required>
+                </md-input-container>
+                <md-input-container>
+                  <label>Name</label>
+                  <input name="name" ng-model="angebot.name" placeholder="Annaconda" required>
                 </md-input-container>
               </div>
-              <div layout="row">
+              <div flex>
                 <md-input-container>
                   <label>Alter</label>
-                  <input name="alter" ng-model="angebot.alter" required>
+                  <input name="alter" ng-model="angebot.alter" placeholder="42" required>
                 </md-input-container>
                 <md-input-container>
-                  <label>Ermässigung</label>
-                  <md-select name="ermaessigung" ng-model="angebot.ermaessigung" required>
-                    <md-option value="none">-</md-option>
+                  <md-select name="ermaessigung" ng-model="angebot.ermaessigung" placeholder="HalbTax" required>
+                    <md-option value="none">keine</md-option>
                     <md-option value="halbtax">HalbTax</md-option>
                     <md-option value="ga">GA</md-option>
                   </md-select>
@@ -85,34 +147,41 @@
           </md-content>
         </md-tab>
         <md-tab label="Angebote">
-          <md-content class="md-padding">
-            <h3 class="md-title">Angebote</h3>
+          <md-content class="layout-padding">
+            <h3 class="md-subhead">Angebote</h3>
             <md-list>
-              <md-list-item class="md-3-line" ng-repeat="item in [{'angebotId': 'A1', 'beschreibung': 'DV Artikel','preis':22},{'angebotId': 'A2', 'beschreibung': 'Sparartikel','preis':42}]">
-                <div class="md-list-item-text">
-                  <h3>{{item.angebotId}}</h3>
-                  <p>{{item.beschreibung}}</p>
-                  Preis: {{item.preis}}
-                </div>
-                <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
-                  Checkbox 1: {{ data.cb1 }}
-                </md-checkbox>
-                <md-divider ng-if="!$last"></md-divider>
+              <md-list-item class="md-3-line" ng-repeat="item in [{'angebotsId': 'A1', 'beschreibung': 'DV Artikel    Bern - Thun','preis':22},{'angebotsId': 'A2', 'beschreibung': 'Sparartikel    Bern - Thun','preis':12}]">
+                <md-card>
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-subhead">AngebotsId: {{item.angebotsId}}</span>
+                      <span class="md-headline">{{item.beschreibung}}</span>
+                      <span style='{float: right}'>Preis:  {{item.preis}}</span>
+                    </md-card-title-text>
+                  </md-card-title>
+                  <md-card-actions layout="row" layout-align="end center">
+                    <md-button class="md-raised md-primary">buchen</md-button>
+                  </md-card-actions>
+                </md-card>
               </md-list-item>
             </md-list>
-            <md-button class="md-primary">Zurück</md-button>
-            <md-button class="md-primary md-raised">Angebot buchen</md-button>
           </md-content>
         </md-tab>
         <md-tab label="Buchungen">
-          <md-content class="md-padding">
-            <h3 class="md-title">Buchungen</h3>
-            <p>
-              Fahrt von Bern nach Thun am 14.01.2017 20:04.
-            </p>
-            <md-button class="md-primary">Zurück</md-button>
-            <md-button class="md-primary">Buchung annullieren</md-button>
-            <md-button class="md-primary md-raised">Billette holen</md-button>
+          <md-content class="layout-padding">
+            <h3 class="md-subhead">Buchungen</h3>
+            <md-card>
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-subhead">BuchungsId: {{item.angebotsId}}</span>
+                  <span class="md-headline">Beschreibung</span> Fahrt von Bern nach Thun am 14.01.2017 20:04.
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-primary">annullieren</md-button>
+                <md-button class="md-primary md-raised">Billette</md-button>
+              </md-card-actions>
+            </md-card>
           </md-content>
         </md-tab>
       </md-tabs>
