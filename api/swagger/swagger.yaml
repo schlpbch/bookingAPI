@@ -13,7 +13,7 @@ info:
     name: SBB
     url: https://data.sbb.ch/page/licence/
 host: localhost:8080 #transportationAPI.sbb.ch
-basePath: /
+basePath: /api
 schemes:
   - http # Nur am Anfang
   - https
@@ -116,7 +116,7 @@ paths:
           description: "unexpected error"
 
   ### Business Partner Part
-  
+
   /personen/{personsId}:
     x-swagger-router-controller: personen
     get:
@@ -136,7 +136,7 @@ paths:
             $ref: '#/definitions/person'
         default:
           description: "unexpected error"
-          
+
   /personen/:
     x-swagger-router-controller: personen
     post:
@@ -156,9 +156,9 @@ paths:
             $ref: '#/definitions/personsId'
         default:
           description: "unexpected error"
-       
+
   ### Vertriebs Part
-          
+
   /angebote/:
     x-swagger-router-controller: angebote
     get:
@@ -414,7 +414,7 @@ definitions:
          - keine
          - halbtax
          - ga
- 
+
   personsId:
     type: object
     required:

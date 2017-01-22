@@ -12,7 +12,7 @@ var app = angular.module('app', ['ngMaterial', 'ngRoute']);
 app.config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
     .primaryPalette('blue')
-    .accentPalette('grey')
+    .accentPalette('orange')
 });
 
 app.controller('AppCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav) {
@@ -22,7 +22,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav) 
 
   // ToDo: Load via REST Services
 
-  //GET http://localhost:8080/verbindungen/?vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22 
+  //GET http://localhost:8080/api/verbindungen/?vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22
   $scope.verbindungen = [{
     'verbindungsId': 'RecContext-RC1',
     'zugNummer': 'IC 918',
@@ -43,7 +43,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav) 
     'ankunftsZeit': '20:52'
   }];
 
-  //GET http://localhost:8080/angebote/?recContext=RecContext-RC1&vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22&alter=42&ermaessigung=halbtax
+  //GET http://localhost:8080/api/angebote/?recContext=RecContext-RC1&vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22&alter=42&ermaessigung=halbtax
   $scope.angebote = [{
     'angebotsId': 'A1',
     'beschreibung': 'DV Artikel    Bern - Thun',
@@ -54,7 +54,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav) 
     'preis': 12
   }];
 
-  //GET http://localhost:8080/buchungen/B1
+  //GET http://localhost:8080/api/buchungen/B1
   $scope.buchung = {
     'buchungsId': 'B1',
     'beschreibung': 'Fahrt von Bern nach Thun am 14.01.2017 20:04.'

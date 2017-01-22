@@ -15,7 +15,7 @@ function getBuchungen(req, res) {
             },
             {
                 rel: "Buchung annullieren",
-                href: "http://localhost:8080/billette/B1/annullieren"
+                href: "http://localhost:8080/api/billette/B1/annullieren"
             }
         ]
     };
