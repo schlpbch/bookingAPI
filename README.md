@@ -49,7 +49,7 @@ To run the *mock* server as docker container, do:
 
 ```bash
   docker build .
-  docker run -d -p 8080:8080 --name mock-srv <containerId>
+  docker run -d -p 80:8080 --name api-mock-srv <containerId>
 ```
 
 ## ToDo
