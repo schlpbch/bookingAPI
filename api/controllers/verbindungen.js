@@ -6,31 +6,31 @@ module.exports = {
 
 function getVerbindungen(req, res) {
     var verbindung1 = {
-        'verbindungsId': 'RecContext-RC1',
-        'zugNummer': 'IC 918',
-        'abfahrtsOrt': 'Bern',
-        'abfahrtsDatum': '2017-01-14',
-        'abfahrtsZeit': "20:04",
-        'ankunftsOrt': "Thun",
-        'ankunftsDatum': '2017-02-24',
-        'ankunftsZeit': '20:22',
-        'links': [{
-            'rel': 'Angebot holen',
-            'href': 'http://localhost:8080/angebote/RecContext-RC1'
+        verbindungsId: 'RecContext-RC1',
+        zugNummer: 'IC 918',
+        abfahrtsOrt: 'Bern',
+        abfahrtsDatum: '2017-01-14',
+        abfahrtsZeit: "20:04",
+        ankunftsOrt: "Thun",
+        ankunftsDatum: '2017-02-24',
+        ankunftsZeit: '20:22',
+        links: [{
+            rel: 'Angebot holen',
+            href: 'http://localhost:8080/angebote/RecContext-RC1'
         }]
     };
     var verbindung2 = {
-        'verbindungsId': 'RecContext-RC1',
-        'zugNummer': 'IC 918',
-        'abfahrtsOrt': 'Bern',
-        'abfahrtsDatum': '2017-01-14',
-        'abfahrtsZeit': "20:34",
-        'ankunftsOrt': "Thun",
-        'ankunftsDatum': '2017-02-24',
-        'ankunftsZeit': '20:52',
-        'links': [{
-            'rel': 'Angebot holen',
-            'href': 'http://localhost:8080/angebote/RecContext-RC1'
+        verbindungsId: 'RecContext-RC1',
+        zugNummer: 'IC 918',
+        abfahrtsOrt: 'Bern',
+        abfahrtsDatum: '2017-01-14',
+        abfahrtsZeit: "20:34",
+        ankunftsOrt: "Thun",
+        ankunftsDatum: '2017-02-24',
+        ankunftsZeit: '20:52',
+        links: [{
+            rel: 'Angebot holen',
+            href: 'http://localhost:8080/angebote/RecContext-RC1'
         }]
     };
     var verbindungen = [verbindung1, verbindung2];
