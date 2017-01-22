@@ -14,13 +14,18 @@
 </head>
 
 <body ng-cloak layout="column" ng-app="app">
+
   <!-- Container #1 (see wireframe) -->
-  <md-content class="md-padding" layout="column">
-    <md-toolbar layout="row" class="md-toolbar-tools">
-      <md-button class="menu md-icon-button" hide-gt-sm ng-click="app.toggleList()" aria-label="Show User List">
+  <md-content layout="column">
+    <md-toolbar class="md-toolbar-tools">
+      <md-button aria-label="Menu">
         <md-icon>menu</md-icon>
       </md-button>
-      <span>booking API Test Application</span>
+      <h3>booking API Test Application</h3>
+      <span flex></span>
+      <md-button aria-label="Open Settings">
+        <md-icon>more_vert</md-icon>
+      </md-button>
     </md-toolbar>
   </md-content>
 
@@ -29,8 +34,27 @@
 
     <!-- Container #3 -->
     <md-sidenav class="md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" ng-click="app.toggleList()">
-      <users-list users="app.users" selected="app.selected" on-selected="app.selectUser(user)">
-      </users-list>
+      <md-toolbar class="md-tall">
+        <span flex></span>
+        <div layout="column" class="md-toolbar-tools-bottom inset">
+          <div>Firstname Lastname</div>
+          <div>email@domainname.com</div>
+        </div>
+      </md-toolbar>
+      <md-list>
+        <md-item  m ng-repeat="item in [{'icon':'exit_to_app', 'title':'login'}]">
+          <a class='md-subhead' href="https://www.swisspass.ch/auth/login">
+            <md-item-content md-ink-ripple layout="row" layout-align="start center">
+              <div class="inset">
+                <md-icon>{{item.icon}}</md-icon>
+              </div>
+              <div class="inset">
+                {{item.title}}
+              </div>
+            </md-item-content>
+          </a>
+        </md-item>
+      </md-list>
     </md-sidenav>
 
     <!-- Container #4 -->
@@ -39,43 +63,40 @@
         <md-tab label="Reisewunsch">
           <md-content class="md-padding">
             <h3 class="md-subhead">Reisewunsch</h3>
-            <form name="reisewunsch">
-              <div flex>
-                <md-input-container>
-                  <label>UIC Code</label>
-                  <input name="vonUICode" ng-model="angebot.vonUICode" placeholder="8507000" required>
-                </md-input-container>
-                <md-input-container>
-                  <label>UIC Code</label>
-                  <input name="nachUICode" ng-model="angebot.nachUICode" placeholder="8507100" required>
-                </md-input-container>
-              </div>
-              <div flex>
-                <md-input-container>
-                  <md-switch ng-model="angebot.istAbfahrt" aria-label="Abfahrt/Ankunft
+            <div flex>
+              <md-input-container>
+                <label>UIC Code</label>
+                <input name="vonUICode" ng-model="angebot.vonUICode" placeholder="8507000" required>
+              </md-input-container>
+              <md-input-container>
+                <label>UIC Code</label>
+                <input name="nachUICode" ng-model="angebot.nachUICode" placeholder="8507100" required>
+              </md-input-container>
+            </div>
+            <div flex>
+              <md-input-container>
+                <md-switch ng-model="angebot.istAbfahrt" aria-label="Abfahrt/Ankunft
                   " ng-true-value="'Abfahrt'" ng-false-value="'Ankunft'">
-                    {{angebot.istAbfahrt}}
-                    </md-switch>
-                </md-input-container>
-              </div>
-              <div flex>
-                <md-input-container>
-                  <md-datepicker ng-model="angebot.datum" md-placeholder="Enter date"></md-datepicker>
-                </md-input-container>
-                <md-input-container>
-                  <label>Zeit</label>
-                  <input name="zeit" ng-model="angebot.zeit" placeholder="22:22" required>
-                </md-input-container>
-              </div>
-            </form>
+                  {{angebot.istAbfahrt}}
+                  </md-switch>
+              </md-input-container>
+            </div>
+            <div flex>
+              <md-input-container>
+                <md-datepicker ng-model="angebot.datum" md-placeholder="Datum"></md-datepicker>
+              </md-input-container>
+              <md-input-container>
+                <label>Zeit</label>
+                <input name="zeit" ng-model="angebot.zeit" placeholder="22:22" required>
+              </md-input-container>
+            </div>
             <md-button class="md-raised md-primary">Suchen</md-button>
           </md-content>
         </md-tab>
-        <md-tab label="verbindungen">
-          <md-content class="layout-padding">
+        <md-tab label="Verbindungen">
+          <md-content class="md-padding">
             <h3 class="md-subhead">Verbindungen</h3>
-            <md-list>
-              <md-list-item class="md-3-line" ng-repeat="item in [{
+            <md-card class="md-3-line" ng-repeat="item in [{
                       'verbindungsId': 'RecContext-RC1',
                       'zugNummer': 'IC 918',
                       'abfahrtsOrt': 'Bern',
@@ -95,85 +116,78 @@
                       'ankunftsZeit': '20:52'
               }
               ]">
-                <md-card>
-                  <md-card-title>
-                    <md-card-title-text>
-                      <span class="md-subhead">VerbindungsId: {{item.verbindungsId}}</span>
-                      <span class="md-headline">Verbindung {{item.abfahrtsOrt}} &ndash; {{item.ankunftsOrt}}</span>
-                      <span class="md-subhead">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-subhead">VerbindungsId: {{item.verbindungsId}}</span>
+                  <span class="md-headline">Verbindung {{item.abfahrtsOrt}} &ndash; {{item.ankunftsOrt}}</span>
+                  <span class="md-subhead">
                         Zugnummer: {{item.zugNummer}}<br>
                         Abfahrtsdatum: {{item.abfahrtsDatum}}, Zeit: {{item.abfahrtsZeit}}<br>
                         Ankunftsdatum: {{item.ankunftsDatum}}, Zeit: {{item.ankunftsZeit}}
                       </span>
-                    </md-card-title-text>
-                  </md-card-title>
-                  <md-card-actions layout="row" layout-align="end center">
-                    <md-button class="md-raised md-primary">Angebot</md-button>
-                  </md-card-actions>
-                </md-card>
-                </md-list-item>
-            </md-list>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-raised md-primary">Angebot</md-button>
+              </md-card-actions>
+              </md-card>
+              </md-list-item>
+              </md-list>
           </md-content>
         </md-tab>
         <md-tab label="Personen">
-          <md-content class="layout-padding">
+          <md-content class="md-padding">
             <h3 class="md-subhead">Personen</h3>
-            <form name="reisewunsch">
-              <div flex>
-                <md-input-container>
-                  <label>Vorname</label>
-                  <input name="vorname" ng-model="angebot.vorname" placeholder="Endo" required>
-                </md-input-container>
-                <md-input-container>
-                  <label>Name</label>
-                  <input name="name" ng-model="angebot.name" placeholder="Annaconda" required>
-                </md-input-container>
-              </div>
-              <div flex>
-                <md-input-container>
-                  <label>Alter</label>
-                  <input name="alter" ng-model="angebot.alter" placeholder="42" required>
-                </md-input-container>
-                <md-input-container>
-                  <md-select name="ermaessigung" ng-model="angebot.ermaessigung" placeholder="HalbTax" required>
-                    <md-option value="none">keine</md-option>
-                    <md-option value="halbtax">HalbTax</md-option>
-                    <md-option value="ga">GA</md-option>
-                  </md-select>
-                </md-input-container>
-              </div>
-            </form>
-            <md-button class="md-raised md-primary" ng-href="#Angebote">Holen</md-button>
+            <div flex>
+              <md-input-container>
+                <label>Vorname</label>
+                <input name="vorname" ng-model="person.vorname" placeholder="Elon" required>
+              </md-input-container>
+              <md-input-container>
+                <label>Name</label>
+                <input name="name" ng-model="person.name" placeholder="Musk" required>
+              </md-input-container>
+            </div>
+            <div flex>
+              <md-input-container>
+                <md-datepicker ng-model="person.geburtsdatum" md-placeholder="Geburtsdatum" required></md-datepicker>
+              </md-input-container>
+              <md-input-container>
+                <label>Ermässigung</label>
+                <md-select name="ermaessigung" ng-model="person.ermaessigung" placeholder="HalbTax" required>
+                  <md-option value="none">keine</md-option>
+                  <md-option value="halbtax">HalbTax</md-option>
+                  <md-option value="ga">GA</md-option>
+                </md-select>
+              </md-input-container>
+            </div>
+            <md-button class="md-raised md-primary">Hinzufügen</md-button>
           </md-content>
         </md-tab>
         <md-tab label="Angebote">
-          <md-content class="layout-padding">
+          <md-content class="md-padding">
             <h3 class="md-subhead">Angebote</h3>
-            <md-list>
-              <md-list-item class="md-3-line" ng-repeat="item in [{'angebotsId': 'A1', 'beschreibung': 'DV Artikel    Bern - Thun','preis':22},{'angebotsId': 'A2', 'beschreibung': 'Sparartikel    Bern - Thun','preis':12}]">
-                <md-card>
-                  <md-card-title>
-                    <md-card-title-text>
-                      <span class="md-subhead">AngebotsId: {{item.angebotsId}}</span>
-                      <span class="md-headline">{{item.beschreibung}}</span>
-                      <span style='{float: right}'>Preis:  {{item.preis}}</span>
-                    </md-card-title-text>
-                  </md-card-title>
-                  <md-card-actions layout="row" layout-align="end center">
-                    <md-button class="md-raised md-primary">buchen</md-button>
-                  </md-card-actions>
-                </md-card>
-              </md-list-item>
-            </md-list>
+            <md-card class="md-3-line" ng-repeat="item in [{'angebotsId': 'A1', 'beschreibung': 'DV Artikel    Bern - Thun','preis':22},{'angebotsId': 'A2', 'beschreibung': 'Sparartikel    Bern - Thun','preis':12}]">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-subhead">AngebotsId: {{item.angebotsId}}</span>
+                  <span class="md-headline">{{item.beschreibung}}</span>
+                  <span>Preis:  {{item.preis}}</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-raised md-primary">buchen</md-button>
+              </md-card-actions>
+            </md-card>
           </md-content>
         </md-tab>
         <md-tab label="Buchungen">
-          <md-content class="layout-padding">
+          <md-content class="md-padding">
             <h3 class="md-subhead">Buchungen</h3>
             <md-card>
               <md-card-title>
                 <md-card-title-text>
-                  <span class="md-subhead">BuchungsId: {{item.angebotsId}}</span>
+                  <span class="md-subhead">BuchungsId: {{buchungsId}}</span>
                   <span class="md-headline">Beschreibung</span> Fahrt von Bern nach Thun am 14.01.2017 20:04.
                 </md-card-title-text>
               </md-card-title>
