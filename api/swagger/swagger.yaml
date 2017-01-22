@@ -115,8 +115,50 @@ paths:
         default:
           description: "unexpected error"
 
-  ### Vertrieb Part
-
+  ### Business Partner Part
+  
+  /personen/{personsId}:
+    x-swagger-router-controller: personen
+    get:
+      description: "Holt die Person"
+      operationId: getPersonen
+      parameters:
+        - name: personsId
+          in: path
+          description: "Id einer Person"
+          required: true
+          type: string
+          default: "P1" # for simplier mock testing only
+      responses:
+        200:
+          description: "Die Person"
+          schema:
+            $ref: '#/definitions/person'
+        default:
+          description: "unexpected error"
+          
+  /personen/:
+    x-swagger-router-controller: personen
+    post:
+      description: "Erstellt die Person."
+      operationId: postPersonen
+      parameters:
+         - name: person
+           in: body
+           description: "Daten der zu erstellenden Person"
+           required: true
+           schema:
+              $ref: '#/definitions/person'
+      responses:
+        200:
+          description: "Person erstellt"
+          schema:
+            $ref: '#/definitions/personsId'
+        default:
+          description: "unexpected error"
+       
+  ### Vertriebs Part
+          
   /angebote/:
     x-swagger-router-controller: angebote
     get:
@@ -345,15 +387,43 @@ definitions:
         items:
           $ref: '#/definitions/link'
 
-  angebotsId:
+  person:
     type: object
     required:
-      - angebotsId
+      - geburtsdatum
+      - ermaessigung
     properties:
-      angebotsId:
-        description: "Id eines Angebotes"
+      vorname:
+        description: "Vornamen der Person"
         type: string
-        default: "A1" # for simplier mock testing only
+        default: 'Elon'
+      name:
+        description: "Name der Person"
+        type: string
+        default: 'Musk'
+      geburtsdatum:
+        description: "Geburtsdatum der Person"
+        type: string
+        format: date
+        default: '1971-06-28'
+      ermaessigung:
+        description: 'Ermaessigung: {Keine, GA, Halbtax}'
+        type: string
+        default: 'halbtax'
+        enum:
+         - keine
+         - halbtax
+         - ga
+ 
+  personsId:
+    type: object
+    required:
+      - personsId
+    properties:
+      personsId:
+        description: "Id einer Person"
+        type: string
+        default: "P1" # for simplier mock testing only
 
   angebot:
     type: object
@@ -376,6 +446,15 @@ definitions:
         items:
           $ref: '#/definitions/link'
 
+  angebotsId:
+    type: object
+    required:
+      - angebotsId
+    properties:
+      angebotsId:
+        description: "Id eines Angebotes"
+        type: string
+        default: "A1" # for simplier mock testing only
 
   vorabbuchung:
     type: object
@@ -413,16 +492,7 @@ definitions:
         items:
           $ref: '#/definitions/link'
 
-  billett:
-    type: object
-    properties:
-      typ:
-        type: string
-        enum:
-        - pdf
-        - screenTicket
-      href:
-        type: string
+
 
   ### REST level 3 support
 
