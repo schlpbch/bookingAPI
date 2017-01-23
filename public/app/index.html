@@ -158,11 +158,12 @@
         </md-tab>
         <md-tab label="Buchungen">
           <md-content class="md-padding">
-            <md-card class="md-3-line" ng-repeat="item in buchungen">
+            <md-card class="md-3-line">
               <md-card-title>
                 <md-card-title-text>
-                  <span class="md-subhead">BuchungsId: {{item.buchungsId}}</span>
-                  <span class="md-headline">Beschreibung</span> {{item.beschreibung}}
+                  <span class="md-subhead">BuchungsId: {{buchung.buchungsId}}</span>
+                  <span class="md-headline">Beschreibung</span>
+                  {{buchung.beschreibung}}
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">

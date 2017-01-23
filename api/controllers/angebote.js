@@ -1,11 +1,18 @@
 'use strict';
 
+// To modell non-functional behavior
+var sleep = require('sleep');
+
 module.exports = {
     getAngebote,
     postAngebote
 };
 
 function getAngebote(req, res) {
+    console.log('getAngebote');
+
+    sleep.msleep(500); //average response time
+
     var angebotDV = {
         angebotsId: 'A1',
         beschreibung: 'Angebot direkter Verkehr',
