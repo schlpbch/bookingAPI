@@ -60,21 +60,19 @@
           <md-content class="md-padding">
             <div flex>
               <md-input-container>
-                <label>UIC Code</label>
-                <input name="vonUICode" ng-model="angebot.vonUICode" placeholder="8507000" required>
+                <label>Abfahrtsort</label>
+                <input name="abfahrtsOrt" ng-model="angebot.abfahrtsOrt" placeholder="Bern" required>
               </md-input-container>
               <md-input-container>
-                <label>UIC Code</label>
-                <input name="nachUICode" ng-model="angebot.nachUICode" placeholder="8507100" required>
+                <label>Ankunftsort</label>
+                <input name="ankunftsOrt" ng-model="angebot.ankunftsOrt" placeholder="Thun" required>
               </md-input-container>
             </div>
             <div flex>
-              <md-input-container>
-                <md-switch ng-model="angebot.istAbfahrt" aria-label="Abfahrt/Ankunft
-                  " ng-true-value="'Abfahrt'" ng-false-value="'Ankunft'">
-                  {{angebot.istAbfahrt}}
-                  </md-switch>
-              </md-input-container>
+              <md-switch ng-model="angebot.istAbfahrt" aria-label="Abfahrt/Ankunft
+                " ng-true-value="'Abfahrt'" ng-false-value="'Ankunft'">
+                {{angebot.istAbfahrt}}
+                </md-switch>
             </div>
             <div flex>
               <md-input-container>
