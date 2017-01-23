@@ -43,12 +43,12 @@
       </md-toolbar>
       <md-list>
         <md-item ng-repeat="item in [{'icon':'exit_to_app', 'title':'Login with SwissPassID'}]">
-            <md-item-content md-ink-ripple layout="row" layout-align="start center">
-              <div class="inset">
-                <md-icon>{{item.icon}}</md-icon>
+          <md-item-content md-ink-ripple layout="row" layout-align="start center">
+            <div class="inset">
+              <md-icon>{{item.icon}}</md-icon>
               <md-button ng-href="https://www.swisspass.ch/auth/login" target="_blank">{{item.title}}</md-button>
             </div>
-            </md-item-content>
+          </md-item-content>
         </md-item>
       </md-list>
     </md-sidenav>
@@ -103,9 +103,9 @@
               <md-card-actions layout="row" layout-align="end center">
                 <md-button class="md-raised md-primary" ng-click="holeAngebot($event)">Angebot</md-button>
               </md-card-actions>
-              </md-card>
-              </md-list-item>
-              </md-list>
+            </md-card>
+            </md-list-item>
+            </md-list>
           </md-content>
         </md-tab>
         <!--
@@ -149,7 +149,7 @@
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary">buchen</md-button>
+                <md-button class="md-raised md-primary" ng-click="holeBuchung($event)">buchen</md-button>
               </md-card-actions>
             </md-card>
           </md-content>
@@ -159,8 +159,8 @@
             <md-card class="md-3-line" ng-repeat="item in buchungen">
               <md-card-title>
                 <md-card-title-text>
-                  <span class="md-subhead">BuchungsId: {{buchung.buchungsId}}</span>
-                  <span class="md-headline">Beschreibung</span>{{buchung.beschreibung}}
+                  <span class="md-subhead">BuchungsId: {{item.buchungsId}}</span>
+                  <span class="md-headline">Beschreibung</span> {{item.beschreibung}}
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
@@ -182,8 +182,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
 
   <script src="scripts/app.js"></script>
-  <script src="scripts/controllers/main.js"></script>
-  <script src="scripts/controllers/about.js"></script>
 
 </body>
 

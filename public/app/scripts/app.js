@@ -61,10 +61,10 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', function($scope,
 
   //GET http://localhost:8080/api/buchungen/B1
   $scope.holeBuchung = function(event) {
-    $scope.buchung = {
+    $scope.buchungen = [{
       'buchungsId': 'B1',
       'beschreibung': 'Fahrt von Bern nach Thun am 14.01.2017 20:04.'
-    };
+    }];
   };
 }]);
 
