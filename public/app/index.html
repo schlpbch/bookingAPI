@@ -83,7 +83,7 @@
                 <input name="zeit" ng-model="angebot.zeit" placeholder="22:22" required>
               </md-input-container>
             </div>
-            <md-button class="md-raised md-primary">Suchen</md-button>
+            <md-button class="md-raised md-primary" ng-click="sucheVerbindung($event)">Suchen</md-button>
           </md-content>
         </md-tab>
         <md-tab label="Verbindungen">
@@ -101,7 +101,7 @@
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary">Angebot</md-button>
+                <md-button class="md-raised md-primary" ng-click="holeAngebot($event)">Angebot</md-button>
               </md-card-actions>
               </md-card>
               </md-list-item>
@@ -156,7 +156,7 @@
         </md-tab>
         <md-tab label="Buchungen">
           <md-content class="md-padding">
-            <md-card>
+            <md-card class="md-3-line" ng-repeat="item in buchungen">
               <md-card-title>
                 <md-card-title-text>
                   <span class="md-subhead">BuchungsId: {{buchung.buchungsId}}</span>
