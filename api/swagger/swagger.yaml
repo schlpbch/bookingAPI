@@ -12,7 +12,7 @@ info:
   license:
     name: SBB
     url: https://data.sbb.ch/page/licence/
-host: localhost:8080 #transportationAPI.sbb.ch
+host: localhost:80 #transportationAPI.sbb.ch
 basePath: /api
 schemes:
   - http # Nur am Anfang
@@ -271,7 +271,7 @@ paths:
     x-swagger-router-controller: buchungen
     get:
       description: "Hole die Buchung"
-      operationId: getBuchungen
+      operationId: getBuchung
       parameters:
         - name: buchungsId
           in: path
@@ -291,7 +291,7 @@ paths:
     x-swagger-router-controller: buchungen
     get:
       description: "Annuliere die Buchung"
-      operationId: getBuchungenAnnullieren
+      operationId: getBuchungAnnullieren
       parameters:
         - name: buchungsId
           in: path
