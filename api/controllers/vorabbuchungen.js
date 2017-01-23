@@ -9,11 +9,11 @@ function postVorabbuchungen(req, res) {
         buchungsId: 'B1',
         links: [{
                 rel: "Buchungsinformation holen",
-                href: "http://localhost:8080/api/buchungen/B1"
+                href: "http://localhost:80/api/buchungen/B1"
             },
             {
                 rel: "Billette holen",
-                href: "http://localhost:8080/api/billette/B1"
+                href: "http://localhost:80/api/billette/B1"
             }
         ]
     }

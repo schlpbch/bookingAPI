@@ -18,7 +18,7 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
     // install middleware
     swaggerExpress.register(app);
 
-    var port = process.env.PORT || 8080;
+    var port = process.env.PORT || 80;
 
     // set static files location used for requests that our frontend will make
     app.use(express.static(__dirname + '/public/app'));
