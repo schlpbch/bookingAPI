@@ -1,7 +1,7 @@
 'use strict';
 
 // To modell non-functional behavior
-var sleep = require('sleep');
+//var sleep = require('sleep');
 
 module.exports = {
     getVerbindungen
@@ -10,7 +10,7 @@ module.exports = {
 function getVerbindungen(req, res) {
     console.log('getVerbindungen');
 
-    sleep.msleep(200); //average response time
+    //sleep.msleep(200); //average response time
 
     var verbindung1 = {
         verbindungsId: 'RecContext-RC1',

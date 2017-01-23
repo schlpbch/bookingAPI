@@ -1,7 +1,7 @@
 'use strict';
 
 // To modell non-functional behavior
-var sleep = require('sleep');
+//var sleep = require('sleep');
 
 module.exports = {
     getBuchung,
@@ -11,7 +11,7 @@ module.exports = {
 function getBuchung(req, res) {
     console.log('getBuchung');
 
-    sleep.msleep(200); //average response time
+    //sleep.msleep(200); //average response time
 
     var buchung = {
         buchungsId: 'B1',
