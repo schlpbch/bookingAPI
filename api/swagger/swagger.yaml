@@ -250,7 +250,7 @@ paths:
     x-swagger-router-controller: preise
     get:
       description: "holt den Preis anhand von BPUIC (vonUICode, nachUICode, ViaUICode, Datum, Zeit)) und macht keine Buchung und für eine Person (Default 1/2 Preis Erwachsen)"
-      operationId: getAngebote
+      operationId: getPreise
       parameters:
         - name: vonUICode
           in: query
@@ -302,11 +302,11 @@ paths:
            - halbtax
       responses:
         200:
-          description: "Eine Liste von Angeboten"
+          description: "Eine Liste von Preisen"
           schema:
             type: array
             items:
-              $ref: '#/definitions/angebot'
+              $ref: '#/definitions/preis'
         default:
           description: "unexpected error"
 
@@ -488,6 +488,15 @@ definitions:
         type: string
         default: "P1" # for simplier mock testing only
 
+  preis:
+    type: object
+    required:
+      - preis
+    properties:
+      preis:
+        description: "Preis der Strecke"
+        type: integer
+    
   angebot:
     type: object
     required:
