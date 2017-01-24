@@ -19,7 +19,7 @@ function getVerbindungen(req, res) {
         abfahrtsDatum: '2017-01-14',
         abfahrtsZeit: "20:04",
         ankunftsOrt: "Thun",
-        ankunftsDatum: '2017-02-24',
+        ankunftsDatum: '2017-01-14',
         ankunftsZeit: '20:22',
         links: [{
             rel: 'Angebot holen',
@@ -33,13 +33,27 @@ function getVerbindungen(req, res) {
         abfahrtsDatum: '2017-01-14',
         abfahrtsZeit: "20:34",
         ankunftsOrt: "Thun",
-        ankunftsDatum: '2017-02-24',
+        ankunftsDatum: '2017-01-14',
         ankunftsZeit: '20:52',
         links: [{
             rel: 'Angebot holen',
             href: 'http://localhost:8080/api/angebote/RecContext-RC1'
         }]
     };
-    var verbindungen = [verbindung1, verbindung2];
+    var verbindung3 = {
+        verbindungsId: 'RecContext-RC1',
+        zugNummer: 'IC 918',
+        abfahrtsOrt: 'Bern',
+        abfahrtsDatum: '2017-01-14',
+        abfahrtsZeit: "20:02",
+        ankunftsOrt: "Zurich",
+        ankunftsDatum: '2017-01-14',
+        ankunftsZeit: '20:56',
+        links: [{
+            rel: 'Angebot holen',
+            href: 'http://localhost:8080/api/angebote/RecContext-RC1'
+        }]
+    };
+    var verbindungen = [verbindung1, verbindung2, verbindung3];
     res.json(verbindungen);
 }
