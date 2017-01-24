@@ -20,6 +20,6 @@ function getPreise(req, res) {
         beschreibung: 'Sparpreis',
         preis: 12
     };
-    var preise = [preisDV, preisSparbillett];
+    var preise = [preisNormal, preisSparbillett];
     res.json(preise);
 }
