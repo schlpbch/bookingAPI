@@ -4,33 +4,22 @@
 //var sleep = require('sleep');
 
 module.exports = {
-    getPreise,
-    postPreise
+    getPreise
 };
 
 function getPreise(req, res) {
     console.log('getPreise');
 
-    //sleep.msleep(500); //average response time
+    //sleep.msleep(300); //average response time
 
-    var preiseDV = {
-        angebotsId: 'A1',
-        beschreibung: 'Angebot direkter Verkehr',
+    var preisNormal = {
+        beschreibung: 'Normalpreis',
         preis: 22
     };
-    var preiseSparbillett = {
-        angebotsId: 'A2',
-        beschreibung: 'Angebot Sparbillett',
+    var preisSparbillett = {
+        beschreibung: 'Sparpreis',
         preis: 12
     };
-    var preise = [angebotDV, angebotSparbillett];
-    res.json(angebote);
-}
-
-
-function postpreise(req, res) {
-    var vorabbuchung = {
-        vorabbuchungsId: 'V1'
-    };
-    res.json(vorabbuchung);
+    var preise = [preisDV, preisSparbillett];
+    res.json(preise);
 }
