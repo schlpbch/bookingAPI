@@ -29,7 +29,7 @@ The web app is running at http://localhost:8080/
 API resources are then available at  http://localhost:8080/api/<resource)
 
 
-## Developping
+## Developing
 First, **Nodejs** and **npm** which comes with it is needed. Then to install all the modules, simply run:
 
 ```bash
