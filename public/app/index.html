@@ -58,31 +58,29 @@
       <md-tabs md-dynamic-height md-border-bottom>
         <md-tab label="Reisewunsch">
           <md-content class="md-padding">
-            <div flex>
-              <md-input-container>
-                <label>Abfahrtsort</label>
-                <input name="abfahrtsOrt" ng-model="angebot.abfahrtsOrt" placeholder="Bern" required>
-              </md-input-container>
-              <md-input-container>
-                <label>Ankunftsort</label>
-                <input name="ankunftsOrt" ng-model="angebot.ankunftsOrt" placeholder="Thun" required>
-              </md-input-container>
-            </div>
-            <div flex>
-              <md-switch ng-model="angebot.istAbfahrt" aria-label="Abfahrt/Ankunft
-                " ng-true-value="'Abfahrt'" ng-false-value="'Ankunft'">
+            <md-input-container>
+              <label>Abfahrtsort</label>
+              <input name="abfahrtsOrt" ng-model="angebot.abfahrtsOrt" placeholder="Bern" required>
+            </md-input-container>
+            <md-input-container>
+              <label>Ankunftsort</label>
+              <input name="ankunftsOrt" ng-model="angebot.ankunftsOrt" placeholder="Thun" required>
+            </md-input-container>
+            <br/>
+            <md-input-container>
+              <md-switch class="md-subhead" ng-model="angebot.istAbfahrt" aria-label="Switch" ng-true-value="'Abfahrt'" ng-false-value="'Ankunft'">
                 {{angebot.istAbfahrt}}
-                </md-switch>
-            </div>
-            <div flex>
-              <md-input-container>
-                <md-datepicker ng-model="angebot.datum" md-placeholder="Datum"></md-datepicker>
-              </md-input-container>
-              <md-input-container>
-                <label>Zeit</label>
-                <input name="zeit" ng-model="angebot.zeit" placeholder="22:22" required>
-              </md-input-container>
-            </div>
+              </md-switch>
+            </md-input-container>
+            <br/>
+            <md-input-container>
+              <md-datepicker ng-model="angebot.datum" md-placeholder="Datum"></md-datepicker>
+            </md-input-container>
+            <md-input-container>
+              <label>Zeit</label>
+              <input name="zeit" ng-model="angebot.zeit" placeholder="22:22" required>
+            </md-input-container>
+            <br/>
             <md-button class="md-raised md-primary" ng-click="sucheVerbindung($event)">Suchen</md-button>
           </md-content>
         </md-tab>
@@ -160,14 +158,12 @@
               <md-card-title>
                 <md-card-title-text>
                   <span class="md-subhead">BuchungsId: {{buchung.buchungsId}}</span>
-                  <span class="md-headline">Beschreibung</span>
-                  {{buchung.beschreibung}}
+                  <span class="md-headline">Beschreibung</span> {{buchung.beschreibung}}
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
                 <md-button class="md-primary">annullieren</md-button>
-                <md-button class="md-primary md-raised"
-                  ng-href="api/billette/{{buchung.buchungsId}}?typ=pdf">
+                <md-button class="md-primary md-raised" ng-href="api/billette/{{buchung.buchungsId}}?typ=pdf">
                   Billett
                 </md-button>
               </md-card-actions>
