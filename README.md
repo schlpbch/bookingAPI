@@ -12,22 +12,29 @@ docker pull schlpbch/bookingAPI
 ```
 The latest docker image is always available at https://hub.docker.com/schlpbch/bookingAPI.
 
-## Installing
-First, **Nodejs** and **npm** which comes with it is needed. Then to install all the modules, simply run:
+## Running 
+The easiest way is to run the docker image:
 
 ```bash
-  npm install
+  docker run -d -p 8080:8080 schlpbch/bookingAPI
 ```
-This will install the package defined in (package.json)[package.json] file.
 
-## Running 
-To run 
+or start with
 
 ```bash
   nodejs app.js
 ```
 
+
 ## Developping
+First, **Nodejs** and **npm** which comes with it is needed. Then to install all the modules, simply run:
+
+```bash
+  npm install
+```
+
+This will install the package defined in (package.json)[package.json] file.
+
 To edit the API interactively, do:
 
 ```bash
