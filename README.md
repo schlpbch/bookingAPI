@@ -24,13 +24,9 @@ or start with
 ```bash
   nodejs app.js
 ```
-The web app is running at
+The web app is running at http://localhost:8080/
 
-http://localhost:8080/
-
-API resources are then available at 
-
-http://localhost:8080/api/<resource)
+API resources are then available at  http://localhost:8080/api/<resource)
 
 
 ## Developping
