@@ -16,8 +16,8 @@ The latest docker image is always available at https://hub.docker.com/schlpbch/b
 The easiest way is to run the docker image:
 
 ```bash
-  docker pull schlpbch/bookingAPI
-  docker run -d -p 80:8080 -name bookingapi-mock schlpbch/bookingapi
+  docker pull schlpbch/bookingapi
+  docker run -d -p 80:8080 --name bookingapi-mock schlpbch/bookingapi
 ```
 
 or start with
