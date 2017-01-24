@@ -23,11 +23,11 @@ function getVerbindungen(req, res) {
         ankunftsZeit: '20:22',
         links: [{
             rel: 'Angebot holen',
-            href: 'http://localhost:8080/api/angebote/RecContext-RC1'
+            href: 'api/angebote/RecContext-RC1'
         }]
     };
     var verbindung2 = {
-        verbindungsId: 'RecContext-RC1',
+        verbindungsId: 'RecContext-RC2',
         zugNummer: 'IC 918',
         abfahrtsOrt: 'Bern',
         abfahrtsDatum: '2017-01-14',
@@ -37,7 +37,7 @@ function getVerbindungen(req, res) {
         ankunftsZeit: '20:52',
         links: [{
             rel: 'Angebot holen',
-            href: 'http://localhost:8080/api/angebote/RecContext-RC1'
+            href: 'angebote/RecContext-RC2'
         }]
     };
     var verbindungen = [verbindung1, verbindung2];

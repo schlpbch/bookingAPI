@@ -7,7 +7,7 @@ module.exports = {
 function getBillette(req, res) {
     if ('pdf' == req.query.typ) {
         var options = {
-            root: __dirname + '/../../public/'
+            root: __dirname + '/../../public/app'
         };
         res.sendFile('billette/billettB1.pdf', options);
     } else {

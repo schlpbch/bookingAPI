@@ -166,7 +166,10 @@
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
                 <md-button class="md-primary">annullieren</md-button>
-                <md-button class="md-primary md-raised">Billette</md-button>
+                <md-button class="md-primary md-raised"
+                  ng-href="api/billette/{{buchung.buchungsId}}?typ=pdf">
+                  Billett
+                </md-button>
               </md-card-actions>
             </md-card>
           </md-content>
