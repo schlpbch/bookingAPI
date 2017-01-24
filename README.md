@@ -24,6 +24,13 @@ or start with
 ```bash
   nodejs app.js
 ```
+The web app is running at
+
+http://localhost:8080/
+
+API resources are then available at 
+
+http://localhost:8080/api/<resource)
 
 
 ## Developping
@@ -33,7 +40,7 @@ First, **Nodejs** and **npm** which comes with it is needed. Then to install all
   npm install
 ```
 
-This will install the package defined in (package.json)[package.json] file.
+This will install the package defined in [package.json](package.json) file.
 
 To edit the API interactively, do:
 
