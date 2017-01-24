@@ -5,13 +5,29 @@ This a simple Node.js based mock server to test the [bookingAPI](api/swagger/swa
 To get the API right, a small web application is provided (we are drinking our own champagne).
 
 ## Installing
+The easiest way is to pull the docker image:
+
+```bash
+docker pull schlpbch/bookingAPI
+```
+The latest docker image is always available at https://hub.docker.com/schlpbch/bookingAPI.
+
+## Installing
 First, **Nodejs** and **npm** which comes with it is needed. Then to install all the modules, simply run:
 
 ```bash
   npm install
 ```
+This will install the package defined in (package.json)[package.json] file.
 
-## Running and editing
+## Running 
+To run 
+
+```bash
+  nodejs app.js
+```
+
+## Developping
 To edit the API interactively, do:
 
 ```bash
