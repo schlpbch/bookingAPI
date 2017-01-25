@@ -8,7 +8,7 @@ info:
   contact:
     name: Team SVS Vertrieb
     email: andreas.schlapbach@sbb.ch
-    url: http://transportationAPI.sbb.ch/
+    url: http://api.sbb.ch/booking
   license:
     name: SBB
     url: https://data.sbb.ch/page/licence/

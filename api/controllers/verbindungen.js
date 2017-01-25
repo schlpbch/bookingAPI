@@ -37,7 +37,7 @@ function getVerbindungen(req, res) {
         ankunftsZeit: '20:52',
         links: [{
             rel: 'Angebot holen',
-            href: 'angebote/RecContext-RC2'
+            href: 'api/angebote/RecContext-RC2'
         }]
     };
     var verbindungen = [verbindung1, verbindung2];

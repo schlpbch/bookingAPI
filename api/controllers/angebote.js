@@ -24,7 +24,7 @@ function getAngebote(req, res) {
         preis: 12
     };
     var angebote = [angebotDV, angebotSparbillett];
-    res.json(angebote);
+    res.write(JSON.stringfy(angebote));
 }
 
 

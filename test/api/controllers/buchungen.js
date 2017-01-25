@@ -5,11 +5,11 @@ var request = require('supertest');
 var server = require('../../../');
 
 describe('controllers', function() {
-    describe('standorte', function() {
-        describe('GET /api/standorte', function() {
+    describe('buchungen', function() {
+        describe('GET /api/buchungen/', function() {
             it('should not return an error', function(done) {
                 request(server)
-                    .get('api/standorte/')
+                    .get('api/buchungen/')
                     .set('Accept', 'application/json')
                     .expect('Content-Type', 'application/json')
                     .expect(200)
