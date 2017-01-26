@@ -39,6 +39,26 @@ produces:
 ## Paths
 paths:
 
+  /ping/{message}:
+    x-swagger-router-controller: ping
+    get:
+      description: "Returniert die eingegebene Nachricht."
+      operationId: getPing
+      parameters:
+        - name: message
+          in: path
+          description: "Eine Nachricht"
+          required: true
+          type: string
+          default: 'Bern'
+      responses:
+        200:
+          description: "The message"
+          schema:
+            type: string
+        default:
+          description: "unexpected error"
+
   ### Fahrplan Part
 
   # ToDo: Define properly with Team VTP
