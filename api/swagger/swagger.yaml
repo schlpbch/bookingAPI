@@ -47,13 +47,13 @@ paths:
       parameters:
         - name: message
           in: path
-          description: "Eine Nachricht"
+          description: "Die Nachricht"
           required: true
           type: string
-          default: 'Bern'
+          default: 'hello'
       responses:
         200:
-          description: "The message"
+          description: "Die Nachricht"
           schema:
             type: string
         default:
