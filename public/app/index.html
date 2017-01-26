@@ -94,7 +94,9 @@
               <md-card-title>
                 <md-card-title-text>
                   <span class="md-subhead">VerbindungsId: {{item.verbindungsId}}</span>
-                  <span class="md-headline">Verbindung {{item.abfahrtsOrt}} &ndash; {{item.ankunftsOrt}}</span>
+                  <span class="md-headline">
+                    <md-icon>train</md-icon>
+                     {{item.abfahrtsOrt}} &ndash; {{item.ankunftsOrt}}</span>
                   <span class="md-subhead">
                         Zugnummer: {{item.zugNummer}}<br>
                         Abfahrtsdatum: {{item.abfahrtsDatum}}, Zeit: {{item.abfahrtsZeit}}<br>
