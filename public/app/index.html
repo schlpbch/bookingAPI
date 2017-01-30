@@ -38,7 +38,7 @@
         <span flex></span>
         <div layout="column" class="md-toolbar-tools-bottom inset">
           <p class='md-title'>booking API &ndash; Test Application</p>
-          <div class='md-subhead'>by Andreas Schlapbach<br/>schlpbch@gmail.com</div>
+          <div class='md-subhead'>by Andreas Schlapbach<br/>Team SVS</div>
         </div>
       </md-toolbar>
       <md-list>
@@ -164,7 +164,7 @@
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-primary">annullieren</md-button>
+                <md-button class="md-primary" ng-click="annuliereBuchung($event)">annullieren</md-button>
                 <md-button class="md-primary md-raised" ng-href="api/billette/{{buchung.buchungsId}}?typ=pdf">
                   Billett
                 </md-button>

@@ -15,7 +15,7 @@ app.config(function($mdThemingProvider) {
     .accentPalette('orange')
 });
 
-app.controller('AppCtrl', ['$scope', '$mdSidenav', '$http', function($scope, $mdSidenav, $http) {
+app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', function($scope, $mdSidenav, $mdDialog, $http) {
   $scope.toggleSidenav = function(menuId) {
     $mdSidenav(menuId).toggle();
   };
@@ -89,6 +89,19 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$http', function($scope, $md
       };
     }
   };
+
+  $scope.annuliereBuchung = function(event) {
+     $mdDialog.show(
+         $mdDialog.alert()
+         .parent(angular.element(document.querySelector('#popupContainer')))
+         .clickOutsideToClose(true)
+         .title('Buchung annulliert')
+         .textContent('Ihre Buchung wurde erfolgreich annulliert.')
+         .ariaLabel('Annullierungs Dialog')
+         .ok('Ok')
+         .targetEvent(event)
+     );
+   };
 }]);
 
 function DialogController($scope, $mdDialog) {
