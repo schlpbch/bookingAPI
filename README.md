@@ -25,9 +25,17 @@ or start with
 ```bash
   nodejs app.js
 ```
-The web app is running at http://localhost:8080/
+The web app and the API are running at http://localhost:8080/
 
-API resources are then available at  http://localhost:8080/<resource>
+## Live documentation
+
+Thanks to **Swagger** the up-to-date documentation is always available at:
+
+http://localhost:8080/docs
+
+and the latest JSON can be accessed at:
+
+http://localhost:8080/api-docs
 
 
 ## Developing
