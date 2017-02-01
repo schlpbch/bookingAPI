@@ -29,8 +29,8 @@ function getAngebote(req, res) {
 
 
 function postAngebote(req, res) {
-    var vorabbuchung = {
-        vorabbuchungsId: 'V1'
+    var buchung = {
+        buchungsId: 'B1'
     };
-    res.json(vorabbuchung);
+    res.json(buchung);
 }

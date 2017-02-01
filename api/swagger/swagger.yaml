@@ -261,9 +261,9 @@ paths:
               $ref: '#/definitions/angebotsId'
       responses:
         200:
-          description: "Angebot vorabgebucht"
+          description: "Angebot gebucht"
           schema:
-            $ref: '#/definitions/vorabbuchung'
+            $ref: '#/definitions/buchung'
         default:
           description: "unexpected error"
 
@@ -331,25 +331,6 @@ paths:
         default:
           description: "unexpected error"
 
-  /vorabbuchungen/:
-    x-swagger-router-controller: vorabbuchungen
-    post:
-      description: "Bucht die Vorabbuchung und erstellt die Buchung."
-      operationId: postVorabbuchungen
-      parameters:
-        - name: vorabbuchungsId
-          in: body
-          description: "Die zu buchende Vorabbuchung"
-          required: true
-          schema:
-            $ref: '#/definitions/vorabbuchung'
-      responses:
-        200:
-          description: "Vorabbuchung gebucht"
-          schema:
-            $ref: '#/definitions/buchungsId'
-        default:
-          description: "unexpected error"
 
   /buchungen/{buchungsId}:
     x-swagger-router-controller: buchungen
@@ -548,26 +529,6 @@ definitions:
         description: "Id eines Angebotes"
         type: string
         default: "A1" # for simplier mock testing only
-
-  vorabbuchung:
-    type: object
-    required:
-     - vorabbuchungsId
-    properties:
-      vorabbuchungsId:
-        description: "Id einer Vorabbbuchung"
-        type: string
-        default: "V1" # for simplier mock testing only
-
-  buchungsId:
-    type: object
-    required:
-     - buchungsId
-    properties:
-      buchungsId:
-        description: "Id einer Buchung"
-        type: string
-        default: "B1" # for simplier mock testing only
 
   buchung:
     type: object
