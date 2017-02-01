@@ -6,10 +6,10 @@ var server = require('../../../');
 
 describe('controllers', function() {
     describe('buchungen', function() {
-        describe('GET /api/buchungen/', function() {
+        describe('GET /buchungen/', function() {
             it('should not return an error', function(done) {
                 request(server)
-                    .get('api/buchungen/')
+                    .get('/buchungen/')
                     .set('Accept', 'application/json')
                     .expect('Content-Type', 'application/json')
                     .expect(200)

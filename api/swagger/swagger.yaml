@@ -13,7 +13,6 @@ info:
     name: SBB
     url: https://data.sbb.ch/page/licence/
 host: localhost:8080 #transportationAPI.sbb.ch
-basePath: /api
 schemes:
   - http # Nur am Anfang
   - https
@@ -135,47 +134,6 @@ paths:
         default:
           description: "unexpected error"
 
-  ### Business Partner Part
-
-  /personen/{personsId}:
-    x-swagger-router-controller: personen
-    get:
-      description: "Holt die Person"
-      operationId: getPersonen
-      parameters:
-        - name: personsId
-          in: path
-          description: "Id einer Person"
-          required: true
-          type: string
-          default: "P1" # for simplier mock testing only
-      responses:
-        200:
-          description: "Die Person"
-          schema:
-            $ref: '#/definitions/person'
-        default:
-          description: "unexpected error"
-
-  /personen/:
-    x-swagger-router-controller: personen
-    post:
-      description: "Erstellt die Person."
-      operationId: postPersonen
-      parameters:
-         - name: person
-           in: body
-           description: "Daten der zu erstellenden Person"
-           required: true
-           schema:
-              $ref: '#/definitions/person'
-      responses:
-        200:
-          description: "Person erstellt"
-          schema:
-            $ref: '#/definitions/personsId'
-        default:
-          description: "unexpected error"
 
   ### Vertriebs Part
 
@@ -446,44 +404,6 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/link'
-
-  person:
-    type: object
-    required:
-      - geburtsdatum
-      - ermaessigung
-    properties:
-      vorname:
-        description: "Vornamen der Person"
-        type: string
-        default: 'Elon'
-      name:
-        description: "Name der Person"
-        type: string
-        default: 'Musk'
-      geburtsdatum:
-        description: "Geburtsdatum der Person"
-        type: string
-        format: date
-        default: '1971-06-28'
-      ermaessigung:
-        description: 'Ermaessigung: {Keine, GA, Halbtax}'
-        type: string
-        default: 'halbtax'
-        enum:
-         - keine
-         - halbtax
-         - ga
-
-  personsId:
-    type: object
-    required:
-      - personsId
-    properties:
-      personsId:
-        description: "Id einer Person"
-        type: string
-        default: "P1" # for simplier mock testing only
 
   preis:
     type: object

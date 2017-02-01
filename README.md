@@ -27,7 +27,7 @@ or start with
 ```
 The web app is running at http://localhost:8080/
 
-API resources are then available at  http://localhost:8080/api/<resource>
+API resources are then available at  http://localhost:8080/<resource>
 
 
 ## Developing

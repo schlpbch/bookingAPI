@@ -1,6 +1,7 @@
 'use strict';
 
 var SwaggerExpress = require('swagger-express-mw');
+var SwaggerUi = require('swagger-tools/middleware/swagger-ui');
 var express = require('express');
 var app = express();
 
@@ -16,6 +17,8 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
     }
 
     // install middleware
+
+    app.use(SwaggerUi(swaggerExpress.runner.swagger));
     swaggerExpress.register(app);
 
     var port = process.env.PORT || 8080;
