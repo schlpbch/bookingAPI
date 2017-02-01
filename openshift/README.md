@@ -1,18 +1,18 @@
-# Setup on Openshift-Cluster:
+# Setup on Openshift-Cluster
 
-##### Prepare
+## Prepare
 ``` bash
 cd ./openshift
 oc login
 oc project xxx
 ```
 
-##### Create Image Stream
+## Create Image Stream
 ``` bash
 oc create -f oc-imagestream.yaml
 ```
 
-##### Create Buildconfig
+## Create Buildconfig
 ``` bash
 oc create -f oc-buildconfig.yaml
 ```
