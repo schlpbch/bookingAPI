@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  name: bookingapi
+  namespace: api-management-dev
+  selfLink: /oapi/v1/namespaces/api-management-dev/buildconfigs/bookingapi
+  uid: 76e127ba-e865-11e6-b738-1c98ec3025f0
+  resourceVersion: '115232028'
+  creationTimestamp: '2017-02-01T10:01:56Z'
+spec:
+  triggers:
+    -
+      type: Generic
+      generic:
+        secret: bookingapi
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/schlpbch/bookingAPI'
+      ref: master
+    contextDir: /
+    secrets: null
+  strategy:
+    type: Docker
+    dockerStrategy:
+      forcePull: true
+  output:
+    to:
+      kind: ImageStreamTag
+      namespace: api-management-dev
+      name: 'bookingapi:latest'
+  resources: {  }
+  postCommit: {  }
+status:
+  lastVersion: 13
