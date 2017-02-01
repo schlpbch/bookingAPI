@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  name: bookingapi
+  namespace: api-management-dev
+  selfLink: /oapi/v1/namespaces/api-management-dev/deploymentconfigs/bookingapi
+  uid: 3a28d08d-e866-11e6-b738-1c98ec3025f0
+  resourceVersion: '115262416'
+  creationTimestamp: '2017-02-01T10:07:24Z'
+  labels:
+    app: bookingapi
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {  }
+  triggers:
+    -
+      type: ConfigChange
+    -
+      type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - bookingapi
+        from:
+          kind: ImageStreamTag
+          name: 'bookingapi:latest'
+        lastTriggeredImage: '172.30.128.186:5000/api-management-dev/bookingapi@sha256:8c09d525f3c8557897c6fba2e1812b9649beb7952d87e6b8b22b56cf77588dd5'
+  replicas: 1
+  test: false
+  selector:
+    app: bookingapi
+    deploymentconfig: bookingapi
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bookingapi
+        deploymentconfig: bookingapi
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+    spec:
+      containers:
+        -
+          name: bookingapi
+          image: '172.30.128.186:5000/api-management-dev/bookingapi@sha256:8c09d525f3c8557897c6fba2e1812b9649beb7952d87e6b8b22b56cf77588dd5'
+          ports:
+            -
+              containerPort: 8080
+              protocol: TCP
+          resources: {  }
+          terminationMessagePath: /dev/termination-log
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {  }
+status:
+  latestVersion: 2
+  details:
+    causes:
+      -
+        type: ImageChange
+        imageTrigger:
+          from:
+            kind: ImageStreamTag
+            name: 'bookingapi:latest'
