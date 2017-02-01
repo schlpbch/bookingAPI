@@ -42,7 +42,8 @@
         </div>
       </md-toolbar>
       <md-list>
-        <md-item ng-repeat="item in [{'icon':'exit_to_app', 'title':'Login with SwissPassID'}]">
+        <md-subheader>Login</md-subheader>
+        <md-item ng-repeat="item in [{'icon':'exit_to_app', 'title':'With SwissPassID'},{'icon':'exit_to_app', 'title':'With B2B-Account'}]">
           <md-item-content md-ink-ripple layout="row" layout-align="start center">
             <div class="inset">
               <md-icon>{{item.icon}}</md-icon>
