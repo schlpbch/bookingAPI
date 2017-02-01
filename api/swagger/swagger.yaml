@@ -182,15 +182,10 @@ paths:
   /angebote/:
     x-swagger-router-controller: angebote
     get:
-      description: "Hole Angebote für eine VerbindungsId (ReconstructionContext oder (vonUICode, nachUICode, ViaUICode, Datum, Zeit)). Der zweite Ansatz ist Convenience."
+      description: "Hole Angebote für einen Strecken basiserten Reisewunsch."
       operationId: getAngebote
       parameters:
-        - name: recContext
-          in: query
-          description: "Reconstruction Context wie vom Fahrplan erstellt"
-          required: true
-          type: string
-          default: 'RecContext-RC1'
+
         - name: vonUICode
           in: query
           description: "Abfahrtsort als UIC Code"
