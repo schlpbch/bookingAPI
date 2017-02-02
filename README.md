@@ -10,7 +10,7 @@ The easiest way is to pull the docker image:
 ```bash
 docker pull schlpbch/bookingAPI
 ```
-The latest docker image is always available at https://hub.docker.com/r/schlpbch/bookingAPI.
+The latest docker image is always available at https://hub.docker.com/schlpbch/bookingAPI.
 
 ## Running
 The easiest way is to run the docker image:
