@@ -24,10 +24,10 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
     var port = process.env.PORT || 8080;
 
     // set static files location used for requests that our frontend will make
-    app.use(express.static(__dirname + '/public/app'));
+    app.use(express.static(__dirname + '/public'));
     app.listen(port);
 
     if (swaggerExpress.runner.swagger.paths['/angebote']) {
-        console.log('try this:\ncurl http://127.0.0.1:' + port + '/angebote');
+        console.log('try this:\ncurl http://127.0.0.1:' + port + '/docs');
     }
 });

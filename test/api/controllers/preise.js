@@ -9,7 +9,7 @@ describe('controllers', function() {
         describe('GET /preise/', function() {
             it('should not return an error', function(done) {
                 request(server)
-                    .get('/preise/')
+                    .get('/booking/preise/')
                     .set('Accept', 'application/json')
                     .expect('Content-Type', 'application/json')
                     .expect(200)

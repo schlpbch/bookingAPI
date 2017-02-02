@@ -9,7 +9,7 @@ describe('controllers', function() {
         describe('GET /ping/{message}', function() {
             it('should return the message sent', function(done) {
                 request(server)
-                    .get('/ping/:hello')
+                    .get('/booking/ping/:hello')
                     .set('Accept', 'application/json')
                     .expect('Content-Type', 'application/json')
                     .expect('hello')

@@ -22,7 +22,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
 
   $scope.sucheVerbindung = function(event) {
     // ToDo: Load via REST Services
-    var url = 'verbindungen/?vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22';
+    var url = '../booking/verbindungen/?vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22';
 
     if (mockAPICall() == false) {
       $http.get(url).
@@ -54,7 +54,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
 
   $scope.holeAngebot = function(event) {
     // ToDo: Load via REST Services
-    var url = 'angebote/?recContext=RecContext-RC1&vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22&alter=42&ermaessigung=halbtax';
+    var url = '../booking/angebote/?recContext=RecContext-RC1&vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22&alter=42&ermaessigung=halbtax';
 
     if (mockAPICall() == false) {
       $http.get(url).
@@ -76,7 +76,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
 
 
   $scope.holeBuchung = function(event) {
-    var url = 'buchungen/B1';
+    var url = '../booking/buchungen/B1';
     if (mockAPICall() == false) {
       $http.get(url).
       then(function(res) {

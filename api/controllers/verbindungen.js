@@ -23,7 +23,7 @@ function getVerbindungen(req, res) {
         ankunftsZeit: '20:22',
         links: [{
             rel: 'Angebot holen',
-            href: '/angebote/RecContext-RC1'
+            href: '/booking/angebote/RecContext-RC1'
         }]
     };
     var verbindung2 = {
@@ -37,7 +37,7 @@ function getVerbindungen(req, res) {
         ankunftsZeit: '20:52',
         links: [{
             rel: 'Angebot holen',
-            href: '/angebote/RecContext-RC2'
+            href: '/booking/angebote/RecContext-RC2'
         }]
     };
     var verbindungen = [verbindung1, verbindung2];

@@ -12,7 +12,9 @@ info:
   license:
     name: SBB
     url: https://data.sbb.ch/page/licence/
-host: localhost:8080 #transportationAPI.sbb.ch
+#host: api.sbb.ch
+#host: localhost:8080
+basePath: /booking
 schemes:
   - http # Nur am Anfang
   - https
