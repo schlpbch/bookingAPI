@@ -10,7 +10,7 @@ The easiest way is to pull the docker image:
 ```bash
 docker pull schlpbch/bookingAPI
 ```
-The latest docker image is always available at https://hub.docker.com/schlpbch/bookingAPI.
+The latest docker image is always available at https://hub.docker.com/r/schlpbch/bookingAPI.
 
 ## Running
 The easiest way is to run the docker image:
@@ -27,15 +27,19 @@ or start with
 ```
 The web app and the API are running at http://localhost:8080/
 
-## Live documentation
+## Live App and Documentation
 
-Thanks to **Swagger** the up-to-date documentation is always available at:
+The Web App is available at:
 
-http://localhost:8080/docs
+- [http://api.sbb.ch/app/](http://api.sbb.ch/app/)
+
+Thanks to **SwaggerUI** the up-to-date documentation is always available at:
+
+- [http://api.sbb.ch/docs/](http://api.sbb.ch/docs/)
 
 and the latest JSON can be accessed at:
 
-http://localhost:8080/api-docs
+- [http://api.sbb.ch/api-docs/](http://api.sbb.ch/api-docs/)
 
 
 ## Developing
@@ -90,6 +94,7 @@ To run the *mock* server as docker container, do:
 ```
 
 ## ToDo
+- Translate API to English
 - Get the API right
 - Complete wiring Wep App with API
 - Clarify legalese
