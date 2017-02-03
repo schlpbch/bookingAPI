@@ -99,6 +99,7 @@ To run the *mock* server as docker container, do:
 - Translate API to English
 - Integrate [Swagger Middleware](https://github.com/BigstickCarpet/swagger-express-middleware/blob/master/docs/samples/walkthrough2.md) to easily pre-populate data
 - Get the API right
+ - Expose journey planning as a route of its own
 - Complete wiring Wep App with API
 - Clarify legalese
 - Setup API Management
