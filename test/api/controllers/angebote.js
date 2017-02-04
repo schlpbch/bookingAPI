@@ -1,22 +1,22 @@
-'use strict';
+'use strict'
 
-var should = require('should');
-var request = require('supertest');
-var server = require('../../../');
+var request = require('supertest')
+var server = require('../../../')
 
-describe('controllers', function() {
-    describe('angebote', function() {
-        describe('GET /angebote/', function() {
-            it('should not return an error', function(done) {
-                request(server)
-                    .get('/booking/angebote/')
-                    .set('Accept', 'application/json')
-                    .expect('Content-Type', 'application/json')
-                    .expect(200)
-                    .end(function(err, res) {
-                        done();
-                    });
-            });
-        });
-    });
+describe('controllers', function () {
+  describe('angebote', function (done) {
+    describe('GET /angebote/', function (done) {
+      it('should not return an error', function (done) {
+        request(server)
+          .get('/booking/angebote/')
+          .set('Accept', 'application/json')
+          .expect('Content-Type', 'application/json')
+          .expect(200)
+          .end(function (err, res) {
+            if (err) throw err
+          })
+        done()
+      })
+    })
+  })
 })

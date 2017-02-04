@@ -1,13 +1,14 @@
-'use strict';
+'use strict'
 
 // To modell non-functional behavior
-//var sleep = require('sleep');
+// var sleep = require('sleep');
 
 module.exports = {
-    getPing
-};
+  getPing
+}
 
-function getPing(req, res) {
-    console.log('getPing');
-    res.json('hello');
+function getPing (req, res) {
+  // console.log('getPing')
+
+  res.json('hello')
 }

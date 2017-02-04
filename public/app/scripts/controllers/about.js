@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 angular.module('app')
   .controller('AboutCtrl', function () {
@@ -6,5 +6,5 @@ angular.module('app')
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
-    ];
-  });
+    ]
+  })

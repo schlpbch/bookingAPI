@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /**
  * @ngdoc overview
@@ -8,27 +8,30 @@
  *
  * Main module of the application.
  */
-var app = angular.module('app', ['ngMaterial', 'ngRoute']);
-app.config(function($mdThemingProvider) {
+
+// const angular = require('angular')
+
+var app = angular.module('app', ['ngMaterial', 'ngRoute'])
+app.config(function ($mdThemingProvider) {
   $mdThemingProvider.theme('default')
     .primaryPalette('blue')
     .accentPalette('orange')
-});
+})
 
-app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', function($scope, $mdSidenav, $mdDialog, $http) {
-  $scope.toggleSidenav = function(menuId) {
-    $mdSidenav(menuId).toggle();
-  };
+app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', function ($scope, $mdSidenav, $mdDialog, $http) {
+  $scope.toggleSidenav = function (menuId) {
+    $mdSidenav(menuId).toggle()
+  }
 
-  $scope.sucheVerbindung = function(event) {
+  $scope.sucheVerbindung = function (event) {
     // ToDo: Load via REST Services
-    var url = '../booking/verbindungen/?vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22';
+    var url = '../booking/verbindungen/?vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22'
 
-    if (mockAPICall() == false) {
-      $http.get(url).
-      then(function(res) {
-        $scope.verbindungen = res.data;
-      });
+    if (mockAPICall() === false) {
+      $http.get(url)
+      .then(function (res) {
+        $scope.verbindungen = res.data
+      })
     } else {
       $scope.verbindungen = [{
         'verbindungsId': 'RecContext-RC1',
@@ -48,19 +51,19 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
         'ankunftsOrt': 'Thun',
         'ankunftsDatum': '2017-02-24',
         'ankunftsZeit': '20:52'
-      }];
+      }]
     }
-  };
+  }
 
-  $scope.holeAngebot = function(event) {
+  $scope.holeAngebot = function (event) {
     // ToDo: Load via REST Services
-    var url = '../booking/angebote/?recContext=RecContext-RC1&vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22&alter=42&ermaessigung=halbtax';
+    var url = '../booking/angebote/?recContext=RecContext-RC1&vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22&alter=42&ermaessigung=halbtax'
 
-    if (mockAPICall() == false) {
-      $http.get(url).
-      then(function(res) {
-        $scope.angebote = res.data;
-      });
+    if (mockAPICall() === false) {
+      $http.get(url)
+      .then(function (res) {
+        $scope.angebote = res.data
+      })
     } else {
       $scope.angebote = [{
         'angebotsId': 'A1',
@@ -70,27 +73,26 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
         'angebotsId': 'A2',
         'beschreibung': 'Sparartikel    Bern - Thun',
         'preis': 12
-      }];
+      }]
     }
-  };
+  }
 
-
-  $scope.holeBuchung = function(event) {
-    var url = '../booking/buchungen/B1';
-    if (mockAPICall() == false) {
-      $http.get(url).
-      then(function(res) {
-        $scope.buchung = res.data;
-      });
+  $scope.holeBuchung = function (event) {
+    var url = '../booking/buchungen/B1'
+    if (mockAPICall() === false) {
+      $http.get(url)
+      .then(function (res) {
+        $scope.buchung = res.data
+      })
     } else {
       $scope.buchung = {
         'buchungsId': 'B1',
         'beschreibung': 'Fahrt von Bern nach Thun am 14.01.2017 20:04.'
-      };
+      }
     }
-  };
+  }
 
-  $scope.annuliereBuchung = function(event) {
+  $scope.annuliereBuchung = function (event) {
     $mdDialog.show(
       $mdDialog.alert()
       .parent(angular.element(document.querySelector('#popupContainer')))
@@ -100,136 +102,134 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
       .ariaLabel('Annullierungs Dialog')
       .ok('Ok')
       .targetEvent(event)
-    );
-  };
-}]);
+    )
+  }
+}])
 
+app.controller('AbfahrtCtrl', ['$timeout', '$q', '$log', function ($timeout, $q, $log) {
+  var self = this
 
-app.controller('AbfahrtCtrl', ['$timeout', '$q', '$log', function($timeout, $q, $log) {
-  var self = this;
+  self.simulateQuery = false
+  self.isDisabled = false
+  self.states = loadAll()
+  self.querySearch = querySearch
+  self.selectedItemChange = selectedItemChange
+  self.searchTextChange = searchTextChange
+  self.newState = newState
 
-  self.simulateQuery = false;
-  self.isDisabled = false;
-  self.states = loadAll();
-  self.querySearch = querySearch;
-  self.selectedItemChange = selectedItemChange;
-  self.searchTextChange = searchTextChange;
-  self.newState = newState;
-
-  function newState(state) {
-    alert("Sorry! You'll need to create a Constitution for " + state + " first!");
+  function newState (state) {
+    alert("Sorry! You'll need to create a Constitution for " + state + ' first!')
   }
 
-  function querySearch(query) {
+  function querySearch (query) {
     var results = query ? self.states.filter(createFilterFor(query)) : self.states,
-      deferred;
+      deferred
     if (self.simulateQuery) {
-      deferred = $q.defer();
-      $timeout(function() {
-        deferred.resolve(results);
-      }, Math.random() * 1000, false);
-      return deferred.promise;
+      deferred = $q.defer()
+      $timeout(function () {
+        deferred.resolve(results)
+      }, Math.random() * 1000, false)
+      return deferred.promise
     } else {
-      return results;
+      return results
     }
   }
 
-  function searchTextChange(text) {
-    $log.info('Text changed to ' + text);
+  function searchTextChange (text) {
+    $log.info('Text changed to ' + text)
   }
 
-  function selectedItemChange(item) {
-    $log.info('Item changed to ' + JSON.stringify(item));
+  function selectedItemChange (item) {
+    $log.info('Item changed to ' + JSON.stringify(item))
   }
 
-  function loadAll() {
-    var allStates = 'Bern, Thun ';
-    return allStates.split(/, +/g).map(function(state) {
+  function loadAll () {
+    var allStates = 'Bern, Thun '
+    return allStates.split(/, +/g).map(function (state) {
       return {
         value: state.toLowerCase(),
         display: state
-      };
-    });
+      }
+    })
   }
 
-  function createFilterFor(query) {
-    var lowercaseQuery = angular.lowercase(query);
+  function createFilterFor (query) {
+    var lowercaseQuery = angular.lowercase(query)
 
-    return function filterFn(state) {
-      return (state.value.indexOf(lowercaseQuery) === 0);
-    };
+    return function filterFn (state) {
+      return (state.value.indexOf(lowercaseQuery) === 0)
+    }
   }
-}]);
+}])
 
-app.controller('AnkunftCtrl', ['$timeout', '$q', '$log', function($timeout, $q, $log) {
-  var self = this;
+app.controller('AnkunftCtrl', ['$timeout', '$q', '$log', function ($timeout, $q, $log) {
+  var self = this
 
-  self.simulateQuery = false;
-  self.isDisabled = false;
-  self.states = loadAll();
-  self.querySearch = querySearch;
-  self.selectedItemChange = selectedItemChange;
-  self.searchTextChange = searchTextChange;
-  self.newState = newState;
+  self.simulateQuery = false
+  self.isDisabled = false
+  self.states = loadAll()
+  self.querySearch = querySearch
+  self.selectedItemChange = selectedItemChange
+  self.searchTextChange = searchTextChange
+  self.newState = newState
 
-  function newState(state) {
-    alert("Sorry! You'll need to create a Constitution for " + state + " first!");
+  function newState (state) {
+    alert("Sorry! You'll need to create a Constitution for " + state + ' first!')
   }
 
-  function querySearch(query) {
+  function querySearch (query) {
     var results = query ? self.states.filter(createFilterFor(query)) : self.states,
-      deferred;
+      deferred
     if (self.simulateQuery) {
-      deferred = $q.defer();
-      $timeout(function() {
-        deferred.resolve(results);
-      }, Math.random() * 1000, false);
-      return deferred.promise;
+      deferred = $q.defer()
+      $timeout(function () {
+        deferred.resolve(results)
+      }, Math.random() * 1000, false)
+      return deferred.promise
     } else {
-      return results;
+      return results
     }
   }
 
-  function searchTextChange(text) {
-    $log.info('Text changed to ' + text);
+  function searchTextChange (text) {
+    $log.info('Text changed to ' + text)
   }
 
-  function selectedItemChange(item) {
-    $log.info('Item changed to ' + JSON.stringify(item));
+  function selectedItemChange (item) {
+    $log.info('Item changed to ' + JSON.stringify(item))
   }
 
-  function loadAll() {
-    var allStates = 'Bern, Thun ';
-    return allStates.split(/, +/g).map(function(state) {
+  function loadAll () {
+    var allStates = 'Bern, Thun '
+    return allStates.split(/, +/g).map(function (state) {
       return {
         value: state.toLowerCase(),
         display: state
-      };
-    });
+      }
+    })
   }
 
-  function createFilterFor(query) {
-    var lowercaseQuery = angular.lowercase(query);
+  function createFilterFor (query) {
+    var lowercaseQuery = angular.lowercase(query)
 
-    return function filterFn(state) {
-      return (state.value.indexOf(lowercaseQuery) === 0);
-    };
+    return function filterFn (state) {
+      return (state.value.indexOf(lowercaseQuery) === 0)
+    }
   }
-}]);
+}])
 
-
-function DialogController($scope, $mdDialog) {
-  $scope.hide = function() {
-    $mdDialog.hide();
-  };
-  $scope.cancel = function() {
-    $mdDialog.cancel();
-  };
-  $scope.answer = function(answer) {
-    $mdDialog.hide(answer);
-  };
+function DialogController ($scope, $mdDialog) {
+  $scope.hide = function () {
+    $mdDialog.hide()
+  }
+  $scope.cancel = function () {
+    $mdDialog.cancel()
+  }
+  $scope.answer = function (answer) {
+    $mdDialog.hide(answer)
+  }
 };
 
-function mockAPICall() {
-  return false;
+function mockAPICall () {
+  return false
 }
