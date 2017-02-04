@@ -1,5 +1,8 @@
-# This compostion adds a nginx firewall infront of the nodejs server
+# This image composition adds NGINX as firewall in front of the NodeJS server
 # and links them together using a software defined network.
+#
+# Using self signed OpenSSL certificates, do not forget to replace with real
+# ones!
 
 version: '2'
 services:
@@ -9,7 +12,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf/
+      - ./config/nginx/ssl/:/etc/nginx/ssl/
     depends_on:
       - mock_server
     networks:
@@ -19,14 +23,17 @@ services:
     image: schlpbch/bookingapi
     ports:
       - "8080:8080"
+    networks:
+      - front
 
-  ui4docker:
-    image: uifd/ui-for-docker:latest
-    privileged: true
-    ports:
-       - "9000:9000"
-    volumes:
-       - /var/run/docker.sock:/var/run/docker.sock
+  # Allows us to look into the running containers
+  # ui4docker:
+  #   image: uifd/ui-for-docker:latest
+  #   privileged: true
+  #    ports:
+  #       - "9000:9000"
+  #    volumes:
+  #       - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
   front:

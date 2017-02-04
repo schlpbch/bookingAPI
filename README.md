@@ -14,7 +14,7 @@ docker pull schlpbch/bookingAPI
 ```
 The latest docker image is always available at https://hub.docker.com/schlpbch/bookingAPI.
 
-## Running
+## Running the Mock Server
 The easiest way is to run the docker image:
 
 ```bash
@@ -27,7 +27,27 @@ or start with
 ```bash
   nodejs app.js
 ```
-The web app and the API are running at http://localhost:8080/
+
+The web app and the API are then running at http://localhost/
+
+## Running the Mock Server with NGINX Firewall
+
+Using [docker-compose](https://docs.docker.com/compose/) a software defined
+firewall (see [NGINX](https://www.nginx.com/))
+is added in front of the mocked server and is linked to the mock server
+server using a software defined  network. This allows us to test
+authentication methods using JSON Web Tokens (JWT) later.
+
+See [docker-compose.yml](docker-compose.yml) for details.
+
+To start simply us
+
+```bash
+  docker-compose up
+```
+
+The server uses self signed certificates, must be replaced
+with real ones for production!
 
 ## Live App and Documentation
 
