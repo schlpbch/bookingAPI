@@ -1,0 +1,33 @@
+# This compostion adds a nginx firewall infront of the nodejs server
+# and links them together using a software defined network.
+
+version: '2'
+services:
+  proxy:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - mock_server
+    networks:
+      - front
+
+  mock_server:
+    image: schlpbch/bookingapi
+    ports:
+      - "8080:8080"
+
+  ui4docker:
+    image: uifd/ui-for-docker:latest
+    privileged: true
+    ports:
+       - "9000:9000"
+    volumes:
+       - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  front:
+    driver: bridge
