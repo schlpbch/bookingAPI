@@ -6,7 +6,7 @@ To get the API right, a small web application is provided (we are drinking our o
 
 Once the API is right, the API will be implemented of SBB's distribution system and provided by a simple to access API Management tool. Here is an example of how it might look like:
 
-- [booking API (DEMO)](https://bookingapi.3scale.net/)
+- [booking API (Mock)](https://bookingapi.3scale.net/)
 
 More to come...
 
