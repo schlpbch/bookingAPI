@@ -4,7 +4,11 @@ This a simple Node.js based mock server to test the [bookingAPI](api/swagger/swa
 
 To get the API right, a small web application is provided (we are drinking our own champagne).
 
-Once the API is right, the API will be implemented of SBB's distribution system and provided by a simple to access API Management tool. More to come...
+Once the API is right, the API will be implemented of SBB's distribution system and provided by a simple to access API Management tool. Here is an example of how it might look like:
+
+- [booking API (DEMO)](https://bookingapi.3scale.net/)
+
+More to come...
 
 ## Installing
 The easiest way is to pull the docker image:
@@ -117,13 +121,14 @@ To run the *mock* server as docker container, do:
 
 ## ToDo
 - Translate API to English
+ - Align with FSM specification  
 - Integrate [Swagger Middleware](https://github.com/BigstickCarpet/swagger-express-middleware/blob/master/docs/samples/walkthrough2.md) to easily pre-populate data
 - Get the API right
  - Expose journey planning as a route of its own
 - Complete wiring Wep App with API
 - Clarify legalese
 - Setup API Management
-- Setup Security (JWT)
+- Setup Security (JSON Web Token)
 
 ## Done
 - <del>Write a client to verify the usability of the API (APIs are UIs for developers).</del>
