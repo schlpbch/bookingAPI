@@ -65,7 +65,7 @@ Thanks to **SwaggerUI** the up-to-date documentation is always available at:
 
 and the latest JSON can be accessed at:
 
-- [http://api.sbb.ch/api-docs/](http://api.sbb.ch/api-docs/)
+- [http://api.sbb.ch/api-docs](http://api.sbb.ch/api-docs)
 
 
 ## Developing
