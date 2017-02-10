@@ -43,18 +43,18 @@ paths:
   /ping/{message}:
     x-swagger-router-controller: ping
     get:
-      description: "Returniert die eingegebene Nachricht."
+      description: "Returns the message sent."
       operationId: getPing
       parameters:
         - name: message
           in: path
-          description: "Die Nachricht"
+          description: "The message sent."
           required: true
           type: string
           default: 'hello'
       responses:
         200:
-          description: "Die Nachricht"
+          description: "The message replied."
           schema:
             type: string
         default:
@@ -64,39 +64,44 @@ paths:
 
   # ToDo: Define properly with Team VTP
 
-  /standorte/{name}:
+  /locations/:
     x-swagger-router-controller: standorte
     get:
-      description: "Hole Standorte Codes"
+      description: "The location.name service can be used to perform a pattern matching of a user input and to retrieve a list of possible matches in the journey planner database. Possible matches might be stops/stations, points of interest and addresses. For reasons of backward compati-bility the service name location can be used as an alias for location.name.\n
+
+        The result is a list of possible matches (locations) where the user might pick one entry to per-form a trip request with this
+        location as origin or destination or to ask for a departure board or arrival board of this location (stops/stations only)"
       operationId: getStandorte
       parameters:
-        - name: name
-          in: path
-          description: "Name des Standortes"
+        - name: input
+          in: query
+          description: "Search for that token."
           required: true
           type: string
           default: 'Bern'
       responses:
         200:
-          description: "Eine Liste von Haltepunkte Codes"
+          description: "A list of stop locations."
           schema:
             type: array
             items:
-              $ref: '#/definitions/standort'
+              $ref: '#/definitions/location'
         default:
           description: "unexpected error"
 
   # ToDo: Define properly with Team VTP
 
-  /verbindungen/:
+  /trips/:
     x-swagger-router-controller: verbindungen
     get:
-      description: "Hole Verbindungen"
+      description:
+        'The trip service calculates a trip from a specified origin to a specified destination. These might be stop/station IDs or coordinates based on addresses and points of interest validated by the location service or coordinates freely defined by the client.'
       operationId: getVerbindungen
       parameters:
-        - name: vonUICode
+        - name: originExtId
           in: query
-          description: "Abfahrtsort als UIC Code"
+          description: "Specifies the external station/stop ID of the origin for the trip.
+Such ID can be retrieved from the location.name or loca-tion.nearbystops services."
           type: integer
           default: 8507000
 
@@ -109,30 +114,31 @@ paths:
       #      description: "Via Ort als UIC Code"
       #      type: integer
 
-        - name: nachUICode
-          description: "Ankunftsort als UIC Code"
+        - name: destExtId
+          description: "Specifies the external station/stop ID of the destination for the trip.
+Such ID can be retrieved from the location.name or loca-tion.nearbystops services."
           in: query
           type: integer
           default: 8508500
-        - name: datum
+        - name: date
           in: query
-          description: "Datum"
+          description: "Sets the departure date for the search."
           type: string
           format: date
           default: '2017-01-14'
-        - name: zeit
+        - name: time
           in: query
-          description: "Zeit"
+          description: "Sets the departure time for the search."
           type: string
           format: dateTime
           default: '20:22'
       responses:
         200:
-          description: "Eine Liste von Verbindungen"
+          description: "Returns a list of trips."
           schema:
             type: array
             items:
-              $ref: '#/definitions/verbindung'
+              $ref: '#/definitions/trip'
         default:
           description: "unexpected error"
 
@@ -356,20 +362,36 @@ paths:
 ## Definitions
 
 definitions:
-  # ToDo: Define properly with Team VTP
-  standort:
+
+  location:
     type: object
     required:
+      - extId
       - name
-      - code
+      - lon
+      - lat
     properties:
+      extId:
+        description: 'UIC code of the location.'
+        type: string
+        default: '008507785'
       name:
+        description: 'Name of the location.'
         type: string
-      code:
-        type: string
+        default: 'Bern Hauptbahnhof'
+      lon:
+        description: 'Longitude of centre coordinate.'
+        type: number
+        format: double
+        default: 7.439122
+      lat:
+        description: 'Latitude of centre coordinate.'
+        type: number
+        format: double
+        default: 46.948825
 
-  # ToDo: Define properly with Team VTP
-  verbindung:
+  # ToDo: Refine properly with Team VTP
+  trip:
     type: object
     required:
       - verbindungsId
@@ -405,7 +427,40 @@ definitions:
       links:
         type: array
         items:
-          $ref: '#/definitions/link'
+          $ref: '#/definitions/leg'
+
+  leg:
+    type: object
+    required:
+      - originName
+      - originDate
+      - originTime
+      - destinationName
+      - destinationDate
+      - destinationTime
+    properties:
+      originName:
+        description: "The name of the origin for the trip."
+        type: string
+      originDate:
+        description: 'The date of the departure at the destination.'
+        type: string
+        format: date
+      originTime:
+        description: 'The time of the departure at the destination.'
+        type: string
+        format: dateTime
+      destinationName:
+        description: "The name of the destination for the trip."
+        type: string
+      destinationDate:
+        description: 'The date of the arrival at the destination.'
+        type: string
+        format: date
+      destinationTime:
+        description: 'The time of the arrival at the destination.'
+        type: string
+        format: dateTime
 
   preis:
     type: object
