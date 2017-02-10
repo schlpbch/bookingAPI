@@ -4,9 +4,9 @@ var request = require('supertest')
 var server = require('../../../')
 
 describe('controllers', function () {
-  describe('buchungen', function (done) {
-    describe('GET /buchungen/', function (done) {
-      it('should not return an error', function (done) {
+  describe('buchungen', function(done) {
+    describe('GET /buchungen/', function(done) {
+      it('should not return an error', function(done) {
         request(server)
           .get('/booking/buchungen/')
           .set('Accept', 'application/json')
