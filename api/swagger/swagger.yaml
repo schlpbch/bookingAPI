@@ -2,7 +2,7 @@ swagger: '2.0'
 
 ## API Information
 info:
-  version: '0.0.4'
+  version: '0.0.5'
   title: "Simple öV booking API"
   description: "A simple API to book öV tickets in Switzerland."
   contact:
@@ -65,13 +65,13 @@ paths:
   # ToDo: Define properly with Team VTP
 
   /locations/:
-    x-swagger-router-controller: standorte
+    x-swagger-router-controller: locations
     get:
       description: "The location.name service can be used to perform a pattern matching of a user input and to retrieve a list of possible matches in the journey planner database. Possible matches might be stops/stations, points of interest and addresses. For reasons of backward compati-bility the service name location can be used as an alias for location.name.\n
 
         The result is a list of possible matches (locations) where the user might pick one entry to per-form a trip request with this
         location as origin or destination or to ask for a departure board or arrival board of this location (stops/stations only)"
-      operationId: getStandorte
+      operationId: getLocations
       parameters:
         - name: input
           in: query
@@ -92,11 +92,11 @@ paths:
   # ToDo: Define properly with Team VTP
 
   /trips/:
-    x-swagger-router-controller: verbindungen
+    x-swagger-router-controller: trips
     get:
       description:
         'The trip service calculates a trip from a specified origin to a specified destination. These might be stop/station IDs or coordinates based on addresses and points of interest validated by the location service or coordinates freely defined by the client.'
-      operationId: getVerbindungen
+      operationId: getTrips
       parameters:
         - name: originExtId
           in: query
@@ -362,7 +362,6 @@ Such ID can be retrieved from the location.name or loca-tion.nearbystops service
 ## Definitions
 
 definitions:
-
   location:
     type: object
     required:
@@ -399,35 +398,14 @@ definitions:
       verbindungsId:
         description: "Id einer Verbindung (ReconstructionContext)"
         type: string
-      zugNummer:
-        description: "Zugnummer"
-        type: string
-      abfahrtsOrt:
-        description: "Abfahrtsort"
-        type: string
-      abfahrtsDatum:
-        description: "Abfahrtsdatum"
-        type: string
-        format: date
-      abfahrtsZeit:
-        description: "Abfahrtszeit"
-        type: string
-        format: dateTime
-      ankunftsOrt:
-        description: "Ankunftsort"
-        type: string
-      ankunftsDatum:
-        description: "Ankunftsdatum"
-        type: string
-        format: date
-      ankunftsZeit:
-        description: "Ankunftszeit"
-        type: string
-        format: dateTime
-      links:
+      trips:
         type: array
         items:
           $ref: '#/definitions/leg'
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/link'
 
   leg:
     type: object
