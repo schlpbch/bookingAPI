@@ -18,11 +18,7 @@ function getTrips (req, res) {
     originTime: '20:04',
     destinationName: 'Thun',
     destinationDate: '2017-02-24',
-    destinationTime: '20:22',
-    links: [{
-      rel: 'Angebot holen',
-      href: '/booking/angebote/RecContext-RC1'
-    }]
+    destinationTime: '20:22'
   }
 
   var leg2 = {

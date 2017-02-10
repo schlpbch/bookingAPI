@@ -25,7 +25,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
 
   $scope.sucheVerbindung = function (event) {
     // ToDo: Load via REST Services
-    var url = '../booking/verbindungen/?vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22'
+    var url = '../booking/trips/?vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22'
 
     if (mockAPICall() === false) {
       $http.get(url)
