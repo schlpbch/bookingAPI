@@ -91,19 +91,18 @@
             </form>
           </md-content>
         </md-tab>
-        <md-tab label="Verbindungen">
+        <md-tab id="verbindungen" label="Verbindungen">
           <md-content class="md-padding">
             <md-card class="md-3-line" ng-repeat="item in trips">
               <md-card-title>
                 <md-card-title-text>
-                  <span class="md-subhead">VerbindungsId: {{item.verbindungsId}}</span>
+                  <span class="md-subhead">VerbindungsId: {{item.tripId}}</span>
                   <span class="md-headline">
                     <md-icon>train</md-icon>
-                     {{item.abfahrtsOrt}} &ndash; {{item.ankunftsOrt}}</span>
+                     {{item.leg1.origin.name}} &ndash; {{item.leg1.destination.name}}</span>
                   <span class="md-subhead">
-                        Zugnummer: {{item.zugNummer}}<br>
-                        Abfahrtsdatum: {{item.abfahrtsDatum}}, Zeit: {{item.abfahrtsZeit}}<br>
-                        Ankunftsdatum: {{item.ankunftsDatum}}, Zeit: {{item.ankunftsZeit}}
+                        Abfahrtsdatum: {{item.leg1.origin.date}}, Zeit: {{item.leg1.origin.time}}<br>
+                        Ankunftsdatum: {{item.leg1.destination.date}}, Zeit: {{item.leg1.destination.time}}
                       </span>
                 </md-card-title-text>
               </md-card-title>
@@ -147,12 +146,12 @@
       -->
         <md-tab label="Angebote">
           <md-content class="md-padding">
-            <md-card class="md-3-line" ng-repeat="item in angebote">
+            <md-card class="md-3-line" ng-repeat="item in offers">
               <md-card-title>
                 <md-card-title-text>
-                  <span class="md-subhead">AngebotsId: {{item.angebotsId}}</span>
-                  <span class="md-headline">{{item.beschreibung}}</span>
-                  <span>Preis:  {{item.preis}}</span>
+                  <span class="md-subhead">AngebotsId: {{item.offerId}}</span>
+                  <span class="md-headline">{{item.description}}</span>
+                  <span>Preis:  {{item.price}}</span>
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
@@ -166,13 +165,13 @@
             <md-card class="md-3-line">
               <md-card-title>
                 <md-card-title-text>
-                  <span class="md-subhead">BuchungsId: {{buchung.buchungsId}}</span>
-                  <span class="md-headline">Beschreibung</span> {{buchung.beschreibung}}
+                  <span class="md-subhead">BuchungsId: {{booking.bookingId}}</span>
+                  <span class="md-headline">Beschreibung</span> {{booking.description}}
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
                 <md-button class="md-primary" ng-click="annuliereBuchung($event)">annullieren</md-button>
-                <md-button class="md-primary md-raised" ng-href="../booking/billette/{{buchung.buchungsId}}?typ=pdf">
+                <md-button class="md-primary md-raised" ng-href="../booking/booking/{{booking.bookingId}}/tickets/?type=pdf">
                   Billett
                 </md-button>
               </md-card-actions>

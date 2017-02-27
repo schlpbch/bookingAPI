@@ -10,5 +10,5 @@ module.exports = {
 function getPing (req, res) {
   // console.log('getPing')
 
-  res.json('hello')
+  res.json('hello simon')
 }

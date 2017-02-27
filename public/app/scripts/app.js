@@ -25,69 +25,79 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
 
   $scope.sucheVerbindung = function (event) {
     // ToDo: Load via REST Services
-    var url = '../booking/trips/?vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22'
+    var url = '../booking/trips/?originId=8507000&destinationId=8508500&date=2017-01-14&time=20%3A22'
 
     if (mockAPICall() === false) {
       $http.get(url)
       .then(function (res) {
-        $scope.verbindungen = res.data
+        $scope.trips = res.data
       })
     } else {
-      $scope.verbindungen = [{
-        'verbindungsId': 'RecContext-RC1',
-        'zugNummer': 'IC 918',
-        'abfahrtsOrt': 'Bern',
-        'abfahrtsDatum': '2017-01-14',
-        'abfahrtsZeit': '20:04',
-        'ankunftsOrt': 'Thun',
-        'ankunftsDatum': '2017-02-24',
-        'ankunftsZeit': '20:22'
+      $scope.trips = [{
+        'tripId': 'RecContext-RC1',
+        "leg1": {
+          "origin": {
+            "name": "Bern",
+            "date": "2017-01-14",
+            "time": "20:04"
+          },
+          "destination": {
+            "name": "Thun",
+            "date": "2017-01-14",
+            "time": "20:22"
+          }
+        }
       }, {
-        'verbindungsId': 'RecContext-RC2',
-        'zugNummer': 'IC 918',
-        'abfahrtsOrt': 'Bern',
-        'abfahrtsDatum': '2017-01-14',
-        'abfahrtsZeit': '20:34',
-        'ankunftsOrt': 'Thun',
-        'ankunftsDatum': '2017-02-24',
-        'ankunftsZeit': '20:52'
+        'tripId': 'RecContext-RC2',
+        "leg1": {
+          "origin": {
+            "name": "Bern",
+            "date": "2017-01-14",
+            "time": "21:04"
+          },
+          "destination": {
+            "name": "Thun",
+            "date": "2017-01-14",
+            "time": "21:22"
+          }
+        }
       }]
     }
   }
 
   $scope.holeAngebot = function (event) {
     // ToDo: Load via REST Services
-    var url = '../booking/angebote/?recContext=RecContext-RC1&vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22&alter=42&ermaessigung=halbtax'
+    var url = '../booking/offers/?tripId=RecContext-RC1&date=2017-01-14&time=20%3A22&alter=42&reduction=halffare'
 
     if (mockAPICall() === false) {
       $http.get(url)
       .then(function (res) {
-        $scope.angebote = res.data
+        $scope.offers = res.data
       })
     } else {
-      $scope.angebote = [{
-        'angebotsId': 'A1',
-        'beschreibung': 'DV Artikel    Bern - Thun',
-        'preis': 22
+      $scope.offers = [{
+        'offerId': 'A1',
+        'description': 'DV Artikel    Bern - Thun',
+        'price': 22
       }, {
-        'angebotsId': 'A2',
-        'beschreibung': 'Sparartikel    Bern - Thun',
-        'preis': 12
+        'offerId': 'A2',
+        'description': 'Sparartikel    Bern - Thun',
+        'price': 12
       }]
     }
   }
 
   $scope.holeBuchung = function (event) {
-    var url = '../booking/buchungen/B1'
+    var url = '../booking/booking/B1/book'
     if (mockAPICall() === false) {
       $http.get(url)
       .then(function (res) {
-        $scope.buchung = res.data
+        $scope.booking = res.data
       })
     } else {
-      $scope.buchung = {
-        'buchungsId': 'B1',
-        'beschreibung': 'Fahrt von Bern nach Thun am 14.01.2017 20:04.'
+      $scope.booking = {
+        'bookingId': 'B1',
+        'description': 'Fahrt von Bern nach Thun am 14.01.2017 20:04.'
       }
     }
   }
