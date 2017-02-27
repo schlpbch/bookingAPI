@@ -29,7 +29,7 @@ The easiest way is to run the docker image:
 or start with
 
 ```bash
-  nodejs app.js
+  node app.js
 ```
 
 The web app and the API are then running at http://localhost/
