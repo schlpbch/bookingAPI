@@ -125,23 +125,23 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 }])
 
-app.controller('AbfahrtCtrl', ['$timeout', '$q', '$log', function ($timeout, $q, $log) {
+app.controller('StationCtrl', ['$timeout', '$q', '$log', function ($timeout, $q, $log) {
   var self = this
 
   self.simulateQuery = false
   self.isDisabled = false
-  self.states = loadAll()
+  self.stations = loadStations()
   self.querySearch = querySearch
   self.selectedItemChange = selectedItemChange
   self.searchTextChange = searchTextChange
-  self.newState = newState
+  self.newStation = newStation
 
-  function newState (state) {
-    alert("Sorry! You'll need to create a Constitution for " + state + ' first!')
+  function newStation (station) {
+    alert("Sorry! You'll need to create a Constitution for " + station + ' first!')
   }
 
   function querySearch (query) {
-    var results = query ? self.states.filter(createFilterFor(query)) : self.states,
+    var results = query ? self.stations.filter(createFilterFor(query)) : self.stations,
       deferred
     if (self.simulateQuery) {
       deferred = $q.defer()
@@ -162,12 +162,12 @@ app.controller('AbfahrtCtrl', ['$timeout', '$q', '$log', function ($timeout, $q,
     $log.info('Item changed to ' + JSON.stringify(item))
   }
 
-  function loadAll () {
-    var allStates = 'Bern, Thun '
-    return allStates.split(/, +/g).map(function (state) {
+  function loadStations () {
+    var allStations = 'Bern, Thun '
+    return allStations.split(/, +/g).map(function (station) {
       return {
-        value: state.toLowerCase(),
-        display: state
+        value: station.toLowerCase(),
+        display: station
       }
     })
   }
@@ -175,64 +175,8 @@ app.controller('AbfahrtCtrl', ['$timeout', '$q', '$log', function ($timeout, $q,
   function createFilterFor (query) {
     var lowercaseQuery = angular.lowercase(query)
 
-    return function filterFn (state) {
-      return (state.value.indexOf(lowercaseQuery) === 0)
-    }
-  }
-}])
-
-app.controller('AnkunftCtrl', ['$timeout', '$q', '$log', function ($timeout, $q, $log) {
-  var self = this
-
-  self.simulateQuery = false
-  self.isDisabled = false
-  self.states = loadAll()
-  self.querySearch = querySearch
-  self.selectedItemChange = selectedItemChange
-  self.searchTextChange = searchTextChange
-  self.newState = newState
-
-  function newState (state) {
-    alert("Sorry! You'll need to create a Constitution for " + state + ' first!')
-  }
-
-  function querySearch (query) {
-    var results = query ? self.states.filter(createFilterFor(query)) : self.states,
-      deferred
-    if (self.simulateQuery) {
-      deferred = $q.defer()
-      $timeout(function () {
-        deferred.resolve(results)
-      }, Math.random() * 1000, false)
-      return deferred.promise
-    } else {
-      return results
-    }
-  }
-
-  function searchTextChange (text) {
-    $log.info('Text changed to ' + text)
-  }
-
-  function selectedItemChange (item) {
-    $log.info('Item changed to ' + JSON.stringify(item))
-  }
-
-  function loadAll () {
-    var allStates = 'Bern, Thun '
-    return allStates.split(/, +/g).map(function (state) {
-      return {
-        value: state.toLowerCase(),
-        display: state
-      }
-    })
-  }
-
-  function createFilterFor (query) {
-    var lowercaseQuery = angular.lowercase(query)
-
-    return function filterFn (state) {
-      return (state.value.indexOf(lowercaseQuery) === 0)
+    return function filterFn (station) {
+      return (station.value.indexOf(lowercaseQuery) === 0)
     }
   }
 }])
