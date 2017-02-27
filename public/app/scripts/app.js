@@ -19,6 +19,9 @@ app.config(function ($mdThemingProvider) {
 })
 
 app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', function ($scope, $mdSidenav, $mdDialog, $http) {
+  $scope.tabs = {
+    selectedIndex: 0
+  }
   $scope.toggleSidenav = function (menuId) {
     $mdSidenav(menuId).toggle()
   }
@@ -31,6 +34,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
       $http.get(url)
       .then(function (res) {
         $scope.trips = res.data
+        $scope.tabs.selectedIndex = 1
       })
     } else {
       $scope.trips = [{
@@ -62,6 +66,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
           }
         }
       }]
+      $scope.tabs.selectedIndex = 1
     }
   }
 
@@ -73,6 +78,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
       $http.get(url)
       .then(function (res) {
         $scope.offers = res.data
+        $scope.tabs.selectedIndex = 2
       })
     } else {
       $scope.offers = [{
@@ -84,6 +90,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
         'description': 'Sparartikel    Bern - Thun',
         'price': 12
       }]
+      $scope.tabs.selectedIndex = 2
     }
   }
 
@@ -93,12 +100,14 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
       $http.get(url)
       .then(function (res) {
         $scope.booking = res.data
+        $scope.tabs.selectedIndex = 3
       })
     } else {
       $scope.booking = {
         'bookingId': 'B1',
         'description': 'Fahrt von Bern nach Thun am 14.01.2017 20:04.'
       }
+      $scope.tabs.selectedIndex = 3
     }
   }
 
