@@ -60,14 +60,14 @@
         <md-tab label="Reisewunsch">
           <md-content class="md-padding">
             <form>
-              <span ng-controller="AbfahrtCtrl as ctrl">
+              <span ng-controller="StationCtrl as ctrl">
               <h5>Abfahrtsort</h5>
               <md-autocomplete ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)"
                 md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.display" md-min-length="0" placeholder="Von">
               <span><md-icon>place</md-icon>{{item.display}}</span>
               </md-autocomplete>
               </span>
-              <span ng-controller="AnkunftCtrl as ctrl">
+              <span ng-controller="StationCtrl as ctrl">
               <h5>Ankunftsort</h5>
               <md-autocomplete ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)"
                 md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.display" md-min-length="0" placeholder="Nach">
