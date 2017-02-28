@@ -67,16 +67,21 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.annuliereBuchung = function (event, item) {
-    $mdDialog.show(
-      $mdDialog.alert()
-      .parent(angular.element(document.querySelector('#popupContainer')))
-      .clickOutsideToClose(true)
-      .title('Buchung annulliert')
-      .textContent('Ihre Buchung wurde erfolgreich annulliert.')
-      .ariaLabel('Annullierungs Dialog')
-      .ok('Ok')
-      .targetEvent(event)
-    )
+    $http.get('../' + item.links[2].href)
+      .then(function (res) {
+        $scope.cancellation = res.data
+
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('Buchung annulliert: ' + $scope.cancellation.bookingId)
+          .textContent('Ihre Buchung wurde erfolgreich annulliert.')
+          .ariaLabel('Annullierungs Dialog')
+          .ok('Ok')
+          .targetEvent(event)
+        )
+    })
   }
 }])
 
