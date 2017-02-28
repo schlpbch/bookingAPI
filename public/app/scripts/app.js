@@ -28,87 +28,34 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
 
   $scope.sucheVerbindung = function (event) {
     // ToDo: Load via REST Services
-    var url = '../booking/trips/?originId=8507000&destinationId=8508500&date=2017-01-14&time=20%3A22'
+    var url = '../trips/?originId=8507000&destinationId=8508500&date=2017-01-14&time=20%3A22'
 
-    if (mockAPICall() === false) {
-      $http.get(url)
-      .then(function (res) {
-        $scope.trips = res.data
-        $scope.tabs.selectedIndex = 1
-      })
-    } else {
-      $scope.trips = [{
-        'tripId': 'RecContext-RC1',
-        "leg1": {
-          "origin": {
-            "name": "Bern",
-            "date": "2017-01-14",
-            "time": "20:04"
-          },
-          "destination": {
-            "name": "Thun",
-            "date": "2017-01-14",
-            "time": "20:22"
-          }
-        }
-      }, {
-        'tripId': 'RecContext-RC2',
-        "leg1": {
-          "origin": {
-            "name": "Bern",
-            "date": "2017-01-14",
-            "time": "21:04"
-          },
-          "destination": {
-            "name": "Thun",
-            "date": "2017-01-14",
-            "time": "21:22"
-          }
-        }
-      }]
+    $http.get(url)
+    .then(function (res) {
+      $scope.trips = res.data
       $scope.tabs.selectedIndex = 1
-    }
+    })
   }
 
   $scope.holeAngebot = function (event) {
     // ToDo: Load via REST Services
-    var url = '../booking/offers/?tripId=RecContext-RC1&date=2017-01-14&time=20%3A22&alter=42&reduction=halffare'
+    var url = '../offers/?tripId=RecContext-RC1&date=2017-01-14&time=20%3A22&alter=42&reduction=halffare'
 
-    if (mockAPICall() === false) {
-      $http.get(url)
-      .then(function (res) {
-        $scope.offers = res.data
-        $scope.tabs.selectedIndex = 2
-      })
-    } else {
-      $scope.offers = [{
-        'offerId': 'A1',
-        'description': 'DV Artikel    Bern - Thun',
-        'price': 22
-      }, {
-        'offerId': 'A2',
-        'description': 'Sparartikel    Bern - Thun',
-        'price': 12
-      }]
+    $http.get(url)
+    .then(function (res) {
+      $scope.offers = res.data
       $scope.tabs.selectedIndex = 2
-    }
+    })
   }
 
   $scope.holeBuchung = function (event) {
-    var url = '../booking/booking/B1/book'
-    if (mockAPICall() === false) {
-      $http.get(url)
-      .then(function (res) {
-        $scope.booking = res.data
-        $scope.tabs.selectedIndex = 3
-      })
-    } else {
-      $scope.booking = {
-        'bookingId': 'B1',
-        'description': 'Fahrt von Bern nach Thun am 14.01.2017 20:04.'
-      }
+    var url = '../booking/B1/book'
+
+    $http.get(url)
+    .then(function (res) {
+      $scope.booking = res.data
       $scope.tabs.selectedIndex = 3
-    }
+    })
   }
 
   $scope.annuliereBuchung = function (event) {
@@ -192,7 +139,3 @@ function DialogController ($scope, $mdDialog) {
     $mdDialog.hide(answer)
   }
 };
-
-function mockAPICall () {
-  return false
-}
