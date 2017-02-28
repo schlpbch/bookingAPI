@@ -30,6 +30,11 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
     // ToDo: Load via REST Services
     var url = '../trips/?originId=8507000&destinationId=8508500&date=2017-01-14&time=20%3A22'
 
+    $scope.trips = null;
+    $scope.offers = null;
+    $scope.prebooking = null;
+    $scope.booking = null;
+
     $http.get(url)
     .then(function (res) {
       $scope.trips = res.data
@@ -37,38 +42,31 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
     })
   }
 
-  $scope.holeAngebot = function (event) {
-    // ToDo: Load via REST Services
-    var url = '../offers/?tripId=RecContext-RC1&date=2017-01-14&time=20%3A22&alter=42&reduction=halffare'
-
-    $http.get(url)
+  $scope.holeAngebot = function (event, item) {
+    $http.get('../' + item.links[1].href)
     .then(function (res) {
       $scope.offers = res.data
       $scope.tabs.selectedIndex = 2
     })
   }
 
-  $scope.holeVorabbuchung = function (event) {
-    var url = '../booking/A1/prebook'
-
-    $http.get(url)
+  $scope.holeVorabbuchung = function (event, item) {
+    $http.get('../' + item.links[0].href)
       .then(function (res) {
         $scope.prebooking = res.data
         $scope.tabs.selectedIndex = 3
       })
   }
 
-  $scope.holeBuchung = function (event) {
-    var url = '../booking/P1/book'
-
-    $http.get(url)
+  $scope.holeBuchung = function (event, item) {
+    $http.get('../' + item.links[0].href)
       .then(function (res) {
         $scope.booking = res.data
         $scope.tabs.selectedIndex = 4
       })
   }
 
-  $scope.annuliereBuchung = function (event) {
+  $scope.annuliereBuchung = function (event, item) {
     $mdDialog.show(
       $mdDialog.alert()
       .parent(angular.element(document.querySelector('#popupContainer')))

@@ -18,10 +18,10 @@ function getBook (req, res) {
     links: [
       {
         rel: 'Billette zur Buchung als PDF holen',
-        href: 'booking/B1/tickets/?typ=pdf'
+        href: 'booking/B1/tickets/?type=pdf'
       }, {
         rel: 'Billette zur Buchung als Screenticket holen',
-        href: 'booking/B1/tickets/?typ=screen'
+        href: 'booking/B1/tickets/?type=screen'
       }, {
         rel: 'Buchung annullieren',
         href: 'booking/B1/cancel'
