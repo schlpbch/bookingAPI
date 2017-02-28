@@ -155,7 +155,40 @@
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-raised md-primary" ng-click="holeVorabbuchung($event)">vorabbuchen</md-button>
+              </md-card-actions>
+            </md-card>
+          </md-content>
+        </md-tab>
+        <md-tab label="Vorabbuchen">
+          <md-content class="md-padding">
+            <md-card class="md-3-line" ng-repeat="item in offers">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-subhead">VorabbuchungsId: {{prebooking.offerId}}</span>
+                  <span class="md-headline">{{prebooking.description}}</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-actions layout="row" layout-align="end center">
                 <md-button class="md-raised md-primary" ng-click="holeBuchung($event)">buchen</md-button>
+              </md-card-actions>
+            </md-card>
+          </md-content>
+        </md-tab>
+        <md-tab label="Buchungen">
+          <md-content class="md-padding">
+            <md-card class="md-3-line">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-subhead">BuchungsId: {{booking.bookingId}}</span>
+                  <span class="md-headline">Beschreibung</span> {{booking.description}}
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-primary" ng-click="annuliereBuchung($event)">annullieren</md-button>
+                <md-button class="md-primary md-raised" ng-href="../booking/{{booking.bookingId}}/tickets/?type=pdf">
+                  Billett
+                </md-button>
               </md-card-actions>
             </md-card>
           </md-content>

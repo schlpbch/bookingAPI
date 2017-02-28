@@ -48,14 +48,24 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
     })
   }
 
-  $scope.holeBuchung = function (event) {
-    var url = '../booking/B1/book'
+  $scope.holeVorabbuchung = function (event) {
+    var url = '../booking/A1/prebook'
 
     $http.get(url)
-    .then(function (res) {
-      $scope.booking = res.data
-      $scope.tabs.selectedIndex = 3
-    })
+      .then(function (res) {
+        $scope.prebooking = res.data
+        $scope.tabs.selectedIndex = 3
+      })
+  }
+
+  $scope.holeBuchung = function (event) {
+    var url = '../booking/P1/book'
+
+    $http.get(url)
+      .then(function (res) {
+        $scope.booking = res.data
+        $scope.tabs.selectedIndex = 4
+      })
   }
 
   $scope.annuliereBuchung = function (event) {
