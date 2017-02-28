@@ -8,13 +8,13 @@ info:
   contact:
     name: Team SVS Vertrieb
     email: andreas.schlapbach@sbb.ch
-    url: http://api.sbb.ch/booking
+    url: http://api.sbb.ch/
   license:
     name: SBB
     url: https://data.sbb.ch/page/licence/
 #host: api.sbb.ch
-#host: localhost:8080
-basePath: /booking
+host: localhost:8080
+basePath: /
 schemes:
   - http # Nur am Anfang
   - https
@@ -231,7 +231,104 @@ paths:
               $ref: '#/definitions/offer'
         default:
           description: "unexpected error"
+          
+  /prices/:
+    x-swagger-router-controller: prices
+    get:
+      description: "The price service calculates prices for a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service."
+      operationId: getPrices
+      parameters:
+        - name: originId
+          in: query
+          description: "The id of the origin."
+          required: true
+          type: integer
+          default: 8507000
+        - name: destinationId
+          description: "The id of the destination."
+          required: true
+          in: query
+          type: integer
+          default: 8508500
+        - name: date
+          in: query
+          description: "The desired departure date."
+          required: true
+          type: string
+          format: date
+          default: '2017-01-14'
+        - name: time
+          in: query
+          description: "The desired departure time."
+          type: string
+          format: dateTime
+          default: '20:22'
+      # ToDo; Scale for more than one traveller
+        - name: age
+          in: query
+          description: 'Age of the traveller.'
+          type: integer
+          default: 42
+          minimum: 0
+          maximum: 120
+        - name: reduction
+          in: query
+          description: 'Reduction: {None, Half-Fare, GA}'
+          type: string
+          default: 'halffare'
+          enum:
+           - none
+           - halffare
+           - ga
+      responses:
+        200:
+          description: "A list of prices for the trip."
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/price'
+        default:
+          description: "unexpected error"
 
+  /prices/{tripId}/:
+    x-swagger-router-controller: prices
+    get:
+      description: "The price service calculates prices for a trip ID. The trip ID can be retrieved using the trips service."
+      operationId: getTripPrices
+      parameters:
+        - name: tripId
+          in: path
+          description: "The trip ID to get prices for."
+          required: true
+          type: string
+          default: 'trip-rec-context' # for simpler mock testing only
+      # ToDo; Scale for more than one traveller
+        - name: age
+          in: query
+          description: 'Age of the traveller.'
+          type: integer
+          default: 42
+          minimum: 0
+          maximum: 120
+        - name: reduction
+          in: query
+          description: 'Reduction: {None, Half-Fare, GA}'
+          type: string
+          default: 'halffare'
+          enum:
+           - none
+           - halffare
+           - ga
+      responses:
+        200:
+          description: "A list of prices for the trip"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/price'
+        default:
+          description: "unexpected error"
+          
   /booking/{offerId}/prebook/:
     x-swagger-router-controller: prebook
     get:
@@ -335,103 +432,6 @@ paths:
       responses:
         200:
           description: "The booked tickets."
-        default:
-          description: "unexpected error"
-
-  /prices/:
-    x-swagger-router-controller: prices
-    get:
-      description: "The price service calculates prices for a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service."
-      operationId: getPrices
-      parameters:
-        - name: originId
-          in: query
-          description: "The id of the origin."
-          required: true
-          type: integer
-          default: 8507000
-        - name: destinationId
-          description: "The id of the destination."
-          required: true
-          in: query
-          type: integer
-          default: 8508500
-        - name: date
-          in: query
-          description: "The desired departure date."
-          required: true
-          type: string
-          format: date
-          default: '2017-01-14'
-        - name: time
-          in: query
-          description: "The desired departure time."
-          type: string
-          format: dateTime
-          default: '20:22'
-      # ToDo; Scale for more than one traveller
-        - name: age
-          in: query
-          description: 'Age of the traveller.'
-          type: integer
-          default: 42
-          minimum: 0
-          maximum: 120
-        - name: reduction
-          in: query
-          description: 'Reduction: {None, Half-Fare, GA}'
-          type: string
-          default: 'halffare'
-          enum:
-           - none
-           - halffare
-           - ga
-      responses:
-        200:
-          description: "A list of prices for the trip."
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/price'
-        default:
-          description: "unexpected error"
-
-  /prices/{tripId}/:
-    x-swagger-router-controller: prices
-    get:
-      description: "The price service calculates prices for a trip ID. The trip ID can be retrieved using the trips service."
-      operationId: getTripPrices
-      parameters:
-        - name: tripId
-          in: path
-          description: "The trip ID to get prices for."
-          required: true
-          type: string
-          default: 'trip-rec-context' # for simpler mock testing only
-      # ToDo; Scale for more than one traveller
-        - name: age
-          in: query
-          description: 'Age of the traveller.'
-          type: integer
-          default: 42
-          minimum: 0
-          maximum: 120
-        - name: reduction
-          in: query
-          description: 'Reduction: {None, Half-Fare, GA}'
-          type: string
-          default: 'halffare'
-          enum:
-           - none
-           - halffare
-           - ga
-      responses:
-        200:
-          description: "A list of prices for the trip"
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/price'
         default:
           description: "unexpected error"
           
