@@ -26,16 +26,16 @@ function getTrips (req, res) {
   }
 
   var leg2 = {
-      origin: {
-          name: 'Thun',
-          date: '2017-01-14',
-          time: '20:34'
-      },
-      destination: {
-          name: 'Interlaken',
-          date: '2017-01-14',
-          time: '20:52'
-      }
+    origin: {
+      name: 'Thun',
+      date: '2017-01-14',
+      time: '20:34'
+    },
+    destination: {
+      name: 'Interlaken',
+      date: '2017-01-14',
+      time: '20:52'
+    }
   }
 
   var trip1 = {
@@ -46,8 +46,8 @@ function getTrips (req, res) {
       rel: 'Request prices for a trip.',
       href: 'prices/trip-rec-context'
     }, {
-        rel: 'Request offers for a trip.',
-        href: 'offers/trip-rec-context'
+      rel: 'Request offers for a trip.',
+      href: 'offers/trip-rec-context'
     }]
   }
 
