@@ -8,7 +8,7 @@ describe('controllers', function() {
         describe('GET /locations/', function(done) {
             it('should not return an error', function(done) {
                 request(server)
-                    .get('/booking/locations/')
+                    .get('/locations/')
                     .set('Accept', 'application/json')
                     .expect('Content-Type', 'application/json')
                     .expect(200)
