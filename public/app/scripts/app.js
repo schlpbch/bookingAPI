@@ -30,10 +30,10 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
     // ToDo: Load via REST Services
     var url = '../trips/?originId=8507000&destinationId=8508500&date=2017-01-14&time=20%3A22'
 
-    $scope.trips = null;
-    $scope.offers = null;
-    $scope.prebooking = null;
-    $scope.booking = null;
+    $scope.trips = null
+    $scope.offers = null
+    $scope.prebooking = null
+    $scope.booking = null
 
     $http.get(url)
       .then(function (res) {
@@ -43,11 +43,11 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.holeAngebot = function (event, item) {
-    $http.get('../' + item.links[1].href)
-      .then(function (res) {
-        $scope.offers = res.data
-        $scope.tabs.selectedIndex = 2
-      })
+    $http.get('../' + item.links[0].href)
+    .then(function (res) {
+      $scope.offers = res.data
+      $scope.tabs.selectedIndex = 2
+    })
   }
 
   $scope.holeVorabbuchung = function (event, item) {

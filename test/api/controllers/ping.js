@@ -4,9 +4,9 @@ var request = require('supertest')
 var server = require('../../../app')
 
 describe('controllers', function () {
-  describe('ping', function(done) {
-    describe('GET /ping/{message}', function(done) {
-      it('should return the message sent', function(done) {
+  describe('ping', function (done) {
+    describe('GET /ping/{message}', function (done) {
+      it('should return the message sent', function (done) {
         request(server)
           .get('/ping/:hello')
           .set('Accept', 'application/json')
@@ -16,7 +16,7 @@ describe('controllers', function () {
             if (err) {
               throw err
             } else {
-                done()
+              done()
             }
           })
       })
