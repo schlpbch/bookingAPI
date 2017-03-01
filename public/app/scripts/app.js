@@ -43,7 +43,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.holeAngebot = function (event, item) {
-    $http.get('../' + item.links[1].href)
+    $http.get('../' + item.links[0].href)
     .then(function (res) {
       $scope.offers = res.data
       $scope.tabs.selectedIndex = 2
