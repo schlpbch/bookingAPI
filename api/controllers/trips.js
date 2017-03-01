@@ -13,29 +13,41 @@ function getTrips (req, res) {
   // sleep.msleep(200); //average response time
 
   var leg1 = {
-    originName: 'Bern',
-    originDate: '2017-01-14',
-    originTime: '20:04',
-    destinationName: 'Thun',
-    destinationDate: '2017-02-24',
-    destinationTime: '20:22'
+    origin: {
+      name: 'Bern',
+      date: '2017-01-14',
+      time: '20:04'
+    },
+    destination: {
+      name: 'Thun',
+      date: '2017-01-14',
+      time: '20:22'
+    }
   }
 
   var leg2 = {
-    originName: 'Bern',
-    originDate: '2017-01-14',
-    originTime: '20:34',
-    destinationName: 'Thun',
-    destinationDate: '2017-02-24',
-    destinationTime: '20:52'
+      origin: {
+          name: 'Thun',
+          date: '2017-01-14',
+          time: '20:34'
+      },
+      destination: {
+          name: 'Interlaken',
+          date: '2017-01-14',
+          time: '20:52'
+      }
   }
 
   var trip1 = {
+    tripId: 'trip-rec-context',
     leg1,
     leg2,
     links: [{
-      rel: 'Angebot holen',
-      href: '/booking/angebote/RecContext-RC1'
+      rel: 'Request prices for a trip.',
+      href: 'prices/trip-rec-context'
+    }, {
+        rel: 'Request offers for a trip.',
+        href: 'offers/trip-rec-context'
     }]
   }
 
