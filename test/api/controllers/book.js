@@ -3,16 +3,16 @@
 var request = require('supertest')
 var server = require('../../../')
 
-describe('controllers', function() {
-    describe('preise', function(done) {
-        describe('GET /preise/', function(done) {
-            it('should not return an error', function(done) {
+describe('controllers', function () {
+    describe('Test book prebook P1', function (done) {
+        describe('GET /booking/P1/book', function (done) {
+            it('should not return an error', function (done) {
                 request(server)
-                    .get('/booking/preise/')
+                    .get('/booking/P1/book')
                     .set('Accept', 'application/json')
                     .expect('Content-Type', 'application/json')
                     .expect(200)
-                    .end(function(err, res) {
+                    .end(function (err, res) {
                         if (err) throw err
                     })
                 done()
