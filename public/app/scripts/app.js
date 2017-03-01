@@ -28,110 +28,80 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
 
   $scope.sucheVerbindung = function (event) {
     // ToDo: Load via REST Services
-    var url = '../booking/trips/?vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22'
+    var url = '../trips/?originId=8507000&destinationId=8508500&date=2017-01-14&time=20%3A22'
 
-    if (mockAPICall() === false) {
-      $http.get(url)
-      .then(function (res) {
-        $scope.trips = res.data
-        $scope.tabs.selectedIndex = 1
-      })
-    } else {
-      $scope.trips = [{
-        'verbindungsId': 'RecContext-RC1',
-        'zugNummer': 'IC 918',
-        'abfahrtsOrt': 'Bern',
-        'abfahrtsDatum': '2017-01-14',
-        'abfahrtsZeit': '20:04',
-        'ankunftsOrt': 'Thun',
-        'ankunftsDatum': '2017-02-24',
-        'ankunftsZeit': '20:22'
-      }, {
-        'verbindungsId': 'RecContext-RC2',
-        'zugNummer': 'IC 918',
-        'abfahrtsOrt': 'Bern',
-        'abfahrtsDatum': '2017-01-14',
-        'abfahrtsZeit': '20:34',
-        'ankunftsOrt': 'Thun',
-        'ankunftsDatum': '2017-02-24',
-        'ankunftsZeit': '20:52'
-      }]
+    $scope.trips = null;
+    $scope.offers = null;
+    $scope.prebooking = null;
+    $scope.booking = null;
+
+    $http.get(url)
+    .then(function (res) {
+      $scope.trips = res.data
       $scope.tabs.selectedIndex = 1
-    }
+    })
   }
 
-  $scope.holeAngebot = function (event) {
-    // ToDo: Load via REST Services
-    var url = '../booking/angebote/?recContext=RecContext-RC1&vonUICode=8507000&nachUICode=8508500&datum=2017-01-14&zeit=20%3A22&alter=42&ermaessigung=halbtax'
-
-    if (mockAPICall() === false) {
-      $http.get(url)
-      .then(function (res) {
-        $scope.angebote = res.data
-        $scope.tabs.selectedIndex = 2
-      })
-    } else {
-      $scope.angebote = [{
-        'angebotsId': 'A1',
-        'beschreibung': 'DV Artikel    Bern - Thun',
-        'preis': 22
-      }, {
-        'angebotsId': 'A2',
-        'beschreibung': 'Sparartikel    Bern - Thun',
-        'preis': 12
-      }]
+  $scope.holeAngebot = function (event, item) {
+    $http.get('../' + item.links[1].href)
+    .then(function (res) {
+      $scope.offers = res.data
       $scope.tabs.selectedIndex = 2
-    }
+    })
   }
 
-  $scope.holeBuchung = function (event) {
-    var url = '../booking/buchungen/B1'
-    if (mockAPICall() === false) {
-      $http.get(url)
+  $scope.holeVorabbuchung = function (event, item) {
+    $http.get('../' + item.links[0].href)
       .then(function (res) {
-        $scope.buchung = res.data
+        $scope.prebooking = res.data
         $scope.tabs.selectedIndex = 3
       })
-    } else {
-      $scope.buchung = {
-        'buchungsId': 'B1',
-        'beschreibung': 'Fahrt von Bern nach Thun am 14.01.2017 20:04.'
-      }
-      $scope.tabs.selectedIndex = 3
-    }
   }
 
-  $scope.annuliereBuchung = function (event) {
-    $mdDialog.show(
-      $mdDialog.alert()
-      .parent(angular.element(document.querySelector('#popupContainer')))
-      .clickOutsideToClose(true)
-      .title('Buchung annulliert')
-      .textContent('Ihre Buchung wurde erfolgreich annulliert.')
-      .ariaLabel('Annullierungs Dialog')
-      .ok('Ok')
-      .targetEvent(event)
-    )
+  $scope.holeBuchung = function (event, item) {
+    $http.get('../' + item.links[0].href)
+      .then(function (res) {
+        $scope.booking = res.data
+        $scope.tabs.selectedIndex = 4
+      })
+  }
+
+  $scope.annuliereBuchung = function (event, item) {
+    $http.get('../' + item.links[2].href)
+      .then(function (res) {
+        $scope.cancellation = res.data
+
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('Buchung annulliert: ' + $scope.cancellation.bookingId)
+          .textContent('Ihre Buchung wurde erfolgreich annulliert.')
+          .ariaLabel('Annullierungs Dialog')
+          .ok('Ok')
+          .targetEvent(event)
+        )
+    })
   }
 }])
 
-app.controller('AbfahrtCtrl', ['$timeout', '$q', '$log', function ($timeout, $q, $log) {
+app.controller('StationCtrl', ['$timeout', '$q', '$log', function ($timeout, $q, $log) {
   var self = this
 
   self.simulateQuery = false
   self.isDisabled = false
-  self.states = loadAll()
+  self.stations = loadStations()
   self.querySearch = querySearch
   self.selectedItemChange = selectedItemChange
   self.searchTextChange = searchTextChange
-  self.newState = newState
+  self.newStation = newStation
 
-  function newState (state) {
-    alert("Sorry! You'll need to create a Constitution for " + state + ' first!')
+  function newStation (station) {
+    alert("Sorry! You'll need to create a Constitution for " + station + ' first!')
   }
 
   function querySearch (query) {
-    var results = query ? self.states.filter(createFilterFor(query)) : self.states,
+    var results = query ? self.stations.filter(createFilterFor(query)) : self.stations,
       deferred
     if (self.simulateQuery) {
       deferred = $q.defer()
@@ -152,12 +122,12 @@ app.controller('AbfahrtCtrl', ['$timeout', '$q', '$log', function ($timeout, $q,
     $log.info('Item changed to ' + JSON.stringify(item))
   }
 
-  function loadAll () {
-    var allStates = 'Bern, Thun '
-    return allStates.split(/, +/g).map(function (state) {
+  function loadStations () {
+    var allStations = 'Bern, Thun '
+    return allStations.split(/, +/g).map(function (station) {
       return {
-        value: state.toLowerCase(),
-        display: state
+        value: station.toLowerCase(),
+        display: station
       }
     })
   }
@@ -165,64 +135,8 @@ app.controller('AbfahrtCtrl', ['$timeout', '$q', '$log', function ($timeout, $q,
   function createFilterFor (query) {
     var lowercaseQuery = angular.lowercase(query)
 
-    return function filterFn (state) {
-      return (state.value.indexOf(lowercaseQuery) === 0)
-    }
-  }
-}])
-
-app.controller('AnkunftCtrl', ['$timeout', '$q', '$log', function ($timeout, $q, $log) {
-  var self = this
-
-  self.simulateQuery = false
-  self.isDisabled = false
-  self.states = loadAll()
-  self.querySearch = querySearch
-  self.selectedItemChange = selectedItemChange
-  self.searchTextChange = searchTextChange
-  self.newState = newState
-
-  function newState (state) {
-    alert("Sorry! You'll need to create a Constitution for " + state + ' first!')
-  }
-
-  function querySearch (query) {
-    var results = query ? self.states.filter(createFilterFor(query)) : self.states,
-      deferred
-    if (self.simulateQuery) {
-      deferred = $q.defer()
-      $timeout(function () {
-        deferred.resolve(results)
-      }, Math.random() * 1000, false)
-      return deferred.promise
-    } else {
-      return results
-    }
-  }
-
-  function searchTextChange (text) {
-    $log.info('Text changed to ' + text)
-  }
-
-  function selectedItemChange (item) {
-    $log.info('Item changed to ' + JSON.stringify(item))
-  }
-
-  function loadAll () {
-    var allStates = 'Bern, Thun '
-    return allStates.split(/, +/g).map(function (state) {
-      return {
-        value: state.toLowerCase(),
-        display: state
-      }
-    })
-  }
-
-  function createFilterFor (query) {
-    var lowercaseQuery = angular.lowercase(query)
-
-    return function filterFn (state) {
-      return (state.value.indexOf(lowercaseQuery) === 0)
+    return function filterFn (station) {
+      return (station.value.indexOf(lowercaseQuery) === 0)
     }
   }
 }])
@@ -238,7 +152,3 @@ function DialogController ($scope, $mdDialog) {
     $mdDialog.hide(answer)
   }
 };
-
-function mockAPICall () {
-  return false
-}

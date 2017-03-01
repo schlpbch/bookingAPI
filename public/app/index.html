@@ -60,14 +60,14 @@
         <md-tab label="Reisewunsch">
           <md-content class="md-padding">
             <form>
-              <span ng-controller="AbfahrtCtrl as ctrl">
+              <span ng-controller="StationCtrl as ctrl">
               <h5>Abfahrtsort</h5>
               <md-autocomplete ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)"
                 md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.display" md-min-length="0" placeholder="Von">
               <span><md-icon>place</md-icon>{{item.display}}</span>
               </md-autocomplete>
               </span>
-              <span ng-controller="AnkunftCtrl as ctrl">
+              <span ng-controller="StationCtrl as ctrl">
               <h5>Ankunftsort</h5>
               <md-autocomplete ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)"
                 md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.display" md-min-length="0" placeholder="Nach">
@@ -91,24 +91,23 @@
             </form>
           </md-content>
         </md-tab>
-        <md-tab label="Verbindungen">
+        <md-tab id="verbindungen" label="Verbindungen" ng-disabled="trips == null">
           <md-content class="md-padding">
             <md-card class="md-3-line" ng-repeat="item in trips">
               <md-card-title>
                 <md-card-title-text>
-                  <span class="md-subhead">VerbindungsId: {{item.verbindungsId}}</span>
+                  <span class="md-subhead">VerbindungsId: {{item.tripId}}</span>
                   <span class="md-headline">
                     <md-icon>train</md-icon>
-                     {{item.abfahrtsOrt}} &ndash; {{item.ankunftsOrt}}</span>
+                     {{item.leg1.origin.name}} &ndash; {{item.leg1.destination.name}}</span>
                   <span class="md-subhead">
-                        Zugnummer: {{item.zugNummer}}<br>
-                        Abfahrtsdatum: {{item.abfahrtsDatum}}, Zeit: {{item.abfahrtsZeit}}<br>
-                        Ankunftsdatum: {{item.ankunftsDatum}}, Zeit: {{item.ankunftsZeit}}
+                        Abfahrtsdatum: {{item.leg1.origin.date}}, Zeit: {{item.leg1.origin.time}}<br>
+                        Ankunftsdatum: {{item.leg1.destination.date}}, Zeit: {{item.leg1.destination.time}}
                       </span>
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary" ng-click="holeAngebot($event)">Angebot</md-button>
+                <md-button class="md-raised md-primary" ng-click="holeAngebot($event, item)">Angebot</md-button>
               </md-card-actions>
             </md-card>
             </md-list-item>
@@ -145,34 +144,49 @@
           </md-content>
         </md-tab>
       -->
-        <md-tab label="Angebote">
+        <md-tab label="Angebote" ng-disabled="offers == null">
           <md-content class="md-padding">
-            <md-card class="md-3-line" ng-repeat="item in angebote">
+            <md-card class="md-3-line" ng-repeat="item in offers">
               <md-card-title>
                 <md-card-title-text>
-                  <span class="md-subhead">AngebotsId: {{item.angebotsId}}</span>
-                  <span class="md-headline">{{item.beschreibung}}</span>
-                  <span>Preis:  {{item.preis}}</span>
+                  <span class="md-subhead">AngebotsId: {{item.offerId}}</span>
+                  <span class="md-headline">{{item.description}}</span>
+                  <span>Preis:  {{item.price}}</span>
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary" ng-click="holeBuchung($event)">buchen</md-button>
+                <md-button class="md-raised md-primary" ng-click="holeVorabbuchung($event, item)">vorabbuchen</md-button>
               </md-card-actions>
             </md-card>
           </md-content>
         </md-tab>
-        <md-tab label="Buchungen">
+        <md-tab label="Vorabbuchen" ng-disabled="prebooking == null">
           <md-content class="md-padding">
             <md-card class="md-3-line">
               <md-card-title>
                 <md-card-title-text>
-                  <span class="md-subhead">BuchungsId: {{buchung.buchungsId}}</span>
-                  <span class="md-headline">Beschreibung</span> {{buchung.beschreibung}}
+                  <span class="md-subhead">VorabbuchungsId: {{prebooking.preBookId}}</span>
+                  <span class="md-headline">{{prebooking.description}}</span>
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-primary" ng-click="annuliereBuchung($event)">annullieren</md-button>
-                <md-button class="md-primary md-raised" ng-href="../booking/billette/{{buchung.buchungsId}}?typ=pdf">
+                <md-button class="md-raised md-primary" ng-click="holeBuchung($event, prebooking)">buchen</md-button>
+              </md-card-actions>
+            </md-card>
+          </md-content>
+        </md-tab>
+        <md-tab label="Buchungen" ng-disabled="booking == null">
+          <md-content class="md-padding">
+            <md-card class="md-3-line">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-subhead">BuchungsId: {{booking.bookingId}}</span>
+                  <span class="md-headline">{{booking.description}}</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-primary" ng-click="annuliereBuchung($event, booking)">annullieren</md-button>
+                <md-button class="md-primary md-raised" ng-href="../{{booking.links[0].href}}">
                   Billett
                 </md-button>
               </md-card-actions>
