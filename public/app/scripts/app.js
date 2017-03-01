@@ -36,18 +36,18 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
     $scope.booking = null;
 
     $http.get(url)
-    .then(function (res) {
-      $scope.trips = res.data
-      $scope.tabs.selectedIndex = 1
-    })
+      .then(function (res) {
+        $scope.trips = res.data
+        $scope.tabs.selectedIndex = 1
+      })
   }
 
   $scope.holeAngebot = function (event, item) {
     $http.get('../' + item.links[1].href)
-    .then(function (res) {
-      $scope.offers = res.data
-      $scope.tabs.selectedIndex = 2
-    })
+      .then(function (res) {
+        $scope.offers = res.data
+        $scope.tabs.selectedIndex = 2
+      })
   }
 
   $scope.holeVorabbuchung = function (event, item) {
@@ -73,16 +73,39 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
 
         $mdDialog.show(
           $mdDialog.alert()
-          .parent(angular.element(document.querySelector('#popupContainer')))
-          .clickOutsideToClose(true)
-          .title('Buchung annulliert: ' + $scope.cancellation.bookingId)
-          .textContent('Ihre Buchung wurde erfolgreich annulliert.')
-          .ariaLabel('Annullierungs Dialog')
-          .ok('Ok')
-          .targetEvent(event)
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('Buchung annulliert: ' + $scope.cancellation.bookingId)
+            .textContent('Ihre Buchung wurde erfolgreich annulliert.')
+            .ariaLabel('Annullierungs Dialog')
+            .ok('Ok')
+            .targetEvent(event)
         )
-    })
+      })
   }
+
+  $scope.showTicketDialog = function (event, bookings) {
+    $http.get('../' + bookings.links[0].href)
+      .then(function (res) {
+        var ticketUrl = res.config.url
+        $mdDialog.show({
+          controller: DialogController,
+          scope: $scope,
+          preserveScope: true,
+          template: '<md-dialog style="max-width: 100% max-height: 100%; width: 100%; height: 100%; border-radius: 0;">' +
+          '  <md-dialog-content style="width: 100%; height: 100%; ">' +
+          '    <object data="' + ticketUrl + '" type="application/pdf" style="width: 100%; height: 100%;">' +
+          '       <embed ng-src="' + ticketUrl + '" type="application/pdf" />' +
+          '    </object>' +
+          '  </md-dialog-content>' +
+          '</md-dialog>',
+          parent: angular.element(document.querySelector('#popupContainer')),
+          targetEvent: event,
+          clickOutsideToClose: true
+        })
+      })
+  };
+
 }])
 
 app.controller('StationCtrl', ['$timeout', '$q', '$log', function ($timeout, $q, $log) {
@@ -96,11 +119,11 @@ app.controller('StationCtrl', ['$timeout', '$q', '$log', function ($timeout, $q,
   self.searchTextChange = searchTextChange
   self.newStation = newStation
 
-  function newStation (station) {
+  function newStation(station) {
     alert("Sorry! You'll need to create a Constitution for " + station + ' first!')
   }
 
-  function querySearch (query) {
+  function querySearch(query) {
     var results = query ? self.stations.filter(createFilterFor(query)) : self.stations,
       deferred
     if (self.simulateQuery) {
@@ -114,15 +137,15 @@ app.controller('StationCtrl', ['$timeout', '$q', '$log', function ($timeout, $q,
     }
   }
 
-  function searchTextChange (text) {
+  function searchTextChange(text) {
     $log.info('Text changed to ' + text)
   }
 
-  function selectedItemChange (item) {
+  function selectedItemChange(item) {
     $log.info('Item changed to ' + JSON.stringify(item))
   }
 
-  function loadStations () {
+  function loadStations() {
     var allStations = 'Bern, Thun '
     return allStations.split(/, +/g).map(function (station) {
       return {
@@ -132,10 +155,10 @@ app.controller('StationCtrl', ['$timeout', '$q', '$log', function ($timeout, $q,
     })
   }
 
-  function createFilterFor (query) {
+  function createFilterFor(query) {
     var lowercaseQuery = angular.lowercase(query)
 
-    return function filterFn (station) {
+    return function filterFn(station) {
       return (station.value.indexOf(lowercaseQuery) === 0)
     }
   }
