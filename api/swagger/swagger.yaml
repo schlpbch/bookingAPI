@@ -231,7 +231,7 @@ paths:
               $ref: '#/definitions/offer'
         default:
           description: "unexpected error"
-          
+
   /prices/:
     x-swagger-router-controller: prices
     get:
@@ -328,7 +328,7 @@ paths:
               $ref: '#/definitions/price'
         default:
           description: "unexpected error"
-          
+
   /booking/{offerId}/prebook/:
     x-swagger-router-controller: prebook
     get:
@@ -434,7 +434,7 @@ paths:
           description: "The booked tickets."
         default:
           description: "unexpected error"
-          
+
 ## Definitions
 
 definitions:
@@ -495,15 +495,9 @@ definitions:
       - destination
     properties:
       origin:
-        description: "The origin of the trip."
-        type: object
-        #schema:
-        #  $ref: '#/definitions/stop'
+        $ref: '#/definitions/stop'
       destination:
-        description: "The destination of the trip."
-        type: object
-        #schema:
-        #  $ref: '#/definitions/stop'
+        $ref: '#/definitions/stop'
 
   stop:
     type: object
@@ -540,7 +534,7 @@ definitions:
         description: "Price of the trip"
         type: integer
         default: 22
-        
+
   offer:
     type: object
     required:
@@ -580,7 +574,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/link'
-          
+
   book:
     type: object
     required:
