@@ -11,12 +11,12 @@ describe('controllers', function () {
                 request(server)
                     .get('/booking/B1/cancel')
                     .set('Accept', 'application/json')
-                    .expect('Content-Type', 'application/json')
+                    .expect('Content-Type', 'application/json; charset=utf-8')
                     .expect(200)
                     .end(function (err, res) {
                         if (err) throw err
+                        else done()
                     })
-                done()
             })
         })
     })
@@ -27,12 +27,12 @@ describe('controllers', function () {
                 request(server)
                     .get('/booking/B1/refund')
                     .set('Accept', 'application/json')
-                    .expect('Content-Type', 'application/json')
+                    .expect('Content-Type', 'application/json; charset=utf-8')
                     .expect(200)
                     .end(function (err, res) {
                         if (err) throw err
+                        else done()
                     })
-                done()
             })
         })
     })

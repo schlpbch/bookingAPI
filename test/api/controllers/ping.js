@@ -8,14 +8,17 @@ describe('controllers', function () {
     describe('GET /ping/{message}', function(done) {
       it('should return the message sent', function(done) {
         request(server)
-          .get('/booking/ping/:hello')
+          .get('/ping/:hello')
           .set('Accept', 'application/json')
-          .expect('Content-Type', 'application/json')
-          .expect('hello')
+          .expect('Content-Type', 'application/json; charset=utf-8')
+          .expect('"hello"')
           .end(function (err, res) {
-            if (err) throw err
+            if (err) {
+              throw err
+            } else {
+                done()
+            }
           })
-        done()
       })
     })
   })
