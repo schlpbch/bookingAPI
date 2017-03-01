@@ -12,6 +12,7 @@ function getTrips (req, res) {
 
   // sleep.msleep(200); //average response time
 
+  // first leg of first trip
   var leg1 = {
     origin: {
       name: 'Bern',
@@ -25,33 +26,37 @@ function getTrips (req, res) {
     }
   }
 
-  var leg2 = {
-      origin: {
-          name: 'Thun',
-          date: '2017-01-14',
-          time: '20:34'
-      },
-      destination: {
-          name: 'Interlaken',
-          date: '2017-01-14',
-          time: '20:52'
-      }
-  }
-
   var trip1 = {
-    tripId: 'trip-rec-context',
+    tripId: 'trip-rec-context1',
     leg1,
-    leg2,
     links: [{
-      rel: 'Request prices for a trip.',
-      href: 'prices/trip-rec-context'
-    }, {
-        rel: 'Request offers for a trip.',
-        href: 'offers/trip-rec-context'
+      rel: 'Request offers for a trip.',
+      href: 'offers/trip-rec-context1'
     }]
   }
 
-  var trip2 = trip1
+  // first leg of second trip
+  leg1 = {
+    origin: {
+      name: 'Bern',
+      date: '2017-01-14',
+      time: '20:34'
+    },
+    destination: {
+      name: 'Thun',
+      date: '2017-01-14',
+      time: '20:52'
+    }
+  }
+
+  var trip2 = {
+    tripId: 'trip-rec-context2',
+    leg1,
+    links: [{
+      rel: 'Request offers for a trip.',
+      href: 'offers/trip-rec-context2'
+    }]
+  }
 
   var verbindungen = [trip1, trip2]
   res.json(verbindungen)
