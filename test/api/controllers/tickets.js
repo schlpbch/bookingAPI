@@ -9,9 +9,9 @@ describe('controllers', function () {
         describe('GET /booking/B1/tickets/', function (done) {
             it('should not return an error', function (done) {
                 request(server)
-                    .get('/booking/B1/tickets')
+                    .get('/booking/B1/tickets/?type=pdf')
                     .set('Accept', 'application/json')
-                    .expect('Content-Type', 'application/json; charset=utf-8')
+                    .expect('Content-Type', 'application/pdf')
                     .expect(200)
                     .end(function (err, res) {
                         if (err) throw err
