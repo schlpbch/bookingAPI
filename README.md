@@ -1,4 +1,4 @@
-![travis-master](https://travis-ci.org/schlpbch/bookingAPI.svg?branch=master)
+[![Build Status](https://travis-ci.org/schlpbch/bookingAPI.svg?branch=master)](https://travis-ci.org/schlpbch/bookingAPI)
 
 #About
 
