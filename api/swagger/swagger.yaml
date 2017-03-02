@@ -44,7 +44,7 @@ paths:
     x-swagger-router-controller: ping
     get:
       description: "Returns the message sent."
-      operationId: getPing
+      operationId: ping
       parameters:
         - name: message
           in: path
@@ -70,7 +70,7 @@ paths:
       description: "The locations service can be used to perform a pattern-based search to retrieve a list of matching locations in the journey planner database. Possible matches might be stations, points of interest and addresses.\n
 
         The result is a list of matching locations which can be used as origin and destination in trip and departure/arrival board requests."
-      operationId: getLocations
+      operationId: locations
       parameters:
         - name: input
           in: query
@@ -95,7 +95,7 @@ paths:
     get:
       description:
         'The trips service calculates different trips for a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service.'
-      operationId: getTrips
+      operationId: trips
       parameters:
         - name: originId
           in: query
@@ -139,7 +139,7 @@ paths:
     x-swagger-router-controller: offers
     get:
       description: "The offers service calculates offers for a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service."
-      operationId: getOffers
+      operationId: offers
       parameters:
         - name: originId
           in: query
@@ -197,7 +197,7 @@ paths:
     x-swagger-router-controller: offers
     get:
       description: "The offers service calculates offers for a trip ID. The trip ID can be retrieved using the trips service."
-      operationId: getTripOffers
+      operationId: tripOffers
       parameters:
         - name: tripId
           in: path
@@ -236,7 +236,7 @@ paths:
     x-swagger-router-controller: prices
     get:
       description: "The price service calculates prices for a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service."
-      operationId: getPrices
+      operationId: prices
       parameters:
         - name: originId
           in: query
@@ -294,7 +294,7 @@ paths:
     x-swagger-router-controller: prices
     get:
       description: "The price service calculates prices for a trip ID. The trip ID can be retrieved using the trips service."
-      operationId: getTripPrices
+      operationId: tripPrices
       parameters:
         - name: tripId
           in: path
@@ -329,11 +329,11 @@ paths:
         default:
           description: "unexpected error"
 
-  /booking/{offerId}/prebook/:
-    x-swagger-router-controller: prebook
+  /bookings/{offerId}/prebook/:
+    x-swagger-router-controller: bookings
     get:
       description: "Pre-book an offer."
-      operationId: getPreBook
+      operationId: prebook
       parameters:
         - name: offerId
           in: path
@@ -349,11 +349,11 @@ paths:
         default:
           description: "unexpected error"
 
-  /booking/{preBookId}/book/:
-    x-swagger-router-controller: book
+  /bookings/{preBookId}/book/:
+    x-swagger-router-controller: bookings
     get:
       description: "Book the pre-booked offer."
-      operationId: getBook
+      operationId: book
       parameters:
         - name: preBookId
           in: path
@@ -369,51 +369,11 @@ paths:
         default:
           description: "unexpected error"
 
-  /booking/{bookingId}/cancel/:
-    x-swagger-router-controller: cancel
-    get:
-      description: "Cancel the booking"
-      operationId: getCancel
-      parameters:
-        - name: bookingId
-          in: path
-          description: "Booking ID to cancel."
-          required: true
-          type: string
-          default: "B1" # for simpler mock testing only
-      responses:
-        200:
-          description: "The canceled booking ID."
-          schema:
-            type: string
-        default:
-          description: "unexpected error"
-
-  /booking/{bookingId}/refund/:
-    x-swagger-router-controller: cancel
-    get:
-      description: "Cancel the booking"
-      operationId: getRefund
-      parameters:
-        - name: bookingId
-          in: path
-          description: "Booking ID to refund."
-          required: true
-          type: string
-          default: "B1" # for simpler mock testing only
-      responses:
-        200:
-          description: "The refunded booking ID."
-          schema:
-            type: string
-        default:
-          description: "unexpected error"
-
-  /booking/{bookingId}/tickets/:
-    x-swagger-router-controller: tickets
+  /bookings/{bookingId}/print/:
+    x-swagger-router-controller: bookings
     get:
       description: "Get the booked tickets."
-      operationId: getTickets
+      operationId: print
       parameters:
         - name: bookingId
           in: path
@@ -432,6 +392,46 @@ paths:
       responses:
         200:
           description: "The booked tickets."
+        default:
+          description: "unexpected error"
+
+  /cancellations/{bookingId}/cancel/:
+    x-swagger-router-controller: cancellations
+    get:
+      description: "Cancel the booking"
+      operationId: cancel
+      parameters:
+        - name: bookingId
+          in: path
+          description: "Booking ID to cancel."
+          required: true
+          type: string
+          default: "B1" # for simpler mock testing only
+      responses:
+        200:
+          description: "The canceled booking ID."
+          schema:
+            type: string
+        default:
+          description: "unexpected error"
+
+  /cancellations/{bookingId}/refund/:
+    x-swagger-router-controller: cancellations
+    get:
+      description: "Cancel the booking"
+      operationId: refund
+      parameters:
+        - name: bookingId
+          in: path
+          description: "Booking ID to refund."
+          required: true
+          type: string
+          default: "B1" # for simpler mock testing only
+      responses:
+        200:
+          description: "The refunded booking ID."
+          schema:
+            type: string
         default:
           description: "unexpected error"
 
