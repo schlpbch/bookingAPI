@@ -87,7 +87,7 @@
                 <input name="zeit" ng-model="angebot.zeit" placeholder="22:22" required>
               </md-input-container>
               <br/>
-              <md-button class="md-raised md-primary" ng-click="sucheVerbindung($event)">Suchen</md-button>
+              <md-button class="md-raised md-primary" ng-click="getTrips($event)">Suchen</md-button>
             </form>
           </md-content>
         </md-tab>
@@ -107,7 +107,7 @@
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary" ng-click="holeAngebot($event, item)">Angebot</md-button>
+                <md-button class="md-raised md-primary" ng-click="getOffers($event, item)">Angebot</md-button>
               </md-card-actions>
             </md-card>
             </md-list-item>
@@ -155,7 +155,7 @@
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary" ng-click="holeVorabbuchung($event, item)">vorabbuchen</md-button>
+                <md-button class="md-raised md-primary" ng-click="getPrebooking($event, item)">vorabbuchen</md-button>
               </md-card-actions>
             </md-card>
           </md-content>
@@ -170,7 +170,7 @@
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary" ng-click="holeBuchung($event, prebooking)">buchen</md-button>
+                <md-button class="md-raised md-primary" ng-click="getBooking($event, prebooking)">buchen</md-button>
               </md-card-actions>
             </md-card>
           </md-content>
@@ -185,8 +185,8 @@
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-primary" ng-click="annuliereBuchung($event, booking)">annullieren</md-button>
-                <md-button class="md-primary md-raised" ng-click="showTicketDialog($event, booking)">
+                <md-button class="md-primary" ng-click="cancelBooking($event, booking)">annullieren</md-button>
+                <md-button class="md-primary md-raised" ng-click="printBooking($event, booking)">
                   Billett
                 </md-button>
               </md-card-actions>

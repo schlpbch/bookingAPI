@@ -26,7 +26,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
     $mdSidenav(menuId).toggle()
   }
 
-  $scope.sucheVerbindung = function (event) {
+  $scope.getTrips = function (event) {
     // ToDo: Load via REST Services
     var url = '../trips/?originId=8507000&destinationId=8508500&date=2017-01-14&time=20%3A22'
 
@@ -42,7 +42,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
       })
   }
 
-  $scope.holeAngebot = function (event, item) {
+  $scope.getOffers = function (event, item) {
     $http.get('../' + item.links[0].href)
     .then(function (res) {
       $scope.offers = res.data
@@ -50,7 +50,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
     })
   }
 
-  $scope.holeVorabbuchung = function (event, item) {
+  $scope.getPrebooking = function (event, item) {
     $http.get('../' + item.links[0].href)
       .then(function (res) {
         $scope.prebooking = res.data
@@ -58,7 +58,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
       })
   }
 
-  $scope.holeBuchung = function (event, item) {
+  $scope.getBooking = function (event, item) {
     $http.get('../' + item.links[0].href)
       .then(function (res) {
         $scope.booking = res.data
@@ -66,7 +66,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
       })
   }
 
-  $scope.annuliereBuchung = function (event, item) {
+  $scope.cancelBooking = function (event, item) {
     $http.get('../' + item.links[2].href)
       .then(function (res) {
         $scope.cancellation = res.data
@@ -84,7 +84,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
       })
   }
 
-  $scope.showTicketDialog = function (event, bookings) {
+  $scope.printBooking = function (event, bookings) {
     $http.get('../' + bookings.links[0].href)
       .then(function (res) {
         var ticketUrl = res.config.url
