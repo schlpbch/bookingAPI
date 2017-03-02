@@ -13,6 +13,7 @@
     "swagger-tools": "^0.10.1"
   },
   "devDependencies": {
+    "swagger": "^0.7.0",
     "eslint": "^3.14.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": ">3.3.0",
