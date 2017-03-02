@@ -25,6 +25,6 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "swagger project test"
+    "test": "mocha -u exports -R spec test/api/controllers"
   }
 }
