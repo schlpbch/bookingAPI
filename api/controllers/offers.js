@@ -1,44 +1,37 @@
 'use strict'
 
-// To modell non-functional behavior
-// var sleep = require('sleep');
-
 module.exports = {
-  getOffers,
-  getTripOffers
+    offers,
+    tripOffers
 }
 
-function getTripOffers (req, res) {
-  getOffers(req, res)
+function tripOffers(req, res) {
+    offers(req, res)
 }
 
-function getOffers (req, res) {
-  // console.log('getOffers')
-
-  // sleep.msleep(500); //average response time
-
-  var offerDV = {
-    offerId: 'A1',
-    description: 'Angebot direkter Verkehr',
-    price: 22,
-    links: [
-      {
-        rel: 'Angebot A1 vorabbuchen',
-        href: 'booking/A1/prebook'
-      }
-    ]
-  }
-  var offerSparbillett = {
-    offerId: 'A2',
-    description: 'Angebot Sparbillett',
-    price: 12,
-    links: [
-      {
-        rel: 'Angebot A2 vorabbuchen',
-        href: 'booking/A2/prebook'
-      }
-    ]
-  }
-  var offers = [offerDV, offerSparbillett]
-  res.json(offers)
+function offers(req, res) {
+    var offerDV = {
+        offerId: 'A1',
+        description: 'Angebot direkter Verkehr',
+        price: 22,
+        links: [
+            {
+                rel: 'Angebot A1 vorabbuchen',
+                href: 'bookings/A1/prebook'
+            }
+        ]
+    }
+    var offerSparbillett = {
+        offerId: 'A2',
+        description: 'Angebot Sparbillett',
+        price: 12,
+        links: [
+            {
+                rel: 'Angebot A2 vorabbuchen',
+                href: 'bookings/A2/prebook'
+            }
+        ]
+    }
+    var offers = [offerDV, offerSparbillett]
+    res.json(offers)
 }
