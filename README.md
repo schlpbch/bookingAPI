@@ -1,3 +1,5 @@
+![travis-master](https://travis-ci.org/schlpbch/bookingAPI.svg?branch=master)
+
 #About
 
 This a simple Node.js based mock server to test the [bookingAPI](api/swagger/swagger.yaml). The mock implementation is intended for fast protoyping and to get the API right (Getting APIs right is *hard*).
