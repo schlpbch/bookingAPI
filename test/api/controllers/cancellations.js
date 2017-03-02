@@ -5,7 +5,7 @@ var server = require('../../../')
 
 describe('controllers', function () {
   describe('Test cancel Booking B1', function (done) {
-    describe('GET /bookings/B1/cancel/', function (done) {
+    describe('GET /cancellations/B1/cancel/', function (done) {
       it('should not return an error', function (done) {
         request(server)
           .get('/bookings/B1/cancel')
@@ -21,7 +21,7 @@ describe('controllers', function () {
   })
 
   describe('Test refund Booking B1', function (done) {
-    describe('GET /bookings/B1/refund/', function (done) {
+    describe('GET /cancellations/B1/refund/', function (done) {
       it('should not return an error', function (done) {
         request(server)
           .get('/bookings/B1/refund')

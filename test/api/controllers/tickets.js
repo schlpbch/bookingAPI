@@ -6,7 +6,7 @@ var server = require('../../../')
 // todo test failing, rest method not implemented
 describe('controllers', function() {
   describe('Test issue tickets for Booking B1', function(done) {
-    describe('GET /bookings/B1/tickets/', function(done) {
+    describe('GET /bookings/B1/print/', function(done) {
       it('should not return an error', function(done) {
         request(server)
           .get('/bookings/B1/tickets/?type=pdf')
