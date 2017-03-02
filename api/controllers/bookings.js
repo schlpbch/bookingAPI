@@ -1,33 +1,27 @@
 'use strict'
 
-// To modell non-functional behavior
-// var sleep = require('sleep');
-
 module.exports = {
-  getBook
+  getBookings
 }
 
-function getBook(req, res) {
-  // console.log('getBook')
-
-  // sleep.msleep(200); //average response time
-
+function getBookings(req, res) {
   var booking = {
     bookingId: 'B1',
     description: 'Fahrt von Bern nach Thun am 14.01.2017 20:04.',
     links: [{
       rel: 'Billette zur Buchung als PDF holen',
-      href: 'booking/B1/tickets/?type=pdf'
+      href: 'bookings/B1/tickets/?type=pdf'
     }, {
       rel: 'Billette zur Buchung als Screenticket holen',
-      href: 'booking/B1/tickets/?type=screen'
+      href: 'bookings/B1/tickets/?type=screen'
     }, {
       rel: 'Buchung annullieren',
-      href: 'booking/B1/cancel'
+      href: 'bookings/B1/cancel'
     }, {
       rel: 'Buchung stornieren',
-      href: 'booking/B1/refund'
+      href: 'bookings/B1/refund'
     }]
   }
+
   res.json(booking)
 }
