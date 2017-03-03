@@ -35,9 +35,6 @@ function book(req, res) {
         }, {
             rel: 'Buchung annullieren',
             href: 'cancellations/B1/cancel'
-        }, {
-            rel: 'Buchung stornieren',
-            href: 'cancellations/B1/refund'
         }]
     }
 
