@@ -22,6 +22,9 @@ function trips(req, res) {
         links: [{
             rel: 'Request offers for a trip.',
             href: 'offers/trip-rec-context1'
+        }, {
+            rel: 'Request the cheapest price for a trip.',
+            href: 'prices/trip-rec-context1'
         }]
     }
 
@@ -44,6 +47,9 @@ function trips(req, res) {
         links: [{
             rel: 'Request offers for a trip.',
             href: 'offers/trip-rec-context2'
+        }, {
+            rel: 'Request the cheapest price for a trip.',
+            href: 'prices/trip-rec-context2'
         }]
     }
 
