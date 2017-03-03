@@ -9,11 +9,13 @@ function trips(req, res) {
         tripId: 'trip-rec-context1',
         leg1: {
             origin: {
+                id: '8507000',
                 name: 'Bern',
                 date: '2017-01-14',
                 time: '20:04'
             },
             destination: {
+                id: '8507100',
                 name: 'Thun',
                 date: '2017-01-14',
                 time: '20:22'
@@ -34,11 +36,13 @@ function trips(req, res) {
         tripId: 'trip-rec-context2',
         leg1: {
             origin: {
+                id: '8507000',
                 name: 'Bern',
                 date: '2017-01-14',
                 time: '20:34'
             },
             destination: {
+                id: '8507100',
                 name: 'Thun',
                 date: '2017-01-14',
                 time: '20:52'
