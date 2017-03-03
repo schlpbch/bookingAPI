@@ -122,8 +122,7 @@ To run the *mock* server as docker container, do:
 ```
 
 ## ToDo
-- Translate API to English
- - Align with FSM specification  
+- Align with FSM specification  
 - Integrate [Swagger Middleware](https://github.com/BigstickCarpet/swagger-express-middleware/blob/master/docs/samples/walkthrough2.md) to easily pre-populate data
 - Get the API right
  - Expose journey planning as a route of its own
@@ -133,6 +132,7 @@ To run the *mock* server as docker container, do:
 - Setup Security (JSON Web Token)
 
 ## Done
+- <del>Translate API to English</del>
 - <del>Write a client to verify the usability of the API (APIs are UIs for developers).</del>
 - <del>Align with Fahrplan team</del>
 - <del>Align with Open Data (better Open API) team<del>
