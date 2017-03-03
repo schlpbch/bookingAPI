@@ -450,10 +450,15 @@ definitions:
   stop:
     type: object
     required:
+      - id
       - name
       - date
       - time
     properties:
+      id:
+        description: 'The UIC code of the stop.'
+        type: string
+        default: '8507785'
       name:
         description: 'The name of the stop.'
         type: string
@@ -551,7 +556,7 @@ definitions:
     properties:
       rel:
         type: string
-        description: "Aktion"
+        description: "Action"
       href:
         type: string
-        description: "URL zu Auslösung der Aktion"
+        description: "URL to execute the action"
