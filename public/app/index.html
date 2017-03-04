@@ -189,7 +189,7 @@
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
                 <md-button class="md-primary" ng-click="cancelBooking($event, booking)">annullieren</md-button>
-                <md-button class="md-primary md-raised" ng-click="printBooking($event, booking)">
+                <md-button class="md-primary md-raised" ng-href="../{{booking.links[0].href}}">
                   Billett
                 </md-button>
               </md-card-actions>
