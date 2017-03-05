@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/schlpbch/bookingAPI.svg?branch=master)](https://travis-ci.org/schlpbch/bookingAPI)
+[![](https://images.microbadger.com/badges/image/schlpbch/bookingapi.svg)](https://microbadger.com/images/schlpbch/bookingapi "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/schlpbch/bookingapi.svg)](https://microbadger.com/images/schlpbch/bookingapi "Get your own version badge on microbadger.com")
 
 #About
 
