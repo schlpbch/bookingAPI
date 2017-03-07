@@ -40,21 +40,14 @@ produces:
 ## Paths
 paths:
 
-  /ping/{message}:
+  /ping/:
     x-swagger-router-controller: ping
     get:
-      description: "Returns the message sent."
+      description: "The ping service can be used to check if the remote server is running and can be reached across the network."
       operationId: ping
-      parameters:
-        - name: message
-          in: path
-          description: "The message sent."
-          required: true
-          type: string
-          default: 'hello'
       responses:
         200:
-          description: "The message replied."
+          description: "The reply from the server."
           schema:
             type: string
         default:
