@@ -5,5 +5,6 @@ module.exports = {
 }
 
 function ping(req, res) {
-    res.json('hello')
+    var now = new Date()
+    res.json('Received ping request on ' + now)
 }
