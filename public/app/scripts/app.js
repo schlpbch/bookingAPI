@@ -9,7 +9,12 @@
  * Main module of the application.
  */
 
-// const angular = require('angular')
+var angular = require('angular');
+require('angular-route');
+require('angular-animate');
+require('angular-material');
+require('angular-aria');
+require('angular-messages');
 
 var app = angular.module('app', ['ngMaterial', 'ngRoute'])
 app.config(function ($mdThemingProvider) {
