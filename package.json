@@ -31,7 +31,7 @@
     "browserify": "^14.1.0"
   },
   "scripts": {
-    "prestart": "browserify public/app/scripts/app.js -o public/app/bundle.js -d",
+    "prestart": "browserify public/app/scripts/app.js -o public/bundle.js -d",
     "start": "node app.js",
     "test": "mocha -u exports -R spec test/api/controllers"
   }
