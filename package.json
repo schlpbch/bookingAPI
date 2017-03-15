@@ -19,19 +19,20 @@
     "swagger-tools": "^0.10.1"
   },
   "devDependencies": {
-    "swagger": "^0.7.0",
+    "browserify": "^14.1.0",
+    "browserify-css": "^0.10.0",
     "eslint": "^3.14.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": ">3.3.0",
     "eslint-plugin-standard": ">2.0.0",
-    "should": "^11.2.0",
     "jasmine-node": "^1.14.5",
     "request": "^2.79.0",
+    "should": "^11.2.0",
     "supertest": "^3.0.0",
-    "browserify": "^14.1.0"
+    "swagger": "^0.7.0"
   },
   "scripts": {
-    "prestart": "browserify public/app/app.js -o public/bundle.js -d",
+    "prestart": "browserify -t browserify-css public/app/app.js -o public/bundle.js -d && browserify",
     "start": "node app.js",
     "test": "mocha -u exports -R spec test/api/controllers"
   }
