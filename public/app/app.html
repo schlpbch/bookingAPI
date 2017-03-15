@@ -1,0 +1,182 @@
+<!-- Container #1 (see wireframe) -->
+<test></test>
+<md-content layout="column">
+  <md-toolbar class="md-toolbar-tools">
+    <md-button ng-click="toggleSidenav('left')" aria-label="Menu">
+      <md-icon>menu</md-icon>
+    </md-button>
+    <h3>booking API App</h3>
+    <span flex></span>
+    <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)">
+      <md-icon>more_vert</md-icon>
+    </md-button>
+  </md-toolbar>
+</md-content>
+
+<!-- Container #2 -->
+<div flex layout="row">
+
+  <!-- Container #3 -->
+  <md-sidenav class="md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" ng-click="app.toggleList()">
+    <md-toolbar class="md-tall md-hue-2">
+      <span flex></span>
+      <div layout="column" class="md-toolbar-tools-bottom inset">
+        <p class='md-title'>booking API &ndash; Test Application</p>
+        <div class='md-subhead'>by Andreas Schlapbach<br/>Team SVS</div>
+      </div>
+    </md-toolbar>
+    <md-list>
+      <md-subheader>Login</md-subheader>
+      <md-item ng-repeat="item in [{'icon':'exit_to_app', 'title':'With SwissPassID'},{'icon':'exit_to_app', 'title':'With B2B-Account'}]">
+        <md-item-content md-ink-ripple layout="row" layout-align="start center">
+          <div class="inset">
+            <md-icon>{{item.icon}}</md-icon>
+            <md-button ng-href="https://www.swisspass.ch/auth/login" target="_blank">{{item.title}}</md-button>
+          </div>
+        </md-item-content>
+      </md-item>
+    </md-list>
+  </md-sidenav>
+
+  <!-- Container #4 -->
+  <md-content layout-padding flex>
+    <md-tabs md-dynamic-height md-border-bottom md-selected="tabs.selectedIndex">
+      <md-tab label="Reisewunsch">
+        <md-content class="md-padding">
+          <form>
+              <span ng-controller="StationCtrl as ctrl">
+              <h5>Abfahrtsort</h5>
+              <md-autocomplete ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)"
+                               md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.display" md-min-length="0" placeholder="Von">
+              <span><md-icon>place</md-icon>{{item.display}}</span>
+              </md-autocomplete>
+              </span>
+            <span ng-controller="StationCtrl as ctrl">
+              <h5>Ankunftsort</h5>
+              <md-autocomplete ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)"
+                               md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.display" md-min-length="0" placeholder="Nach">
+              <span><md-icon>place</md-icon>{{item.display}}</span>
+              </md-autocomplete>
+              </span>
+            <br/>
+            <md-switch class="md-subhead" ng-model="angebot.istAnkunft" aria-label="Switch" ng-true-value="'Ankunft'" ng-false-value="'Abfahrt'">
+              {{angebot.istAnkunft}}
+            </md-switch>
+            <md-input-container>
+              <label>Datum</label>
+              <md-datepicker ng-model="angebot.datum" md-placeholder="2017/09/02"></md-datepicker>
+            </md-input-container>
+            <md-input-container>
+              <label>Zeit</label>
+              <input name="zeit" ng-model="angebot.zeit" placeholder="22:22" required>
+            </md-input-container>
+            <br/>
+            <md-button class="md-raised md-primary" ng-click="getTrips($event)">Suchen</md-button>
+          </form>
+        </md-content>
+      </md-tab>
+      <md-tab id="verbindungen" label="Verbindungen" ng-disabled="trips == null">
+        <md-content class="md-padding">
+          <md-card class="md-3-line" ng-repeat="item in trips">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-subhead">VerbindungsId: {{item.tripId}}</span>
+                <span class="md-headline">
+                    <md-icon>train</md-icon>
+                     {{item.leg1.origin.name}} &ndash; {{item.leg1.destination.name}}</span>
+                <span class="md-subhead">
+                        Abfahrtsdatum: {{item.leg1.origin.date}}, Zeit: {{item.leg1.origin.time}}<br>
+                        Ankunftsdatum: {{item.leg1.destination.date}}, Zeit: {{item.leg1.destination.time}}
+                      </span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button class="md-raised md-primary" ng-click="getOffers($event, item)">Angebot</md-button>
+            </md-card-actions>
+          </md-card>
+          </md-list-item>
+          </md-list>
+        </md-content>
+      </md-tab>
+      <!--
+      <md-tab label="Personen">
+        <md-content class="md-padding">
+          <div flex>
+            <md-input-container>
+              <label>Vorname</label>
+              <input name="vorname" ng-model="person.vorname" placeholder="Elon" required>
+            </md-input-container>
+            <md-input-container>
+              <label>Name</label>
+              <input name="name" ng-model="person.name" placeholder="Musk" required>
+            </md-input-container>
+          </div>
+          <div flex>
+            <md-input-container>
+              <md-datepicker ng-model="person.geburtsdatum" md-placeholder="Geburtsdatum" required></md-datepicker>
+            </md-input-container>
+            <md-input-container>
+              <label>Ermässigung</label>
+              <md-select name="ermaessigung" ng-model="person.ermaessigung" placeholder="HalbTax" required>
+                <md-option value="none">keine</md-option>
+                <md-option value="halbtax">HalbTax</md-option>
+                <md-option value="ga">GA</md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+          <md-button class="md-raised md-primary">Hinzufügen</md-button>
+        </md-content>
+      </md-tab>
+    -->
+      <md-tab label="Angebote" ng-disabled="offers == null">
+        <md-content class="md-padding">
+          <md-card class="md-3-line" ng-repeat="item in offers">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-subhead">AngebotsId: {{item.offerId}}</span>
+                <span class="md-headline">{{item.description}}</span>
+                <span>Preis:  {{item.price}}</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button class="md-raised md-primary" ng-click="getPrebooking($event, item)">vorabbuchen</md-button>
+            </md-card-actions>
+          </md-card>
+        </md-content>
+      </md-tab>
+      <md-tab label="Vorabbuchen" ng-disabled="prebooking == null">
+        <md-content class="md-padding">
+          <md-card class="md-3-line">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-subhead">VorabbuchungsId: {{prebooking.preBookId}}</span>
+                <span class="md-headline">{{prebooking.description}}</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button class="md-raised md-primary" ng-click="getBooking($event, prebooking)">buchen</md-button>
+            </md-card-actions>
+          </md-card>
+        </md-content>
+      </md-tab>
+      <md-tab label="Buchungen" ng-disabled="booking == null">
+        <md-content class="md-padding">
+          <md-card class="md-3-line">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-subhead">BuchungsId: {{booking.bookingId}}</span>
+                <span class="md-headline">{{booking.description}}</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button class="md-primary" ng-click="cancelBooking($event, booking)">annullieren</md-button>
+              <md-button class="md-primary md-raised" ng-href="../{{booking.links[0].href}}">
+                Billett
+              </md-button>
+            </md-card-actions>
+          </md-card>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>
