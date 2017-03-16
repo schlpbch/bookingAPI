@@ -11,12 +11,9 @@ import 'angular-messages';
 //Components
 var appController = require('./app.controller');
 var stationController = require('./station/station.controller');
-import motorradModul from './motorrad/motorrad';
+import toolbarModul from './toolbar/toolbar';
 
-//Style imports
-
-
-angular.module('app', ['ngMaterial', 'ngRoute', motorradModul])
+angular.module('app', ['ngMaterial', 'ngRoute', toolbarModul])
   .config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
       .primaryPalette('blue')
