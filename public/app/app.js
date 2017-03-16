@@ -1,17 +1,17 @@
 /**
  * Created by kevinkreuzer on 15.03.17.
  */
-var angular = require('angular');
-require('angular-route');
-require('angular-animate');
-require('angular-material');
-require('angular-aria');
-require('angular-messages');
+import angular from 'angular';
+import 'angular-route';
+import 'angular-animate';
+import 'angular-material';
+import 'angular-aria';
+import 'angular-messages';
 
 //Components
 var appController = require('./app.controller');
 var stationController = require('./station/station.controller');
-var motorradModul = require('./motorrad/motorrad');
+import motorradModul from './motorrad/motorrad';
 
 //Style imports
 
