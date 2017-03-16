@@ -9,8 +9,8 @@ import 'angular-aria';
 import 'angular-messages';
 
 //Components
-var appController = require('./app.controller');
-var stationController = require('./station/station.controller');
+import appController from './app.controller';
+import stationController from './station/station.controller';
 import toolbarModul from './toolbar/toolbar';
 
 angular.module('app', ['ngMaterial', 'ngRoute', toolbarModul])
@@ -25,3 +25,4 @@ angular.module('app', ['ngMaterial', 'ngRoute', toolbarModul])
   })
   .controller('AppCtrl', appController)
   .controller('StationCtrl', stationController);
+
