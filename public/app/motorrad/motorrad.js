@@ -4,8 +4,7 @@
 import controller from './motorrad.controller';
 import motorradService from './motorrad.service';
 var moduleName = 'motorrad';
-require('./motorrad.css');
-
+import './motorrad.css';
 
 angular.module(moduleName, [])
   .component('motorrad', {controller: controller, templateUrl: 'app/motorrad/motorrad.html'})
