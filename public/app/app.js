@@ -11,10 +11,12 @@ require('angular-messages');
 //Components
 var appController = require('./app.controller');
 var stationController = require('./station/station.controller');
+var motorradModul = require('./motorrad/motorrad');
 
-require('./tester/test');
+//Style imports
 
-angular.module('app', ['ngMaterial', 'ngRoute', 'test'])
+
+angular.module('app', ['ngMaterial', 'ngRoute', motorradModul])
   .config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
       .primaryPalette('blue')
