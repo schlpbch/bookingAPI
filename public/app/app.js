@@ -11,9 +11,10 @@ import 'angular-messages';
 //Components
 import appController from './app.controller';
 import stationController from './station/station.controller';
-import toolbarModul from './toolbar/toolbar';
+import toolbarModule from './toolbar/toolbar';
+import sideNavModule from './sidenav/sidenav';
 
-angular.module('app', ['ngMaterial', 'ngRoute', toolbarModul])
+angular.module('app', ['ngMaterial', 'ngRoute', toolbarModule, sideNavModule])
   .config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
       .primaryPalette('blue')
