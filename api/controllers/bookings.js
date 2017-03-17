@@ -3,42 +3,8 @@
 const path = require('path')
 
 module.exports = {
-    prebook,
-    book,
-    print
-}
-
-function prebook(req, res) {
-    var prebooking = {
-        preBookId: 'P1',
-        description: 'Fahrt von Bern nach Thun am 14.01.2017 20:04 für 22 CHF',
-        links: [
-            {
-                rel: 'Billette zur Buchung holen',
-                href: 'bookings/P1/book'
-            }
-        ]
-    }
-    res.json(prebooking)
-}
-
-function book(req, res) {
-    var booking = {
-        bookingId: 'B1',
-        description: 'Fahrt von Bern nach Thun am 14.01.2017 20:04.',
-        links: [{
-            rel: 'Billette zur Buchung als PDF holen',
-            href: 'bookings/B1/print/?type=pdf'
-        }, {
-            rel: 'Billette zur Buchung als Screenticket holen',
-            href: 'bookings/B1/print/?type=screen'
-        }, {
-            rel: 'Buchung annullieren',
-            href: 'cancellations/B1/cancel'
-        }]
-    }
-
-    res.json(booking)
+    print,
+    cancel
 }
 
 function print(req, res) {
@@ -50,4 +16,11 @@ function print(req, res) {
     } else {
         res.sendStatus(415)
     }
+}
+
+function cancel(req, res) {
+    var bookingId = {
+        bookingId: 'B1'
+    }
+    res.json(bookingId)
 }
