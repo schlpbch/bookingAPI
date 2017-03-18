@@ -2,7 +2,7 @@ swagger: '2.0'
 
 ## API Information
 info:
-  version: '0.0.5'
+  version: '0.0.6'
   title: "Simple öV booking API"
   description: "A simple API to book öV tickets in Switzerland."
   contact:
@@ -40,11 +40,11 @@ produces:
 ## Paths
 paths:
 
-  /ping/:
-    x-swagger-router-controller: ping
+  /health/status/:
+    x-swagger-router-controller: health
     get:
-      description: "The ping service can be used to check if the remote server is running and can be reached across the network."
-      operationId: ping
+      description: "The status service can be used to check if the remote server is running and can be reached across the network."
+      operationId: status
       responses:
         200:
           description: "The reply from the server."
@@ -290,8 +290,8 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{offerId}/prebook/:
-    x-swagger-router-controller: bookings
+  /offers/{offerId}/prebook/:
+    x-swagger-router-controller: offers
     get:
       description: "Pre-book an offer during checkout process for 15 minutes. Normally called when adding an item to the shopping cart."
       operationId: prebook
@@ -310,8 +310,8 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{preBookId}/book/:
-    x-swagger-router-controller: bookings
+  /prebookings/{preBookId}/book/:
+    x-swagger-router-controller: prebookings
     get:
       description: "Book the pre-booked offer."
       operationId: book
@@ -356,10 +356,10 @@ paths:
         default:
           description: "unexpected error"
 
-  /cancellations/{bookingId}/cancel/:
-    x-swagger-router-controller: cancellations
+  /bookings/{bookingId}/cancel/:
+    x-swagger-router-controller: bookings
     get:
-      description: "Cancel the booking"
+      description: "Cancel the booking (technical; not for refunding)."
       operationId: cancel
       parameters:
         - name: bookingId
