@@ -2,6 +2,16 @@
  * Created by kevinkreuzer on 15.03.17.
  */
 
+export default class AppController{
+
+  constructor(bookingStore, tabService){
+    this.bookingStore = bookingStore;
+    this.tabService = tabService;
+  }
+}
+
+/*
+
 module.exports = ['$scope', '$mdSidenav', '$mdDialog', '$http', function ($scope, $mdSidenav, $mdDialog, $http) {
   $scope.tabs = {
     selectedIndex: 0
@@ -103,3 +113,5 @@ function DialogController ($scope, $mdDialog) {
     $mdDialog.hide(answer)
   }
 };
+
+*/

@@ -1,0 +1,24 @@
+<md-tab label="Reisewunsch">
+  <md-content class="md-padding">
+    <form>
+      <api-station title="'Abfahrtsort'"></api-station>
+      <api-station title="'Ankunftsort'"></api-station>
+      <br/>
+      <md-switch class="md-subhead" ng-model="angebot.istAnkunft" aria-label="Switch" ng-true-value="'Ankunft'"
+                 ng-false-value="'Abfahrt'">
+        {{ $ctrl.angebot.istAnkunft}}
+      </md-switch>
+      <md-input-container>
+        <label>Datum</label>
+        <md-datepicker ng-model="$ctrl.angebot.datum" md-placeholder="2017/09/02"></md-datepicker>
+      </md-input-container>
+      <md-input-container>
+        <label>Zeit</label>
+        <input name="zeit" ng-model="$ctrl.angebot.zeit" placeholder="22:22" required>
+      </md-input-container>
+      <br/>
+      <md-button class="md-raised md-primary" ng-click="$ctrl.reisewunschService.getTrips()">Suchen
+      </md-button>
+    </form>
+  </md-content>
+</md-tab>
