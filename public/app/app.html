@@ -8,59 +8,14 @@
 <div flex layout="row">
 
   <api-sidenav></api-sidenav>
-
   <!-- Container #4 -->
   <md-content layout-padding flex>
     <md-tabs md-dynamic-height md-border-bottom md-selected="$ctrl.tabService.selectedTab">
       <api-travel-wish></api-travel-wish>
       <api-connections></api-connections>
+      <!--<api-persons></api-persons>-->
+      <api-offers></api-offers>
 
-      <!--
-      <md-tab label="Personen">
-        <md-content class="md-padding">
-          <div flex>
-            <md-input-container>
-              <label>Vorname</label>
-              <input name="vorname" ng-model="person.vorname" placeholder="Elon" required>
-            </md-input-container>
-            <md-input-container>
-              <label>Name</label>
-              <input name="name" ng-model="person.name" placeholder="Musk" required>
-            </md-input-container>
-          </div>
-          <div flex>
-            <md-input-container>
-              <md-datepicker ng-model="person.geburtsdatum" md-placeholder="Geburtsdatum" required></md-datepicker>
-            </md-input-container>
-            <md-input-container>
-              <label>Ermässigung</label>
-              <md-select name="ermaessigung" ng-model="person.ermaessigung" placeholder="HalbTax" required>
-                <md-option value="none">keine</md-option>
-                <md-option value="halbtax">HalbTax</md-option>
-                <md-option value="ga">GA</md-option>
-              </md-select>
-            </md-input-container>
-          </div>
-          <md-button class="md-raised md-primary">Hinzufügen</md-button>
-        </md-content>
-      </md-tab>
-    -->
-      <md-tab label="Angebote" ng-disabled="offers == null">
-        <md-content class="md-padding">
-          <md-card class="md-3-line" ng-repeat="item in offers">
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-subhead">AngebotsId: {{item.offerId}}</span>
-                <span class="md-headline">{{item.description}}</span>
-                <span>Preis:  {{item.price}}</span>
-              </md-card-title-text>
-            </md-card-title>
-            <md-card-actions layout="row" layout-align="end center">
-              <md-button class="md-raised md-primary" ng-click="getPrebooking($event, item)">vorabbuchen</md-button>
-            </md-card-actions>
-          </md-card>
-        </md-content>
-      </md-tab>
       <md-tab label="Vorabbuchen" ng-disabled="prebooking == null">
         <md-content class="md-padding">
           <md-card class="md-3-line">
