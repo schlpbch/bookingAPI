@@ -4,9 +4,9 @@
 
 export default class AppController{
 
-  constructor(bookingStore, tabService){
-    this.bookingStore = bookingStore;
+  constructor(tabService, bookingStore){
     this.tabService = tabService;
+    this.bookingStore = bookingStore;
   }
 }
 

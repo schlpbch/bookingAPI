@@ -1,7 +1,8 @@
 
 export default class BookingStore{
 
-  constructor(){
+  constructor(tabService){
+    this.tabService = tabService;
     this._trips = null
     this._offers = null
     this._prebooking = null

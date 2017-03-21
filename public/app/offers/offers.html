@@ -1,0 +1,16 @@
+<md-tab label="Angebote" ng-disabled="$ctrl.bookingStore.offers === null">
+<md-content class="md-padding">
+  <md-card class="md-3-line" ng-repeat="item in $ctrl.offers">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-subhead">AngebotsId: {{item.offerId}}</span>
+        <span class="md-headline">{{item.description}}</span>
+        <span>Preis:  {{item.price}}</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button class="md-raised md-primary" ng-click="getPrebooking($event, item)">vorabbuchen</md-button>
+    </md-card-actions>
+  </md-card>
+</md-content>
+</md-tab>

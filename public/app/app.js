@@ -15,10 +15,12 @@ import toolbarModule from './toolbar/toolbar';
 import sideNavModule from './sidenav/sidenav';
 import travelWishModule from './travel-wish/travel-wish';
 import connectionsModule from './connections/connections';
+import personsModule from './persons/persons';
+import offersModule from './offers/offers';
 import commonModule from './common/common';
 
 angular.module('app', ['ngMaterial', 'ngRoute', toolbarModule, sideNavModule,
-  travelWishModule, commonModule, connectionsModule])
+  travelWishModule, commonModule, connectionsModule, personsModule, offersModule])
   .config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
       .primaryPalette('blue')

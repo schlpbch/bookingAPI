@@ -4,7 +4,8 @@
 
 export default class TabService{
 
-  constructor(){
+  constructor($timeout){
+    this.$timeout = $timeout;
     this._selectedTab = 0;
   }
 
@@ -16,4 +17,10 @@ export default class TabService{
     this._selectedTab = selectedTab;
   }
 
+  goToNextTab(){
+    //Ensure everything else gets executed before
+    this.$timeout(() => {
+      this._selectedTab++;
+    }, 0)
+  }
 }
