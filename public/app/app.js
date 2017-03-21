@@ -13,10 +13,12 @@ import appController from './app.controller';
 import stationController from './station/station.controller';
 import toolbarModule from './toolbar/toolbar';
 import sideNavModule from './sidenav/sidenav';
-import reisewunschModule from './reisewunsch/reisewunsch';
+import travelWishModule from './travel-wish/travel-wish';
+import connectionsModule from './connections/connections';
 import commonModule from './common/common';
 
-angular.module('app', ['ngMaterial', 'ngRoute', toolbarModule, sideNavModule, reisewunschModule, commonModule])
+angular.module('app', ['ngMaterial', 'ngRoute', toolbarModule, sideNavModule,
+  travelWishModule, commonModule, connectionsModule])
   .config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
       .primaryPalette('blue')

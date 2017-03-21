@@ -1,0 +1,8 @@
+<md-tab id="verbindungen" label="Verbindungen"
+        ng-attr-disabled="{{ $ctrl.bookingStore.trips == null" ? 'disabled' : undefined }}">
+  <md-content class="md-padding">
+    <api-connection-detail trips="$ctrl.bookingStore.trips"></api-connection-detail>
+    </md-list-item>
+    </md-list>
+  </md-content>
+</md-tab>

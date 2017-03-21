@@ -4,7 +4,7 @@
 
 export default class ReiseWunschController{
 
-  constructor(reisewunschService){
-    this.reisewunschService = reisewunschService;
+  constructor(travelWishService){
+    this.travelWishService = travelWishService;
   }
 }

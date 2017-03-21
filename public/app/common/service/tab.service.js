@@ -15,4 +15,5 @@ export default class TabService{
   set selectedTab(selectedTab){
     this._selectedTab = selectedTab;
   }
+
 }

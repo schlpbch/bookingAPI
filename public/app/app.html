@@ -12,30 +12,9 @@
   <!-- Container #4 -->
   <md-content layout-padding flex>
     <md-tabs md-dynamic-height md-border-bottom md-selected="$ctrl.tabService.selectedTab">
-      <api-reisewunsch></api-reisewunsch>
-      <md-tab id="verbindungen" label="Verbindungen" ng-disabled="$ctrl.bookingStore.trips == null">
-        <md-content class="md-padding">
-          <md-card class="md-3-line" ng-repeat="item in trips">
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-subhead">VerbindungsId: {{item.tripId}}</span>
-                <span class="md-headline">
-                    <md-icon>train</md-icon>
-                     {{item.leg1.origin.name}} &ndash; {{item.leg1.destination.name}}</span>
-                <span class="md-subhead">
-                        Abfahrtsdatum: {{item.leg1.origin.date}}, Zeit: {{item.leg1.origin.time}}<br>
-                        Ankunftsdatum: {{item.leg1.destination.date}}, Zeit: {{item.leg1.destination.time}}
-                      </span>
-              </md-card-title-text>
-            </md-card-title>
-            <md-card-actions layout="row" layout-align="end center">
-              <md-button class="md-raised md-primary" ng-click="getOffers($event, item)">Angebot</md-button>
-            </md-card-actions>
-          </md-card>
-          </md-list-item>
-          </md-list>
-        </md-content>
-      </md-tab>
+      <api-travel-wish></api-travel-wish>
+      <api-connections></api-connections>
+
       <!--
       <md-tab label="Personen">
         <md-content class="md-padding">
