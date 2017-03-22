@@ -29,8 +29,8 @@ export default class BookingStore{
     return this._prebooking;
   }
 
-  set preeboking(preeboking){
-    this._prebooking = preeboking;
+  set prebooking(preebooking){
+    this._prebooking = preebooking;
   }
 
   get booking(){
