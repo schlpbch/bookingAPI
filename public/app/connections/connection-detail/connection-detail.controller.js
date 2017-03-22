@@ -4,17 +4,8 @@
 
 export default class ConnectionDetailController {
 
-  constructor(bookingStore, $http, tabService) {
+  constructor(bookingStore, connectionService) {
     this.bookingStore = bookingStore;
-    this.tabService = tabService;
-    this.$http = $http;
-  }
-
-  getOffers(item) {
-    this.$http.get('../' + item.links[0].href)
-      .then(function (res) {
-        this.bookingStore.offers = res.data;
-        this.tabService.selectedTab = 2;
-      })
+    this.connectionService = connectionService;
   }
 }
