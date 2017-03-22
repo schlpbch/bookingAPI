@@ -6,6 +6,5 @@ export default class OffersController {
 
   constructor(bookingStore){
     this.bookingStore = bookingStore;
-    this.offers = this.bookingStore.offers;
   }
 }

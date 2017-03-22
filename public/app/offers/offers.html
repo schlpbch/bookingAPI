@@ -1,6 +1,6 @@
 <md-tab label="Angebote" ng-disabled="$ctrl.bookingStore.offers === null">
 <md-content class="md-padding">
-  <md-card class="md-3-line" ng-repeat="item in $ctrl.offers">
+  <md-card class="md-3-line" ng-repeat="item in $ctrl.bookingStore.offers">
     <md-card-title>
       <md-card-title-text>
         <span class="md-subhead">AngebotsId: {{item.offerId}}</span>

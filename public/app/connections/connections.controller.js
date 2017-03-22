@@ -4,7 +4,8 @@
 
 export default class VerbindungenController{
 
-  constructor(bookingStore){
+  constructor(bookingStore, connectionService){
     this.bookingStore = bookingStore;
+    this.connectionService = connectionService;
   }
 }

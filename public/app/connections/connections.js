@@ -3,6 +3,7 @@
  */
 import connetionController from './connections.controller';
 import connectionDetailController from './connection-detail/connection-detail.controller';
+import connectionService from './connections.service';
 
 let moduleName = 'connectionsModule';
 
@@ -13,10 +14,11 @@ angular.module(moduleName, [])
   })
   .component('apiConnectionDetail', {
     bindings: {
-      trips: '<'
+      trip: '<'
     },
     controller: connectionDetailController,
     templateUrl: 'app/connections/connection-detail/connection-detail.html'
   })
+  .service('connectionService', connectionService);
 
 export default moduleName;
