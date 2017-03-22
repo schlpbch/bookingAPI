@@ -7,6 +7,7 @@ export default class BookingStore{
     this._offers = null
     this._prebooking = null
     this._booking = null
+    this._cancelation = null
   }
 
   get trips(){
@@ -39,5 +40,13 @@ export default class BookingStore{
 
   set booking(booking){
     this._booking = booking;
+  }
+
+  get cancelation(){
+    return this._cancellation
+  }
+
+  set cancelation(cancelation){
+    this.cancelation = cancelation;
   }
 }
