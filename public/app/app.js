@@ -18,11 +18,12 @@ import connectionsModule from './connections/connections';
 import personsModule from './persons/persons';
 import offersModule from './offers/offers';
 import preebookingModule from './prebooking/prebooking';
+import bookingModule from './booking/booking';
 import commonModule from './common/common';
 
 angular.module('app', ['ngMaterial', 'ngRoute', toolbarModule, sideNavModule,
   travelWishModule, commonModule, connectionsModule, personsModule, offersModule,
-  preebookingModule])
+  preebookingModule, bookingModule])
   .config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
       .primaryPalette('blue')

@@ -16,24 +16,7 @@
       <!--<api-persons></api-persons>-->
       <api-offers></api-offers>
       <api-prebooking></api-prebooking>
-      <md-tab label="Buchungen" ng-disabled="booking == null">
-        <md-content class="md-padding">
-          <md-card class="md-3-line">
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-subhead">BuchungsId: {{booking.bookingId}}</span>
-                <span class="md-headline">{{booking.description}}</span>
-              </md-card-title-text>
-            </md-card-title>
-            <md-card-actions layout="row" layout-align="end center">
-              <md-button class="md-primary" ng-click="cancelBooking($event, booking)">annullieren</md-button>
-              <md-button class="md-primary md-raised" ng-href="../{{booking.links[0].href}}">
-                Billett
-              </md-button>
-            </md-card-actions>
-          </md-card>
-        </md-content>
-      </md-tab>
+      <api-booking></api-booking>
     </md-tabs>
   </md-content>
 </div>
