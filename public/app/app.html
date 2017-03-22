@@ -15,21 +15,7 @@
       <api-connections></api-connections>
       <!--<api-persons></api-persons>-->
       <api-offers></api-offers>
-      <md-tab label="Vorabbuchen" ng-disabled="prebooking == null">
-        <md-content class="md-padding">
-          <md-card class="md-3-line">
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-subhead">VorabbuchungsId: {{prebooking.preBookId}}</span>
-                <span class="md-headline">{{prebooking.description}}</span>
-              </md-card-title-text>
-            </md-card-title>
-            <md-card-actions layout="row" layout-align="end center">
-              <md-button class="md-raised md-primary" ng-click="getBooking($event, prebooking)">buchen</md-button>
-            </md-card-actions>
-          </md-card>
-        </md-content>
-      </md-tab>
+      <api-prebooking></api-prebooking>
       <md-tab label="Buchungen" ng-disabled="booking == null">
         <md-content class="md-padding">
           <md-card class="md-3-line">
