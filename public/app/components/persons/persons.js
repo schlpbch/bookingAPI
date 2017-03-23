@@ -6,7 +6,7 @@ let moduleName = 'personsModule';
 
 angular.module(moduleName, [])
   .component('apiPersons', {
-    templateUrl: 'app/persons/persons.html'
+    templateUrl: 'components/persons/persons.html'
   });
 
 export default moduleName;

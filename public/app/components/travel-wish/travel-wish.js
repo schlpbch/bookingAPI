@@ -10,14 +10,14 @@ let moduleName = 'reisewunsch';
 angular.module(moduleName, [])
   .component('apiTravelWish', {
     controller: travelWishController,
-    templateUrl: 'app/travel-wish/travel-wish.html'
+    templateUrl: 'components/travel-wish/travel-wish.html'
   })
   .component('apiStation', {
     bindings: {
       title: '<'
     },
     controller: stationController,
-    templateUrl: 'app/travel-wish/station/station.html'
+    templateUrl: 'components/travel-wish/station/station.html'
   })
   .service('travelWishService', travelWishService)
 

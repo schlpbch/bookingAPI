@@ -4,7 +4,7 @@ let moduleName = 'sidenav';
 angular.module(moduleName, [])
   .component('apiSidenav', {
     controller,
-    templateUrl: 'app/sidenav/sidenav.html'
+    templateUrl: 'components/sidenav/sidenav.html'
   });
 
 export default moduleName;

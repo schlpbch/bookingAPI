@@ -10,14 +10,14 @@ let moduleName = 'connectionsModule';
 angular.module(moduleName, [])
   .component('apiConnections', {
     controller: connetionController,
-    templateUrl: 'app/connections/connections.html'
+    templateUrl: 'components/connections/connections.html'
   })
   .component('apiConnectionDetail', {
     bindings: {
       trip: '<'
     },
     controller: connectionDetailController,
-    templateUrl: 'app/connections/connection-detail/connection-detail.html'
+    templateUrl: 'components/connections/connection-detail/connection-detail.html'
   })
   .service('connectionService', connectionService);
 

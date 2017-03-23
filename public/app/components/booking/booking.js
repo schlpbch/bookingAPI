@@ -10,20 +10,20 @@ let moduleName = 'bookingModule';
 angular.module(moduleName, [])
   .component('apiBooking', {
     controller: bookingController,
-    templateUrl: 'app/booking/booking.html'
+    templateUrl: 'components/booking/booking.html'
   })
   .component('apiBookingDetail', {
     bindings: {
       booking: '<'
     },
-    templateUrl: 'app/booking/booking-detail/booking-detail.html'
+    templateUrl: 'components/booking/booking-detail/booking-detail.html'
   })
   .component('apiBookingActions', {
     bindings: {
       booking: '<'
     },
     controller: bookingActionsController,
-    templateUrl: 'app/booking/booking-actions/booking-actions.html'
+    templateUrl: 'components/booking/booking-actions/booking-actions.html'
   })
   .service('bookingService', bookingService)
 
