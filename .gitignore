@@ -32,3 +32,7 @@ node_modules
 
 # Runtime configuration for swagger app
 config/runtime.yaml
+
+
+# Marketing material
+public/app/api-pitch
