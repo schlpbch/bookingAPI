@@ -10,14 +10,14 @@ let moduleName = 'preBookingModule';
 angular.module(moduleName, [])
   .component('apiPrebooking', {
     controller: prebookingController,
-    templateUrl: 'app/prebooking/prebooking.html'
+    templateUrl: 'components/prebooking/prebooking.html'
   })
   .component('apiPrebookingDetail', {
     bindings: {
       prebooking: '<'
     },
     controller: prebookingDetailController,
-    templateUrl: 'app/prebooking/prebooking-detail/prebooking-detail.html'
+    templateUrl: 'components/prebooking/prebooking-detail/prebooking-detail.html'
   })
   .service('prebookingService', prebookingService);
 

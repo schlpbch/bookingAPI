@@ -6,6 +6,6 @@ let moduleName = 'toolbar';
 
 angular.module(moduleName, [])
   .component('apiToolbar',{
-    templateUrl: 'app/toolbar/toolbar.html'
+    templateUrl: 'components/toolbar/toolbar.html'
   });
 export default moduleName;

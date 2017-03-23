@@ -31,7 +31,7 @@ angular.module('app', ['ngMaterial', 'ngRoute', toolbarModule, sideNavModule,
   })
   .component('app', {
     controller: appController,
-    templateUrl: './app/app.html'
+    templateUrl: 'components/app.html'
   })
   .controller('AppCtrl', appController)
   .controller('StationCtrl', stationController);

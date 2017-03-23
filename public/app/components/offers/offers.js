@@ -10,14 +10,14 @@ let moduleName = 'offersModule';
 angular.module(moduleName, [])
   .component('apiOffers', {
     controller: offersController,
-    templateUrl: 'app/offers/offers.html'
+    templateUrl: 'components/offers/offers.html'
   })
   .component('apiOfferDetail', {
     bindings: {
       offer: '<'
     },
     controller: offerDetailController,
-    templateUrl: 'app/offers/offer-detail/offer-detail.html'
+    templateUrl: 'components/offers/offer-detail/offer-detail.html'
   })
   .service('offersService', offersService);
 

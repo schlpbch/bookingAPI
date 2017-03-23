@@ -39,8 +39,8 @@
   "scripts": {
     "dev": "concurrently \"npm run watchify\" \"npm run browsersync\"",
     "browsersync": "browser-sync start --startPath='./public' --server --files './public/*.html, ./public/bundle.js'",
-    "watchify": "watchify -t browserify-css public/app/app.js -o public/bundle.js -d -t [ babelify --presets [ es2015 react ] ]",
-    "prestart": "browserify -t browserify-css public/app/app.js -o public/bundle.js -d -t [ babelify --presets [ es2015 react ] ]",
+    "watchify": "watchify -t browserify-css public/app/components/app.js -o public/app/bundle.js -d -t [ babelify --presets [ es2015 react ] ]",
+    "prestart": "browserify -t browserify-css public/app/components/app.js -o public/app/bundle.js -d -t [ babelify --presets [ es2015 react ] ]",
     "start": "node app.js",
     "test": "mocha -u exports -R spec test/api/controllers"
   }
