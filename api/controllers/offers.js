@@ -2,7 +2,8 @@
 
 module.exports = {
     offers,
-    tripOffers
+    tripOffers,
+    prebook
 }
 
 function tripOffers(req, res) {
@@ -17,7 +18,7 @@ function offers(req, res) {
         links: [
             {
                 rel: 'Angebot A1 vorabbuchen',
-                href: 'bookings/A1/prebook'
+                href: 'offers/A1/prebook'
             }
         ]
     }
@@ -28,10 +29,24 @@ function offers(req, res) {
         links: [
             {
                 rel: 'Angebot A2 vorabbuchen',
-                href: 'bookings/A2/prebook'
+                href: 'offers/A2/prebook'
             }
         ]
     }
     var offers = [offerDV, offerSparbillett]
     res.json(offers)
+}
+
+function prebook(req, res) {
+    var prebooking = {
+        preBookId: 'P1',
+        description: 'Fahrt von Bern nach Thun am 14.01.2017 20:04 für 22 CHF',
+        links: [
+            {
+                rel: 'Billette zur Buchung holen',
+                href: 'prebookings/P1/book'
+            }
+        ]
+    }
+    res.json(prebooking)
 }
