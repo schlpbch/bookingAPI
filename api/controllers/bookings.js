@@ -3,11 +3,11 @@
 const path = require('path')
 
 module.exports = {
-    print,
+    fulfill,
     cancel
 }
 
-function print(req, res) {
+function fulfill(req, res) {
     if (req.query.type === 'pdf') {
         var options = {
             root: path.join(__dirname, '/../../public/app')

@@ -154,13 +154,6 @@ paths:
             type: string
             format: date
             default: '2017-01-14'
-          - name: time
-            in: query
-            description: "The desired departure time."
-            required: true
-            type: string
-            format: dateTime
-            default: '20:22'
         responses:
           200:
             description: "A list of prices for the trip."
@@ -218,12 +211,6 @@ paths:
           type: string
           format: date
           default: '2017-01-14'
-        - name: time
-          in: query
-          description: "The desired departure time."
-          type: string
-          format: dateTime
-          default: '20:22'
       # ToDo; Scale for more than one traveller
         - name: age
           in: query
@@ -310,7 +297,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /prebookings/{preBookId}/book/:
+  /prebookings/{preBookId}/confirm/:
     x-swagger-router-controller: prebookings
     get:
       description: "Book the pre-booked offer."
@@ -330,11 +317,11 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{bookingId}/print/:
+  /bookings/{bookingId}/fulfill/:
     x-swagger-router-controller: bookings
     get:
       description: "Get the booked tickets."
-      operationId: print
+      operationId: fulfill
       parameters:
         - name: bookingId
           in: path
