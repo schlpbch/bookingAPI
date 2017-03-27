@@ -44,7 +44,7 @@ function prebook(req, res) {
         links: [
             {
                 rel: 'Billette zur Buchung holen',
-                href: 'prebookings/P1/book'
+                href: 'prebookings/P1/confirm'
             }
         ]
     }

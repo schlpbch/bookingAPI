@@ -8,7 +8,7 @@ describe('controllers', function () {
         describe('GET /prebookings/P1/book', function (done) {
             it('should not return an error', function (done) {
                 request(server)
-                .get('/prebookings/P1/book')
+                .get('/prebookings/P1/confirm')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .expect(200)

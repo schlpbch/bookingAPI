@@ -5,10 +5,10 @@ var server = require('../../../')
 
 describe('controllers', function () {
     describe('Test issue tickets for Booking B1', function(done) {
-        describe('GET /bookings/B1/print', function(done) {
+        describe('GET /bookings/B1/fulfill', function(done) {
             it('should not return an error', function(done) {
                 request(server)
-                .get('/bookings/B1/print/?type=pdf')
+                .get('/bookings/B1/fulfill/?type=pdf')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/pdf')
                 .expect(200)
