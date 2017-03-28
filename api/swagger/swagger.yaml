@@ -277,14 +277,14 @@ paths:
         default:
           description: "unexpected error"
 
-  /offers/{offerId}/prebook/:
-    x-swagger-router-controller: offers
+  /prebookings/prebook/:
+    x-swagger-router-controller: prebookings
     get:
       description: "Pre-book an offer during checkout process for 15 minutes. Normally called when adding an item to the shopping cart."
       operationId: prebook
       parameters:
         - name: offerId
-          in: path
+          in: query
           description: "The offer ID to be pre-booked for later booking."
           required: true
           type: string
@@ -297,14 +297,14 @@ paths:
         default:
           description: "unexpected error"
 
-  /prebookings/{preBookId}/confirm/:
-    x-swagger-router-controller: prebookings
+  /bookings/confirm/:
+    x-swagger-router-controller: bookings
     get:
       description: "Book the pre-booked offer."
-      operationId: book
+      operationId: confirm
       parameters:
-        - name: preBookId
-          in: path
+        - name: preBookingId
+          in: query
           description: "The pre-book ID to be booked."
           required: true
           type: string
@@ -317,11 +317,11 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{bookingId}/fulfill/:
+  /bookings/fulfil/{bookingId}/:
     x-swagger-router-controller: bookings
     get:
       description: "Get the booked tickets."
-      operationId: fulfill
+      operationId: fulfil
       parameters:
         - name: bookingId
           in: path
@@ -343,7 +343,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{bookingId}/cancel/:
+  /bookings/cancel/{bookingId}/:
     x-swagger-router-controller: bookings
     get:
       description: "Cancel the booking (technical; not for refunding)."
