@@ -4,17 +4,20 @@ var request = require('supertest')
 var server = require('../../../')
 
 describe('controllers', function () {
-    describe('Test book prebook P1', function (done) {
-        describe('GET /prebookings/P1/book', function (done) {
+    describe('Test prebook offer A1', function (done) {
+        describe('GET /prebookings/prebook', function (done) {
             it('should not return an error', function (done) {
                 request(server)
-                .get('/prebookings/P1/confirm')
+                .get('/prebookings/prebook?offerId=A1')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .expect(200)
                 .end(function (err, res) {
-                    if (err) throw err
-                    else done()
+                    if (err) {
+                        throw err
+                    } else {
+                        done()
+                    }
                 })
             })
         })
