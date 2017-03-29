@@ -221,7 +221,7 @@ paths:
           maximum: 120
         - name: reduction
           in: query
-          description: 'Reduction: {None, Half-Fare, GA}'
+          description: 'Reduction: {none, halffare, ga}'
           type: string
           default: 'halffare'
           enum:
@@ -287,8 +287,8 @@ paths:
           in: query
           description: "The offer ID to be pre-booked for later booking."
           required: true
-          type: integer
-          default: 1001 # for simpler mock testing only
+          type: string
+          default: '1001' # for simpler mock testing only
       responses:
         200:
           description: "The pre-booked offer."
@@ -307,8 +307,8 @@ paths:
           in: query
           description: "The pre-book ID to be booked."
           required: true
-          type: integer
-          default: 2001 # for simpler mock testing only
+          type: string
+          default: '2001' # for simpler mock testing only
       responses:
         200:
           description: "The booked offer."
@@ -327,8 +327,8 @@ paths:
           in: path
           description: "The booking ID."
           required: true
-          type: integer
-          default: 3001 # for simpler mock testing only
+          type: string
+          default: '3001' # for simpler mock testing only
         - name: type
           description: "Type of the tickets: {pdf, png}"
           in: query
@@ -353,8 +353,8 @@ paths:
           in: path
           description: "Booking ID to cancel."
           required: true
-          type: integer
-          default: 3001 # for simpler mock testing only
+          type: string
+          default: '3001' # for simpler mock testing only
       responses:
         200:
           description: "The canceled booking ID."
@@ -478,8 +478,8 @@ definitions:
     properties:
       offerId:
         description: "ID of the offer for pre-booking."
-        type: integer
-        default: 1001
+        type: string
+        default: '1001'
       description:
         description: "Description of the offer."
         type: string
@@ -490,6 +490,11 @@ definitions:
       qualityOfService:
         description: "Quality of service of the offer."
         type: string
+        default: '2nd'
+        enum:
+         - 'none'
+         - '1st'
+         - '2nd'
       links:
         type: array
         items:
@@ -502,8 +507,8 @@ definitions:
     properties:
       preBookingId:
         description: "ID of the pre-booked offer."
-        type: integer
-        default: 2001
+        type: string
+        default: '2001'
       description:
         description: "Description of the pre-booked offer."
         type: string
@@ -519,8 +524,8 @@ definitions:
     properties:
       bookingId:
         description: "Id of the booking"
-        type: integer
-        default: 3001
+        type: string
+        default: '3001'
       description:
         description: "Description of the booked offer."
         type: string
