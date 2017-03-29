@@ -221,13 +221,14 @@ paths:
           maximum: 120
         - name: reduction
           in: query
-          description: 'Reduction: {none, halffare, ga}'
+          description: 'Reduction: {none, halffare, ga1kl, ga2kl}'
           type: string
           default: 'halffare'
           enum:
            - none
            - halffare
-           - ga
+           - ga1kl
+           - ga2kl
       responses:
         200:
           description: "A list of offers."
@@ -266,7 +267,8 @@ paths:
           enum:
            - none
            - halffare
-           - ga
+           - ga1kl
+           - ga2kl
       responses:
         200:
           description: "A list of offers."
