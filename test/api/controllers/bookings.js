@@ -4,11 +4,11 @@ var request = require('supertest')
 var server = require('../../../')
 
 describe('controllers', function () {
-    describe('Test book prebook P1', function (done) {
+    describe('Test book prebook 2001', function (done) {
         describe('GET /bookings/confirm', function (done) {
             it('should not return an error', function (done) {
                 request(server)
-                .get('/bookings/confirm?preBookingId=P1')
+                .get('/bookings/confirm?preBookingId=2001')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .expect(200)
@@ -20,11 +20,11 @@ describe('controllers', function () {
         })
     })
 
-    describe('Test issue tickets for Booking B1', function(done) {
-        describe('GET /bookings/fulfil/B1', function(done) {
+    describe('Test issue tickets for Booking 3001', function(done) {
+        describe('GET /bookings/fulfil/3001', function(done) {
             it('should not return an error', function(done) {
                 request(server)
-                .get('/bookings/fulfil/B1?type=pdf')
+                .get('/bookings/fulfil/3001?type=pdf')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/pdf')
                 .expect(200)
@@ -37,10 +37,10 @@ describe('controllers', function () {
     })
 
     describe('Test cancel Booking B1', function (done) {
-        describe('GET /bookings/cancel/B1', function (done) {
+        describe('GET /bookings/cancel/3001', function (done) {
             it('should not return an error', function (done) {
                 request(server)
-                .get('/bookings/cancel/B1')
+                .get('/bookings/cancel/3001')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .expect(200)

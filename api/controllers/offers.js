@@ -11,13 +11,14 @@ function tripOffers(req, res) {
 
 function offers(req, res) {
     var offerDV = {
-        offerId: 'A1',
+        offerId: 1001,
         description: 'Angebot direkter Verkehr',
         price: 22,
+        qualityOfService: '2nd',
         links: [
             {
-                rel: 'Angebot A1 vorabbuchen',
-                href: 'prebookings/prebook?offerId=A1'
+                rel: 'Angebot 1001 vorabbuchen',
+                href: 'prebookings/prebook?offerId=1001'
             }
         ]
     }
@@ -25,10 +26,11 @@ function offers(req, res) {
         offerId: 'A2',
         description: 'Angebot Sparbillett',
         price: 12,
+        qualityOfService: '2nd',
         links: [
             {
-                rel: 'Angebot A2 vorabbuchen',
-                href: 'prebookings/prebook?offerId=A2'
+                rel: 'Angebot 1002 vorabbuchen',
+                href: 'prebookings/prebook?offerId=1002'
             }
         ]
     }
