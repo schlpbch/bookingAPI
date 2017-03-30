@@ -23,7 +23,7 @@ function trips(req, res) {
         },
         links: [{
             rel: 'Request offers for a trip.',
-            href: 'offers/trip-rec-context1'
+            href: 'offersRedirect/?originId=8507000&destinationId=8508500&date=2017-04-01&age=42&reduction=halffare'
         }, {
             rel: 'Request the cheapest price for a trip.',
             href: 'prices/trip-rec-context1'
@@ -50,7 +50,7 @@ function trips(req, res) {
         },
         links: [{
             rel: 'Request offers for a trip.',
-            href: 'offers/trip-rec-context2'
+            href: 'offersRedirect/?originId=8507000&destinationId=8508500&date=2017-04-01&age=42&reduction=none'
         }, {
             rel: 'Request the cheapest price for a trip.',
             href: 'prices/trip-rec-context2'
