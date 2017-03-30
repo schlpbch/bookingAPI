@@ -13,8 +13,8 @@ var config = {
     appRoot: __dirname // required config
 }
 
-var backendPort = process.env.BACKEND_PORT || 8080 ;
-console.log('Backend port: ', backendPort);
+var backend = process.env.BACKEND || 'http://localhost:8080';
+console.log('Backend: ', backend);
 
 SwaggerExpress.create(config, function (err, swaggerExpress) {
     if (err) {
@@ -33,7 +33,7 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
 
 
     app.get('/offersRedirect/*', function (req, res) {
-        var target = `http://localhost:${backendPort}/offers/${req.params[0]}${req._parsedUrl.search}`;
+        var target = `${backend}/offers/${req.params[0]}${req._parsedUrl.search}`;
         request(target).pipe(res);
     });
 
