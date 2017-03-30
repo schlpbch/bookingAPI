@@ -10,17 +10,17 @@ module.exports = {
 
 function confirm(req, res) {
     var booking = {
-        bookingId: 'B1',
+        bookingId: '3001',
         description: 'Fahrt von Bern nach Thun am 14.01.2017 20:04.',
         links: [{
             rel: 'Billette zur Buchung als PDF holen',
-            href: 'bookings/fulfil/B1?type=pdf'
+            href: 'bookings/fulfil/3001?type=pdf'
         }, {
             rel: 'Billette zur Buchung als Screenticket holen',
-            href: 'bookings/fulfil/B1?type=screen'
+            href: 'bookings/fulfil/3001?type=screen'
         }, {
             rel: 'Buchung annullieren',
-            href: 'bookings/cancel/B1'
+            href: 'bookings/cancel/3001'
         }]
     }
 
@@ -40,7 +40,7 @@ function fulfil(req, res) {
 
 function cancel(req, res) {
     var bookingId = {
-        bookingId: 'B1'
+        bookingId: '3001'
     }
     res.json(bookingId)
 }
