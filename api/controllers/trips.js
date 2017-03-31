@@ -21,7 +21,7 @@ function trips (req, res) {
         time: '20:22'
       }
     },
-    links: [{
+    _links: [{
       rel: 'Request offers for a trip.',
       href: 'offersRedirect/?originId=8507000&destinationId=8508500&date=2017-04-01&age=42&reduction=halffare'
     }, {
@@ -48,7 +48,7 @@ function trips (req, res) {
         time: '20:52'
       }
     },
-    links: [{
+    _links: [{
       rel: 'Request offers for a trip.',
       href: 'offersRedirect/?originId=8507000&destinationId=8508500&date=2017-04-01&age=42&reduction=none'
     }, {

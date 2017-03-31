@@ -15,7 +15,7 @@ function offers (req, res) {
     description: 'Angebot direkter Verkehr',
     price: 22,
     qualityOfService: '2nd',
-    links: [
+    _links: [
       {
         rel: 'Angebot 1001 vorabbuchen',
         href: 'prebookings/prebook?offerId=1001'
@@ -27,7 +27,7 @@ function offers (req, res) {
     description: 'Angebot Sparbillett',
     price: 12,
     qualityOfService: '2nd',
-    links: [
+    _links: [
       {
         rel: 'Angebot 1002 vorabbuchen',
         href: 'prebookings/prebook?offerId=1002'
