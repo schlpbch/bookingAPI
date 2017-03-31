@@ -12,7 +12,7 @@ function confirm (req, res) {
   var booking = {
     bookingId: '3001',
     description: 'Fahrt von Bern nach Thun am 14.01.2017 20:04.',
-    links: [{
+    _links: [{
       rel: 'Billette zur Buchung als PDF holen',
       href: 'bookings/fulfil/3001?type=pdf'
     }, {
