@@ -2,7 +2,7 @@ swagger: '2.0'
 
 ## API Information
 info:
-  version: '0.0.6'
+  version: '0.0.7'
   title: "Simple öV booking API"
   description: "A simple API to book öV tickets in Switzerland."
   contact:
@@ -22,6 +22,7 @@ consumes:
   - application/json
 produces:
   - application/json
+  - application/hal+json
   - application/pdf
 
 ## Security
@@ -229,6 +230,12 @@ paths:
            - halffare
            - ga1kl
            - ga2kl
+        - name: productId
+          in: query
+          description: "The productId identifying the product"
+          type: string
+          required: false
+
       responses:
         200:
           description: "A list of offers."
@@ -319,7 +326,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{bookingId}/fulfil:
+  /bookings/{bookingId}/fulfil/:
     x-swagger-router-controller: bookings
     get:
       description: "Get the booked tickets."
@@ -345,7 +352,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{bookingId}/cancel:
+  /bookings/{bookingId}/cancel/:
     x-swagger-router-controller: bookings
     get:
       description: "Cancel the booking (technical; not for refunding)."
@@ -399,6 +406,10 @@ definitions:
         description: 'Type of the location.'
         type: string
         default: 'STATION'
+      _links:
+        type: array
+        items:
+          $ref: '#/definitions/link'
 
   # ToDo: Refine properly with Team VTP
   trip:
@@ -413,7 +424,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/leg'
-      links:
+      _links:
         type: array
         items:
           $ref: '#/definitions/link'
@@ -459,7 +470,9 @@ definitions:
   price:
     type: object
     required:
+      - description
       - price
+      - _links
     properties:
       description:
         description: 'A description of the priced element.'
@@ -469,6 +482,19 @@ definitions:
         description: "Price of the trip"
         type: integer
         default: 22
+      _links:
+        $ref: '#/definitions/price_links'
+
+  price_links:
+    type: object
+    required:
+      - self
+      - offer
+    properties:
+     self:
+       $ref: '#/definitions/uri'
+     offer:
+       $ref: '#/definitions/uri'
 
   offer:
     type: object
@@ -497,10 +523,21 @@ definitions:
          - 'none'
          - '1st'
          - '2nd'
-      links:
+      _links:
         type: array
         items:
           $ref: '#/definitions/link'
+
+  offer_links:
+    type: object
+    required:
+      - self
+      - preBook
+    properties:
+      self:
+        $ref: '#/definitions/uri'
+      preBook:
+        $ref: '#/definitions/uri'
 
   preBook:
     type: object
@@ -514,10 +551,21 @@ definitions:
       description:
         description: "Description of the pre-booked offer."
         type: string
-      links:
+      _links:
         type: array
         items:
           $ref: '#/definitions/link'
+
+  preBook_links:
+    type: object
+    required:
+      - self
+      - book
+    properties:
+      self:
+        $ref: '#/definitions/uri'
+      book:
+        $ref: '#/definitions/uri'
 
   book:
     type: object
@@ -531,13 +579,35 @@ definitions:
       description:
         description: "Description of the booked offer."
         type: string
-      links:
+      _links:
         type: array
         items:
           $ref: '#/definitions/link'
 
+  book_links:
+    type: object
+    required:
+      - self
+      - fulfil
+      - cancel
+    properties:
+      self:
+        $ref: '#/definitions/uri'
+      fulfil:
+        $ref: '#/definitions/uri'
+      cancel:
+        $ref: '#/definitions/uri'
+
 
   ### REST level 3 support
+
+  uri:
+    type: object
+    required:
+      - href
+    properties:
+      href:
+        type: string
 
   link:
     type: object

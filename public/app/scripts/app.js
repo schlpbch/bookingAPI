@@ -43,7 +43,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.getOffers = function (event, item) {
-    $http.get('../' + item.links[0].href)
+    $http.get('../' + item._links[0].href)
     .then(function (res) {
       $scope.offers = res.data
       $scope.tabs.selectedIndex = 2
@@ -51,7 +51,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.getPrebooking = function (event, item) {
-    $http.get('../' + item.links[0].href)
+    $http.get('../' + item._links[0].href)
       .then(function (res) {
         $scope.prebooking = res.data
         $scope.tabs.selectedIndex = 3
@@ -59,7 +59,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.getBooking = function (event, item) {
-    $http.get('../' + item.links[0].href)
+    $http.get('../' + item._links[0].href)
       .then(function (res) {
         $scope.booking = res.data
         $scope.tabs.selectedIndex = 4
@@ -67,7 +67,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.cancelBooking = function (event, item) {
-    $http.get('../' + item.links[2].href)
+    $http.get('../' + item._links[2].href)
       .then(function (res) {
         $scope.cancellation = res.data
 
@@ -85,7 +85,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.printBooking = function (event, bookings) {
-    $http.get('../' + bookings.links[0].href)
+    $http.get('../' + bookings._links[0].href)
       .then(function (res) {
         var ticketUrl = res.config.url
         $mdDialog.show({
@@ -104,8 +104,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
           clickOutsideToClose: true
         })
       })
-  };
-
+  }
 }])
 
 app.controller('StationCtrl', ['$timeout', '$q', '$log', function ($timeout, $q, $log) {
@@ -119,11 +118,11 @@ app.controller('StationCtrl', ['$timeout', '$q', '$log', function ($timeout, $q,
   self.searchTextChange = searchTextChange
   self.newStation = newStation
 
-  function newStation(station) {
+  function newStation (station) {
     alert("Sorry! You'll need to create a Constitution for " + station + ' first!')
   }
 
-  function querySearch(query) {
+  function querySearch (query) {
     var results = query ? self.stations.filter(createFilterFor(query)) : self.stations,
       deferred
     if (self.simulateQuery) {
@@ -137,15 +136,15 @@ app.controller('StationCtrl', ['$timeout', '$q', '$log', function ($timeout, $q,
     }
   }
 
-  function searchTextChange(text) {
+  function searchTextChange (text) {
     $log.info('Text changed to ' + text)
   }
 
-  function selectedItemChange(item) {
+  function selectedItemChange (item) {
     $log.info('Item changed to ' + JSON.stringify(item))
   }
 
-  function loadStations() {
+  function loadStations () {
     var allStations = 'Bern, Thun '
     return allStations.split(/, +/g).map(function (station) {
       return {
@@ -155,10 +154,10 @@ app.controller('StationCtrl', ['$timeout', '$q', '$log', function ($timeout, $q,
     })
   }
 
-  function createFilterFor(query) {
+  function createFilterFor (query) {
     var lowercaseQuery = angular.lowercase(query)
 
-    return function filterFn(station) {
+    return function filterFn (station) {
       return (station.value.indexOf(lowercaseQuery) === 0)
     }
   }
