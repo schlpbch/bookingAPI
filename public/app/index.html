@@ -163,17 +163,17 @@
             </md-card>
           </md-content>
         </md-tab>
-        <md-tab label="Vorabbuchen" ng-disabled="prebooking == null">
+        <md-tab label="Vorabbuchen" ng-disabled="prebookings == null">
           <md-content class="md-padding">
-            <md-card class="md-3-line">
+            <md-card class="md-3-line" ng-repeat="item in prebookings">
               <md-card-title>
                 <md-card-title-text>
-                  <span class="md-subhead">VorabbuchungsId: {{prebooking.preBookId}}</span>
-                  <span class="md-headline">{{prebooking.description}}</span>
+                  <span class="md-subhead">VorabbuchungsId: {{item.preBookingId}}</span>
+                  <span class="md-headline">{{item.description}}</span>
                 </md-card-title-text>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary" ng-click="getBooking($event, prebooking)">buchen</md-button>
+                <md-button class="md-raised md-primary" ng-click="getBooking($event,item)">buchen</md-button>
               </md-card-actions>
             </md-card>
           </md-content>
