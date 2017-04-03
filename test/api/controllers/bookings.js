@@ -21,10 +21,10 @@ describe('controllers', function () {
   })
 
   describe('Test issue tickets for Booking 3001', function (done) {
-    describe('GET /bookings/fulfil/3001', function (done) {
+    describe('GET /bookings/3001/fulfil', function (done) {
       it('should not return an error', function (done) {
         request(server)
-                .get('/bookings/fulfil/3001?type=pdf')
+                .get('/bookings/3001/fulfil?type=pdf')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/pdf')
                 .expect(200)
@@ -37,10 +37,10 @@ describe('controllers', function () {
   })
 
   describe('Test cancel Booking B1', function (done) {
-    describe('GET /bookings/cancel/3001', function (done) {
+    describe('GET /bookings/3001/cancel', function (done) {
       it('should not return an error', function (done) {
         request(server)
-                .get('/bookings/cancel/3001')
+                .get('/bookings/3001/cancel')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .expect(200)
