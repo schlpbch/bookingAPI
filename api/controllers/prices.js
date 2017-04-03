@@ -16,7 +16,7 @@ function prices (req, res) {
 
   // TODO: Get offers for Normalpries/Sparpreis right
   var search = require('url').parse(req.originalUrl).search
-  var personParameters = '&age=42&reduction=halffare'
+  var personParameters = '&age=42&reduction=half-fare-2nd'
   var offer = {
     href: '/offers/' + search + '&productId=125' + personParameters
   }
