@@ -326,7 +326,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/fulfil/{bookingId}/:
+  /bookings/{bookingId}/fulfil/:
     x-swagger-router-controller: bookings
     get:
       description: "Get the booked tickets."
@@ -352,7 +352,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/cancel/{bookingId}/:
+  /bookings/{bookingId}/cancel/:
     x-swagger-router-controller: bookings
     get:
       description: "Cancel the booking (technical; not for refunding)."
