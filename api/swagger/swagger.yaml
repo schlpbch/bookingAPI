@@ -133,7 +133,7 @@ paths:
   /prices/:
       x-swagger-router-controller: prices
       get:
-        description: "The price service calculates the cheapest prices for an adult with halffare reduction and a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service."
+        description: "The price service calculates the cheapest prices for an adult with half-fare reduction and a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service."
         operationId: prices
         parameters:
           - name: originId
@@ -168,7 +168,7 @@ paths:
   /prices/{tripId}/:
       x-swagger-router-controller: prices
       get:
-        description: "The price service calculates the cheapest prices for an adult with halffare reduction and a trip ID. The trip ID can be retrieved using the trips service."
+        description: "The price service calculates the cheapest prices for an adult with half-fare reduction and a trip ID. The trip ID can be retrieved using the trips service."
         operationId: tripPrices
         parameters:
           - name: tripId
@@ -222,14 +222,15 @@ paths:
           maximum: 120
         - name: reduction
           in: query
-          description: 'Reduction: {none, halffare, ga1kl, ga2kl}'
+          description: 'Reductions that can be applied'
           type: string
-          default: 'halffare'
+          default: 'half-fare-2nd'
           enum:
            - none
-           - halffare
-           - ga1kl
-           - ga2kl
+           - half-fare-2nd
+           - half-fare-1st
+           - ga-2nd
+           - ga-1st
         - name: productId
           in: query
           description: "The productId identifying the product"
@@ -268,14 +269,15 @@ paths:
           maximum: 120
         - name: reduction
           in: query
-          description: 'Reduction: {None, Half-Fare, GA}'
+          description: 'Reductions that can be applied'
           type: string
-          default: 'halffare'
+          default: 'half-fare-2nd'
           enum:
            - none
-           - halffare
-           - ga1kl
-           - ga2kl
+           - half-fare-2nd
+           - half-fare-1st
+           - ga-2nd
+           - ga-1st
       responses:
         200:
           description: "A list of offers."
