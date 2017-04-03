@@ -496,7 +496,6 @@ definitions:
      offer:
        $ref: '#/definitions/uri'
 
-
   offer:
     type: object
     required:
@@ -529,6 +528,17 @@ definitions:
         items:
           $ref: '#/definitions/link'
 
+  offer_links:
+    type: object
+    required:
+      - self
+      - preBook
+    properties:
+      self:
+        $ref: '#/definitions/uri'
+      preBook:
+        $ref: '#/definitions/uri'
+
   preBook:
     type: object
     required:
@@ -545,6 +555,17 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/link'
+
+  preBook_links:
+    type: object
+    required:
+      - self
+      - book
+    properties:
+      self:
+        $ref: '#/definitions/uri'
+      book:
+        $ref: '#/definitions/uri'
 
   book:
     type: object
@@ -563,6 +584,20 @@ definitions:
         items:
           $ref: '#/definitions/link'
 
+  book_links:
+    type: object
+    required:
+      - self
+      - fulfil
+      - cancel
+    properties:
+      self:
+        $ref: '#/definitions/uri'
+      fulfil:
+        $ref: '#/definitions/uri'
+      cancel:
+        $ref: '#/definitions/uri'
+
 
   ### REST level 3 support
 
@@ -573,7 +608,6 @@ definitions:
     properties:
       href:
         type: string
-
 
   link:
     type: object
