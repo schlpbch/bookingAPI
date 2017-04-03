@@ -14,13 +14,13 @@ function confirm(req, res) {
         description: 'Fahrt von Bern nach Thun am 14.01.2017 20:04.',
         links: [{
             rel: 'Billette zur Buchung als PDF holen',
-            href: 'bookings/fulfil/3001?type=pdf'
+            href: 'bookings/3001/fulfil?type=pdf'
         }, {
             rel: 'Billette zur Buchung als Screenticket holen',
-            href: 'bookings/fulfil/3001?type=screen'
+            href: 'bookings/3001/fulfil?type=screen'
         }, {
             rel: 'Buchung annullieren',
-            href: 'bookings/cancel/3001'
+            href: 'bookings/3001/cancel'
         }]
     }
 

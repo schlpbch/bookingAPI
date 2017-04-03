@@ -31,10 +31,11 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
     // set static files location used for requests that our frontend will make
     app.use(express.static(path.join(__dirname, '/public')))
 
-
     app.get('/offersRedirect/*', function (req, res) {
-        var target = `${backend}/offers/${req.params[0]}${req._parsedUrl.search}`;
-        request(target).pipe(res);
+        request(`${backend}/offers/${req.params[0]}${req._parsedUrl.search}`).pipe(res);
+    });
+    app.get('/prebookingsRedirect/prebook*', function (req, res) {
+        request(`${backend}/prebookings/prebook/${req.params[0]}${req._parsedUrl.search}`).pipe(res);
     });
 
     app.listen(port)
