@@ -18,7 +18,7 @@ function prices (req, res) {
   var search = require('url').parse(req.originalUrl).search
   var personParameters = '&age=42&reduction=halffare'
   var offer = {
-    href: '/offers/' + search + '&productId=125' + personParameters
+    href: 'offers/' + search + '&productId=125' + personParameters
   }
 
   var normalpreis = {
@@ -31,7 +31,7 @@ function prices (req, res) {
   }
 
   offer = {
-    href: '/offers/' + search + '&productId=4004' + personParameters
+    href: 'offers/' + search + '&productId=4004' + personParameters
   }
 
   var sparpreis = {
