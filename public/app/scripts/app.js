@@ -43,7 +43,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.getOffers = function (event, item) {
-    $http.get('../' + item._links[0].href)
+    $http.get('../redirect_' + item._links[0].href)
     .then(function (res) {
       $scope.offers = res.data
       $scope.tabs.selectedIndex = 2
@@ -51,9 +51,9 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.getPrebooking = function (event, item) {
-    $http.get('../' + item._links[0].href)
+    $http.get('../redirect_' + item._links[0].href)
       .then(function (res) {
-        $scope.prebooking = res.data
+        $scope.prebookings = res.data
         $scope.tabs.selectedIndex = 3
       })
   }
