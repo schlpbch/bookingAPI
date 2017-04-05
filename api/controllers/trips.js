@@ -27,7 +27,7 @@ function trips (req, res) {
         }, 'prices': {
             title: 'Request the cheapest price for a trip.', href: 'prices/trip-rec-context1'
         }, 'offers': {
-            title: 'Request offers for a trip.', href: 'offers/?originId=8507000&destinationId=8508500&date=2017-05-02&age=42'
+            title: 'Request offers for a trip.', href: 'offers?originId=8507000&destinationId=8508500&date=2017-05-02&age=42&reduction=none'
         }
     }
   }
@@ -56,7 +56,7 @@ function trips (req, res) {
         }, 'prices': {
             title: 'Request the cheapest price for a trip.', href: 'prices/trip-rec-context2'
         }, 'offers': {
-            title: 'Request offers for a trip.', href: 'offers/?originId=8508500&destinationId=8507000&date=2017-05-02&age=42&reduction=halffare'
+            title: 'Request offers for a trip.', href: 'offers?originId=8508500&destinationId=8507000&date=2017-05-02&age=42&reduction=halffare'
         }
     }
   }
