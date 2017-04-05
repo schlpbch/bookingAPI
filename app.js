@@ -13,8 +13,10 @@ var config = {
   appRoot: __dirname // required config
 }
 
-var backend = process.env.BACKEND || 'http://localhost:8080'
-console.log('Backend: ', backend)
+var backendReise = process.env.BACKEND_REISE || 'http://localhost:8080'
+console.log('Backend Reise: ', backendReise)
+var backendOrch = process.env.BACKEND_ORCH || 'http://localhost:8080'
+console.log('Backend Orch: ', backendOrch)
 
 SwaggerExpress.create(config, function (err, swaggerExpress) {
   if (err) {
@@ -32,13 +34,13 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
   app.use(express.static(path.join(__dirname, '/public')))
 
   app.get('/redirect_offers*', function (req, res) {
-      request(`${backend}/offers${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
+      request(`${backendReise}/offers${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
   });
   app.get('/redirect_prebookings*', function (req, res) {
-      request(`${backend}/prebookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
+      request(`${backendReise}/prebookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
   });
   app.get('/redirect_bookings*', function (req, res) {
-      request(`${backend}/bookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
+      request(`${backendOrch}/bookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
   });
 
   app.listen(port)
