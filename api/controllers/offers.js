@@ -15,24 +15,26 @@ function offers (req, res) {
     description: 'Angebot direkter Verkehr',
     price: 22,
     qualityOfService: '2nd',
-    _links: [
-      {
-        rel: 'Angebot 1001 vorabbuchen',
-        href: 'prebookings/prebook?offerId=1001'
-      }
-    ]
+    _links: {
+        'self': {
+            href: 'offers/1001'
+        }, 'prebook': {
+            title: 'Angebot 1001 vorabbuchen', href: 'offers/1001/prebook'
+        }
+    }
   }
   var offerSparbillett = {
     offerId: '1002',
     description: 'Angebot Sparbillett',
     price: 12,
     qualityOfService: '2nd',
-    _links: [
-      {
-        rel: 'Angebot 1002 vorabbuchen',
-        href: 'prebookings/prebook?offerId=1002'
-      }
-    ]
+    _links: {
+        'self': {
+            href: 'offers/1002'
+        }, 'prebook': {
+            title: 'Angebot 1002 vorabbuchen', href: 'offers/1002/prebook'
+        }
+    }
   }
   var offers = [offerDV, offerSparbillett]
   res.json(offers)

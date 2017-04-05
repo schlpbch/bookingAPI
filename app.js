@@ -31,16 +31,19 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
     // set static files location used for requests that our frontend will make
   app.use(express.static(path.join(__dirname, '/public')))
 
-    app.get('/redirect_offers*', function (req, res) {
-        request(`${backend}/offers/${req.params[0]}${req._parsedUrl.search}`).pipe(res);
-    });
-    app.get('/redirect_prebookings/prebook*', function (req, res) {
-        request(`${backend}/prebookings/prebook/${req.params[0]}${req._parsedUrl.search}`).pipe(res);
-    });
+  app.get('/redirect_offers*', function (req, res) {
+      request(`${backend}/offers${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
+  });
+  app.get('/redirect_prebookings*', function (req, res) {
+      request(`${backend}/prebookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
+  });
+  app.get('/redirect_bookings*', function (req, res) {
+      request(`${backend}/bookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
+  });
 
   app.listen(port)
 
-  if (swaggerExpress.runner.swagger.paths['/offers/']) {
+  if (swaggerExpress.runner.swagger.paths['/offers']) {
     console.log('try this:\ncurl http://127.0.0.1:' + port + '/docs')
   }
 })
