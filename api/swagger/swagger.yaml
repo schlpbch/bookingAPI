@@ -288,14 +288,14 @@ paths:
         default:
           description: "unexpected error"
 
-  /prebookings/prebook/:
+  /offers/{offerId}/prebook/:
     x-swagger-router-controller: prebookings
     get:
       description: "Pre-book an offer during checkout process for 15 minutes. Normally called when adding an item to the shopping cart."
       operationId: prebook
       parameters:
         - name: offerId
-          in: query
+          in: path
           description: "The offer ID to be pre-booked for later booking."
           required: true
           type: string
@@ -308,14 +308,14 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/confirm/:
+  /prebookings/{preBookingId}/confirm/:
     x-swagger-router-controller: bookings
     get:
       description: "Book the pre-booked offer."
       operationId: confirm
       parameters:
         - name: preBookingId
-          in: query
+          in: path
           description: "The pre-book ID to be booked."
           required: true
           type: string
@@ -526,9 +526,7 @@ definitions:
          - '1st'
          - '2nd'
       _links:
-        type: array
-        items:
-          $ref: '#/definitions/link'
+        $ref: '#/definitions/offer_links'
 
   offer_links:
     type: object
@@ -554,9 +552,7 @@ definitions:
         description: "Description of the pre-booked offer."
         type: string
       _links:
-        type: array
-        items:
-          $ref: '#/definitions/link'
+        $ref: '#/definitions/preBook_links'
 
   preBook_links:
     type: object
@@ -582,9 +578,7 @@ definitions:
         description: "Description of the booked offer."
         type: string
       _links:
-        type: array
-        items:
-          $ref: '#/definitions/link'
+        $ref: '#/definitions/book_links'
 
   book_links:
     type: object
