@@ -5,10 +5,10 @@ var server = require('../../../')
 
 describe('controllers', function () {
   describe('Test book prebook 2001', function (done) {
-    describe('GET /bookings/confirm', function (done) {
+    describe('GET /prebookings/2001/confirm', function (done) {
       it('should not return an error', function (done) {
         request(server)
-                .get('/bookings/confirm?preBookingId=2001')
+                .get('/prebookings/2001/confirm')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .expect(200)
