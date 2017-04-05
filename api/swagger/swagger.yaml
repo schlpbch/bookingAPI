@@ -216,6 +216,7 @@ paths:
         - name: age
           in: query
           description: 'Age of the traveller.'
+          required: true
           type: integer
           default: 42
           minimum: 0
@@ -223,6 +224,7 @@ paths:
         - name: reduction
           in: query
           description: 'Reductions that can be applied'
+          required: true
           type: string
           default: 'half-fare-2nd'
           enum:
@@ -263,6 +265,7 @@ paths:
         - name: age
           in: query
           description: 'Age of the traveller.'
+          required: true
           type: integer
           default: 42
           minimum: 0
@@ -270,6 +273,7 @@ paths:
         - name: reduction
           in: query
           description: 'Reductions that can be applied'
+          required: true
           type: string
           default: 'half-fare-2nd'
           enum:
