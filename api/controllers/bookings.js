@@ -9,7 +9,7 @@ module.exports = {
 }
 
 function confirm (req, res) {
-  var booking = {
+  var bookings = [{
     bookingId: '3001',
     description: 'Fahrt von Bern nach Thun am 14.01.2017 20:04.',
     _links: {
@@ -17,15 +17,13 @@ function confirm (req, res) {
             href: 'bookings/3001'
         }, 'fulfil': {
             title: 'Billette zur Buchung als PDF holen', href: 'bookings/3001/fulfil?type=pdf'
-        }, 'book': {
-            title: 'Billette zur Buchung als Screenticket holen', href: 'bookings/3001/fulfil?type=screen'
         }, 'cancel': {
             title: 'Buchung annullieren', href: 'bookings/3001/cancel'
         }
     }
-  }
+  }]
 
-  res.json(booking)
+  res.json(bookings)
 }
 
 function fulfil (req, res) {
