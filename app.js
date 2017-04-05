@@ -37,7 +37,7 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
       request(`${backendReise}/offers${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
   });
   app.get('/redirect_prebookings*', function (req, res) {
-      request(`${backendReise}/prebookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
+      request(`${backendOrch}/prebookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
   });
   app.get('/redirect_bookings*', function (req, res) {
       request(`${backendOrch}/bookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);

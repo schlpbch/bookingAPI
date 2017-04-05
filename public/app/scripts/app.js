@@ -28,7 +28,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
 
   $scope.getTrips = function (event) {
     // ToDo: Load via REST Services
-    var url = '../trips/?originId=8507000&destinationId=8508500&date=2017-01-14&time=20%3A22'
+    var url = '../trips/?originId=8507000&destinationId=8503000&date=2017-01-14&time=20%3A22'
 
     $scope.trips = null
     $scope.offers = null
@@ -61,7 +61,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   $scope.getBooking = function (event, item) {
     $http.get('../redirect_' + item._links.confirm.href)
       .then(function (res) {
-        $scope.booking = res.data
+        $scope.bookings = res.data
         $scope.tabs.selectedIndex = 4
       })
   }
@@ -84,8 +84,8 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
       })
   }
 
-  $scope.printBooking = function (event, bookings) {
-    window.location.href = '../redirect_' + bookings._links.fulfil.href;
+  $scope.printBooking = function (event, booking) {
+    window.location.href = '../redirect_' + booking._links.fulfil.href;
     /* Issue #26 (Mobile)
     $http.get('../redirect_' + bookings._links.fulfil.href)
       .then(function (res) {

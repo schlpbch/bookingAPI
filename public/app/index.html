@@ -178,9 +178,9 @@
             </md-card>
           </md-content>
         </md-tab>
-        <md-tab label="Buchungen" ng-disabled="booking == null">
+        <md-tab label="Buchungen" ng-disabled="bookings == null">
           <md-content class="md-padding">
-            <md-card class="md-3-line">
+            <md-card class="md-3-line" ng-repeat="booking in bookings">
               <md-card-title>
                 <md-card-title-text>
                   <span class="md-subhead">BuchungsId: {{booking.bookingId}}</span>
