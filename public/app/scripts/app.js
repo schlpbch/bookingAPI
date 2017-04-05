@@ -43,7 +43,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.getOffers = function (event, item) {
-    $http.get('../redirect_' + item._links[0].href)
+    $http.get('../redirect_' + item._links.offers.href)
     .then(function (res) {
       $scope.offers = res.data
       $scope.tabs.selectedIndex = 2
@@ -51,7 +51,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.getPrebooking = function (event, item) {
-    $http.get('../redirect_' + item._links[0].href)
+    $http.get('../redirect_' + item._links.prebook.href)
       .then(function (res) {
         $scope.prebookings = res.data
         $scope.tabs.selectedIndex = 3
@@ -59,7 +59,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.getBooking = function (event, item) {
-    $http.get('../' + item._links[0].href)
+    $http.get('../redirect_' + item._links.confirm.href)
       .then(function (res) {
         $scope.booking = res.data
         $scope.tabs.selectedIndex = 4
@@ -67,7 +67,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.cancelBooking = function (event, item) {
-    $http.get('../' + item._links[2].href)
+    $http.get('../' + item._links.cancel.href)
       .then(function (res) {
         $scope.cancellation = res.data
 
@@ -85,7 +85,9 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
   }
 
   $scope.printBooking = function (event, bookings) {
-    $http.get('../' + bookings._links[0].href)
+    window.location.href = '../redirect_' + bookings._links.fulfil.href;
+    /* Issue #26 (Mobile)
+    $http.get('../redirect_' + bookings._links.fulfil.href)
       .then(function (res) {
         var ticketUrl = res.config.url
         $mdDialog.show({
@@ -104,6 +106,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
           clickOutsideToClose: true
         })
       })
+    */
   }
 }])
 

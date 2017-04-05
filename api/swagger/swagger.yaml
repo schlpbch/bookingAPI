@@ -41,7 +41,7 @@ produces:
 ## Paths
 paths:
 
-  /health/status/:
+  /health/status:
     x-swagger-router-controller: health
     get:
       description: "The status service can be used to check if the remote server is running and can be reached across the network."
@@ -58,7 +58,7 @@ paths:
 
   # ToDo: Define properly with Team VTP
 
-  /locations/:
+  /locations:
     x-swagger-router-controller: locations
     get:
       description: "The locations service can be used to perform a pattern-based search to retrieve a list of matching locations in the journey planner database. Possible matches might be stations, points of interest and addresses.\n
@@ -84,7 +84,7 @@ paths:
 
   # ToDo: Define properly with Team VTP #wer ist vtp?
 
-  /trips/: #sollte das nicht itinerary sein
+  /trips: #sollte das nicht itinerary sein
     x-swagger-router-controller: trips
     get:
       description:
@@ -130,7 +130,7 @@ paths:
 
   ### Vertriebs Part
 
-  /prices/:
+  /prices:
       x-swagger-router-controller: prices
       get:
         description: "The price service calculates the cheapest prices for an adult with half-fare reduction and a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service."
@@ -165,7 +165,7 @@ paths:
           default:
             description: "unexpected error"
 
-  /prices/{tripId}/:
+  /prices/{tripId}:
       x-swagger-router-controller: prices
       get:
         description: "The price service calculates the cheapest prices for an adult with half-fare reduction and a trip ID. The trip ID can be retrieved using the trips service."
@@ -187,7 +187,7 @@ paths:
           default:
             description: "unexpected error"
 
-  /offers/:
+  /offers:
     x-swagger-router-controller: offers
     get:
       description: "The offers service calculates offers for a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service."
@@ -247,7 +247,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /offers/{tripId}/:
+  /offers/{tripId}:
     x-swagger-router-controller: offers
     get:
       description: "The offers service calculates offers for a trip ID. The trip ID can be retrieved using the trips service."
@@ -288,7 +288,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /offers/{offerId}/prebook/:
+  /offers/{offerId}/prebook:
     x-swagger-router-controller: prebookings
     get:
       description: "Pre-book an offer during checkout process for 15 minutes. Normally called when adding an item to the shopping cart."
@@ -308,7 +308,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /prebookings/{preBookingId}/confirm/:
+  /prebookings/{preBookingId}/confirm:
     x-swagger-router-controller: bookings
     get:
       description: "Book the pre-booked offer."
@@ -328,7 +328,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{bookingId}/fulfil/:
+  /bookings/{bookingId}/fulfil:
     x-swagger-router-controller: bookings
     get:
       description: "Get the booked tickets."
@@ -354,7 +354,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{bookingId}/cancel/:
+  /bookings/{bookingId}/cancel:
     x-swagger-router-controller: bookings
     get:
       description: "Cancel the booking (technical; not for refunding)."
