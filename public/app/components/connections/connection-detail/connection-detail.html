@@ -1,0 +1,17 @@
+<md-card class="md-3-line">
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-subhead">VerbindungsId: {{$ctrl.trip.tripId}}</span>
+      <span class="md-headline">
+                    <md-icon>train</md-icon>
+                     {{$ctrl.trip.leg1.origin.name}} &ndash; {{$ctrl.trip.leg1.destination.name}}</span>
+      <span class="md-subhead">
+                        Abfahrtsdatum: {{$ctrl.trip.leg1.origin.date}}, Zeit: {{$ctrl.trip.leg1.origin.time}}<br>
+                        Ankunftsdatum: {{$ctrl.trip.leg1.destination.date}}, Zeit: {{$ctrl.trip.leg1.destination.time}}
+                      </span>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-actions layout="row" layout-align="end center">
+    <md-button class="md-raised md-primary" ng-click="$ctrl.connectionService.getOffers($ctrl.trip)">Angebot</md-button>
+  </md-card-actions>
+</md-card>

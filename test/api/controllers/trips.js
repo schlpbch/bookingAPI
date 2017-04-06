@@ -5,7 +5,7 @@ var server = require('../../../')
 
 describe('controllers', function () {
   describe('trips', function (done) {
-    describe('GET /trips', function (done) {
+    describe('GET /api/trips', function (done) {
       it('should not return an error', function (done) {
         request(server)
           .get('/api/trips')

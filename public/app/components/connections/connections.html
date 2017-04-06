@@ -1,0 +1,7 @@
+<md-tab id="verbindungen" label="Verbindungen" ng-disabled="$ctrl.bookingStore.trips === null">
+  <md-content class="md-padding">
+    <api-connection-detail ng-repeat="trip in $ctrl.bookingStore.trips" trip="trip"></api-connection-detail>
+    </md-list-item>
+    </md-list>
+  </md-content>
+</md-tab>

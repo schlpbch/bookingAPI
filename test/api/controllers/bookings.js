@@ -21,7 +21,7 @@ describe('controllers', function () {
   })
 
   describe('Test issue tickets for Booking 3001', function (done) {
-    describe('GET /bookings/3001/fulfil', function (done) {
+    describe('GET /api/bookings/3001/fulfil', function (done) {
       it('should not return an error', function (done) {
         request(server)
                 .get('/api/bookings/3001/fulfil?type=pdf')
