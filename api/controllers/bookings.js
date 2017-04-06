@@ -16,9 +16,9 @@ function confirm (req, res) {
         'self': {
             href: 'bookings/3001'
         }, 'fulfil': {
-            title: 'Billette zur Buchung als PDF holen', href: 'bookings/3001/fulfil?type=pdf'
+            title: 'Billette zur Buchung als PDF holen', href: 'api/bookings/3001/fulfil?type=pdf'
         }, 'cancel': {
-            title: 'Buchung annullieren', href: 'bookings/3001/cancel'
+            title: 'Buchung annullieren', href: 'api/bookings/3001/cancel'
         }
     }
   }]

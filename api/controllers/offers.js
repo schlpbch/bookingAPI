@@ -19,7 +19,7 @@ function offers (req, res) {
         'self': {
             href: 'offers/1001'
         }, 'prebook': {
-            title: 'Angebot 1001 vorabbuchen', href: 'offers/1001/prebook'
+            title: 'Angebot 1001 vorabbuchen', href: 'api/offers/1001/prebook'
         }
     }
   }
@@ -32,7 +32,7 @@ function offers (req, res) {
         'self': {
             href: 'offers/1002'
         }, 'prebook': {
-            title: 'Angebot 1002 vorabbuchen', href: 'offers/1002/prebook'
+            title: 'Angebot 1002 vorabbuchen', href: 'api/offers/1002/prebook'
         }
     }
   }
