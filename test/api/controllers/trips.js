@@ -8,7 +8,7 @@ describe('controllers', function () {
     describe('GET /trips', function (done) {
       it('should not return an error', function (done) {
         request(server)
-          .get('/trips')
+          .get('/api/trips')
           .set('Accept', 'application/json')
           .expect('Content-Type', 'application/json; charset=utf-8')
           .expect(200)

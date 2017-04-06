@@ -5,10 +5,10 @@ var server = require('../../../')
 
 describe('controllers', function () {
   describe('Test book prebook 2001', function (done) {
-    describe('GET /prebookings/2001/confirm', function (done) {
+    describe('GET /api/prebookings/2001/confirm', function (done) {
       it('should not return an error', function (done) {
         request(server)
-                .get('/prebookings/2001/confirm')
+                .get('/api/prebookings/2001/confirm')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .expect(200)
@@ -24,7 +24,7 @@ describe('controllers', function () {
     describe('GET /bookings/3001/fulfil', function (done) {
       it('should not return an error', function (done) {
         request(server)
-                .get('/bookings/3001/fulfil?type=pdf')
+                .get('/api/bookings/3001/fulfil?type=pdf')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/pdf')
                 .expect(200)
@@ -40,7 +40,7 @@ describe('controllers', function () {
     describe('GET /bookings/3001/cancel', function (done) {
       it('should not return an error', function (done) {
         request(server)
-                .get('/bookings/3001/cancel')
+                .get('/api/bookings/3001/cancel')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .expect(200)

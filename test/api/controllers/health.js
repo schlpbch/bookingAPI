@@ -8,7 +8,7 @@ describe('controllers', function () {
     describe('GET /health/status/', function (done) {
       it('should return the message sent', function (done) {
         request(server)
-          .get('/health/status/')
+          .get('/api/health/status/')
           .set('Accept', 'application/json')
           .expect('Content-Type', 'application/json; charset=utf-8')
           .end(function (err, res) {
