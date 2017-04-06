@@ -8,7 +8,7 @@ describe('controllers', function () {
     describe('GET /offers', function (done) {
       it('should not return an error', function (done) {
         request(server)
-                .get('/offers')
+                .get('/api/offers')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .expect(200)
@@ -27,7 +27,7 @@ describe('controllers', function () {
     describe('GET /offers/3001', function (done) {
       it('should not return an error', function (done) {
         request(server)
-                .get('/offers/3001')
+                .get('/api/offers/3001')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .expect(200)
