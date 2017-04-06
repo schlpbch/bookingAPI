@@ -28,7 +28,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$http', functio
 
   $scope.getTrips = function (event) {
     // ToDo: Load via REST Services
-    var url = '../trips/?originId=8507000&destinationId=8503000&date=2017-01-14&time=20%3A22'
+    var url = '../api/trips/?originId=8507000&destinationId=8503000&date=2017-01-14&time=20%3A22'
 
     $scope.trips = null
     $scope.offers = null

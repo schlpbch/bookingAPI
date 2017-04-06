@@ -14,7 +14,7 @@ info:
     url: https://data.sbb.ch/page/licence/
 #host: api.sbb.ch
 #host: localhost:8080
-basePath: /
+basePath: /api
 schemes:
   - http # Nur am Anfang
   - https
