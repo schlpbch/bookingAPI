@@ -1,52 +1,41 @@
 'use strict'
 
 module.exports = {
-    offers,
-    tripOffers,
-    prebook
+  offers,
+  tripOffers
 }
 
-function tripOffers(req, res) {
-    offers(req, res)
+function tripOffers (req, res) {
+  offers(req, res)
 }
 
-function offers(req, res) {
-    var offerDV = {
-        offerId: 'A1',
-        description: 'Angebot direkter Verkehr',
-        price: 22,
-        links: [
-            {
-                rel: 'Angebot A1 vorabbuchen',
-                href: 'offers/A1/prebook'
-            }
-        ]
+function offers (req, res) {
+  var offerDV = {
+    offerId: '1001',
+    description: 'Angebot direkter Verkehr',
+    price: 22,
+    qualityOfService: '2nd',
+    _links: {
+        'self': {
+            href: 'offers/1001'
+        }, 'prebook': {
+            title: 'Angebot 1001 vorabbuchen', href: 'api/offers/1001/prebook'
+        }
     }
-    var offerSparbillett = {
-        offerId: 'A2',
-        description: 'Angebot Sparbillett',
-        price: 12,
-        links: [
-            {
-                rel: 'Angebot A2 vorabbuchen',
-                href: 'offers/A2/prebook'
-            }
-        ]
+  }
+  var offerSparbillett = {
+    offerId: '1002',
+    description: 'Angebot Sparbillett',
+    price: 12,
+    qualityOfService: '2nd',
+    _links: {
+        'self': {
+            href: 'offers/1002'
+        }, 'prebook': {
+            title: 'Angebot 1002 vorabbuchen', href: 'api/offers/1002/prebook'
+        }
     }
-    var offers = [offerDV, offerSparbillett]
-    res.json(offers)
-}
-
-function prebook(req, res) {
-    var prebooking = {
-        preBookId: 'P1',
-        description: 'Fahrt von Bern nach Thun am 14.01.2017 20:04 für 22 CHF',
-        links: [
-            {
-                rel: 'Billette zur Buchung holen',
-                href: 'prebookings/P1/book'
-            }
-        ]
-    }
-    res.json(prebooking)
+  }
+  var offers = [offerDV, offerSparbillett]
+  res.json(offers)
 }

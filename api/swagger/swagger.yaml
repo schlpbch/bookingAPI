@@ -2,7 +2,7 @@ swagger: '2.0'
 
 ## API Information
 info:
-  version: '0.0.6'
+  version: '0.0.7'
   title: "Simple öV booking API"
   description: "A simple API to book öV tickets in Switzerland."
   contact:
@@ -14,7 +14,7 @@ info:
     url: https://data.sbb.ch/page/licence/
 #host: api.sbb.ch
 #host: localhost:8080
-basePath: /
+basePath: /api
 schemes:
   - http # Nur am Anfang
   - https
@@ -22,6 +22,7 @@ consumes:
   - application/json
 produces:
   - application/json
+  - application/hal+json
   - application/pdf
 
 ## Security
@@ -40,7 +41,7 @@ produces:
 ## Paths
 paths:
 
-  /health/status/:
+  /health/status:
     x-swagger-router-controller: health
     get:
       description: "The status service can be used to check if the remote server is running and can be reached across the network."
@@ -57,7 +58,7 @@ paths:
 
   # ToDo: Define properly with Team VTP
 
-  /locations/:
+  /locations:
     x-swagger-router-controller: locations
     get:
       description: "The locations service can be used to perform a pattern-based search to retrieve a list of matching locations in the journey planner database. Possible matches might be stations, points of interest and addresses.\n
@@ -83,7 +84,7 @@ paths:
 
   # ToDo: Define properly with Team VTP #wer ist vtp?
 
-  /trips/: #sollte das nicht itinerary sein
+  /trips: #sollte das nicht itinerary sein
     x-swagger-router-controller: trips
     get:
       description:
@@ -129,10 +130,10 @@ paths:
 
   ### Vertriebs Part
 
-  /prices/:
+  /prices:
       x-swagger-router-controller: prices
       get:
-        description: "The price service calculates the cheapest prices for an adult with halffare reduction and a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service."
+        description: "The price service calculates the cheapest prices for an adult with half-fare reduction and a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service."
         operationId: prices
         parameters:
           - name: originId
@@ -154,13 +155,6 @@ paths:
             type: string
             format: date
             default: '2017-01-14'
-          - name: time
-            in: query
-            description: "The desired departure time."
-            required: true
-            type: string
-            format: dateTime
-            default: '20:22'
         responses:
           200:
             description: "A list of prices for the trip."
@@ -171,10 +165,10 @@ paths:
           default:
             description: "unexpected error"
 
-  /prices/{tripId}/:
+  /prices/{tripId}:
       x-swagger-router-controller: prices
       get:
-        description: "The price service calculates the cheapest prices for an adult with halffare reduction and a trip ID. The trip ID can be retrieved using the trips service."
+        description: "The price service calculates the cheapest prices for an adult with half-fare reduction and a trip ID. The trip ID can be retrieved using the trips service."
         operationId: tripPrices
         parameters:
           - name: tripId
@@ -193,7 +187,7 @@ paths:
           default:
             description: "unexpected error"
 
-  /offers/:
+  /offers:
     x-swagger-router-controller: offers
     get:
       description: "The offers service calculates offers for a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service."
@@ -218,12 +212,6 @@ paths:
           type: string
           format: date
           default: '2017-01-14'
-        - name: time
-          in: query
-          description: "The desired departure time."
-          type: string
-          format: dateTime
-          default: '20:22'
       # ToDo; Scale for more than one traveller
         - name: age
           in: query
@@ -234,13 +222,21 @@ paths:
           maximum: 120
         - name: reduction
           in: query
-          description: 'Reduction: {None, Half-Fare, GA}'
+          description: 'Reductions that can be applied'
           type: string
-          default: 'halffare'
+          default: 'half-fare-2nd'
           enum:
            - none
-           - halffare
-           - ga
+           - half-fare-2nd
+           - half-fare-1st
+           - ga-2nd
+           - ga-1st
+        - name: productId
+          in: query
+          description: "The productId identifying the product"
+          type: string
+          required: false
+
       responses:
         200:
           description: "A list of offers."
@@ -251,7 +247,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /offers/{tripId}/:
+  /offers/{tripId}:
     x-swagger-router-controller: offers
     get:
       description: "The offers service calculates offers for a trip ID. The trip ID can be retrieved using the trips service."
@@ -273,13 +269,15 @@ paths:
           maximum: 120
         - name: reduction
           in: query
-          description: 'Reduction: {None, Half-Fare, GA}'
+          description: 'Reductions that can be applied'
           type: string
-          default: 'halffare'
+          default: 'half-fare-2nd'
           enum:
            - none
-           - halffare
-           - ga
+           - half-fare-2nd
+           - half-fare-1st
+           - ga-2nd
+           - ga-1st
       responses:
         200:
           description: "A list of offers."
@@ -290,8 +288,8 @@ paths:
         default:
           description: "unexpected error"
 
-  /offers/{offerId}/prebook/:
-    x-swagger-router-controller: offers
+  /offers/{offerId}/prebook:
+    x-swagger-router-controller: prebookings
     get:
       description: "Pre-book an offer during checkout process for 15 minutes. Normally called when adding an item to the shopping cart."
       operationId: prebook
@@ -301,7 +299,7 @@ paths:
           description: "The offer ID to be pre-booked for later booking."
           required: true
           type: string
-          default: 'O1' # for simpler mock testing only
+          default: '1001' # for simpler mock testing only
       responses:
         200:
           description: "The pre-booked offer."
@@ -310,18 +308,18 @@ paths:
         default:
           description: "unexpected error"
 
-  /prebookings/{preBookId}/book/:
-    x-swagger-router-controller: prebookings
+  /prebookings/{preBookingId}/confirm:
+    x-swagger-router-controller: bookings
     get:
       description: "Book the pre-booked offer."
-      operationId: book
+      operationId: confirm
       parameters:
-        - name: preBookId
+        - name: preBookingId
           in: path
           description: "The pre-book ID to be booked."
           required: true
           type: string
-          default: "P1" # for simpler mock testing only
+          default: '2001' # for simpler mock testing only
       responses:
         200:
           description: "The booked offer."
@@ -330,18 +328,18 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{bookingId}/print/:
+  /bookings/{bookingId}/fulfil:
     x-swagger-router-controller: bookings
     get:
       description: "Get the booked tickets."
-      operationId: print
+      operationId: fulfil
       parameters:
         - name: bookingId
           in: path
           description: "The booking ID."
           required: true
           type: string
-          default: "B1" # for simpler mock testing only
+          default: '3001' # for simpler mock testing only
         - name: type
           description: "Type of the tickets: {pdf, png}"
           in: query
@@ -356,7 +354,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{bookingId}/cancel/:
+  /bookings/{bookingId}/cancel:
     x-swagger-router-controller: bookings
     get:
       description: "Cancel the booking (technical; not for refunding)."
@@ -367,7 +365,7 @@ paths:
           description: "Booking ID to cancel."
           required: true
           type: string
-          default: "B1" # for simpler mock testing only
+          default: '3001' # for simpler mock testing only
       responses:
         200:
           description: "The canceled booking ID."
@@ -410,6 +408,10 @@ definitions:
         description: 'Type of the location.'
         type: string
         default: 'STATION'
+      _links:
+        type: array
+        items:
+          $ref: '#/definitions/link'
 
   # ToDo: Refine properly with Team VTP
   trip:
@@ -424,7 +426,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/leg'
-      links:
+      _links:
         type: array
         items:
           $ref: '#/definitions/link'
@@ -470,7 +472,9 @@ definitions:
   price:
     type: object
     required:
+      - description
       - price
+      - _links
     properties:
       description:
         description: 'A description of the priced element.'
@@ -480,6 +484,19 @@ definitions:
         description: "Price of the trip"
         type: integer
         default: 22
+      _links:
+        $ref: '#/definitions/price_links'
+
+  price_links:
+    type: object
+    required:
+      - self
+      - offer
+    properties:
+     self:
+       $ref: '#/definitions/uri'
+     offer:
+       $ref: '#/definitions/uri'
 
   offer:
     type: object
@@ -487,11 +504,12 @@ definitions:
       - offerId
       - description
       - price
+      - qualityOfService
     properties:
       offerId:
         description: "ID of the offer for pre-booking."
         type: string
-        default: 'O1'
+        default: '1001'
       description:
         description: "Description of the offer."
         type: string
@@ -499,10 +517,27 @@ definitions:
         description: "Price of the offer."
         type: integer
         default: 22
-      links:
-        type: array
-        items:
-          $ref: '#/definitions/link'
+      qualityOfService:
+        description: "Quality of service of the offer."
+        type: string
+        default: '2nd'
+        enum:
+         - 'none'
+         - '1st'
+         - '2nd'
+      _links:
+        $ref: '#/definitions/offer_links'
+
+  offer_links:
+    type: object
+    required:
+      - self
+      - preBook
+    properties:
+      self:
+        $ref: '#/definitions/uri'
+      preBook:
+        $ref: '#/definitions/uri'
 
   preBook:
     type: object
@@ -512,14 +547,23 @@ definitions:
       preBookingId:
         description: "ID of the pre-booked offer."
         type: string
-        default: 'P1'
+        default: '2001'
       description:
         description: "Description of the pre-booked offer."
         type: string
-      links:
-        type: array
-        items:
-          $ref: '#/definitions/link'
+      _links:
+        $ref: '#/definitions/preBook_links'
+
+  preBook_links:
+    type: object
+    required:
+      - self
+      - book
+    properties:
+      self:
+        $ref: '#/definitions/uri'
+      book:
+        $ref: '#/definitions/uri'
 
   book:
     type: object
@@ -529,17 +573,37 @@ definitions:
       bookingId:
         description: "Id of the booking"
         type: string
-        default: 'B1'
+        default: '3001'
       description:
         description: "Description of the booked offer."
         type: string
-      links:
-        type: array
-        items:
-          $ref: '#/definitions/link'
+      _links:
+        $ref: '#/definitions/book_links'
+
+  book_links:
+    type: object
+    required:
+      - self
+      - fulfil
+      - cancel
+    properties:
+      self:
+        $ref: '#/definitions/uri'
+      fulfil:
+        $ref: '#/definitions/uri'
+      cancel:
+        $ref: '#/definitions/uri'
 
 
   ### REST level 3 support
+
+  uri:
+    type: object
+    required:
+      - href
+    properties:
+      href:
+        type: string
 
   link:
     type: object
