@@ -5,7 +5,7 @@ var server = require('../../../app')
 
 describe('controllers', function () {
   describe('status', function (done) {
-    describe('GET /health/status/', function (done) {
+    describe('GET /api/health/status/', function (done) {
       it('should return the message sent', function (done) {
         request(server)
           .get('/api/health/status/')

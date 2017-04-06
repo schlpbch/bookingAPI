@@ -1,0 +1,5 @@
+<md-tab label="Angebote" ng-disabled="$ctrl.bookingStore.offers === null">
+<md-content class="md-padding">
+  <api-offer-detail ng-repeat="offer in $ctrl.bookingStore.offers" offer="offer"></api-offer-detail ng-repeat="offer in $ctrl.bookingStore.offers" offer="offer">
+</md-content>
+</md-tab>

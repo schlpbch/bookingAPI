@@ -1,0 +1,11 @@
+<md-card class="md-3-line">
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-subhead">VorabbuchungsId: {{$ctrl.prebooking.preBookId}}</span>
+      <span class="md-headline">{{$ctrl.prebooking.description}}</span>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-actions layout="row" layout-align="end center">
+    <md-button class="md-raised md-primary" ng-click="$ctrl.prebookingService.getBooking($ctrl.prebooking)">buchen</md-button>
+  </md-card-actions>
+</md-card>

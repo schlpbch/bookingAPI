@@ -1,0 +1,20 @@
+<md-sidenav class="md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" ng-click="app.toggleList()">
+  <md-toolbar class="md-tall md-hue-2">
+    <span flex></span>
+    <div layout="column" class="md-toolbar-tools-bottom inset">
+      <p class='md-title'>booking API &ndash; Test Application</p>
+      <div class='md-subhead'>by Andreas Schlapbach<br/>Team SVS</div>
+    </div>
+  </md-toolbar>
+  <md-list>
+    <md-subheader>Login</md-subheader>
+    <md-item ng-repeat="item in $ctrl.items">
+      <md-item-content md-ink-ripple layout="row" layout-align="start center">
+        <div class="inset">
+          <md-icon>{{item.icon}}</md-icon>
+          <md-button ng-href="https://www.swisspass.ch/auth/login" target="_blank">{{item.title}}</md-button>
+        </div>
+      </md-item-content>
+    </md-item>
+  </md-list>
+</md-sidenav>
