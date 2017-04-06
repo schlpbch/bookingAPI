@@ -11,9 +11,9 @@ export default class PreebookingService {
   }
 
   getBooking(item) {
-    this.$http.get('../' + item.links[0].href)
+    this.$http.get('../redirect_' + item._links.confirm.href)
       .then(res => {
-        this.bookingStore.booking = res.data;
+        this.bookingStore.bookings = res.data;
         this.tabService.goToNextTab();
       })
   }

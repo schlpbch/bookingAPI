@@ -11,7 +11,7 @@ export default class ReiseWunschService {
   }
 
   getTrips() {
-    let url = '../trips/?originId=8507000&destinationId=8508500&date=2017-01-14&time=20%3A22'
+    let url = '../api/trips/?originId=8507000&destinationId=8503000&date=2017-01-14&time=20%3A22'
     return this.$http.get(url).then(res => {
       this.bookingStore.trips = res.data;
       this.tabService.goToNextTab();

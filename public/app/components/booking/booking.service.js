@@ -10,8 +10,12 @@ export default class BookingService {
     this.bookingStore = bookingStore;
   }
 
+  printBooking(item) {
+    window.location.href = '../redirect_' + item._links.fulfil.href;
+  }
+
   cancelBooking(item) {
-    this.$http.get('../' + item.links[2].href)
+    this.$http.get('../' + item._links.cancel.href)
       .then(res => {
         this.bookingStore.cancellation = res.data;
         this.showCancelDialog();

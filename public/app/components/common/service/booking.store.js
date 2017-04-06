@@ -5,8 +5,8 @@ export default class BookingStore{
     this.tabService = tabService;
     this._trips = null
     this._offers = null
-    this._prebooking = null
-    this._booking = null
+    this._prebookings = null
+    this._bookings = null
     this._cancelation = null
   }
 
@@ -26,20 +26,20 @@ export default class BookingStore{
     this._offers = offers;
   }
 
-  get prebooking(){
+  get prebookings(){
     return this._prebooking;
   }
 
-  set prebooking(preebooking){
-    this._prebooking = preebooking;
+  set prebookings(prebookings){
+    this._prebooking = prebookings;
   }
 
-  get booking(){
-    return this._booking;
+  get bookings(){
+    return this._bookings;
   }
 
-  set booking(booking){
-    this._booking = booking;
+  set bookings(bookings){
+    this._bookings = bookings;
   }
 
   get cancelation(){
