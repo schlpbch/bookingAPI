@@ -27,11 +27,11 @@ export default class BookingStore{
   }
 
   get prebookings(){
-    return this._prebooking;
+    return this._prebookings;
   }
 
   set prebookings(prebookings){
-    this._prebooking = prebookings;
+    this._prebookings = prebookings;
   }
 
   get bookings(){

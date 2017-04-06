@@ -56,7 +56,7 @@ function trips (req, res) {
         }, 'prices': {
             title: 'Request the cheapest price for a trip.', href: 'api/prices/trip-rec-context2'
         }, 'offers': {
-            title: 'Request offers for a trip.', href: 'api/offers?originId=8507000&destinationId=8503000&date=2017-05-02&age=42&reduction=halffare'
+            title: 'Request offers for a trip.', href: 'api/offers?originId=8507000&destinationId=8503000&date=2017-05-02&age=42&reduction=none'
         }
     }
   }
