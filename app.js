@@ -33,14 +33,14 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
     // set static files location used for requests that our frontend will make
   app.use(express.static(path.join(__dirname, '/public')))
 
-  app.get('/redirect_offers*', function (req, res) {
-      request(`${backendReise}/offers${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
+  app.get('/redirect_api/offers*', function (req, res) {
+      request(`${backendReise}/api/offers${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
   });
-  app.get('/redirect_prebookings*', function (req, res) {
-      request(`${backendOrch}/prebookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
+  app.get('/redirect_api/prebookings*', function (req, res) {
+      request(`${backendOrch}/api/prebookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
   });
-  app.get('/redirect_bookings*', function (req, res) {
-      request(`${backendOrch}/bookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
+  app.get('/redirect_api/bookings*', function (req, res) {
+      request(`${backendOrch}/api/bookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
   });
 
   app.listen(port)

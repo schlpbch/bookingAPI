@@ -14,7 +14,7 @@ function prebook (req, res) {
         'self': {
             href: 'prebookings/2001'
         }, 'confirm': {
-            title: 'Billette zur Buchung holen', href: 'prebookings/2001/confirm'
+            title: 'Billette zur Buchung holen', href: 'api/prebookings/2001/confirm'
         }
     }
   }]

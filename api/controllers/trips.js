@@ -25,9 +25,9 @@ function trips (req, res) {
         'self': {
             href: 'trips/trip-rec-context1'
         }, 'prices': {
-            title: 'Request the cheapest price for a trip.', href: 'prices/trip-rec-context1'
+            title: 'Request the cheapest price for a trip.', href: 'api/prices/trip-rec-context1'
         }, 'offers': {
-            title: 'Request offers for a trip.', href: 'offers?originId=8507000&destinationId=8503000&date=2017-05-02&age=42&reduction=none'
+            title: 'Request offers for a trip.', href: 'api/offers?originId=8507000&destinationId=8503000&date=2017-05-02&age=42&reduction=none'
         }
     }
   }
@@ -54,9 +54,9 @@ function trips (req, res) {
         'self': {
             href: 'trips/trip-rec-context2'
         }, 'prices': {
-            title: 'Request the cheapest price for a trip.', href: 'prices/trip-rec-context2'
+            title: 'Request the cheapest price for a trip.', href: 'api/prices/trip-rec-context2'
         }, 'offers': {
-            title: 'Request offers for a trip.', href: 'offers?originId=8507000&destinationId=8503000&date=2017-05-02&age=42&reduction=halffare'
+            title: 'Request offers for a trip.', href: 'api/offers?originId=8507000&destinationId=8503000&date=2017-05-02&age=42&reduction=halffare'
         }
     }
   }
