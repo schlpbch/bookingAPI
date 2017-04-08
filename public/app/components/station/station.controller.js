@@ -13,11 +13,11 @@ module.exports = ['$timeout', '$q', '$log', function ($timeout, $q, $log) {
   self.searchTextChange = searchTextChange
   self.newStation = newStation
 
-  function newStation(station) {
+  function newStation (station) {
     alert("Sorry! You'll need to create a Constitution for " + station + ' first!')
   }
 
-  function querySearch(query) {
+  function querySearch (query) {
     var results = query ? self.stations.filter(createFilterFor(query)) : self.stations,
       deferred
     if (self.simulateQuery) {
@@ -31,15 +31,15 @@ module.exports = ['$timeout', '$q', '$log', function ($timeout, $q, $log) {
     }
   }
 
-  function searchTextChange(text) {
+  function searchTextChange (text) {
     $log.info('Text changed to ' + text)
   }
 
-  function selectedItemChange(item) {
+  function selectedItemChange (item) {
     $log.info('Item changed to ' + JSON.stringify(item))
   }
 
-  function loadStations() {
+  function loadStations () {
     var allStations = 'Bern, Thun '
     return allStations.split(/, +/g).map(function (station) {
       return {
@@ -49,11 +49,11 @@ module.exports = ['$timeout', '$q', '$log', function ($timeout, $q, $log) {
     })
   }
 
-  function createFilterFor(query) {
+  function createFilterFor (query) {
     var lowercaseQuery = angular.lowercase(query)
 
-    return function filterFn(station) {
+    return function filterFn (station) {
       return (station.value.indexOf(lowercaseQuery) === 0)
     }
   }
-}];
+}]

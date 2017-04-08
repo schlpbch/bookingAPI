@@ -1,11 +1,11 @@
 /**
  * Created by kevinkreuzer on 22.03.17.
  */
-import prebookingController from './prebooking.controller';
-import prebookingDetailController from './prebooking-detail/prebooking-detail.controller';
-import prebookingService from './prebooking.service';
+import prebookingController from './prebooking.controller'
+import prebookingDetailController from './prebooking-detail/prebooking-detail.controller'
+import prebookingService from './prebooking.service'
 
-let moduleName = 'preBookingModule';
+let moduleName = 'preBookingModule'
 
 angular.module(moduleName, [])
   .component('apiPrebooking', {
@@ -19,6 +19,6 @@ angular.module(moduleName, [])
     controller: prebookingDetailController,
     templateUrl: 'components/prebooking/prebooking-detail/prebooking-detail.html'
   })
-  .service('prebookingService', prebookingService);
+  .service('prebookingService', prebookingService)
 
-export default moduleName;
+export default moduleName
