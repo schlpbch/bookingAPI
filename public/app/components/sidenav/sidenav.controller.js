@@ -3,8 +3,7 @@
  */
 
 export default class SidenavController {
-
-  constructor() {
+  constructor () {
     this.items = [
       {
         icon: 'exit_to_app',
@@ -13,6 +12,6 @@ export default class SidenavController {
       {
         icon: 'exit_to_app',
         title: 'With B2B-Account'
-      }];
+      }]
   }
 }

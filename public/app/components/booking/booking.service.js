@@ -3,26 +3,25 @@
  */
 
 export default class BookingService {
-
-  constructor($http, $mdDialog, bookingStore) {
-    this.$http = $http;
-    this.$mdDialog = $mdDialog;
-    this.bookingStore = bookingStore;
+  constructor ($http, $mdDialog, bookingStore) {
+    this.$http = $http
+    this.$mdDialog = $mdDialog
+    this.bookingStore = bookingStore
   }
 
-  printBooking(item) {
-    window.location.href = '../redirect_' + item._links.fulfil.href;
+  printBooking (item) {
+    window.location.href = '../redirect_' + item._links.fulfil.href
   }
 
-  cancelBooking(item) {
+  cancelBooking (item) {
     this.$http.get('../' + item._links.cancel.href)
       .then(res => {
-        this.bookingStore.cancellation = res.data;
-        this.showCancelDialog();
+        this.bookingStore.cancellation = res.data
+        this.showCancelDialog()
       })
   }
 
-  showCancelDialog() {
+  showCancelDialog () {
     this.$mdDialog.show(
       this.$mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))

@@ -3,9 +3,8 @@
  */
 
 export default class ConnectionDetailController {
-
-  constructor(bookingStore, connectionService) {
-    this.bookingStore = bookingStore;
-    this.connectionService = connectionService;
+  constructor (bookingStore, connectionService) {
+    this.bookingStore = bookingStore
+    this.connectionService = connectionService
   }
 }

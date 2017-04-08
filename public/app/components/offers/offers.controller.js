@@ -3,8 +3,7 @@
  */
 
 export default class OffersController {
-
-  constructor(bookingStore){
-    this.bookingStore = bookingStore;
+  constructor (bookingStore) {
+    this.bookingStore = bookingStore
   }
 }

@@ -1,11 +1,11 @@
 /**
  * Created by kevinkreuzer on 17.03.17.
  */
-import travelWishController from './travel-wish.controller';
-import stationController from './station/station.controller';
-import travelWishService from './travel-wish.service';
+import travelWishController from './travel-wish.controller'
+import stationController from './station/station.controller'
+import travelWishService from './travel-wish.service'
 
-let moduleName = 'reisewunsch';
+let moduleName = 'reisewunsch'
 
 angular.module(moduleName, [])
   .component('apiTravelWish', {
@@ -21,4 +21,4 @@ angular.module(moduleName, [])
   })
   .service('travelWishService', travelWishService)
 
-export default moduleName;
+export default moduleName

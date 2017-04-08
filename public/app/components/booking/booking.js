@@ -1,11 +1,11 @@
 /**
  * Created by kevinkreuzer on 22.03.17.
  */
-import bookingController from './booking.controller';
-import bookingActionsController from './booking-actions/booking-actions.controller';
-import bookingService from './booking.service';
+import bookingController from './booking.controller'
+import bookingActionsController from './booking-actions/booking-actions.controller'
+import bookingService from './booking.service'
 
-let moduleName = 'bookingModule';
+let moduleName = 'bookingModule'
 
 angular.module(moduleName, [])
   .component('apiBooking', {
@@ -27,4 +27,4 @@ angular.module(moduleName, [])
   })
   .service('bookingService', bookingService)
 
-export default moduleName;
+export default moduleName

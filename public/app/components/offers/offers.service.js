@@ -3,18 +3,17 @@
  */
 
 export default class OffersService {
-
-  constructor(bookingStore, tabService, $http) {
-    this.bookingStore = bookingStore;
-    this.tabService = tabService;
-    this.$http = $http;
+  constructor (bookingStore, tabService, $http) {
+    this.bookingStore = bookingStore
+    this.tabService = tabService
+    this.$http = $http
   }
 
-  getPrebooking(item) {
+  getPrebooking (item) {
     this.$http.get('../redirect_' + item._links.prebook.href)
       .then(res => {
-        this.bookingStore.prebookings = res.data;
-        this.tabService.goToNextTab();
+        this.bookingStore.prebookings = res.data
+        this.tabService.goToNextTab()
       })
   }
 }

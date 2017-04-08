@@ -1,11 +1,11 @@
 /**
  * Created by kevinkreuzer on 21.03.17.
  */
-import offersController from './offers.controller';
-import offerDetailController from './offer-detail/offer-detail.controller';
-import offersService from './offers.service';
+import offersController from './offers.controller'
+import offerDetailController from './offer-detail/offer-detail.controller'
+import offersService from './offers.service'
 
-let moduleName = 'offersModule';
+let moduleName = 'offersModule'
 
 angular.module(moduleName, [])
   .component('apiOffers', {
@@ -19,6 +19,6 @@ angular.module(moduleName, [])
     controller: offerDetailController,
     templateUrl: 'components/offers/offer-detail/offer-detail.html'
   })
-  .service('offersService', offersService);
+  .service('offersService', offersService)
 
-export default moduleName;
+export default moduleName
