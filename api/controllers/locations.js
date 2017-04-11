@@ -5,6 +5,13 @@ module.exports = {
 }
 
 function locations (req, res) {
+  var locationZuerichHB = {
+      id: '8503000',
+      name: 'Zürich HB',
+      lon: 7.439122,
+      lat: 46.948825,
+      type: 'STATION'
+  }
   var locationBernHB = {
     id: '8507000',
     name: 'Bern HB',
@@ -19,6 +26,6 @@ function locations (req, res) {
     lon: 46.948825,
     type: 'STATION'
   }
-  var locations = [locationBernHB, locationBernRBS]
+  var locations = [locationZuerichHB, locationBernHB, locationBernRBS]
   res.json(locations)
 }
