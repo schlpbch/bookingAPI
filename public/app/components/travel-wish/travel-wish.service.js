@@ -9,11 +9,15 @@ export default class ReiseWunschService {
     this.tabService = tabService
   }
 
-  getTrips () {
-    let url = '../api/trips/?originId=8507000&destinationId=8503000&date=2017-01-14&time=20%3A22'
-    return this.$http.get(url).then(res => {
-      this.bookingStore.trips = res.data
-      this.tabService.goToNextTab()
-    })
+  getTrips (origin, destination) {
+
+    let originId = origin.value;
+    let destinationId = destination.value;
+
+    this.$http.get(`../redirect_api/trips?originId=${originId}&destinationId=${destinationId}&date=2017-05-05&time=10:00`)
+      .then((res) => {
+        this.bookingStore.trips = res.data
+        this.tabService.goToNextTab()
+      })
   }
 }

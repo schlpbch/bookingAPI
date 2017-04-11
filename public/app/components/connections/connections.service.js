@@ -10,7 +10,7 @@ export default class ConnectionService {
   }
 
   getOffers (item) {
-    this.$http.get('../redirect_' + item._links.offers.href)
+    this.$http.get('../redirect_' + item._links.offers.href + '&age=42&reduction=none')
       .then((res) => {
         this.bookingStore.offers = res.data
         this.tabService.goToNextTab()
