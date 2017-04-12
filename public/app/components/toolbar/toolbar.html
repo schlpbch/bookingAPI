@@ -1,17 +1,10 @@
 <md-toolbar class="md-toolbar-tools">
-  <md-button ng-click="$ctrl.toggleSidenav('left')" aria-label="Menu">
-    <md-icon>menu</md-icon>
-  </md-button>
-  <h3>booking API</h3>
-  <span flex></span>
-  <md-menu md-position-mode="target-right target">
-    <md-button ng-click="$mdMenu.open($event)">
-      <md-icon>more_vert</md-icon>
+    <md-button ng-click="$ctrl.toggleSidenav('left')" aria-label="Menu">
+        <md-icon>menu</md-icon>
     </md-button>
-    <md-menu-content>
-      <md-menu-item><md-button>About</md-button></md-menu-item>
-      <md-menu-item><md-button>Settings</md-button></md-menu-item>
-      <md-menu-item><md-button>Copyright</md-button></md-menu-item>
-    </md-menu-content>
-  </md-menu>
+    <h3>booking API</h3>
+    <span flex></span>
+    <md-button ng-click="$ctrl.showAdvanced($event)">
+        <md-icon>more_vert</md-icon>
+    </md-button>
 </md-toolbar>
