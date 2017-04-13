@@ -7,7 +7,6 @@ export default class StationController {
     this.$q = $q
     this.$log = $log
     this.stationService = stationService;
-    this.simulateQuery = false
     this.stations = []
     this.isDisabled = false
   }
@@ -33,22 +32,5 @@ export default class StationController {
 
   selectedItemChange (item) {
     this.$log.info('Item changed to ' + JSON.stringify(item))
-  }
-
-  loadStations () {
-    let allStations = 'Bern, Thun '
-    return allStations.split(/, +/g).map(function (station) {
-      return {
-        value: station.toLowerCase(),
-        display: station
-      }
-    })
-  }
-
-  createFilterFor (query) {
-    var lowercaseQuery = angular.lowercase(query)
-    return function filterFn (station) {
-      return (station.value.indexOf(lowercaseQuery) === 0)
-    }
   }
 }
