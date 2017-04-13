@@ -1,7 +1,7 @@
 /**
  * Created by kevinkreuzer on 08.04.17.
  */
-import SettingsDialogController from './settings/settings-dialog.controller'
+import settingsDialogController from './settings/settings-dialog.controller';
 
 export default class ToolbarController {
     constructor($mdSidenav, $mdDialog) {
@@ -15,17 +15,18 @@ export default class ToolbarController {
 
     showAdvanced(ev) {
         this.$mdDialog.show({
-            controller: SettingsDialogController,
+            controller: settingsDialogController,
+            controllerAs: '$ctrl',
             templateUrl: 'components/toolbar/settings/settings-dialog.html',
             parent: angular.element(document.body),
             targetEvent: ev,
-            clickOutsideToClose:true,
+            clickOutsideToClose: true,
             fullscreen: false
         })
-            .then(function(answer) {
-                console.log('Handle answer', answer)
-            }, function() {
-                console.log('Handle cancel')
+            .then(function (answer) {
+                console.log('You changed the mode of the mock to disabled: ', answer)
+            }, function () {
+                //Handle cancel
             });
     };
 }

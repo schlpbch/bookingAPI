@@ -1,21 +1,21 @@
 /**
  * Created by kevinkreuzer on 12.04.17.
  */
-export default class SettingsDialogController {
+export default function SettingsController($mdDialog, settingsService) {
+    this.$mdDialog = $mdDialog;
+    this.contributors = [];
+    settingsService.loadContributors()
+        .then(res => {
+            this.contributors = res.data;
+        }, () => {
+            this.loadingFailed = true;
+        });
 
-    constructor($mdDialog) {
-        this.$mdDialog = $mdDialog;
-    }
-
-    hide() {
-        this.$mdDialog.hide();
+    this.cancel = function () {
+        this.$mdDialog.cancel();
     };
 
-    cancel() {
-        this.mdDialog.cancel();
-    };
-
-    answer(answer) {
-        this.mdDialog.hide(answer);
+    this.apply = function () {
+        this.$mdDialog.hide(this.isMockDisabled);
     };
 }
