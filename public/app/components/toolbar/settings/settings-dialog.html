@@ -1,4 +1,4 @@
-<md-dialog>
+<md-dialog flex>
     <form ng-cloak>
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -9,26 +9,57 @@
                 </md-button>
             </div>
         </md-toolbar>
-
         <md-dialog-content>
             <div class="md-dialog-content">
                 <h2>Contributors</h2>
-                <p>
-                    The mango is a juicy stone fruit belonging to the genus Mangifera, consisting of numerous tropical fruiting trees, cultivated mostly for edible fruit. The majority of these species are found in nature as wild mangoes. They all belong to the flowering plant family Anacardiaceae. The mango is native to South and Southeast Asia, from where it has been distributed worldwide to become one of the most cultivated fruits in the tropics.
-                </p>
+                <p ng-if="$ctrl.loadingFailed">Failed to load contributors</p>
+                <div layout="row" layout-xs="column">
+                    <div flex>
+                        <md-list flex>
+                            <md-list-item ng-repeat="contributor in $ctrl.contributors" ng-if="$index % 2 === 0"
+                                          class="noright">
+                                <img ng-src="{{contributor.avatar_url}}" class="md-avatar"/>
+                                <p>{{ contributor.login}}</p>
+                        </md-list>
+                    </div>
+                    <div flex>
+                        <md-list flex>
+                            <md-list-item ng-repeat="contributor in $ctrl.contributors" ng-if="$index % 2 !== 0"
+                                          class="noright">
+                                <img ng-src="{{contributor.avatar_url}}" class="md-avatar"/>
+                                <p>{{ contributor.login}}</p>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                </div>
+                <div layout="row" layout-xs="column">
+                    <div flex>
+                        <h2>Settings</h2>
+                        <p>The following setting allows you to switch between the mock Backend and the real Backend</p>
+                        <md-switch class="md-subhead" ng-model="$ctrl.isMockDisabled" aria-label="Switch"
+                                   ng-true-value="true" ng-false-value="false">
+                            Disable Mock
+                        </md-switch>
+                    </div>
+                </div>
+                <div layout="row" layout-xs="column">
+                    <div flex>
+                        <h2>Licence</h2>
+                        <h3>Todo add Licence</h3>
+                        <h3>Visit us on <a target="_blank" href="https://github.com/schlpbch/bookingAPI">GitHub</a></h3>
+                        <span flex></span>
+                    </div>
+                </div>
             </div>
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
-            <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
-                More on Wikipedia
-            </md-button>
             <span flex></span>
-            <md-button ng-click="answer('not useful')">
-                Not Useful
+            <md-button ng-click="$ctrl.apply()">
+                Apply
             </md-button>
-            <md-button ng-click="answer('useful')">
-                Useful
+            <md-button ng-click="$ctrl.cancel()">
+                Cancel
             </md-button>
         </md-dialog-actions>
     </form>
