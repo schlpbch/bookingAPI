@@ -12,9 +12,13 @@
         <md-dialog-content>
             <div class="md-dialog-content">
                 <h2>Contributors</h2>
-                <p ng-if="$ctrl.loadingFailed">Failed to load contributors</p>
                 <div layout="row" layout-xs="column">
                     <div flex>
+                        <api-loader ng-if="$ctrl.contributors.length === 0 && !$ctrl.loadingFailed"></api-loader>
+                        <div style="color: red;" ng-if="$ctrl.loadingFailed">
+                            <md-icon>error</md-icon>
+                            Failed to load contributors
+                        </div>
                         <md-list flex>
                             <md-list-item ng-repeat="contributor in $ctrl.contributors" ng-if="$index % 2 === 0"
                                           class="noright">
