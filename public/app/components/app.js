@@ -10,7 +10,6 @@ import 'angular-messages'
 
 // Components
 import appController from './app.controller'
-import stationController from './station/station.controller'
 import toolbarModule from './toolbar/toolbar'
 import sideNavModule from './sidenav/sidenav'
 import travelWishModule from './travel-wish/travel-wish'
@@ -34,4 +33,3 @@ angular.module('app', ['ngMaterial', 'ngRoute', toolbarModule, sideNavModule,
     templateUrl: 'components/app.html'
   })
   .controller('AppCtrl', appController)
-  .controller('StationCtrl', stationController)
