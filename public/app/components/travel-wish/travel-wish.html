@@ -1,8 +1,8 @@
 <md-tab label="Reisewunsch">
   <md-content class="md-padding">
     <form>
-      <api-station title="'Abfahrtsort'"></api-station>
-      <api-station title="'Ankunftsort'"></api-station>
+      <api-station title="'Abfahrtsort'" selected-item="$ctrl.origin"></api-station>
+      <api-station title="'Ankunftsort'" selected-item="$ctrl.destination"></api-station>
       <br/>
       <md-switch class="md-subhead" ng-model="angebot.istAnkunft" aria-label="Switch" ng-true-value="'Ankunft'" ng-false-value="'Abfahrt'">
         {{ $ctrl.angebot.istAnkunft}}
@@ -16,7 +16,7 @@
         <input name="zeit" ng-model="$ctrl.angebot.zeit" placeholder="22:22" required>
       </md-input-container>
       <br/>
-      <md-button class="md-raised md-primary" ng-click="$ctrl.travelWishService.getTrips()">Suchen
+      <md-button class="md-raised md-primary" ng-click="$ctrl.travelWishService.getTrips($ctrl.origin, $ctrl.destination)">Suchen
       </md-button>
     </form>
   </md-content>

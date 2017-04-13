@@ -10,7 +10,7 @@ export default class OffersService {
   }
 
   getPrebooking (item) {
-    this.$http.get('../redirect_' + item._links.prebook.href)
+    this.$http.get('../redirect_' + item._links.prebook.href + '?firstname=Hans&lastname=Mustermann')
       .then(res => {
         this.bookingStore.prebookings = res.data
         this.tabService.goToNextTab()

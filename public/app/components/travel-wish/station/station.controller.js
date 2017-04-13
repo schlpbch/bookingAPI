@@ -2,12 +2,12 @@
  * Created by kevinkreuzer on 17.03.17.
  */
 export default class StationController {
-  constructor ($timeout, $q, $log) {
+  constructor ($timeout, $q, $log, stationService) {
     this.$timeout = $timeout
     this.$q = $q
     this.$log = $log
-    this.stations = this.loadStations()
-    this.simulateQuery = false
+    this.stationService = stationService;
+    this.stations = []
     this.isDisabled = false
   }
 
@@ -16,17 +16,14 @@ export default class StationController {
   }
 
   querySearch (query) {
-    let results = query ? this.stations.filter(this.createFilterFor(query)) : this.stations,
-      deferred
-    if (this.simulateQuery) {
-      deferred = this.$q.defer()
-      $timeout(function () {
-        deferred.resolve(results)
-      }, Math.random() * 1000, false)
-      return deferred.promise
-    } else {
-      return results
-    }
+    this.stationService.getStations(query)
+      .then(res => {
+        this.stations = res.data.map(location => ({
+          display: location.name,
+          value: location.id
+        }));
+      })
+    return this.stations
   }
 
   searchTextChange (text) {
@@ -35,22 +32,5 @@ export default class StationController {
 
   selectedItemChange (item) {
     this.$log.info('Item changed to ' + JSON.stringify(item))
-  }
-
-  loadStations () {
-    let allStations = 'Bern, Thun '
-    return allStations.split(/, +/g).map(function (station) {
-      return {
-        value: station.toLowerCase(),
-        display: station
-      }
-    })
-  }
-
-  createFilterFor (query) {
-    var lowercaseQuery = angular.lowercase(query)
-    return function filterFn (station) {
-      return (station.value.indexOf(lowercaseQuery) === 0)
-    }
   }
 }

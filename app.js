@@ -33,6 +33,12 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
     // set static files location used for requests that our frontend will make
   app.use(express.static(path.join(__dirname, '/public')))
 
+  app.get('/redirect_api/locations*', function (req, res) {
+      request(`${backendReise}/api/locations${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
+  });
+  app.get('/redirect_api/trips*', function (req, res) {
+      request(`${backendReise}/api/trips${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
+  });
   app.get('/redirect_api/offers*', function (req, res) {
       request(`${backendReise}/api/offers${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res);
   });
