@@ -4,10 +4,11 @@
 
 import bookingStore from './service/booking.store'
 import tabService from './service/tab.service'
+import loaderModule from './loader/loader'
 
 let moduleName = 'commonModule'
 
-angular.module(moduleName, [])
+angular.module(moduleName, [loaderModule])
   .service('bookingStore', bookingStore)
   .service('tabService', tabService)
 

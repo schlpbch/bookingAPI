@@ -1,0 +1,70 @@
+<md-dialog flex>
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>About & Settings</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="$ctrl.cancel()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <h2>Contributors</h2>
+                <div layout="row" layout-xs="column">
+                    <div flex>
+                        <api-loader ng-if="$ctrl.contributors.length === 0 && !$ctrl.loadingFailed"></api-loader>
+                        <div style="color: red;" ng-if="$ctrl.loadingFailed">
+                            <md-icon>error</md-icon>
+                            Failed to load contributors
+                        </div>
+                        <md-list flex>
+                            <md-list-item ng-repeat="contributor in $ctrl.contributors" ng-if="$index % 2 === 0"
+                                          class="noright">
+                                <img ng-src="{{contributor.avatar_url}}" class="md-avatar"/>
+                                <p>{{ contributor.login}}</p>
+                        </md-list>
+                    </div>
+                    <div flex>
+                        <md-list flex>
+                            <md-list-item ng-repeat="contributor in $ctrl.contributors" ng-if="$index % 2 !== 0"
+                                          class="noright">
+                                <img ng-src="{{contributor.avatar_url}}" class="md-avatar"/>
+                                <p>{{ contributor.login}}</p>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                </div>
+                <div layout="row" layout-xs="column">
+                    <div flex>
+                        <h2>Settings</h2>
+                        <p>The following setting allows you to switch between the mock Backend and the real Backend</p>
+                        <md-switch class="md-subhead" ng-model="$ctrl.isMockDisabled" aria-label="Switch"
+                                   ng-true-value="true" ng-false-value="false">
+                            Disable Mock
+                        </md-switch>
+                    </div>
+                </div>
+                <div layout="row" layout-xs="column">
+                    <div flex>
+                        <h2>Licence</h2>
+                        <h3>Todo add Licence</h3>
+                        <h3>Visit us on <a target="_blank" href="https://github.com/schlpbch/bookingAPI">GitHub</a></h3>
+                        <span flex></span>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="$ctrl.apply()">
+                Apply
+            </md-button>
+            <md-button ng-click="$ctrl.cancel()">
+                Cancel
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
