@@ -131,19 +131,17 @@ To run the *mock* server as docker container, do:
   docker run -d -p 8080:8080 --name api-mock-srv <containerId>
 ```
 
-
-
 ## ToDo
-- Align with FSM specification  
 - Integrate [Swagger Middleware](https://github.com/BigstickCarpet/swagger-express-middleware/blob/master/docs/samples/walkthrough2.md) to easily pre-populate data
 - Get the API right
  - Expose journey planning as a route of its own
-- Complete wiring Wep App with API
 - Clarify legalese
 - Setup API Management
 - Setup Security (JSON Web Token)
 
 ## Done
+- <del>Align with FSM specification</del>
+- <del>Complete wiring Wep App with API</del>
 - <del>Translate API to English</del>
 - <del>Write a client to verify the usability of the API (APIs are UIs for developers).</del>
 - <del>Align with Fahrplan team</del>
