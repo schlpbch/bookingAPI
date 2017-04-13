@@ -72,8 +72,7 @@ and the latest JSON can be accessed at:
 
 - [http://api.sbb.ch/api-docs](http://api.sbb.ch/api-docs)
 
-
-## Developing
+Developing
 First, **Nodejs** and **npm** which comes with it is needed. Then to install all the modules, simply run:
 
 ```bash
@@ -99,13 +98,11 @@ To run Swagger in mock mode, start with:
 
 To run the tests:
 
-
 ```bash
   swagger project test
 ```
 
 To run the *mock* server, do:
-
 
 ```bash
   swagger project start
@@ -114,8 +111,18 @@ To run the *mock* server, do:
 or more simple:
 
 ```bash
-  node app.js
+  npm run dev
 ```
+
+npm run dev runs the the express app. It also creates a bundle for the
+front-end part. This bundle includes soucre maps for debugging.
+
+*To run the app in production* please run the following command
+```bash
+  npm run prod
+```
+this command minifies the bundle and exludes source maps as we do not
+want to deliver our code in plain text.
 
 To run the *mock* server as docker container, do:
 
@@ -125,16 +132,16 @@ To run the *mock* server as docker container, do:
 ```
 
 ## ToDo
-- Align with FSM specification  
 - Integrate [Swagger Middleware](https://github.com/BigstickCarpet/swagger-express-middleware/blob/master/docs/samples/walkthrough2.md) to easily pre-populate data
 - Get the API right
  - Expose journey planning as a route of its own
-- Complete wiring Wep App with API
 - Clarify legalese
 - Setup API Management
 - Setup Security (JSON Web Token)
 
 ## Done
+- <del>Align with FSM specification</del>
+- <del>Complete wiring Wep App with API</del>
 - <del>Translate API to English</del>
 - <del>Write a client to verify the usability of the API (APIs are UIs for developers).</del>
 - <del>Align with Fahrplan team</del>

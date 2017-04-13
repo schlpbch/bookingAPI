@@ -1,12 +1,32 @@
 /**
  * Created by kevinkreuzer on 08.04.17.
  */
-export default class ToolbarController {
-  constructor ($mdSidenav) {
-    this.$mdSidenav = $mdSidenav
-  }
+import settingsDialogController from './settings/settings-dialog.controller';
 
-  toggleSidenav (menuId) {
-    this.$mdSidenav(menuId).toggle()
-  }
+export default class ToolbarController {
+    constructor($mdSidenav, $mdDialog) {
+        this.$mdSidenav = $mdSidenav
+        this.$mdDialog = $mdDialog
+    }
+
+    toggleSidenav(menuId) {
+        this.$mdSidenav(menuId).toggle()
+    }
+
+    showAdvanced(ev) {
+        this.$mdDialog.show({
+            controller: settingsDialogController,
+            controllerAs: '$ctrl',
+            templateUrl: 'components/toolbar/settings/settings-dialog.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true,
+            fullscreen: false
+        })
+            .then(function (answer) {
+                console.log('You changed the mode of the mock to disabled: ', answer)
+            }, function () {
+                //Handle cancel
+            });
+    };
 }
