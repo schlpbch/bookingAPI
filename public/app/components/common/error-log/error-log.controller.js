@@ -13,6 +13,7 @@ export default class ErrorLogController {
         this.$mdBottomSheet.show({
             templateUrl: 'components/common/error-log/error-sheet/error-sheet.html',
             controller: errorSheetController,
+            controllerAs: '$ctrl'
         });
     }
 }

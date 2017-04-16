@@ -1,14 +1,12 @@
-HTMLJSCSSBOTTOM-SHEET-GRID-TEMPLATE.HTMLBOTTOM-SHEET-LIST-TEMPLATE.HTML
 <md-bottom-sheet class="md-list md-has-header">
-    <md-subheader ng-cloak>Comment Actions</md-subheader>
+    <h3>Error Log</h3>
     <md-list ng-cloak>
-        <md-list-item ng-repeat="item in items">
-            <md-button
-                    ng-click="listItemClick($index)"
-                    md-autofocus="$index == 2"
-                    class="md-list-item-content" >
-                <md-icon md-svg-src="{{item.icon}}"></md-icon>
-                <span class="md-inline-list-icon-label">{{ item.name }}</span>
+        <md-list-item ng-repeat="error in $ctrl.errorLogService.errors">
+            <md-button md-autofocus="$index == 2"
+                       class="md-list-item-content">
+                <md-icon>error</md-icon>
+                <b>{{ error.code }}</b>
+                <span class="md-inline-list-icon-label">{{ error.message }}</span>
             </md-button>
         </md-list-item>
     </md-list>
