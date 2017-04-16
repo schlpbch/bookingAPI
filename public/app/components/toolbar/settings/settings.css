@@ -1,0 +1,16 @@
+a svg:hover #githubIcon {
+    fill: #111;
+}
+
+a {
+    outline: none;
+    border: 0;
+    text-decoration: none;
+}
+
+a svg #githubIcon {
+    transition: 200ms;
+    transition-timing-function: ease-in-out;
+    -webkit-transition: 200ms;
+    -webkit-transition-timing-function: ease-in-out;
+}
