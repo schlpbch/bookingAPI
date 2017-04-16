@@ -1,8 +1,9 @@
 /**
  * Created by kevinkreuzer on 12.04.17.
  */
-export default function SettingsController($mdDialog, settingsService) {
+export default function SettingsController($mdDialog, settingsService, $window) {
     this.$mdDialog = $mdDialog;
+    this.$window = $window;
     this.contributors = [];
     settingsService.loadContributors()
         .then(res => {
@@ -18,4 +19,8 @@ export default function SettingsController($mdDialog, settingsService) {
     this.apply = function () {
         this.$mdDialog.hide(this.isMockDisabled);
     };
+
+    this.openUrl = function(url){
+        this.$window.open(url, '_blank');
+    }
 }
