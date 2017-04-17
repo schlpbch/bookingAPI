@@ -48,7 +48,6 @@
     "dev": "node app.js",
     "preprod": "browserify -t browserify-css public/app/components/app.js -t [ babelify --presets [ es2015 react ] ] | uglifyjs > public/app/bundle.js",
     "prod": "node app.js",
-    "start": "node app.js",
     "test": "mocha -u exports -R spec test/api/controllers"
   }
 }
