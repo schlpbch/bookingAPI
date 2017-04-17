@@ -20,7 +20,7 @@ services:
       - front
 
   mock_server:
-    image: schlpbch/bookingapi
+    image: schlpbch/bookingapi:latest
     ports:
       - "8080:8080"
     networks:
