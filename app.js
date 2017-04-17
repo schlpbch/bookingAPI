@@ -54,6 +54,6 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
   app.listen(port)
 
   if (swaggerExpress.runner.swagger.paths['/offers']) {
-    console.log('try this:\ncurl http://127.0.0.1:' + port + '/docs')
+    console.log('try this: http://localhost:' + port + '/app')
   }
 })
