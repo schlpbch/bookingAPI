@@ -114,14 +114,14 @@ or more simple:
   npm run dev
 ```
 
-npm run dev runs the the express app. It also creates a bundle for the
-front-end part. This bundle includes soucre maps for debugging.
+`npm run dev` runs the the express app. It also creates a bundle for the
+front-end part. This bundle includes source maps for debugging.
 
 *To run the app in production* please run the following command
 ```bash
   npm run prod
 ```
-this command minifies the bundle and exludes source maps as we do not
+which minifies the bundle and excludes source maps as we do not
 want to deliver our code in plain text.
 
 To run the *mock* server as docker container, do:
