@@ -1,16 +1,17 @@
 <md-content layout="column">
-  <api-toolbar></api-toolbar>
+    <api-toolbar></api-toolbar>
 </md-content>
 
 <div flex layout="row">
-  <api-sidenav></api-sidenav>
-  <md-content layout-padding flex>
-    <md-tabs md-dynamic-height md-border-bottom md-selected="$ctrl.tabService.selectedTab">
-      <api-travel-wish></api-travel-wish>
-      <api-connections></api-connections>
-      <api-offers></api-offers>
-      <api-prebooking></api-prebooking>
-      <api-booking></api-booking>
-    </md-tabs>
-  </md-content>
+    <api-sidenav></api-sidenav>
+    <md-content layout-padding flex>
+        <md-tabs md-dynamic-height md-border-bottom md-selected="$ctrl.tabService.selectedTab">
+            <api-travel-wish></api-travel-wish>
+            <api-connections></api-connections>
+            <api-offers></api-offers>
+            <api-prebooking></api-prebooking>
+            <api-booking></api-booking>
+        </md-tabs>
+    </md-content>
+    <api-error-log></api-error-log>
 </div>

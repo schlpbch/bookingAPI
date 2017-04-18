@@ -1,0 +1,13 @@
+<md-bottom-sheet class="md-list md-has-header">
+    <h3>Error Log</h3>
+    <md-list ng-cloak>
+        <md-list-item ng-repeat="error in $ctrl.errorLogService.errors">
+            <md-button md-autofocus="$index == 2"
+                       class="md-list-item-content">
+                <md-icon>error</md-icon>
+                <b>{{ error.code }}</b>
+                <span class="md-inline-list-icon-label">{{ error.message }}</span>
+            </md-button>
+        </md-list-item>
+    </md-list>
+</md-bottom-sheet>
