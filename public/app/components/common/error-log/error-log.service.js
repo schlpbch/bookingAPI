@@ -6,10 +6,10 @@ export default class ErrorLogService {
     constructor(){
         this.errors = [];
 
-        //TODO kk - Just sample errors - remove after testing
-        this.errors.push(this.createMockError(500, 'Internal server error'));
-        this.errors.push(this.createMockError(404, 'Not found'));
-        this.errors.push(this.createMockError(500, 'Internal server error'));
+        //TODO kk - Just sample errors - remove as soon as error handling is implemented
+        this.errors.push(this.createMockError(500, 'Sample Error 1'));
+        this.errors.push(this.createMockError(404, 'Sample Error 2'));
+        this.errors.push(this.createMockError(500, 'Sample Error 3'));
     }
 
     createMockError(code, message){
