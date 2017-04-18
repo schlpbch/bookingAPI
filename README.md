@@ -1,8 +1,7 @@
 [![Build Status](https://travis-ci.org/schlpbch/bookingAPI.svg?branch=master)](https://travis-ci.org/schlpbch/bookingAPI)
 [![](https://images.microbadger.com/badges/image/schlpbch/bookingapi.svg)](https://microbadger.com/images/schlpbch/bookingapi "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/schlpbch/bookingapi.svg)](https://microbadger.com/images/schlpbch/bookingapi "Get your own version badge on microbadger.com")
-[![](https://images.microbadger.com/badges/commit/schlpbch/bookingapi.svg)](https://microbadger.com/images/schlpbch/bookingapi "Get your own commit badge on microbadger.com")
-
+[![dependencies Status](https://david-dm.org/schlpbch/bookingapi/status.svg)](https://david-dm.org/schlpbch/bookingapi)
 ## About
 
 This a simple Node.js based mock server to test the [bookingAPI](api/swagger/swagger.yaml). The mock implementation is intended for fast protoyping and to get the API right (Getting APIs right is *hard*).
