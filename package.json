@@ -29,7 +29,7 @@
     "browserify-css": "^0.10.0",
     "concurrently": "^3.4.0",
     "eslint": "^3.14.1",
-    "eslint-config-standard": "^6.2.1",
+    "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
