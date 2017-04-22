@@ -3,6 +3,7 @@
 var SwaggerExpress = require('swagger-express-mw')
 var SwaggerUi = require('swagger-tools/middleware/swagger-ui')
 var express = require('express')
+let bodyParser = require('body-parser');
 var path = require('path')
 var request = require('request')
 var morgan = require('morgan')
@@ -25,6 +26,8 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
     }
 
     // install middleware
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(bodyParser.json());
     app.use(SwaggerUi(swaggerExpress.runner.swagger))
     swaggerExpress.register(app)
 
