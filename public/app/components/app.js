@@ -25,6 +25,7 @@ angular.module('app', ['ngMaterial', 'ngRoute', 'satellizer', toolbarModule, sid
             .accentPalette('orange')
 
         $authProvider.github({
+            url: 'http://localhost:8080/api/auth/github',
             clientId: '78c57dbf89006d064fcc',
             popupOptions: {width: 1020, height: 618}
         });

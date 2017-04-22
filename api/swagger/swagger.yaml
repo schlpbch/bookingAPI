@@ -616,14 +616,14 @@ definitions:
   authData:
     type: object
     properties:
-      client_id:
-        description: 'Client Id'
+      clientId:
+        description: 'The ClientId that is provided by GitHub on registering'
         type: string
       code:
-        description: 'code'
+        description: 'The code we retrive from GitHub after the user granted the application'
         type: string
-      redirectURI:
-        description: 'RedirectURI'
+      redirectUri:
+        description: 'Uri the user will be redirected after a successfull login'
         type: string
         
   ### REST level 3 support
