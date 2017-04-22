@@ -12,7 +12,7 @@
       <md-item-content md-ink-ripple layout="row" layout-align="start center">
         <div class="inset">
           <md-icon>{{item.icon}}</md-icon>
-          <md-button ng-href="https://www.swisspass.ch/auth/login" target="_blank">{{item.title}}</md-button>
+          <md-button ng-click="$ctrl.authenticate(item.provider)">{{item.title}}</md-button>
         </div>
       </md-item-content>
     </md-item>

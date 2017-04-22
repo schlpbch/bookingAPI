@@ -18,6 +18,7 @@ basePath: /api
 schemes:
   - http # Nur am Anfang
   - https
+host: 'localhost:8080'
 consumes:
   - application/json
 produces:
@@ -373,6 +374,24 @@ paths:
             type: string
         default:
           description: "unexpected error"
+          
+  /auth/github:
+    x-swagger-router-controller: authentication
+    post:
+      description: "Exchange the retrived code from GitHub with an access token"
+      operationId: loginWithGithub
+      produces:
+        - 'application/json'
+      parameters:
+        - in: "body"
+          name: "authData"
+          description: "ClientId, redirectURI and the code retrieved from GitHub after the user granted the application"
+          required: false #Needs to be set to false otherwise the request is crashing
+          schema:
+            $ref: "#/definitions/authData"
+      responses:
+        200:
+          description: "Successfull authenticated"
 
 ## Definitions
 
@@ -593,8 +612,20 @@ definitions:
         $ref: '#/definitions/uri'
       cancel:
         $ref: '#/definitions/uri'
-
-
+        
+  authData:
+    type: object
+    properties:
+      client_id:
+        description: 'Client Id'
+        type: string
+      code:
+        description: 'code'
+        type: string
+      redirectURI:
+        description: 'RedirectURI'
+        type: string
+        
   ### REST level 3 support
 
   uri:

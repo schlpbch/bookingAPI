@@ -11,7 +11,7 @@ var app = express()
 module.exports = app // for testing
 
 var config = {
-  appRoot: __dirname // required config
+    appRoot: __dirname // required config
 }
 
 var backendReise = process.env.BACKEND_REISE || 'http://localhost:8080'
@@ -20,40 +20,39 @@ var backendOrch = process.env.BACKEND_ORCH || 'http://localhost:8080'
 console.log('Backend Orch: ', backendOrch)
 
 SwaggerExpress.create(config, function (err, swaggerExpress) {
-  if (err) {
-    throw err
-  }
+    if (err) {
+        throw err
+    }
 
-  // install middleware
+    // install middleware
+    app.use(SwaggerUi(swaggerExpress.runner.swagger))
+    swaggerExpress.register(app)
 
-  app.use(SwaggerUi(swaggerExpress.runner.swagger))
-  swaggerExpress.register(app)
+    var port = process.env.PORT || 8080
 
-  var port = process.env.PORT || 8080
+    // set static files location used for requests that our frontend will make
+    app.use(morgan('dev'))
+    app.use(express.static(path.join(__dirname, '/public')))
 
-  // set static files location used for requests that our frontend will make
-  app.use(morgan('dev'))
-  app.use(express.static(path.join(__dirname, '/public')))
+    app.get('/redirect_api/locations*', function (req, res) {
+        request(`${backendReise}/api/locations${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
+    })
+    app.get('/redirect_api/trips*', function (req, res) {
+        request(`${backendReise}/api/trips${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
+    })
+    app.get('/redirect_api/offers*', function (req, res) {
+        request(`${backendReise}/api/offers${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
+    })
+    app.get('/redirect_api/prebookings*', function (req, res) {
+        request(`${backendOrch}/api/prebookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
+    })
+    app.get('/redirect_api/bookings*', function (req, res) {
+        request(`${backendOrch}/api/bookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
+    })
 
-  app.get('/redirect_api/locations*', function (req, res) {
-    request(`${backendReise}/api/locations${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
-  })
-  app.get('/redirect_api/trips*', function (req, res) {
-    request(`${backendReise}/api/trips${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
-  })
-  app.get('/redirect_api/offers*', function (req, res) {
-    request(`${backendReise}/api/offers${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
-  })
-  app.get('/redirect_api/prebookings*', function (req, res) {
-    request(`${backendOrch}/api/prebookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
-  })
-  app.get('/redirect_api/bookings*', function (req, res) {
-    request(`${backendOrch}/api/bookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
-  })
+    app.listen(port)
 
-  app.listen(port)
-
-  if (swaggerExpress.runner.swagger.paths['/offers']) {
-    console.log('try this: http://localhost:' + port + '/app')
-  }
+    if (swaggerExpress.runner.swagger.paths['/offers']) {
+        console.log('try this: http://localhost:' + port + '/app')
+    }
 })

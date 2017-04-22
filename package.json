@@ -17,6 +17,7 @@
     "express": "^4.14.1",
     "morgan": "^1.8.1",
     "request": "^2.81.0",
+    "satellizer": "^0.15.5",
     "swagger-express-mw": "^0.7.0",
     "swagger-tools": "^0.10.1",
     "watchify": "^3.9.0"
