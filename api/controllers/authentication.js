@@ -11,7 +11,9 @@ let TOKEN_SECRET = 'awesomeBookingSecret'
 
 function createJWT(profile) {
     var payload = {
-        sub: profile.id,
+        id: profile.id,
+        name: profile.login,
+        avatar: profile.avatar_url,
         iat: moment().unix(),
         exp: moment().add(14, 'days').unix()
     };
