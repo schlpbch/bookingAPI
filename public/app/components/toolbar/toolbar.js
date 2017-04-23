@@ -4,6 +4,7 @@
 import toolbarController from './toolbar.controller'
 import settingsService from './settings/settings.service'
 import settingsStyle from './settings/settings.css';
+import toolbarStyles from './toolbar.css'
 
 let moduleName = 'toolbar'
 
