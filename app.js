@@ -53,6 +53,18 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
         request(`${backendOrch}/api/bookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
     })
 
+    app.get('/contributors', function (req, res) {
+        var options = {
+            url: 'https://api.github.com/repos/schlpbch/bookingAPI/contributors',
+            headers: {
+                'User-Agent': 'request'
+            }
+        };
+        request.get(options, function(err, response, contributors) {
+            res.send(contributors)
+        })
+    })
+
     app.listen(port)
 
     if (swaggerExpress.runner.swagger.paths['/offers']) {
