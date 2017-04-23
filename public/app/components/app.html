@@ -5,13 +5,18 @@
 <div flex layout="row">
     <api-sidenav></api-sidenav>
     <md-content layout-padding flex>
-        <md-tabs md-dynamic-height md-border-bottom md-selected="$ctrl.tabService.selectedTab">
+        <md-tabs ng-if="$ctrl.authService.isAuthenticated()" md-dynamic-height md-border-bottom
+                 md-selected="$ctrl.tabService.selectedTab">
             <api-travel-wish></api-travel-wish>
             <api-connections></api-connections>
             <api-offers></api-offers>
             <api-prebooking></api-prebooking>
             <api-booking></api-booking>
         </md-tabs>
+        <div ng-if="!$ctrl.authService.isAuthenticated()">
+            <h3 style="color: darkcyan">Please login with one of the methods provided in the
+                sidebar</h3>
+        </div>
     </md-content>
     <api-error-log></api-error-log>
 </div>

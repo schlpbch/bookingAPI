@@ -7,18 +7,16 @@ export default class SidenavController {
         this.$auth = $auth;
         this.items = [
             {
-                icon: 'exit_to_app',
                 title: 'With SwissPassID',
                 provider: 'https://www.swisspass.ch/auth/login'
             },
             {
-                icon: 'exit_to_app',
                 title: 'With B2B-Account',
                 provider: 'https://www.swisspass.ch/auth/login'
             },
             {
-                icon: 'exit_to_app',
-                title: 'Github Login',
+                icon: 'github',
+                title: 'Login with GitHub',
                 provider: 'github'
             }
         ]

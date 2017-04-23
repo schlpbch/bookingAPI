@@ -11,7 +11,8 @@
     <md-item ng-repeat="item in $ctrl.items">
       <md-item-content md-ink-ripple layout="row" layout-align="start center">
         <div class="inset">
-          <md-icon>{{item.icon}}</md-icon>
+          <md-icon ng-if="item.icon" md-svg-src="icons/{{item.icon}}.svg"></md-icon>
+          <md-icon ng-if="!item.icon">exit_to_app</md-icon>
           <md-button ng-click="$ctrl.authenticate(item.provider)">{{item.title}}</md-button>
         </div>
       </md-item-content>
