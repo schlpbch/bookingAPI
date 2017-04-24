@@ -10,7 +10,15 @@ export default class AuthService {
     }
 
     isAuthenticated() {
-        return this._getAuthToken() ? true : false
+        let authToken = this._getAuthToken();
+        if(authToken){
+            return !this._isTokenExpired(authToken)
+        }
+        return false
+    }
+
+    _isTokenExpired(authToken){
+        return this.jwtHelper.isTokenExpired(authToken);
     }
 
     _getAuthToken() {
