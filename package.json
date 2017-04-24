@@ -3,9 +3,9 @@
   "version": "0.0.9",
   "private": true,
   "description": "A simple API to book öV tickets in Switzerland.",
-  "keywords": [],
+  "keywords": ["booking", "public-transportation", "api", "switzerland", "sbb"],
   "author": "Andreas Schlapbach",
-  "license": "SBB",
+  "license": "Apache-2.0",
   "main": "app.js",
   "dependencies": {
     "angular": "^1.6.0",
