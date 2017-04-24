@@ -7,6 +7,7 @@ let bodyParser = require('body-parser');
 var path = require('path')
 var request = require('request')
 var morgan = require('morgan')
+var expressJWT = require('express-jwt');
 var app = express()
 
 module.exports = app // for testing
@@ -24,6 +25,11 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
     if (err) {
         throw err
     }
+
+    app.use('/redirect_api',
+        expressJWT({
+            secret: 'awesomeBookingSecret'
+        }).unless({ path: ['/auth/github'] }));
 
     // install middleware
     app.use(bodyParser.urlencoded({extended: true}));
