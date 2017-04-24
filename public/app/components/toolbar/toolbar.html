@@ -4,9 +4,9 @@
     </md-button>
     <h3>booking API</h3>
     <span flex></span>
-    <md-list-item class="user-infos" ng-if="$ctrl.authService.isAuthenticated()">
+    <md-list-item hide-xs class="user-infos" ng-if="$ctrl.authService.isAuthenticated()">
         <span flex></span>
-        {{ $ctrl.authService.getAuthData().name }}
+        <span>{{ $ctrl.authService.getAuthData().name }}</span>
         <img ng-src="{{$ctrl.authService.getAuthData().avatar}}" class="md-avatar user-avatar">
     </md-list-item>
     <md-button class="toggle-settings" ng-click="$ctrl.showAdvanced($event)">

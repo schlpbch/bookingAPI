@@ -31,8 +31,6 @@ export default class AuthService {
 
     getAuthData() {
         let token = this._getAuthToken()
-        let decodedToken = this.jwtHelper.decodeToken(token)
-        console.log('DecodedToken', decodedToken)
         return this.jwtHelper.decodeToken(token)
     }
 }
