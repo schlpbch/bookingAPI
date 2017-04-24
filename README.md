@@ -61,15 +61,15 @@ with real ones for production!
 
 The Web App is available at:
 
-- [http://api.sbb.ch/app/](http://api.sbb.ch/app/)
+- [http://booking.sbb.ch/app/](http://booking.sbb.ch/app/)
 
 Thanks to **SwaggerUI** the up-to-date documentation is always available at:
 
-- [http://api.sbb.ch/docs/](http://api.sbb.ch/docs/)
+- [http://booking.sbb.ch/docs/](http://booking.sbb.ch/docs/)
 
 and the latest JSON can be accessed at:
 
-- [http://api.sbb.ch/api-docs](http://api.sbb.ch/api-docs)
+- [http://booking.sbb.ch/api-docs](http://booking.sbb.ch/api-docs)
 
 Developing
 First, **Nodejs** and **npm** which comes with it is needed. Then to install all the modules, simply run:
@@ -134,11 +134,11 @@ To run the *mock* server as docker container, do:
 - Integrate [Swagger Middleware](https://github.com/BigstickCarpet/swagger-express-middleware/blob/master/docs/samples/walkthrough2.md) to easily pre-populate data
 - Get the API right
  - Expose journey planning as a route of its own
-- Clarify legalese
 - Setup API Management
 - Setup Security (JSON Web Token)
 
 ## Done
+- <del>Clarify legalese</del>
 - <del>Align with FSM specification</del>
 - <del>Complete wiring Wep App with API</del>
 - <del>Translate API to English</del>
