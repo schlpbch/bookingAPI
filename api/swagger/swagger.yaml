@@ -1,3 +1,10 @@
+# @Author: Andreas Schlapbach <schlpbch>
+# @Date:   2017-04-07T17:04:50+02:00
+# @Email:  andreas.schlapbach@sbb.ch
+# @Last modified time: 2017-04-24T21:04:49+02:00
+# @License: ALv2
+# @Copyright: 2017 Schweizerische Bundesbahnen (SBB)
+
 swagger: '2.0'
 
 ## API Information
@@ -8,7 +15,7 @@ info:
   contact:
     name: Team SVS Vertrieb
     email: andreas.schlapbach@sbb.ch
-    url: http://api.sbb.ch/
+    url: http://booking.sbb.ch/
   license:
     name: SBB
     url: https://data.sbb.ch/page/licence/
