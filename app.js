@@ -28,7 +28,7 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
 
     app.use('/redirect_api',
         expressJWT({
-            secret: 'awesomeBookingSecret'
+            secret: process.env.TOKEN_SECRET
         }).unless({ path: ['/auth/github'] }));
 
     // install middleware
