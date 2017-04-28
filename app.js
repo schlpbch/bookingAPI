@@ -27,7 +27,7 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
         throw err
     }
 
-    app.use('/redirect_api',
+    app.use('/api',
         expressJWT({
             secret: process.env.TOKEN_SECRET
         }).unless({path: ['/auth/github']}));
@@ -44,20 +44,25 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
     app.use(morgan('dev'))
     app.use(express.static(path.join(__dirname, '/public')))
 
+    let proxyRequest = function(req, res, subdomain){
+        request(`${backendReise}/api/${subdomain}${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`,
+            {headers: req.headers}).pipe(res)
+    }
+
     app.get('/redirect_api/locations*', function (req, res) {
-        request(`${backendReise}/api/locations${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
+        proxyRequest(req, res, 'locations');
     })
     app.get('/redirect_api/trips*', function (req, res) {
-        request(`${backendReise}/api/trips${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
+        proxyRequest(req, res, 'trips')
     })
     app.get('/redirect_api/offers*', function (req, res) {
-        request(`${backendReise}/api/offers${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
+        proxyRequest(req, res, 'offers');
     })
     app.get('/redirect_api/prebookings*', function (req, res) {
-        request(`${backendOrch}/api/prebookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
+        proxyRequest(req, res, 'prebookings');
     })
     app.get('/redirect_api/bookings*', function (req, res) {
-        request(`${backendOrch}/api/bookings${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
+        proxyRequest(req, res, 'bookings');
     })
 
     app.get('/contributors', function (req, res) {
