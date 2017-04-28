@@ -52,7 +52,7 @@
     "browsersync": "browser-sync start --startPath='./public' --server --files './public/*.html, ./public/bundle.js'",
     "watchify": "watchify -t browserify-css public/app/components/app.js -o public/app/bundle.js -d -t [ babelify --presets [ es2015 react ] ]",
     "predev": "browserify -t browserify-css public/app/components/app.js -o public/app/bundle.js -d -t [ babelify --presets [ es2015 react ] ]",
-    "dev": "node app.js",
+    "dev": "TOKEN_SECRET=bookingToken GITHUB_SECRET=9d3893393de2dfd406ab091b9b0a97d153550e71 node app.js",
     "preprod": "browserify -t browserify-css public/app/components/app.js -t [ babelify --presets [ es2015 react ] ] | uglifyjs > public/app/bundle.js",
     "prod": "node app.js",
     "test": "mocha -u exports -R spec test/api/controllers"
