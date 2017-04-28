@@ -4,9 +4,10 @@
 const AUTH_TOKEN_NAME = 'satellizer_token'
 export default class AuthService {
 
-    constructor($window, jwtHelper) {
+    constructor($window, jwtHelper, $http) {
         this.$window = $window
         this.jwtHelper = jwtHelper
+        this.$http = $http
     }
 
     isAuthenticated() {
@@ -32,5 +33,9 @@ export default class AuthService {
     getAuthData() {
         let token = this._getAuthToken()
         return this.jwtHelper.decodeToken(token)
+    }
+
+    getClientId(){
+        return this.$http.get('/clientId');
     }
 }

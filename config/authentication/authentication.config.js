@@ -3,6 +3,7 @@
  */
 
 let github = {
+    clientId: '78c57dbf89006d064fcc',
     clientSecret: process.env.GITHUB_SECRET,
     accessTokenUrl: 'https://github.com/login/oauth/access_token',
     userApiUrl: 'https://api.github.com/user'

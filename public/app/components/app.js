@@ -19,18 +19,27 @@ import bookingModule from './booking/booking'
 import securityModule from './security/security'
 import commonModule from './common/common'
 
+let authProvider;
 angular.module('app', ['ngMaterial', 'ngRoute', 'satellizer', 'angular-jwt', toolbarModule, sideNavModule, travelWishModule, commonModule,
     connectionsModule, offersModule, preebookingModule, bookingModule, securityModule])
     .config(function ($mdThemingProvider, $authProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('blue')
             .accentPalette('orange')
+        authProvider = $authProvider;
 
-        $authProvider.github({
-            url: 'http://localhost:8080/api/auth/github',
-            clientId: '78c57dbf89006d064fcc',
-            popupOptions: {width: 1020, height: 618}
-        });
+    })
+    .run((authService) => {
+       authService.getClientId()
+            .then(res => {
+                console.log('Response', res);
+                let clientId = res.data.clientID;
+                authProvider.github({
+                    clientId,
+                    url: 'api/auth/github',
+                    popupOptions: {width: 1020, height: 618}
+                });
+            })
     })
     .component('app', {
         controller: appController,

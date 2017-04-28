@@ -8,6 +8,7 @@ var path = require('path')
 var request = require('request')
 var morgan = require('morgan')
 var expressJWT = require('express-jwt');
+var authConfig = require('./config/authentication/authentication.config');
 var app = express()
 
 module.exports = app // for testing
@@ -29,7 +30,7 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
     app.use('/redirect_api',
         expressJWT({
             secret: process.env.TOKEN_SECRET
-        }).unless({ path: ['/auth/github'] }));
+        }).unless({path: ['/auth/github']}));
 
     // install middleware
     app.use(bodyParser.urlencoded({extended: true}));
@@ -66,9 +67,13 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
                 'User-Agent': 'request'
             }
         };
-        request.get(options, function(err, response, contributors) {
+        request.get(options, function (err, response, contributors) {
             res.send(contributors)
         })
+    })
+
+    app.get('/clientId', function (req, res) {
+        res.send({clientID: authConfig.github.clientId});
     })
 
     app.listen(port)
