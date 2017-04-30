@@ -29,7 +29,7 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
 
     app.use('/redirect_api',
         expressJWT({
-            secret: process.env.TOKEN_SECRET
+            secret: authConfig.TOKEN_SECRECT
         }).unless({path: ['/auth/github']}));
 
     // install middleware
