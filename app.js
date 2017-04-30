@@ -27,7 +27,7 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
         throw err
     }
 
-    app.use('/api',
+    app.use('/redirect_api',
         expressJWT({
             secret: process.env.TOKEN_SECRET
         }).unless({path: ['/auth/github']}));
