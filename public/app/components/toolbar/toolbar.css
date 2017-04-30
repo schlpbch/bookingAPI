@@ -8,6 +8,11 @@
 }
 
 .toggle-settings {
-    padding-left: 0px !important;
-    margin-left: 0px !important;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.logout-button {
+   cursor: pointer;
 }

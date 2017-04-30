@@ -12,13 +12,13 @@ export default class AuthService {
 
     isAuthenticated() {
         let authToken = this._getAuthToken();
-        if(authToken){
+        if (authToken) {
             return !this._isTokenExpired(authToken)
         }
         return false
     }
 
-    _isTokenExpired(authToken){
+    _isTokenExpired(authToken) {
         return this.jwtHelper.isTokenExpired(authToken);
     }
 
@@ -35,7 +35,11 @@ export default class AuthService {
         return this.jwtHelper.decodeToken(token)
     }
 
-    getClientId(){
+    getClientId() {
         return this.$http.get('/clientId');
+    }
+
+    logout() {
+        this.$window.localStorage.removeItem(AUTH_TOKEN_NAME);
     }
 }

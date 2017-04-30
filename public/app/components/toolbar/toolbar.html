@@ -9,7 +9,6 @@
         <span>{{ $ctrl.authService.getAuthData().name }}</span>
         <img ng-src="{{$ctrl.authService.getAuthData().avatar}}" class="md-avatar user-avatar">
     </md-list-item>
-    <md-button class="toggle-settings" ng-click="$ctrl.showAdvanced($event)">
-        <md-icon>more_vert</md-icon>
-    </md-button>
+    <md-icon class="toggle-settings" ng-click="$ctrl.showAdvanced($event)">more_vert</md-icon>
+    <md-icon class="logout-button" ng-if="$ctrl.authService.isAuthenticated()" ng-click="$ctrl.authService.logout()">input</md-icon>
 </md-toolbar>
