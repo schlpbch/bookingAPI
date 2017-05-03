@@ -10,6 +10,7 @@
   "strict": true,
   "undef": true,
   "unused": true,
+  "asi": true,
   "globals": {
     "angular": false
   }
