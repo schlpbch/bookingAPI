@@ -3,13 +3,18 @@
  */
 export default class ErrorLogService {
 
-    constructor(){
+    constructor($mdBottomSheet){
+        this.$mdBottomSheet = $mdBottomSheet
         this.errors = [];
 
         //TODO kk - Just sample errors - remove as soon as error handling is implemented
         this.errors.push(this.createMockError(500, 'Sample Error 1'));
         this.errors.push(this.createMockError(404, 'Sample Error 2'));
         this.errors.push(this.createMockError(500, 'Sample Error 3'));
+    }
+
+    newError(errorCode, errorMessage){
+        console.log('A new error occured', errorCode, errorMessage)
     }
 
     createMockError(code, message){
