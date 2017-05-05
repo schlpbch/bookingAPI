@@ -4,6 +4,7 @@ import 'angular-animate'
 import 'angular-material'
 import 'angular-aria'
 import 'angular-messages'
+import 'ngclipboard'
 
 // Components
 import appController from './app.controller'
@@ -17,7 +18,7 @@ import bookingModule from './booking/booking'
 import commonModule from './common/common'
 import coreModule from './core/core.module';
 
-angular.module('app', ['ngMaterial', 'ngRoute', coreModule, toolbarModule, sideNavModule, travelWishModule, commonModule, connectionsModule, offersModule, preebookingModule, bookingModule]).config(function ($mdThemingProvider) {
+angular.module('app', ['ngMaterial', 'ngRoute', 'ngclipboard', coreModule, toolbarModule, sideNavModule, travelWishModule, commonModule, connectionsModule, offersModule, preebookingModule, bookingModule]).config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
         .primaryPalette('blue')
         .accentPalette('orange')
