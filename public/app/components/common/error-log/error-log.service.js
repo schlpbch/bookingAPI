@@ -16,7 +16,6 @@ export default class ErrorLogService {
             controller: errorSheetController,
             controllerAs: '$ctrl'
         });
-        console.log('A new error occured', errorCode, errorMessage)
     }
 
     _createError(code, message) {
