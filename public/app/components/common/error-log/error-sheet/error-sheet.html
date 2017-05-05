@@ -13,10 +13,7 @@
     <md-list id="errorlist" ng-cloak>
         <md-list-item ng-repeat="error in $ctrl.errorLogService.errors">
             <span>
-                <md-tooltip md-direction="left">Refresh</md-tooltip>
-                <md-icon ngclipboard-success="$ctrl.onSuccess(e);" class="test-tooltip" ngclipboard
-                         data-clipboard-target="#error-{{$index}}">assignment return</md-icon>
-                <span id="error-{{$index}}" class="md-inline-list-icon-label"><b>{{ error.code }}</b>{{ error.message }}</span>
+                <span class="md-inline-list-icon-label"><b style="margin-right: 15px">{{ error.code }}</b>{{ error.message }}</span>
             </span>
         </md-list-item>
     </md-list>
