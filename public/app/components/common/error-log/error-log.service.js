@@ -1,27 +1,25 @@
 /**
  * Created by kevinkreuzer on 16.04.17.
  */
+import errorSheetController from './error-sheet/error-sheet.controller'
 export default class ErrorLogService {
 
-    constructor($mdBottomSheet){
+    constructor($mdBottomSheet) {
         this.$mdBottomSheet = $mdBottomSheet
         this.errors = [];
-
-        //TODO kk - Just sample errors - remove as soon as error handling is implemented
-        this.errors.push(this.createMockError(500, 'Sample Error 1'));
-        this.errors.push(this.createMockError(404, 'Sample Error 2'));
-        this.errors.push(this.createMockError(500, 'Sample Error 3'));
     }
 
-    newError(errorCode, errorMessage){
+    newError(errorCode, errorMessage) {
+        this.errors.push(this._createError(errorCode, errorMessage))
+        this.$mdBottomSheet.show({
+            templateUrl: 'components/common/error-log/error-sheet/error-sheet.html',
+            controller: errorSheetController,
+            controllerAs: '$ctrl'
+        });
         console.log('A new error occured', errorCode, errorMessage)
     }
 
-    createMockError(code, message){
+    _createError(code, message) {
         return {code, message};
-    }
-
-    logError(errorMessage){
-        this.errors.push(errorMessage);
     }
 }
