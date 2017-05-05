@@ -11,6 +11,10 @@ export default class ErrorLogService {
 
     newError(errorCode, errorMessage) {
         this.errors.push(this._createError(errorCode, errorMessage))
+        this.openButtomSheet();
+    }
+
+    openButtomSheet(){
         this.$mdBottomSheet.show({
             templateUrl: 'components/common/error-log/error-sheet/error-sheet.html',
             controller: errorSheetController,
@@ -20,5 +24,9 @@ export default class ErrorLogService {
 
     _createError(code, message) {
         return {code, message};
+    }
+
+    hasErrors(){
+       return this.errors.length > 0
     }
 }
