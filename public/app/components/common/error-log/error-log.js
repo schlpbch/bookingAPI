@@ -3,6 +3,7 @@
  */
 import errorLogController from './error-log.controller';
 import errorLogService from './error-log.service';
+
 let moduleName = 'errorLog';
 
 angular.module(moduleName, [])

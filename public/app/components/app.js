@@ -4,6 +4,7 @@ import 'angular-animate'
 import 'angular-material'
 import 'angular-aria'
 import 'angular-messages'
+import 'ngclipboard'
 
 // Components
 import appController from './app.controller'
@@ -15,14 +16,15 @@ import offersModule from './offers/offers'
 import preebookingModule from './prebooking/prebooking'
 import bookingModule from './booking/booking'
 import commonModule from './common/common'
+import coreModule from './core/core.module';
 
-angular.module('app', ['ngMaterial', 'ngRoute', toolbarModule, sideNavModule, travelWishModule, commonModule, connectionsModule, offersModule, preebookingModule, bookingModule]).config(function ($mdThemingProvider) {
-  $mdThemingProvider.theme('default')
-      .primaryPalette('blue')
-      .accentPalette('orange')
+angular.module('app', ['ngMaterial', 'ngRoute', 'ngclipboard', coreModule, toolbarModule, sideNavModule, travelWishModule, commonModule, connectionsModule, offersModule, preebookingModule, bookingModule]).config(function ($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+        .primaryPalette('blue')
+        .accentPalette('orange')
 })
-  .component('app', {
-    controller: appController,
-    templateUrl: 'components/app.html'
-  })
-  .controller('AppCtrl', appController)
+    .component('app', {
+        controller: appController,
+        templateUrl: 'components/app.html'
+    })
+    .controller('AppCtrl', appController)

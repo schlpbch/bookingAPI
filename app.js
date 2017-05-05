@@ -25,7 +25,6 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
   }
 
   // install middleware
-
   app.use(SwaggerUi(swaggerExpress.runner.swagger))
   swaggerExpress.register(app)
 
