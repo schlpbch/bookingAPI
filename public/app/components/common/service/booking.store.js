@@ -6,7 +6,8 @@ export default class BookingStore {
     this._offers = null
     this._prebookings = null
     this._bookings = null
-    this._cancelation = null
+    this._cancellation = null
+    this._refund = null
   }
 
   get trips () {
@@ -41,11 +42,19 @@ export default class BookingStore {
     this._bookings = bookings
   }
 
-  get cancelation () {
+  get cancellation () {
     return this._cancellation
   }
 
-  set cancelation (cancelation) {
-    this.cancelation = cancelation
+  set cancellation (cancellation) {
+    this._cancellation = cancellation
+  }
+
+  get refund () {
+    return this._refund
+  }
+
+  set refund (refund) {
+    this._refund = refund
   }
 }

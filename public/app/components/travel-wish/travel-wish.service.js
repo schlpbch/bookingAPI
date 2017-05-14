@@ -11,7 +11,7 @@ export default class ReiseWunschService {
   }
 
   getTrips (originId, destinationId, isArrival, date, time) {
-    this.$http.get(`../redirect_api/trips?originId=${originId}&destinationId=${destinationId}&date=${date}&time=${time}`)
+    this.$http.get(`../redirect_api/trips?originId=${originId.value}&destinationId=${destinationId.value}&date=2017-05-05&time=10:00`)
       .then((res) => {
         this.bookingStore.trips = res.data
         this.tabService.goToNextTab()
