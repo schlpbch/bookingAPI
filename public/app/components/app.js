@@ -16,9 +16,10 @@ import offersModule from './offers/offers'
 import preebookingModule from './prebooking/prebooking'
 import bookingModule from './booking/booking'
 import commonModule from './common/common'
-import coreModule from './core/core.module';
+import coreModule from './core/core.module'
+import loginModule from './login/login'
 
-angular.module('app', ['ngMaterial', 'ngRoute', 'ngclipboard', coreModule, toolbarModule, sideNavModule, travelWishModule, commonModule, connectionsModule, offersModule, preebookingModule, bookingModule]).config(function ($mdThemingProvider) {
+angular.module('app', ['ngMaterial', 'ngRoute', 'ngclipboard', coreModule, toolbarModule, sideNavModule, travelWishModule, commonModule, connectionsModule, offersModule, preebookingModule, bookingModule, loginModule]).config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
         .primaryPalette('blue')
         .accentPalette('orange')
