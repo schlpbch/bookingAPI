@@ -1,7 +1,7 @@
 # @Author: Andreas Schlapbach <schlpbch>
 # @Date:   2017-04-07T17:04:50+02:00
 # @Email:  andreas.schlapbach@sbb.ch
-# @Last modified time: 2017-04-24T21:04:49+02:00
+# @Last modified time: 2017-05-24T21:04:49+02:00
 # @License: ALv2
 # @Copyright: 2017 Schweizerische Bundesbahnen (SBB)
 
@@ -51,7 +51,10 @@ paths:
   /health/status:
     x-swagger-router-controller: health
     get:
-      description: "The status service can be used to check if the remote server is running and can be reached across the network."
+      description:
+        'The status service can be used to check if the remote server is running
+        and can be reached across the network.'
+
       operationId: status
       responses:
         200:
@@ -61,16 +64,19 @@ paths:
         default:
           description: "unexpected error"
 
-  ### Fahrplan Part
-
-  # ToDo: Define properly with Team VTP
+  ### Trip Planning Part
 
   /locations:
     x-swagger-router-controller: locations
     get:
-      description: "The locations service can be used to perform a pattern-based search to retrieve a list of matching locations in the journey planner database. Possible matches might be stations, points of interest and addresses.\n
+      description:
+        'The locations service can be used to perform a pattern-based search to
+        retrieve a list of matching locations in the journey planner database.
+        Possible matches might be stations, points of interest and addresses.<br><br>
 
-        The result is a list of matching locations which can be used as origin and destination in trip and departure/arrival board requests."
+        The result is a list of matching locations which can be used as origin
+        and destination in trip and departure/arrival board requests.'
+
       operationId: locations
       parameters:
         - name: input
@@ -89,13 +95,14 @@ paths:
         default:
           description: "unexpected error"
 
-  # ToDo: Define properly with Team VTP #wer ist vtp?
-
-  /trips: #sollte das nicht itinerary sein
+  /trips:
     x-swagger-router-controller: trips
     get:
       description:
-        'The trips service calculates different trips for a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service.'
+        'The trips service calculates different trips for a specified origin
+        and destination. The external ids for origin and destination can be
+        retrieved with the locations service.'
+
       operationId: trips
       parameters:
         - name: originId
@@ -135,33 +142,53 @@ paths:
           description: "unexpected error"
 
 
-  ### Vertriebs Part
+  ### Booking Part
 
   /prices:
       x-swagger-router-controller: prices
       get:
-        description: "The price service calculates the cheapest prices for an adult with half-fare reduction and a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service."
+        description:
+          'The price service calculates the cheapest prices for an adult with
+          half-fare reduction and a specified origin and destination.
+          The external ids for origin and destination can be retrieved
+          with the locations service.<br><br>
+
+          Either the "tripId" or "originId", "destinationId" and "date" must
+          be defined.'
+
         operationId: prices
         parameters:
           - name: originId
             in: query
             description: "The id of the origin."
-            required: true
+            required: false
             type: integer
             default: 8507000
           - name: destinationId
             description: "The id of the destination."
-            required: true
+            required: false
             in: query
             type: integer
             default: 8508500
           - name: date
             in: query
             description: "The desired departure date."
-            required: true
+            required: false
             type: string
             format: date
             default: '2017-01-14'
+          - name: time
+            in: query
+            description: "The desired departure time."
+            required: false
+            type: string
+            format: datetime
+            default: '20:04'
+          - name: tripId
+            in: query
+            description: "The id of a trip."
+            required: false
+            type: string
         responses:
           200:
             description: "A list of prices for the trip."
@@ -172,53 +199,45 @@ paths:
           default:
             description: "unexpected error"
 
-  /prices/{tripId}:
-      x-swagger-router-controller: prices
-      get:
-        description: "The price service calculates the cheapest prices for an adult with half-fare reduction and a trip ID. The trip ID can be retrieved using the trips service."
-        operationId: tripPrices
-        parameters:
-          - name: tripId
-            in: path
-            description: "The trip ID to get prices for."
-            required: true
-            type: string
-            default: 'trip-rec-context' # for simpler mock testing only
-        responses:
-          200:
-            description: "A list of prices for the trip"
-            schema:
-              type: array
-              items:
-                $ref: '#/definitions/price'
-          default:
-            description: "unexpected error"
-
   /offers:
     x-swagger-router-controller: offers
     get:
-      description: "The offers service calculates offers for a specified origin and destination. The external ids for origin and destination can be retrieved with the locations service."
+      description:
+        'The offers service calculates offers for a specified origin
+        and destination. The external ids for origin and destination can
+        be retrieved with the locations service.<br><br>
+
+        Either the "tripId" or "originId", "destinationId" and "date" must
+        be defined.'
+
       operationId: offers
       parameters:
         - name: originId
           in: query
           description: "The id of the origin."
-          required: true
+          required: false
           type: integer
           default: 8507000
         - name: destinationId
           description: "The id of the destination."
-          required: true
+          required: false
           in: query
           type: integer
           default: 8508500
         - name: date
           in: query
           description: "The desired departure date."
-          required: true
+          required: false
           type: string
           format: date
           default: '2017-01-14'
+        - name: time
+          in: query
+          description: "The desired departure time."
+          required: false
+          type: string
+          format: datetime
+          default: '20:04'
       # ToDo; Scale for more than one traveller
         - name: age
           in: query
@@ -243,48 +262,12 @@ paths:
           description: "The productId identifying the product"
           type: string
           required: false
-
-      responses:
-        200:
-          description: "A list of offers."
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/offer'
-        default:
-          description: "unexpected error"
-
-  /offers/{tripId}:
-    x-swagger-router-controller: offers
-    get:
-      description: "The offers service calculates offers for a trip ID. The trip ID can be retrieved using the trips service."
-      operationId: tripOffers
-      parameters:
         - name: tripId
-          in: path
-          description: "The trip ID to get offers for."
-          required: true
-          type: string
-          default: 'trip-rec-context' # for simpler mock testing only
-      # ToDo; Scale for more than one traveller
-        - name: age
           in: query
-          description: 'Age of the traveller.'
-          type: integer
-          default: 42
-          minimum: 0
-          maximum: 120
-        - name: reduction
-          in: query
-          description: 'Reductions that can be applied'
+          description: "The id of a trip."
+          required: false
           type: string
-          default: 'half-fare-2nd'
-          enum:
-           - none
-           - half-fare-2nd
-           - half-fare-1st
-           - ga-2nd
-           - ga-1st
+
       responses:
         200:
           description: "A list of offers."
@@ -298,7 +281,10 @@ paths:
   /offers/{offerId}/prebook:
     x-swagger-router-controller: prebookings
     get:
-      description: "Pre-book an offer during checkout process for 15 minutes. Normally called when adding an item to the shopping cart."
+      description:
+        'Prebook an offer during checkout process for 15 minutes. Normally
+        called when adding an item to the shopping cart.'
+
       operationId: prebook
       parameters:
         - name: offerId
@@ -318,7 +304,8 @@ paths:
   /prebookings/{prebookingId}/confirm:
     x-swagger-router-controller: bookings
     get:
-      description: "Book the pre-booked offer."
+      description:
+        'Book the pre-booked offer.'
       operationId: confirm
       parameters:
         - name: prebookingId
@@ -338,7 +325,12 @@ paths:
   /bookings/{bookingId}/fulfil:
     x-swagger-router-controller: bookings
     get:
-      description: "Get the booked tickets."
+      description:
+        'Fulfill the booking which traditionally means producing a tickets.
+        However other ways of fullfilment are possible such as storing the
+        booking on a central database. In this case only a reference to the
+        booking is returned.'
+
       operationId: fulfil
       parameters:
         - name: bookingId
@@ -364,7 +356,8 @@ paths:
   /bookings/{bookingId}/cancel:
     x-swagger-router-controller: bookings
     get:
-      description: "Cancel the booking (technical; not for refunding)."
+      description:
+        'Cancel the booking (technical; not for refunding).'
       operationId: cancel
       parameters:
         - name: bookingId
@@ -384,8 +377,12 @@ paths:
   /bookings/{bookingId}/refund:
     x-swagger-router-controller: bookings
     get:
-      description: "Refund the booking. Two types of refund are to be supported: full and partial. ToDo: Specity fully
-        (alias,...)"
+      description:
+        'Refund the booking. Two types of refund are to be supported, full and
+        partial.
+        <br><br>
+        ToDo: Fully specify (alias,...).'
+
       operationId: refund
       parameters:
         - name: bookingId

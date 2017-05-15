@@ -13,7 +13,8 @@ function prebook (req, res) {
         href: 'prebookings/2001'
       },
       'confirm': {
-        title: 'Confirm booking', href: 'api/prebookings/2001/confirm'
+        title: 'Confirm prebooking',
+        href: 'api/prebookings/2001/confirm'
       }
     }
   }]
