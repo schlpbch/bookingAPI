@@ -153,8 +153,8 @@ paths:
           The external ids for origin and destination can be retrieved
           with the locations service.<br><br>
 
-          Either the "tripId" or "originId", "destinationId" and "date" must
-          be defined.'
+          Either the "tripId" or "originId", "destinationId", "date", and "time"
+          must be defined.'
 
         operationId: prices
         parameters:
@@ -207,8 +207,8 @@ paths:
         and destination. The external ids for origin and destination can
         be retrieved with the locations service.<br><br>
 
-        Either the "tripId" or "originId", "destinationId" and "date" must
-        be defined.'
+        Either the "tripId" or "originId", "destinationId", "date", and "time"
+        must be defined.'
 
       operationId: offers
       parameters:

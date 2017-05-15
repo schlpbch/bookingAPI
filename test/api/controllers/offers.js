@@ -4,11 +4,11 @@ var request = require('supertest')
 var server = require('../../../')
 
 describe('controllers', function () {
-  describe('get offers for origin and destination', function (done) {
+  describe('get offers for trip', function (done) {
     describe('GET /api/offers', function (done) {
       it('should not return an error', function (done) {
         request(server)
-                .get('/api/offers')
+                .get('/api/offers?tripId=T1')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .expect(200)
@@ -22,12 +22,14 @@ describe('controllers', function () {
       })
     })
   })
+})
 
-  describe('get trip offers', function (done) {
-    describe('GET /api/offers/3001', function (done) {
+describe('controllers', function () {
+  describe('get offers for originId, destinationId, date, and time', function (done) {
+    describe('GET /api/offers', function (done) {
       it('should not return an error', function (done) {
         request(server)
-                .get('/api/offers/3001')
+                .get('/api/offers?originId=8507000&destinationId=8508500&date=2017-01-14&time=20%3A04')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .expect(200)

@@ -12,7 +12,7 @@ function tripOffers (req, res) {
 function offers (req, res) {
   let q = req.query
   if ((q.tripId === undefined) && (q.originId === undefined || q.destinationId === undefined || q.date === undefined)) {
-    let message = 'Either the "tripId" or "originId", "destinationId" and "date" must be defined'
+    let message = 'Either the "tripId" or "originId", "destinationId", "date", and "time" must be defined'
     console.error(message)
     res.status(400).send(message)
   } else {
