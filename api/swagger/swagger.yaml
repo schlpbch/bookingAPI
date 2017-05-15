@@ -381,6 +381,35 @@ paths:
         default:
           description: "unexpected error"
 
+  /bookings/{bookingId}/refund:
+    x-swagger-router-controller: bookings
+    get:
+      description: "Refund the booking. Two types of refund are to be supported: full and partial. ToDo: Specity fully
+        (alias,...)"
+      operationId: refund
+      parameters:
+        - name: bookingId
+          in: path
+          description: "Booking ID to refund."
+          required: true
+          type: string
+          default: '3001' # for simpler mock testing only
+        - name: type
+          description: "Type of refund: {full, partial}"
+          in: query
+          type: string
+          default: "full"
+          enum:
+           - full
+           - partial # todo: define properly
+      responses:
+        200:
+          description: "The refunded booking ID."
+          schema:
+            type: string
+        default:
+          description: "unexpected error"
+
 ## Definitions
 
 definitions:

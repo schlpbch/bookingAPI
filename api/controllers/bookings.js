@@ -5,7 +5,8 @@ const path = require('path')
 module.exports = {
   confirm,
   fulfil,
-  cancel
+  cancel,
+  refund
 }
 
 function confirm (req, res) {
@@ -17,10 +18,16 @@ function confirm (req, res) {
         href: 'bookings/3001'
       },
       'fulfil': {
-        title: 'Billette zur Buchung als PDF holen', href: 'api/bookings/3001/fulfil?type=pdf'
+        title: 'Get ticket in PDF format',
+        href: 'api/bookings/3001/fulfil?type=pdf'
       },
       'cancel': {
-        title: 'Buchung annullieren', href: 'api/bookings/3001/cancel'
+        title: 'Cancel the booking',
+        href: 'api/bookings/3001/cancel'
+      },
+      'refund': {
+        title: 'Refund the booking',
+        href: 'api/bookings/3001/refund'
       }
     }
   }]
@@ -40,6 +47,14 @@ function fulfil (req, res) {
 }
 
 function cancel (req, res) {
+  var bookingId = {
+    bookingId: '3001'
+  }
+  res.json(bookingId)
+}
+
+function refund (req, res) {
+  // TODO: Fully specify behaviour
   var bookingId = {
     bookingId: '3001'
   }
