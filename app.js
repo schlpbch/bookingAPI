@@ -5,18 +5,16 @@ var express = require('express')
 var path = require('path')
 var createReverseProxy = require('./api/proxy/reverse.proxy')
 var morgan = require('morgan')
+const environmentConfigLoader = require('./config/environments/environment.loader')
 var app = express()
 
 module.exports = app // for testing
-
 var config = {
     appRoot: __dirname // required config
 }
-
-var backendReise = process.env.BACKEND_REISE || 'http://localhost:8080'
-console.log('Backend Reise: ', backendReise)
-var backendOrch = process.env.BACKEND_ORCH || 'http://localhost:8080'
-console.log('Backend Orch: ', backendOrch)
+const environmentConfiguration = environmentConfigLoader.loadEnvironmentConfig()
+console.info('Backend Reise: ', environmentConfiguration.backendReise)
+console.info('Backend Orch: ', environmentConfiguration.backendOrch)
 
 SwaggerExpress.create(config, function (err, swaggerExpress) {
     if (err) {
@@ -25,16 +23,12 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
     // install middleware
     app.use(SwaggerUi(swaggerExpress.runner.swagger))
     swaggerExpress.register(app)
-
-    var port = process.env.PORT || 8080
-
-    // set static files location used for requests that our frontend will make
-    app.use(morgan('dev'))
+    app.use(morgan(environmentConfiguration.morganFormat))
     app.use(express.static(path.join(__dirname, '/public')))
-    createReverseProxy(app, backendReise)
-    app.listen(port)
+    createReverseProxy(app, environmentConfiguration.backendReise)
+    app.listen(environmentConfiguration.appPort)
 
     if (swaggerExpress.runner.swagger.paths['/offers']) {
-        console.log('try this: http://localhost:' + port + '/app')
+        console.log('try this: http://localhost:' + environmentConfiguration.appPort + '/app')
     }
 })

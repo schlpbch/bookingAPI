@@ -5,7 +5,7 @@ import prebookingController from './prebooking.controller'
 import prebookingDetailController from './prebooking-detail/prebooking-detail.controller'
 import prebookingService from './prebooking.service'
 
-let moduleName = 'preBookingModule'
+let moduleName = 'prebookingModule'
 
 angular.module(moduleName, [])
   .component('apiPrebooking', {

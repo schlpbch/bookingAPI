@@ -1,6 +1,6 @@
 {
   "name": "bookingAPI",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "private": true,
   "description": "A simple API to book öV tickets in Switzerland.",
   "keywords": [
@@ -54,7 +54,7 @@
     "predev": "browserify -t browserify-css public/app/components/app.js -o public/app/bundle.js -d -t [ babelify --presets [ es2015 react ] ]",
     "dev": "node app.js",
     "preprod": "browserify -t browserify-css public/app/components/app.js -t [ babelify --presets [ es2015 react ] ] | uglifyjs > public/app/bundle.js",
-    "prod": "node app.js",
+    "prod": "ENVIRONMENT=production node app.js",
     "test": "mocha -u exports -R spec test/api/controllers"
   }
 }

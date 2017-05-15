@@ -1,4 +1,4 @@
-<md-tab label="Vorabbuchen" ng-disabled="$ctrl.bookingStore.prebookings === null">
+<md-tab label="Prebookings" ng-disabled="$ctrl.bookingStore.prebookings === null">
   <md-content class="md-padding">
     <api-prebooking-detail ng-repeat="prebooking in $ctrl.bookingStore.prebookings" prebooking="prebooking"></api-prebooking-detail>
   </md-content>

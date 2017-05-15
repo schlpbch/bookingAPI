@@ -1,22 +1,22 @@
-<md-tab label="Reisewunsch">
+<md-tab label="Travel Wish">
   <md-content class="md-padding">
     <form>
-      <api-station title="'Abfahrtsort'" selected-item="$ctrl.origin"></api-station>
-      <api-station title="'Ankunftsort'" selected-item="$ctrl.destination"></api-station>
+      <api-station title="'Origin'" selected-item="$ctrl.originId"></api-station>
+      <api-station title="'Destination'" selected-item="$ctrl.destinationId"></api-station>
       <br/>
-      <md-switch class="md-subhead" ng-model="angebot.istAnkunft" aria-label="Switch" ng-true-value="'Ankunft'" ng-false-value="'Abfahrt'">
-        {{ $ctrl.angebot.istAnkunft}}
+      <md-switch class="md-subhead" ng-model="$ctrl.isArrival" aria-label="Switch" ng-true-value="'Arrival Time'" ng-false-value="'Departure Time'">
+        {{ $ctrl.isArrival}}
       </md-switch>
       <md-input-container>
-        <label>Datum</label>
-        <md-datepicker ng-model="$ctrl.angebot.datum" md-placeholder="2017/09/02"></md-datepicker>
+        <label>Date</label>
+        <md-datepicker ng-model="$ctrl.date" md-placeholder="2017/09/02"></md-datepicker>
       </md-input-container>
       <md-input-container>
-        <label>Zeit</label>
-        <input name="zeit" ng-model="$ctrl.angebot.zeit" placeholder="22:22" required>
+        <label>Time</label>
+        <input name="zeit" ng-model="$ctrl.time" placeholder="22:22" required>
       </md-input-container>
       <br/>
-      <md-button class="md-raised md-primary" ng-click="$ctrl.travelWishService.getTrips($ctrl.origin, $ctrl.destination)">Suchen
+      <md-button class="md-raised md-primary" ng-click="$ctrl.travelWishService.getTrips($ctrl.originId, $ctrl.destinationId, $ctrl.isArrival, $ctrl.date, $ctrl.time)">Find
       </md-button>
     </form>
   </md-content>

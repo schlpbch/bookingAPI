@@ -1,12 +1,12 @@
 <md-card class="md-3-line">
   <md-card-title>
     <md-card-title-text>
-      <span class="md-subhead">AngebotsId: {{$ctrl.offer.offerId}}</span>
+      <span class="md-subhead">offerId: {{$ctrl.offer.offerId}}</span>
       <span class="md-headline">{{$ctrl.offer.description}}</span>
-      <span>Preis:  {{$ctrl.offer.price}}</span>
+      <span>Price:  {{$ctrl.offer.price}}</span>
     </md-card-title-text>
   </md-card-title>
   <md-card-actions layout="row" layout-align="end center">
-    <md-button class="md-raised md-primary" ng-click="$ctrl.offersService.getPrebooking($ctrl.offer)">vorabbuchen</md-button>
+    <md-button class="md-raised md-primary" ng-click="$ctrl.offersService.getPrebooking($ctrl.offer)">Prebook</md-button>
   </md-card-actions>
 </md-card>
