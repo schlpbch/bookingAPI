@@ -5,7 +5,6 @@
 const request = require('request')
 const createReverseProxy = (app, environmentConfiguration) => {
 
-
     const proxyAPIRequest = (uri, req, res) => {
         let backendReise = environmentConfiguration.backendReise
         request(`${backendReise}/api/${uri}${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
@@ -26,9 +25,13 @@ const createReverseProxy = (app, environmentConfiguration) => {
         proxyAPIRequest('bookings', req, res)
     })
 
-    app.get('/basicAuth/login', function (req, res) {
+    app.get('/basicAuth/login', function (clientRequest, clientResponse) {
+        let headers = clientRequest.headers
         let basicAuthURL = environmentConfiguration.basicAuth_url
-        request(`${basicAuthURL}${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
+        //TODO: Über Zertifikat lösen statt rejectUnauthorized: false
+        request(basicAuthURL, {headers, rejectUnauthorized: false}, function (request, response) {
+            clientResponse.send(response.headers.authorization)
+        })
     })
 }
 module.exports = createReverseProxy
