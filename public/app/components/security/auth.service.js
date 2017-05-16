@@ -28,15 +28,24 @@ export default class AuthService {
         return this.jwtHelper.isTokenExpired(authToken);
     }
 
+    getUserNumber() {
+        return this._getDecodedToken().sub
+    }
+
+    _getDecodedToken() {
+        let token = this._extractTokenFromStorage()
+        return this.jwtHelper.decodeToken(token)
+    }
+
     hasValidToken() {
-        let token = this.extractTokenFromStorage()
+        let token = this._extractTokenFromStorage()
         if (token) {
             return !this._isTokenExpired(token)
         }
         return false
     }
 
-    extractTokenFromStorage() {
+    _extractTokenFromStorage() {
         let tokenWithPrefix = this.$window.localStorage.getItem(AUTH_KEY)
         return tokenWithPrefix ? tokenWithPrefix.split(' ')[1] : undefined
     }

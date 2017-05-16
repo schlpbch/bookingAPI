@@ -4,9 +4,10 @@
 import settingsDialogController from './settings/settings-dialog.controller';
 
 export default class ToolbarController {
-    constructor($mdSidenav, $mdDialog) {
+    constructor($mdSidenav, $mdDialog, authService) {
         this.$mdSidenav = $mdSidenav
         this.$mdDialog = $mdDialog
+        this.authService = authService
     }
 
     toggleSidenav(menuId) {

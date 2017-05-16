@@ -1,0 +1,13 @@
+.user-infos {
+    padding-right: 0px !important;
+}
+
+.avatar {
+    margin-right: 15px;
+}
+
+.toggle-settings {
+    cursor: pointer;
+    margin-left: 20px;
+    margin-right: 20px;
+}
