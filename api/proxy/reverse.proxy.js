@@ -28,7 +28,7 @@ const createReverseProxy = (app, environmentConfiguration) => {
     app.get('/basicAuth/login', function (clientRequest, clientResponse) {
         let headers = clientRequest.headers
         let basicAuthURL = environmentConfiguration.basicAuth_url
-        //TODO: Über Zertifikat lösen statt rejectUnauthorized: false
+        //TODO: Use Certificate solution instead of rejectUnauthorized: false
         request(basicAuthURL, {headers, rejectUnauthorized: false}, function (request, response) {
             if (response.status === 200) {
                 clientResponse.send(response.headers.authorization)
