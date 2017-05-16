@@ -11,3 +11,8 @@
     margin-left: 20px;
     margin-right: 20px;
 }
+
+.logout-button {
+    margin-right: 10px;
+    cursor: pointer;
+}

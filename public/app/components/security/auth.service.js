@@ -49,4 +49,8 @@ export default class AuthService {
         let tokenWithPrefix = this.$window.localStorage.getItem(AUTH_KEY)
         return tokenWithPrefix ? tokenWithPrefix.split(' ')[1] : undefined
     }
+
+    logout() {
+        this.$window.localStorage.removeItem(AUTH_KEY);
+    }
 }

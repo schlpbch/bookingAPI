@@ -29,5 +29,9 @@ export default class ToolbarController {
             }, function () {
                 //Handle cancel
             });
-    };
+    }
+
+    logout(){
+        this.authService.logout()
+    }
 }
