@@ -26,13 +26,6 @@ function locations (req, res) {
     lon: 46.754853,
     type: 'STATION'
   }
-  var locationZuerichHB = {
-    id: '8503000',
-    name: 'Zürich HB',
-    lon: 8.540192,
-    lat: 47.378176,
-    type: 'STATION'
-  }
-  var locations = [locationBernHB, locationBernRBS, locationThunHB, locationZuerichHB]
+  var locations = [locationBernHB, locationBernRBS, locationThunHB]
   res.json(locations)
 }

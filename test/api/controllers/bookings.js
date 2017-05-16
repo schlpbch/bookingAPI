@@ -20,7 +20,7 @@ describe('controllers', function () {
     })
   })
 
-  describe('Test issue tickets for Booking 3001', function (done) {
+  describe('Test issue tickets for booking 3001', function (done) {
     describe('GET /api/bookings/3001/fulfil', function (done) {
       it('should not return an error', function (done) {
         request(server)
@@ -36,11 +36,27 @@ describe('controllers', function () {
     })
   })
 
-  describe('Test cancel Booking B1', function (done) {
+  describe('Test cancel booking 3001', function (done) {
     describe('GET /bookings/3001/cancel', function (done) {
       it('should not return an error', function (done) {
         request(server)
                 .get('/api/bookings/3001/cancel')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', 'application/json; charset=utf-8')
+                .expect(200)
+                .end(function (err, res) {
+                  if (err) throw err
+                  else done()
+                })
+      })
+    })
+  })
+
+  describe('Test refund booking 3001', function (done) {
+    describe('GET /bookings/3001/refund', function (done) {
+      it('should not return an error', function (done) {
+        request(server)
+                .get('/api/bookings/3001/refund')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', 'application/json; charset=utf-8')
                 .expect(200)
