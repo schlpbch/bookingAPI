@@ -16,8 +16,6 @@ const environmentConfiguration = environmentConfigLoader.loadEnvironmentConfig()
 console.info('Backend Reise: ', environmentConfiguration.backendReise)
 console.info('Backend Orch: ', environmentConfiguration.backendOrch)
 
-require('ssl-root-cas').inject();
-
 SwaggerExpress.create(config, function (err, swaggerExpress) {
     if (err) {
         throw err
