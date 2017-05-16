@@ -14,9 +14,11 @@ export default class AuthService {
     login(username, password) {
         let credentials = window.btoa(`${username}:${password}`)
         let headers = {"Authorization": "Basic " + credentials}
-        this.$http.get(this.config.basicAuth_url, {headers: headers})
+        return this.$http.get(this.config.basicAuth_url, {headers: headers})
             .then(res => {
-                this._storeToken(res.data)
+                if (res.data) {
+                    this._storeToken(res.data)
+                }
             })
     }
 
