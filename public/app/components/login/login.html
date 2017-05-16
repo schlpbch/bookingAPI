@@ -7,14 +7,14 @@
             <md-content class="md-padding" layout="column">
                 <md-input-container>
                     <label>Username</label>
-                    <input type="text" ng-model="username"/>
+                    <input type="text" ng-model="$ctrl.username"/>
                 </md-input-container>
                 <md-input-container>
                     <label>Password</label>
-                    <input type="password" ng-model="password"/>
+                    <input type="password" ng-model="$ctrl.password"/>
                 </md-input-container>
                 <div layout="row" layout-align="center center">
-                    <md-button class="md-raised md-primary">Login</md-button>
+                    <md-button class="md-raised md-primary" ng-click="$ctrl.login()">Login</md-button>
                 </div>
             </md-content>
         </div>

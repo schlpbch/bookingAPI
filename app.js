@@ -25,7 +25,7 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
     swaggerExpress.register(app)
     app.use(morgan(environmentConfiguration.morganFormat))
     app.use(express.static(path.join(__dirname, '/public')))
-    createReverseProxy(app, environmentConfiguration.backendReise)
+    createReverseProxy(app, environmentConfiguration)
     app.listen(environmentConfiguration.appPort)
 
     if (swaggerExpress.runner.swagger.paths['/offers']) {

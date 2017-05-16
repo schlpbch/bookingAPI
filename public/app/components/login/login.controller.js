@@ -4,4 +4,11 @@
 
 export default class LoginController {
 
+    constructor(authService) {
+        this.authService = authService
+    }
+
+    login(){
+        this.authService.login(this.username, this.password)
+    }
 }
