@@ -28,7 +28,11 @@
     height: 300px;
     left: 0;
     right: 0;
-    background-color: blue;
+    background: #2a28bb; /* Old Browsers */
+    background: -webkit-linear-gradient(top, #2a28bb, #c7ffe2); /*Safari 5.1-6*/
+    background: -o-linear-gradient(top, #2a28bb, #c7ffe2); /*Opera 11.1-12*/
+    background: -moz-linear-gradient(top, #2a28bb, #c7ffe2); /*Fx 3.6-15*/
+    background: linear-gradient(to bottom, #2a28bb, #c7ffe2); /*Standard*/
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -41,11 +45,27 @@
     z-index: 1;
     top: 100px;
     background: #ffffff;
-    width: 700px;
+    width: 40%;
     margin: 0 auto;
+}
+
+.loginBox {
+    padding: 60px;
 }
 
 .shadow {
     box-shadow: 1px 1px 7px 0px rgba(145, 145, 145, 0.5);
+
+}
+
+@media screen and (max-width: 1000px) {
+    .login-overlay .form-container {
+        width: 80%;
+        padding: 0;
+    }
+
+    .loginBox {
+        padding: 15px
+    }
 }
 
