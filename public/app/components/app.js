@@ -5,6 +5,7 @@ import 'angular-material'
 import 'angular-aria'
 import 'angular-messages'
 import 'ngclipboard'
+import 'angular-jwt'
 
 // Components
 import appController from './app.controller'
@@ -16,9 +17,11 @@ import offersModule from './offers/offers'
 import preebookingModule from './prebooking/prebooking'
 import bookingModule from './booking/booking'
 import commonModule from './common/common'
-import coreModule from './core/core.module';
+import coreModule from './core/core.module'
+import loginModule from './login/login'
+import securityModule from './security/security'
 
-angular.module('app', ['ngMaterial', 'ngRoute', 'ngclipboard', coreModule, toolbarModule, sideNavModule, travelWishModule, commonModule, connectionsModule, offersModule, preebookingModule, bookingModule]).config(function ($mdThemingProvider) {
+angular.module('app', ['ngMaterial', 'ngRoute', 'ngclipboard', 'angular-jwt', coreModule, toolbarModule, sideNavModule, travelWishModule, commonModule, connectionsModule, offersModule, preebookingModule, bookingModule, loginModule, securityModule]).config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
         .primaryPalette('blue')
         .accentPalette('orange')
@@ -28,3 +31,6 @@ angular.module('app', ['ngMaterial', 'ngRoute', 'ngclipboard', coreModule, toolb
         templateUrl: 'components/app.html'
     })
     .controller('AppCtrl', appController)
+    .constant('config', {
+        basicAuth_url: '/basicAuth/login'
+    });

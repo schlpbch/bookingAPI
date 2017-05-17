@@ -4,6 +4,7 @@
 module.exports = {
     backendReise: 'http://localhost:8080',
     backendOrch: 'http://localhost:8080',
+    basicAuth_url: 'https://zvs-api-test-ws.sbb.ch/login-jwt',
     appPort: 8080,
     morganFormat: 'dev'
 }

@@ -1,26 +1,44 @@
 /**
  * Created by kevinkreuzer on 05.05.17.
  */
+'use strict'
 const request = require('request')
+const createReverseProxy = (app, environmentConfiguration) => {
 
-const createReverseProxy = (app, backendReise) => {
-    const proxyRequest = (uri, req, res) => {
+    const proxyAPIRequest = (uri, req, res) => {
+        let backendReise = environmentConfiguration.backendReise
         request(`${backendReise}/api/${uri}${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
     }
     app.get('/redirect_api/locations*', function (req, res) {
-        proxyRequest('locations', req, res)
+        proxyAPIRequest('locations', req, res)
     })
     app.get('/redirect_api/trips*', function (req, res) {
-        proxyRequest('trips', req, res)
+        proxyAPIRequest('trips', req, res)
     })
     app.get('/redirect_api/offers*', function (req, res) {
-        proxyRequest('offers', req, res)
+        proxyAPIRequest('offers', req, res)
     })
     app.get('/redirect_api/prebookings*', function (req, res) {
-        proxyRequest('prebookings', req, res)
+        proxyAPIRequest('prebookings', req, res)
     })
     app.get('/redirect_api/bookings*', function (req, res) {
-        proxyRequest('bookings', req, res)
+        proxyAPIRequest('bookings', req, res)
+    })
+
+    app.get('/basicAuth/login', function (clientRequest, clientResponse) {
+        let headers = clientRequest.headers
+        let basicAuthURL = environmentConfiguration.basicAuth_url
+        //TODO: Use Certificate solution instead of rejectUnauthorized: false
+        request(basicAuthURL, {headers, rejectUnauthorized: false}, function (request, response) {
+            if (response.statusCode === 200) {
+                clientResponse.send(response.headers.authorization)
+            }
+            else {
+                clientResponse.status(401).send({
+                    message: 'Wrong username or password'
+                });
+            }
+        })
     })
 }
 module.exports = createReverseProxy
