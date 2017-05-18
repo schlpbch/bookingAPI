@@ -1,4 +1,4 @@
-# Roadmap 2017 R75-R84
+## Roadmap 2017 R75-R84
 ASC, TAK, DIW (18.05.2017)
 
 ### R75 Deep Link Relase
@@ -41,7 +41,7 @@ ASC, TAK, DIW (18.05.2017)
   - for offers
 - seat reservation
 - fulfilement:
- - ticket Layouting for KTUs (print attributes -> ticket)
+  - ticket Layouting for KTUs (print attributes -> ticket)
 
 ### R84 Best Prices Finder Release
 - product based distribution
