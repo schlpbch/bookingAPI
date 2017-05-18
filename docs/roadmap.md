@@ -3,11 +3,11 @@ ASC, TAK, DIW (18.05.2017)
 
 ### R75 Deep Link Relase
 - journey planning
- - get locations
- - get trips
+  - get locations
+  - get trips
 - deep linking
- - link to webshop B2C
- - link to mobile B2C
+  - link to webshop B2C
+  - link to mobile B2C
 
 ### R78 First Light Release
 - commercial registration (contract, bill put)
@@ -17,9 +17,9 @@ ASC, TAK, DIW (18.05.2017)
 
 - master data for locations (HD)
 
-- dsitribution per tickets (HD)
- - via eMail
- - via SMS
+- distribution per tickets (HD)
+  - via eMail
+  - via SMS
 
 - fullfilement
    - bar code
@@ -28,8 +28,8 @@ ASC, TAK, DIW (18.05.2017)
 
 - route based distribution (origin, destination, {via})
   - assortment
-   - City Tickets
-   - Verbund Tickets
+    - City Tickets
+    - Verbund Tickets
 
 ### R81 Version 1.0 Release
 - after sales: State of booking e.g., cancelled, printed,...
@@ -45,20 +45,20 @@ ASC, TAK, DIW (18.05.2017)
 ### R84 Best Prices Finder Release
 - product based distribution
 - assortment
- - STS passes
- - Tageskarte DV (prenom, name, birthday -> ticket)
- - RIT
- - tailor made ticket
+  - STS passes
+  - Tageskarte DV (prenom, name, birthday -> ticket)
+  - RIT
+  - tailor made ticket
 
 - best prices per time period
 
 ### R8x Future Release
 - assortment
- - Tageskarte Verbund (prenom, name, birthday -> ticket)
+  - Tageskarte Verbund (prenom, name, birthday -> ticket)
 - product information (fares & conditions)
 - direct booking
 - after sales: exchange
 - STS Sortiment
- - STS Pass
- - STS Flex Pass
+  - STS Pass
+  - STS Flex Pass
 - More than 1 person (family fares)
