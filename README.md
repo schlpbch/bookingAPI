@@ -14,6 +14,8 @@ Once the API is right, the API will be implemented of SBB's distribution system 
 
 More to come...
 
+Here  you can find a initial functional [road map](docs/roadmap.md).
+
 ## Installing
 The easiest way is to pull the docker image:
 
