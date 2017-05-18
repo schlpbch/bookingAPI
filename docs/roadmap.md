@@ -32,12 +32,13 @@ ASC, TAK, DIW (18.05.2017)
     - Verbund Tickets
 
 ### R81 Version 1.0 Release
-- after sales: State of booking e.g., cancelled, printed,...
-- after sales: Refund of booking
+- after sales: 
+  - state of booking e.g., cancelled, printed,...
+  - refund of a booking
 - more than 1 person (child, adult, senior)
 - more than 0 vias
-  -  for trips
-  -  for offers
+  - for trips
+  - for offers
 - seat reservation
 - fulfilement:
  - ticket Layouting for KTUs (print attributes -> ticket)
