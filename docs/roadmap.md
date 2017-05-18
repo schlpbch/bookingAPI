@@ -53,7 +53,8 @@ ASC, TAK, DIW (18.05.2017)
 
 - best prices per time period
 
-### R8x Future Release
+### R8x Future Releases (not scheduled yet)
+- location based trip search
 - assortment
   - Tageskarte Verbund (prenom, name, birthday -> ticket)
 - product information (fares & conditions)
