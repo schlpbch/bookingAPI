@@ -21,6 +21,7 @@
     "angular-material": "^1.1.4",
     "angular-messages": "^1.6.0",
     "angular-route": "^1.6.0",
+    "append-query": "^2.0.1",
     "express": "^4.14.1",
     "morgan": "^1.8.1",
     "ngclipboard": "^1.1.1",
