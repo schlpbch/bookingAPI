@@ -2,22 +2,15 @@
  * Created by kevinkreuzer on 05.05.17.
  */
 'use strict'
-const appendQuery = require('append-query')
 const request = require('request')
+const REDIRECT_API = '/redirect_api/'
 const createReverseProxy = (app, environmentConfiguration) => {
 
     const proxyAPIRequest = (baseURL, path, clientRequest, clientResponse) => {
         let headers = clientRequest.headers
-        let url = appendQuery(`${baseURL}/api/${path}`, clientRequest.query)
+        let url = clientRequest.url.replace(REDIRECT_API, `${environmentConfiguration.backendReise}/api/`)
         //TODO: Use Certificate solution instead of rejectUnauthorized: false
-        console.log('New Proxy: Calling ', url)
         request(url, {headers, rejectUnauthorized: false}).pipe(clientResponse)
-    }
-
-    const proxyAPIRequestOld = (uri, req, res) => {
-        let backendReise = environmentConfiguration.backendReise
-        console.log('Calling', `${backendReise}/api/${uri}${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`)
-        request(`${backendReise}/api/${uri}${req.params[0]}${req._parsedUrl.search ? req._parsedUrl.search : ''}`).pipe(res)
     }
 
     const proxyReiseRequest = (path, clientRequest, clientResponse) => {
@@ -39,6 +32,7 @@ const createReverseProxy = (app, environmentConfiguration) => {
     app.get('/redirect_api/prebookings*', function (clientRequest, clientResponse) {
         proxyReiseRequest('prebookings', clientRequest, clientResponse)
     })
+
     app.get('/redirect_api/bookings*', function (clientRequest, clientResponse) {
         proxyReiseRequest('bookings', clientRequest, clientResponse)
     })
