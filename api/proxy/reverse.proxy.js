@@ -26,7 +26,6 @@ const createReverseProxy = (app, environmentConfiguration) => {
 
     app.get('/redirect_api/locations*', function (clientRequest, clientResponse) {
         proxyReiseRequest('locations', clientRequest, clientResponse)
-        //proxyAPIRequestOld('locations', clientRequest, clientResponse)
     })
 
     app.get('/redirect_api/trips*', function (clientRequest, clientResponse) {
@@ -38,8 +37,7 @@ const createReverseProxy = (app, environmentConfiguration) => {
     })
 
     app.get('/redirect_api/prebookings*', function (clientRequest, clientResponse) {
-        //proxyReiseRequest('prebookings', clientRequest, clientResponse)
-        proxyAPIRequestOld('prebookings', clientRequest, clientResponse)
+        proxyReiseRequest('prebookings', clientRequest, clientResponse)
     })
     app.get('/redirect_api/bookings*', function (clientRequest, clientResponse) {
         proxyReiseRequest('bookings', clientRequest, clientResponse)
