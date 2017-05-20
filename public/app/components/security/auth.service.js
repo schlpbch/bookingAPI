@@ -2,7 +2,7 @@
  * Created by kevinkreuzer on 16.05.17.
  */
 const AUTH_KEY = 'bookingAPI.auth'
-const UNAUTHORIZED_USERNAME = 'Unauthorized'
+const UNAUTHORIZED_USERNAME = 'Dummy User'
 export default class AuthService {
 
     constructor($http, config, $window, jwtHelper) {
