@@ -1,14 +1,11 @@
 <md-toolbar class="md-toolbar-tools">
-    <md-button ng-click="$ctrl.toggleSidenav('left')" aria-label="Menu">
-        <md-icon>menu</md-icon>
-    </md-button>
-    <h3>booking App</h3>
+  <md-icon class="toggle-menu" ng-click="$ctrl.toggleSidenav('left')" aria-label="Menu">menu</md-icon>
+  <span flex>booking App</span>
+  <md-list-item hide-xs class="user-infos">
     <span flex></span>
-    <md-list-item hide-xs class="user-infos">
-        <span flex></span>
-        <md-icon class="avatar">person</md-icon>
-        <span>{{ $ctrl.authService.getUserNumber() }}</span>
-    </md-list-item>
-    <md-icon class="toggle-settings" ng-click="$ctrl.showAdvanced($event)">more_vert</md-icon>
-    <md-icon class="logout-button" ng-click="$ctrl.logout()">input</md-icon>
+    <md-icon class="avatar">person</md-icon>
+    <span>{{ $ctrl.authService.getUserNumber() }}</span>
+  </md-list-item>
+  <md-icon class="toggle-settings" ng-click="$ctrl.showAdvanced($event)" aria-label="Settings">more_vert</md-icon>
+  <md-icon class="logout-button" ng-click="$ctrl.logout()" aria-label="Logout">input</md-icon>
 </md-toolbar>

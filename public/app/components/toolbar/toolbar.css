@@ -1,18 +1,23 @@
 .user-infos {
-    padding-right: 0px !important;
+  padding-right: 0px !important;
 }
 
 .avatar {
-    margin-right: 15px;
+  margin-right: 15px;
 }
 
+.toggle-menu {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+
 .toggle-settings {
-    cursor: pointer;
-    margin-left: 20px;
-    margin-right: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .logout-button {
-    margin-right: 10px;
-    cursor: pointer;
+  cursor: pointer;
 }
