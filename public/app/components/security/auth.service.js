@@ -17,8 +17,9 @@ export default class AuthService {
         let headers = {"Authorization": "Basic " + credentials}
         return this.$http.get(this.config.basicAuth_url, {headers: headers})
             .then(res => {
-                this._storeToken(res.data)
-            })
+                    this._storeToken(res.data)
+                }
+            )
     }
 
     getAuthHeader() {

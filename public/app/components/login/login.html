@@ -20,7 +20,9 @@
             </md-input-container>
             <div layout="row" layout-align="center center">
                 <md-button class="md-raised md-primary" ng-click="$ctrl.login()">Login</md-button>
-                <api-loader ng-if="true === false"></api-loader>
+            </div>
+            <div style="margin: 0 auto;">
+                <api-loader ng-if="$ctrl.isLoginInProcess"></api-loader>
             </div>
         </md-content>
     </md-dialog-content>
