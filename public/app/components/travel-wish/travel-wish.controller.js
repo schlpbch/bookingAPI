@@ -4,6 +4,6 @@
 export default class ReiseWunschController {
     constructor(travelWishService) {
         this.travelWishService = travelWishService
-        this.isArrival = 'Departure Time'
+        this.departureOrArrival = 'Departure Time'
     }
 }
