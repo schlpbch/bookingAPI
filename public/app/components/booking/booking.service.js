@@ -3,60 +3,63 @@
  */
 
 export default class BookingService {
-  constructor ($http, $mdDialog, bookingStore, errorLogService) {
-    this.$http = $http
-    this.$mdDialog = $mdDialog
-    this.bookingStore = bookingStore
-    this.errorLogService = errorLogService
-  }
+    constructor($http, $mdDialog, bookingStore, errorLogService, authService) {
+        this.$http = $http
+        this.$mdDialog = $mdDialog
+        this.bookingStore = bookingStore
+        this.errorLogService = errorLogService
+        this.authService = authService
+    }
 
-  printBooking (item) {
-    window.location.href = '../redirect_' + item._links.fulfil.href
-  }
+    printBooking(item) {
+        window.location.href = '../redirect_' + item._links.fulfil.href
+    }
 
-  cancelBooking (item) {
-    this.$http.get('../' + item._links.cancel.href)
-      .then(res => {
-        this.bookingStore.cancellation = res.data
-        this.showCancelDialog()
-      }, (error) => {
-        this.errorLogService.logError(error)
-      })
-  }
+    cancelBooking(item) {
+        let headers = this.authService.getAuthHeader()
+        this.$http.get('../' + item._links.cancel.href, {headers})
+            .then(res => {
+                this.bookingStore.cancellation = res.data
+                this.showCancelDialog()
+            }, (error) => {
+                this.errorLogService.logError(error)
+            })
+    }
 
-  showCancelDialog () {
-    this.$mdDialog.show(
-      this.$mdDialog.alert()
-      .parent(angular.element(document.querySelector('#popupContainer')))
-      .clickOutsideToClose(true)
-      .title('Booking cancelled: ' + this.bookingStore.cancellation.bookingId)
-      .textContent('Your booking has been successfully cancelled.')
-      .ariaLabel('Cancellation Dialog')
-      .ok('Ok')
-      .targetEvent(event)
-    )
-  }
+    showCancelDialog() {
+        this.$mdDialog.show(
+            this.$mdDialog.alert()
+                .parent(angular.element(document.querySelector('#popupContainer')))
+                .clickOutsideToClose(true)
+                .title('Booking cancelled: ' + this.bookingStore.cancellation.bookingId)
+                .textContent('Your booking has been successfully cancelled.')
+                .ariaLabel('Cancellation Dialog')
+                .ok('Ok')
+                .targetEvent(event)
+        )
+    }
 
-  refundBooking (item) {
-    this.$http.get('../' + item._links.refund.href)
-      .then(res => {
-        this.bookingStore.refund = res.data
-        this.showRefundDialog()
-      }, (error) => {
-        this.errorLogService.logError(error)
-      })
-  }
+    refundBooking(item) {
+        let headers = this.authService.getAuthHeader()
+        this.$http.get('../' + item._links.refund.href, {headers})
+            .then(res => {
+                this.bookingStore.refund = res.data
+                this.showRefundDialog()
+            }, (error) => {
+                this.errorLogService.logError(error)
+            })
+    }
 
-  showRefundDialog () {
-    this.$mdDialog.show(
-      this.$mdDialog.alert()
-      .parent(angular.element(document.querySelector('#popupContainer')))
-      .clickOutsideToClose(true)
-      .title('Booking refunded: ' + this.bookingStore.refund.bookingId)
-      .textContent('The amount of xyz CHF has been refunded to your account.\nTODO: Fully specify semantics.')
-      .ariaLabel('Refund Dialog')
-      .ok('Ok')
-      .targetEvent(event)
-    )
-  }
+    showRefundDialog() {
+        this.$mdDialog.show(
+            this.$mdDialog.alert()
+                .parent(angular.element(document.querySelector('#popupContainer')))
+                .clickOutsideToClose(true)
+                .title('Booking refunded: ' + this.bookingStore.refund.bookingId)
+                .textContent('The amount of xyz CHF has been refunded to your account.\nTODO: Fully specify semantics.')
+                .ariaLabel('Refund Dialog')
+                .ok('Ok')
+                .targetEvent(event)
+        )
+    }
 }

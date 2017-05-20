@@ -16,14 +16,19 @@ export default class AuthService {
         let headers = {"Authorization": "Basic " + credentials}
         return this.$http.get(this.config.basicAuth_url, {headers: headers})
             .then(res => {
-                if (res.data) {
-                    this._storeToken(res.data)
-                }
+                this._storeToken(res.data)
             })
     }
 
+    getAuthHeader() {
+        return {
+            'Authorization': 'Bearer ' + this._extractTokenFromStorage()
+        }
+    }
+
     _storeToken(tokenWithPrefix) {
-        this.$window.localStorage.setItem(AUTH_KEY, tokenWithPrefix)
+        const token = tokenWithPrefix ? tokenWithPrefix.split(' ')[1] : undefined
+        this.$window.localStorage.setItem(AUTH_KEY, token)
     }
 
     _isTokenExpired(authToken) {
@@ -48,8 +53,7 @@ export default class AuthService {
     }
 
     _extractTokenFromStorage() {
-        let tokenWithPrefix = this.$window.localStorage.getItem(AUTH_KEY)
-        return tokenWithPrefix ? tokenWithPrefix.split(' ')[1] : undefined
+        return this.$window.localStorage.getItem(AUTH_KEY)
     }
 
     logout() {

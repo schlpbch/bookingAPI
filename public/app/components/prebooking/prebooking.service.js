@@ -3,15 +3,17 @@
  */
 
 export default class PreebookingService {
-    constructor(bookingStore, $http, tabService, errorLogService) {
+    constructor(bookingStore, $http, tabService, errorLogService, authService) {
         this.bookingStore = bookingStore
         this.$http = $http
         this.tabService = tabService
         this.errorLogService = errorLogService
+        this.authService = authService
     }
 
     getBooking(item) {
-        this.$http.get('../redirect_' + item._links.confirm.href)
+        let headers = this.authService.getAuthHeader()
+        this.$http.get('../redirect_' + item._links.confirm.href, {headers})
             .then(res => {
                 this.bookingStore.bookings = res.data
                 this.tabService.goToNextTab()
