@@ -1,7 +1,7 @@
 /**
  * Created by kevinkreuzer on 16.03.17.
  */
-import loginController from '../login/login.controller'
+import basicAuthController from '../login/basicAuth-dialog.controller'
 
 export default class SidenavController {
     constructor($mdDialog) {
@@ -11,9 +11,9 @@ export default class SidenavController {
     showBasicAuthLogin(ev) {
         console.log('Hier')
         this.$mdDialog.show({
-            controller: loginController,
+            controller: basicAuthController,
             controllerAs: '$ctrl',
-            templateUrl: 'components/login/login.html',
+            templateUrl: 'components/login/basicAuth-dialog.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: true,
