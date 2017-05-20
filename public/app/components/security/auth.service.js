@@ -16,13 +16,11 @@ export default class AuthService {
         let headers = {"Authorization": "Basic " + credentials}
         return this.$http.get(this.config.basicAuth_url, {headers: headers})
             .then(res => {
-                if (res.data) {
-                    this._storeToken(res.data)
-                }
+                this._storeToken(res.data)
             })
     }
 
-    getAuthHeader(){
+    getAuthHeader() {
         return {
             'Authorization': 'Bearer ' + this._extractTokenFromStorage()
         }
