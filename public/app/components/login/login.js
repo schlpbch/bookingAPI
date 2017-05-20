@@ -3,13 +3,13 @@
  */
 let moduleName = 'login'
 
-import loginController from './login.controller'
-import loginStyles from './login.css'
+import basicAuthController from './basicAuth-dialog.controller'
+import basicAuthStyles from './basicAuth-dialog.css'
 
 angular.module(moduleName, [])
-    .component('login', {
-        controller: loginController,
-        templateUrl: 'components/login/login.html'
+    .component('basicAuth', {
+        controller: basicAuthController,
+        templateUrl: 'components/login/basicAuth-dialog.html'
     })
 
 export default moduleName

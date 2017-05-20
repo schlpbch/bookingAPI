@@ -2,6 +2,7 @@
  * Created by kevinkreuzer on 16.05.17.
  */
 const AUTH_KEY = 'bookingAPI.auth'
+const UNAUTHORIZED_USERNAME = 'Dummy User'
 export default class AuthService {
 
     constructor($http, config, $window, jwtHelper) {
@@ -16,8 +17,9 @@ export default class AuthService {
         let headers = {"Authorization": "Basic " + credentials}
         return this.$http.get(this.config.basicAuth_url, {headers: headers})
             .then(res => {
-                this._storeToken(res.data)
-            })
+                    this._storeToken(res.data)
+                }
+            )
     }
 
     getAuthHeader() {
@@ -36,12 +38,13 @@ export default class AuthService {
     }
 
     getUserNumber() {
-        return this._getDecodedToken().sub
+        let decodedToken = this._getDecodedToken()
+        return decodedToken ? decodedToken.sub : UNAUTHORIZED_USERNAME
     }
 
     _getDecodedToken() {
         let token = this._extractTokenFromStorage()
-        return this.jwtHelper.decodeToken(token)
+        return token ? this.jwtHelper.decodeToken(token) : undefined
     }
 
     hasValidToken() {

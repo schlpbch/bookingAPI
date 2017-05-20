@@ -1,0 +1,29 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Login with Username and Password</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="$ctrl.closeDialog()">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content class="login-dialog-content">
+        <md-content class="login-container" layout="column">
+            <md-input-container>
+                <label>Username</label>
+                <input type="text" ng-model="$ctrl.username"/>
+            </md-input-container>
+            <md-input-container>
+                <label>Password</label>
+                <input type="password" ng-model="$ctrl.password"/>
+            </md-input-container>
+            <div layout="row" layout-align="center center">
+                <md-button class="md-raised md-primary" ng-click="$ctrl.login()">Login</md-button>
+            </div>
+            <div style="margin: 0 auto;">
+                <api-loader ng-if="$ctrl.isLoginInProcess"></api-loader>
+            </div>
+        </md-content>
+    </md-dialog-content>
+</md-dialog>
