@@ -50,7 +50,7 @@
   },
   "scripts": {
     "serve": "concurrently \"npm run watchify\" \"npm run browsersync\"",
-    "browsersync": "browser-sync start --startPath='./public' --server --files './public/*.html, ./public/bundle.js'",
+    "browsersync": "browser-sync start --startPath='./public/app' --server --files './public/*.html, ./public/bundle.js'",
     "watchify": "watchify -t browserify-css public/app/components/app.js -o public/app/bundle.js -d -t [ babelify --presets [ es2015 react ] ]",
     "predev": "browserify -t browserify-css public/app/components/app.js -o public/app/bundle.js -d -t [ babelify --presets [ es2015 react ] ]",
     "dev": "node app.js",
