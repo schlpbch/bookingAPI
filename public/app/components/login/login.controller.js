@@ -12,7 +12,7 @@ export default class LoginController {
     login() {
         this.isLoginInProcess = true
         this.authService.login(this.username, this.password)
-            .then(_ => {
+            .then(() => {
                 this.isLoginInProcess = false
                 this.closeDialog()
             })
