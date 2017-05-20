@@ -4,13 +4,21 @@
 
 export default class LoginController {
 
-    constructor(authService) {
+    constructor(authService, $mdDialog) {
         this.authService = authService
+        this.$mdDialog = $mdDialog
     }
 
-    login(){
+    login() {
         this.isLoginInProcess = true
         this.authService.login(this.username, this.password)
-            .then(_ => this.isLoginInProcess = false)
+            .then(_ => {
+                this.isLoginInProcess = false
+                this.closeDialog()
+            })
+    }
+
+    closeDialog() {
+        this.$mdDialog.cancel();
     }
 }
