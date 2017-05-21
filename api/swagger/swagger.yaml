@@ -18,7 +18,7 @@ info:
     url: http://booking.sbb.ch/
   license:
     name: SBB
-    url: https://data.sbb.ch/page/licence/
+    url: http://booking.sbb.ch/app/LICENSE.txt
 #host: api.sbb.ch
 #host: localhost:8080
 basePath: /api
