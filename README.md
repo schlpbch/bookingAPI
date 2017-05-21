@@ -14,6 +14,8 @@ Once the API is right, the API will be implemented of SBB's distribution system 
 
 More to come...
 
+Here  you can find a initial functional [road map](docs/roadmap.md).
+
 ## Installing
 The easiest way is to pull the docker image:
 
@@ -42,19 +44,18 @@ The web app and the API are then running at http://localhost/
 
 Using [docker-compose](https://docs.docker.com/compose/) a software defined
 firewall (see [NGINX](https://www.nginx.com/))
-is added in front of the mocked server and is linked to the mock server
-server using a software defined  network. This allows us to test
-authentication methods using JSON Web Tokens (JWT) later.
+is added in front of the mocked server and is linked to the mock server using a software defined  network. This allows us to test
+authentication methods using JSON Web Tokens ([JWT](https://jwt.io)) later.
 
 See [docker-compose.yml](docker-compose.yml) for details.
 
-To start simply us
+To start simply use
 
 ```bash
   docker-compose up
 ```
 
-The server uses self signed certificates, must be replaced
+The server uses self signed certificates, they must be replaced
 with real ones for production!
 
 ## Live App and Documentation

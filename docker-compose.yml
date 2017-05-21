@@ -13,6 +13,7 @@ services:
       - "443:443"
     volumes:
       - ./config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf/
+      - ./config/nginx/.htpasswd:/etc/nginx/.htpasswd
       - ./config/nginx/ssl/:/etc/nginx/ssl/
     depends_on:
       - mock_server
@@ -20,7 +21,8 @@ services:
       - front
 
   mock_server:
-    image: schlpbch/bookingapi:latest
+    build: .
+    image: schlpbch/bookingapi:develop
     ports:
       - "8080:8080"
     networks:

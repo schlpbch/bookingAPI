@@ -9,7 +9,7 @@ swagger: '2.0'
 
 ## API Information
 info:
-  version: '0.0.10'
+  version: '0.0.11'
   title: "Simple öV booking API"
   description: "A simple API to book öV tickets in Switzerland."
   contact:

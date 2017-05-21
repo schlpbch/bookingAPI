@@ -3,15 +3,17 @@
  */
 
 export default class ConnectionService {
-    constructor(bookingStore, tabService, $http, errorLogService) {
+    constructor(bookingStore, tabService, $http, errorLogService, authService) {
         this.bookingStore = bookingStore
         this.tabService = tabService
         this.$http = $http
         this.errorLogService = errorLogService
+        this.authService = authService
     }
 
     getOffers(item) {
-        this.$http.get('../redirect_' + item._links.offers.href + '&age=42&reduction=none')
+        let headers = this.authService.getAuthHeader()
+        this.$http.get('../redirect_' + item._links.offers.href + '&age=42&reduction=none', {headers})
             .then((res) => {
                 this.bookingStore.offers = res.data
                 this.tabService.goToNextTab()

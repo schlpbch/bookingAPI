@@ -6,13 +6,9 @@ export default class StationController {
     this.$timeout = $timeout
     this.$q = $q
     this.$log = $log
-    this.stationService = stationService;
+    this.stationService = stationService
     this.stations = []
     this.isDisabled = false
-  }
-
-  newStation (station) {
-    alert("Sorry! You'll need to create a Constitution for " + station + ' first!')
   }
 
   querySearch (query) {
@@ -21,7 +17,7 @@ export default class StationController {
         this.stations = res.data.map(location => ({
           display: location.name,
           value: location.id
-        }));
+        }))
       })
     return this.stations
   }

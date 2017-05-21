@@ -1,6 +1,6 @@
 {
   "name": "bookingAPI",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "private": true,
   "description": "A simple API to book öV tickets in Switzerland.",
   "keywords": [
@@ -17,6 +17,7 @@
     "angular": "^1.6.0",
     "angular-animate": "^1.6.0",
     "angular-aria": "^1.6.0",
+    "angular-jwt": "^0.1.9",
     "angular-material": "^1.1.4",
     "angular-messages": "^1.6.0",
     "angular-route": "^1.6.0",
@@ -49,7 +50,7 @@
   },
   "scripts": {
     "serve": "concurrently \"npm run watchify\" \"npm run browsersync\"",
-    "browsersync": "browser-sync start --startPath='./public' --server --files './public/*.html, ./public/bundle.js'",
+    "browsersync": "browser-sync start --startPath='./public/app' --server --files './public/*.html, ./public/bundle.js'",
     "watchify": "watchify -t browserify-css public/app/components/app.js -o public/app/bundle.js -d -t [ babelify --presets [ es2015 react ] ]",
     "predev": "browserify -t browserify-css public/app/components/app.js -o public/app/bundle.js -d -t [ babelify --presets [ es2015 react ] ]",
     "dev": "node app.js",

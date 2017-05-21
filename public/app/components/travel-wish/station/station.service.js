@@ -3,11 +3,15 @@
  */
 
 export default class StationService {
-  constructor ($http) {
+  constructor ($http, authService) {
     this.$http = $http
+    this.authService = authService
   }
 
   getStations (query) {
-    return this.$http.get(`../redirect_api/locations?q=${query}`)
+    let headers = this.authService.getAuthHeader()
+    return this.$http.get(`../redirect_api/locations?q=${query}`, {
+      headers
+    })
   }
 }

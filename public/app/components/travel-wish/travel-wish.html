@@ -1,15 +1,14 @@
 <md-tab label="Travel Wish">
   <md-content class="md-padding">
     <form>
-      <api-station title="'Origin'" selected-item="$ctrl.originId"></api-station>
-      <api-station title="'Destination'" selected-item="$ctrl.destinationId"></api-station>
-      <br/>
-      <md-switch class="md-subhead" ng-model="$ctrl.isArrival" aria-label="Switch" ng-true-value="'Arrival Time'" ng-false-value="'Departure Time'">
-        {{ $ctrl.isArrival}}
+      <api-station title="'Origin'" selected-item="$ctrl.originId" required></api-station>
+      <api-station title="'Destination'" selected-item="$ctrl.destinationId" required></api-station>
+      <md-switch class="md-subhead" ng-model="$ctrl.departureOrArrival" aria-label="Switch" ng-true-value="'Arrival Time'" ng-false-value="'Departure Time'">
+        {{ $ctrl.departureOrArrival}}
       </md-switch>
       <md-input-container>
         <label>Date</label>
-        <md-datepicker ng-model="$ctrl.date" md-placeholder="2017/09/02"></md-datepicker>
+        <md-datepicker ng-model="$ctrl.date" md-placeholder="2017/09/02" required></md-datepicker>
       </md-input-container>
       <md-input-container>
         <label>Time</label>
