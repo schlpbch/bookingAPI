@@ -13,10 +13,8 @@
     </md-card-title-text>
   </md-card-title>
   <md-card-actions layout="row" layout-align="end center">
-    <md-button class="md-raised" href="{{$ctrl.trip._links.link2WebshopB2C.href}}">Book@www.sbb.ch</md-button>
-    <!--
-    <md-button class="md-raised" href="{{$ctrl.trip._links.link2MobileB2C.href}}">Book in Mobile App</md-button>
-    -->
+    <md-button class="md-raised" href="{{$ctrl.trip._links.link2WebshopB2C.href}}">Book in webshop</md-button>
+    <md-button class="md-raised" href="{{$ctrl.trip._links.link2MobileB2C.href}}">Book in mobile</md-button>
     <md-button class="md-raised md-primary" ng-click="$ctrl.connectionService.getOffers($ctrl.trip)">Offer</md-button>
   </md-card-actions>
 </md-card>
