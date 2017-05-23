@@ -9,6 +9,7 @@
         Date of Departure: {{$ctrl.trip.segments[0].origin.date}}, Time: {{$ctrl.trip.segments[0].origin.time}}<br>
         Date of Arrival: {{$ctrl.trip.segments[0].destination.date}}, Time: {{$ctrl.trip.segments[0].destination.time}}
       </span>
+      <span>from: {{$ctrl.connectionService.getPrice($ctrl.trip)}}</span>
     </md-card-title-text>
   </md-card-title>
   <md-card-actions layout="row" layout-align="end center">
