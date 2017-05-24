@@ -1,4 +1,23 @@
 <md-card class="md-3-line">
+          <md-card-header>
+          <md-card-avatar>
+            <md-icon>train</md-icon>
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">{{$ctrl.trip.segments[0].origin.name}} &ndash; {{$ctrl.trip.segments[0].destination.name}}</span>
+            <span class="md-subhead">Departure: {{$ctrl.trip.segments[0].origin.date}} {{$ctrl.trip.segments[0].origin.time}}</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-content>
+          <div md-layout="row">
+        <p>Date of Departure: {{$ctrl.trip.segments[0].origin.date}}, Time: {{$ctrl.trip.segments[0].origin.time}}<br>
+        Date of Arrival: {{$ctrl.trip.segments[0].destination.date}}, Time: {{$ctrl.trip.segments[0].destination.time}}</p>
+          </div>
+        <div layout="row" layout-align="end center">
+      <md-chips ng-model="$ctrl.prices" readonly="$ctrl.readonly" md-removable="$ctrl.removable"></md-chips>
+        </div>
+        </md-content>
+        <!--
   <md-card-title>
     <md-card-title-text>
       <span class="md-subhead">tripId: {{$ctrl.trip.tripId}}</span>
@@ -9,7 +28,7 @@
         Date of Departure: {{$ctrl.trip.segments[0].origin.date}}, Time: {{$ctrl.trip.segments[0].origin.time}}<br>
         Date of Arrival: {{$ctrl.trip.segments[0].destination.date}}, Time: {{$ctrl.trip.segments[0].destination.time}}
       </span>
-      <span>from: {{$ctrl.connectionService.getPrice($ctrl.trip)}}</span>
+      -->
     </md-card-title-text>
   </md-card-title>
   <md-card-actions layout="row" layout-align="end center">
@@ -17,4 +36,5 @@
     <md-button class="md-raised" href="{{$ctrl.trip._links.link2MobileB2C.href}}">Book in mobile</md-button>
     <md-button class="md-raised md-primary" ng-click="$ctrl.connectionService.getOffers($ctrl.trip)">Offer</md-button>
   </md-card-actions>
+
 </md-card>
