@@ -8,13 +8,15 @@ export default class ConnectionDetailController {
     this.connectionService = connectionService
     this.prices = [];
     this.readonly = true;
-    this.removable =false;
+    this.removable = false;
+    this.loadingPrices = true;
 
     this.$onChanges = function (changes) {
       if (angular.isDefined(changes.trip.currentValue)) {
         this.getPrices()
       }
     }
+    
   }
 
   getPrices() {
@@ -24,7 +26,9 @@ export default class ConnectionDetailController {
 
         for (var index = 0; index < res.data.length; index++) {
           this.prices.push(res.data[index].description + " CHF " + res.data[index].price)
-        }        
+        }
+
+        this.loadingPrices = false
       }, (error) => {
         this.connectionService.errorLogService.logError(error)
       })
