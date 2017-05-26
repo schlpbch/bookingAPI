@@ -5,6 +5,8 @@ module.exports = {
 }
 
 function trips (req, res) {
+  // TODO: trip with multiple segments
+  
   var trip1 = {
     tripId: 'trip-rec-context1',
     segments: [{
