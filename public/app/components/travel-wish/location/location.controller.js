@@ -1,7 +1,7 @@
 /**
  * Created by kevinkreuzer on 17.03.17.
  */
-export default class StationController {
+export default class LocationController {
   constructor ($timeout, $q, $log, stationService) {
     this.$timeout = $timeout
     this.$q = $q

@@ -2,7 +2,7 @@
  * Created by ue69708 on 11.04.2017.
  */
 
-export default class StationService {
+export default class LocationService {
   constructor ($http, authService) {
     this.$http = $http
     this.authService = authService
