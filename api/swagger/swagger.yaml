@@ -10,8 +10,8 @@ swagger: '2.0'
 ## API Information
 info:
   version: '0.0.11'
-  title: "Simple öV booking API"
-  description: "A simple API to book öV tickets in Switzerland."
+  title: "Simple booking API for public transport"
+  description: "A simple API to book tickets for public transport in Switzerland."
   contact:
     name: Team SVS Vertrieb
     email: andreas.schlapbach@sbb.ch
@@ -131,6 +131,7 @@ paths:
           type: string
           format: dateTime
           default: '20:22'
+
       responses:
         200:
           description: "A list of possible trips matching the specified travel wishes."
@@ -380,7 +381,7 @@ paths:
       description:
         'Refund the booking. Two types of refund are to be supported, full and
         partial.
-        <br><br>
+
         ToDo: Fully specify (alias,...).'
 
       operationId: refund
