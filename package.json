@@ -30,7 +30,7 @@
     "watchify": "^3.9.0"
   },
   "devDependencies": {
-    "autotrack": "^2.4.0",
+    "autotrack": "^2.4.1",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-react": "^6.24.1",
     "babelify": "^7.3.0",

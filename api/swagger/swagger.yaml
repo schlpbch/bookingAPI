@@ -506,18 +506,23 @@ definitions:
   price:
     type: object
     required:
-      - description
-      - price
+      - normalPrices
       - _links
     properties:
-      description:
-        description: 'A description of the priced element.'
-        type: string
-        default: 'Normal fare ticket'
-      price:
-        description: "Price of the trip"
-        type: integer
-        default: 22
+      normalPrices:
+        description: 'Includes the normal fare prices of a trip for second and
+          first class with and without half-fare reduction. Thus, in total four
+          prices are returned. The prices are in Swiss cents.'
+        type: array
+        items:
+          type: integer
+      superSaverPrices:
+        description: 'Includes the super fare prices of a trip for second and
+          first class with and without half-fare reduction. Thus, in total four
+          prices are returned. The prices are in Swiss cents.'
+        type: array
+        items:
+          type: integer
       _links:
         $ref: '#/definitions/price_links'
 
@@ -525,11 +530,8 @@ definitions:
     type: object
     required:
       - self
-      - offer
     properties:
      self:
-       $ref: '#/definitions/uri'
-     offer:
        $ref: '#/definitions/uri'
 
   offer:
