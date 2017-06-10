@@ -8,7 +8,7 @@ function trips (req, res) {
   // TODO: trip with multiple segments
 
   var trip1 = {
-    tripId: 'trip-rec-context1',
+    tripId: 'reccon1',
     segments: [{
       origin: {
         id: '8507000',
@@ -52,7 +52,7 @@ function trips (req, res) {
   trip1['_links'] = links1
 
   var trip2 = {
-    tripId: 'trip-rec-context2',
+    tripId: 'reccon2',
     segments: [{
       origin: {
         id: '8507000',

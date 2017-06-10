@@ -1,6 +1,7 @@
 <md-card class="md-3-line">
   <md-card-title>
     <md-card-title-text>
+      <span class="md-subhead">tripId: {{$ctrl.trip.tripId}}</span>
       <span class="md-headline">
         <md-icon>train</md-icon>
         {{$ctrl.trip.segments[0].origin.name}} &ndash;
@@ -16,7 +17,7 @@
       </ul>
       <div class="md-body-2" layout="row" layout-align="end center">
         <md-progress-circular md-mode="indeterminate" md-diameter="20px" ng-show="$ctrl.loadingPrices"></md-progress-circular>
-        <b>from {{$ctrl.price | number: 2}} CHF</b>
+        <b>from {{($ctrl.price / 100)| number: 2}} CHF</b>
       </div>
     </md-card-title-text>
   </md-card-title>

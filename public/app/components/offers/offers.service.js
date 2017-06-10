@@ -3,22 +3,25 @@
  */
 
 export default class OffersService {
-    constructor(bookingStore, tabService, $http, errorLogService, authService) {
-        this.bookingStore = bookingStore
-        this.tabService = tabService
-        this.$http = $http
-        this.errorLogService = errorLogService
-        this.authService = authService
-    }
+  constructor (bookingStore, tabService, $http, errorLogService, authService) {
+    this.bookingStore = bookingStore
+    this.tabService = tabService
+    this.$http = $http
+    this.errorLogService = errorLogService
+    this.authService = authService
+  }
 
-    getPrebooking(item) {
-        let headers = this.authService.getAuthHeader()
-        this.$http.get('../redirect_' + item._links.prebook.href + '?firstname=Hans&lastname=Mustermann', {headers})
-            .then(res => {
-                this.bookingStore.prebookings = res.data
-                this.tabService.goToNextTab()
-            }, (error) => {
-                this.errorLogService.logError(error)
-            })
-    }
+  getPrebooking (item) {
+    let headers = this.authService.getAuthHeader()
+    let url = '../redirect_' + item._links.prebook.href + '?firstname=Hans&lastname=Mustermann'
+    this.$http.get(url, {
+      headers
+    })
+      .then(res => {
+        this.bookingStore.prebookings = res.data
+        this.tabService.goToNextTab()
+      }, (error) => {
+        this.errorLogService.logError(error)
+      })
+  }
 }
