@@ -16,7 +16,7 @@
       </ul>
       <div class="md-body-2" layout="row" layout-align="end center">
         <md-progress-circular md-mode="indeterminate" md-diameter="20px" ng-show="$ctrl.loadingPrices"></md-progress-circular>
-        <b>{{$ctrl.price}}</b>
+        <b>from {{$ctrl.price | number: 2}} CHF</b>
       </div>
     </md-card-title-text>
   </md-card-title>

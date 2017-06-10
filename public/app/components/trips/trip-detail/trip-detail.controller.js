@@ -31,7 +31,7 @@ export default class ConnectionDetailController {
         } else {
           price = res.data.superSaverPrices[0]
         }
-        this.price = 'from ' + (price / 100) + ' CHF'
+        this.price = price / 100
         this.loadingPrices = false
       }, (error) => {
         this.connectionService.errorLogService.logError(error)
