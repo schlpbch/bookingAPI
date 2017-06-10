@@ -6,19 +6,21 @@ module.exports = {
 
 function trips (req, res) {
   // TODO: trip with multiple segments
-  
+
   var trip1 = {
     tripId: 'trip-rec-context1',
     segments: [{
       origin: {
         id: '8507000',
         name: 'Bern',
+        platform: '6',
         date: '2017-06-14',
         time: '20:04'
       },
       destination: {
         id: '8507100',
         name: 'Thun',
+        platform: '1',
         date: '2017-06-14',
         time: '20:22'
       }
@@ -55,12 +57,14 @@ function trips (req, res) {
       origin: {
         id: '8507000',
         name: 'Bern',
+        platform: '6',
         date: '2017-06-14',
         time: '20:34'
       },
       destination: {
         id: '8507100',
         name: 'Thun',
+        platform: '1',
         date: '2017-06-14',
         time: '20:52'
       }

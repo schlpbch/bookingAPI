@@ -6,7 +6,7 @@ export default class ConnectionDetailController {
   constructor (bookingStore, connectionService) {
     this.bookingStore = bookingStore
     this.connectionService = connectionService
-    this.prices = []
+    this.price = ''
     this.readonly = true
     this.removable = false
     this.loadingPrices = true
@@ -31,7 +31,7 @@ export default class ConnectionDetailController {
         } else {
           price = res.data.superSaverPrices[0]
         }
-        this.prices.push(price / 100 + ' CHF')
+        this.price = 'from ' + (price / 100) + ' CHF'
         this.loadingPrices = false
       }, (error) => {
         this.connectionService.errorLogService.logError(error)

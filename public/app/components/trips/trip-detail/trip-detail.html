@@ -2,15 +2,21 @@
   <md-card-title>
     <md-card-title-text>
       <span class="md-headline">
-      <md-icon>train</md-icon>
-       {{$ctrl.trip.segments[0].origin.name}} &ndash; {{$ctrl.trip.segments[0].destination.name}}</span>
-      <ul>
-        <li>{{$ctrl.trip.segments[0].origin.time}} &ndash; {{$ctrl.trip.segments[0].origin.name}}</li>
-        <li>{{$ctrl.trip.segments[0].destination.time}} &ndash; {{$ctrl.trip.segments[0].destination.name}}</li>
+        <md-icon>train</md-icon>
+        {{$ctrl.trip.segments[0].origin.name}} &ndash;
+        {{$ctrl.trip.segments[0].destination.name}}
+     </span>
+      <ul class="md-body-1">
+        <li>
+          {{$ctrl.trip.segments[0].origin.time}} &ndash; {{$ctrl.trip.segments[0].origin.name}}, Platform {{$ctrl.trip.segments[0].origin.platform}}
+        </li>
+        <li>
+          {{$ctrl.trip.segments[0].destination.time}} &ndash; {{$ctrl.trip.segments[0].destination.name}}, Platform {{$ctrl.trip.segments[0].destination.platform}}
+        </li>
       </ul>
-      <div layout="row" layout-align="end center">
+      <div class="md-body-2" layout="row" layout-align="end center">
         <md-progress-circular md-mode="indeterminate" md-diameter="20px" ng-show="$ctrl.loadingPrices"></md-progress-circular>
-        <md-chips ng-model="$ctrl.prices" readonly="$ctrl.readonly" md-removable="$ctrl.removable"></md-chips>
+        <b>{{$ctrl.price}}</b>
       </div>
     </md-card-title-text>
   </md-card-title>
