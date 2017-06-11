@@ -19,7 +19,7 @@ function offers (req, res) {
     let offerDV = {
       offerId: '1001',
       description: 'Offer normal fare',
-      price: 22,
+      price: 1660,
       qualityOfService: '2nd',
       _links: {
         'self': {
@@ -34,7 +34,7 @@ function offers (req, res) {
     let offerSparbillett = {
       offerId: '1002',
       description: 'Offer super saver fare',
-      price: 12,
+      price: 840,
       qualityOfService: '2nd',
       _links: {
         'self': {

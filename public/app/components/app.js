@@ -12,7 +12,7 @@ import appController from './app.controller'
 import toolbarModule from './toolbar/toolbar'
 import sideNavModule from './sidenav/sidenav'
 import travelWishModule from './travel-wish/travel-wish'
-import connectionsModule from './connections/connections'
+import tripsModule from './trips/trips'
 import offersModule from './offers/offers'
 import preebookingModule from './prebooking/prebooking'
 import bookingModule from './booking/booking'
@@ -21,7 +21,7 @@ import coreModule from './core/core.module'
 import loginModule from './login/login'
 import securityModule from './security/security'
 
-angular.module('app', ['ngMaterial', 'ngRoute', 'ngclipboard', 'angular-jwt', coreModule, toolbarModule, sideNavModule, travelWishModule, commonModule, connectionsModule, offersModule, preebookingModule, bookingModule, loginModule, securityModule]).config(function ($mdThemingProvider) {
+angular.module('app', ['ngMaterial', 'ngRoute', 'ngclipboard', 'angular-jwt', coreModule, toolbarModule, sideNavModule, travelWishModule, commonModule, tripsModule, offersModule, preebookingModule, bookingModule, loginModule, securityModule]).config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
         .primaryPalette('blue')
         .accentPalette('orange')

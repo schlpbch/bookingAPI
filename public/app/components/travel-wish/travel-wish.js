@@ -2,23 +2,23 @@
  * Created by kevinkreuzer on 17.03.17.
  */
 import travelWishController from './travel-wish.controller'
-import stationController from './station/station.controller'
 import travelWishService from './travel-wish.service'
-import stationService from './station/station.service';
+import locationController from './location/location.controller'
+import locationService from './location/location.service';
 
-let moduleName = 'reisewunsch'
+let moduleName = 'travelWish'
 
 angular.module(moduleName, [])
-  .component('apiTravelWish', {
-    controller: travelWishController, templateUrl: 'components/travel-wish/travel-wish.html'
-  })
-  .component('apiStation', {
-    bindings: {
-      title: '<',
-      selectedItem: '='
-    }, controller: stationController, templateUrl: 'components/travel-wish/station/station.html'
-  })
-  .service('travelWishService', travelWishService)
-  .service('stationService', stationService)
+    .component('apiTravelWish', {
+        controller: travelWishController, templateUrl: 'components/travel-wish/travel-wish.html'
+    })
+    .component('apiLocation', {
+        bindings: {
+            title: '<',
+            selectedItem: '='
+        }, controller: locationController, templateUrl: 'components/travel-wish/location/location.html'
+    })
+    .service('travelWishService', travelWishService)
+    .service('stationService', locationService)
 
 export default moduleName

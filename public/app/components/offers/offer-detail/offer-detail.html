@@ -3,7 +3,7 @@
     <md-card-title-text>
       <span class="md-subhead">offerId: {{$ctrl.offer.offerId}}</span>
       <span class="md-headline">{{$ctrl.offer.description}}</span>
-      <span>Price:  {{$ctrl.offer.price}}</span>
+      <span>Price:  {{($ctrl.offer.price / 100) | number: 2}} CHF</span>
     </md-card-title-text>
   </md-card-title>
   <md-card-actions layout="row" layout-align="end center">

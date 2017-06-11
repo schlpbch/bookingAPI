@@ -1,0 +1,29 @@
+<md-card class="md-3-line">
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-subhead">tripId: {{$ctrl.trip.tripId}}</span>
+      <span class="md-headline">
+        <md-icon>train</md-icon>
+        {{$ctrl.trip.segments[0].origin.name}} &ndash;
+        {{$ctrl.trip.segments[0].destination.name}}
+     </span>
+      <ul class="md-body-1">
+        <li>
+          {{$ctrl.trip.segments[0].origin.time}} &ndash; {{$ctrl.trip.segments[0].origin.name}}, Platform {{$ctrl.trip.segments[0].origin.platform}}
+        </li>
+        <li>
+          {{$ctrl.trip.segments[0].destination.time}} &ndash; {{$ctrl.trip.segments[0].destination.name}}, Platform {{$ctrl.trip.segments[0].destination.platform}}
+        </li>
+      </ul>
+      <div class="md-body-2" layout="row" layout-align="end center">
+        <md-progress-circular md-mode="indeterminate" md-diameter="20px" ng-show="$ctrl.loadingPrices"></md-progress-circular>
+        <b>from {{($ctrl.price / 100)| number: 2}} CHF</b>
+      </div>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-actions layout="row" layout-align="end center">
+    <md-button class="md-raised" href="{{$ctrl.trip._links.link2WebshopB2C.href}}">Book in webshop</md-button>
+    <!-- <md-button class="md-raised" href="{{$ctrl.trip._links.link2MobileB2C.href}}">Book in mobile</md-button> -->
+    <md-button class="md-raised md-primary" ng-click="$ctrl.connectionService.getOffers($ctrl.trip)">Offer</md-button>
+  </md-card-actions>
+</md-card>

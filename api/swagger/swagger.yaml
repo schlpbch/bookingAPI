@@ -9,16 +9,19 @@ swagger: '2.0'
 
 ## API Information
 info:
-  version: '0.0.11'
-  title: "Simple öV booking API"
-  description: "A simple API to book öV tickets in Switzerland."
+  version: '0.0.12'
+  title: "Simple booking API for public transport"
+  description: "A simple API to book tickets for public transport in Switzerland."
   contact:
     name: Team SVS Vertrieb
     email: andreas.schlapbach@sbb.ch
     url: http://booking.sbb.ch/
   license:
     name: SBB
-    url: https://data.sbb.ch/page/licence/
+    url: http://booking.sbb.ch/app/LICENSE.txt
+
+
+## Host, Base Path, Schemes and Content Types
 #host: api.sbb.ch
 #host: localhost:8080
 basePath: /api
@@ -32,6 +35,22 @@ produces:
   - application/hal+json
   - application/pdf
 
+## Tags
+tags:
+  - name: health
+    description:
+      Health and version of the API
+  - name: journeyPlanning
+    description:
+      Journey planning
+  - name: booking
+    description:
+     Journey booking
+  - name: afterSales
+    description:
+     Afters sales operations on bookings
+
+
 ## Security
 #securityDefinitions:
 #  oauth:
@@ -41,19 +60,25 @@ produces:
 #    scopes:
 #      basic: |
 #       to read any and all data related to the B2P API
+#  key:
+#    type: apiKey
+#    in: query
+#    name: access_token
 #security:
 #  - oauth:
 #    - basic
 
 ## Paths
 paths:
-
   /health/status:
     x-swagger-router-controller: health
     get:
+      tags:
+        - health
       description:
-        'The status service can be used to check if the remote server is running
-        and can be reached across the network.'
+        The status service can be used to check if the remote server is running
+        and can be reached across the network. Furthermore, the version of the
+        API is returned.
 
       operationId: status
       responses:
@@ -69,13 +94,15 @@ paths:
   /locations:
     x-swagger-router-controller: locations
     get:
+      tags:
+        - journeyPlanning
       description:
-        'The locations service can be used to perform a pattern-based search to
+        The locations service can be used to perform a pattern-based search to
         retrieve a list of matching locations in the journey planner database.
-        Possible matches might be stations, points of interest and addresses.<br><br>
+        Possible matches might be stations, points of interest and addresses.
 
         The result is a list of matching locations which can be used as origin
-        and destination in trip and departure/arrival board requests.'
+        and destination in trip and departure/arrival board requests.
 
       operationId: locations
       parameters:
@@ -98,10 +125,12 @@ paths:
   /trips:
     x-swagger-router-controller: trips
     get:
+      tags:
+        - journeyPlanning
       description:
-        'The trips service calculates different trips for a specified origin
+        The trips service calculates different trips for a specified origin
         and destination. The external ids for origin and destination can be
-        retrieved with the locations service.'
+        retrieved with the locations service.
 
       operationId: trips
       parameters:
@@ -131,6 +160,7 @@ paths:
           type: string
           format: dateTime
           default: '20:22'
+
       responses:
         200:
           description: "A list of possible trips matching the specified travel wishes."
@@ -141,20 +171,25 @@ paths:
         default:
           description: "unexpected error"
 
-
   ### Booking Part
 
   /prices:
       x-swagger-router-controller: prices
       get:
+        tags:
+          - booking
         description:
-          'The price service calculates the cheapest prices for an adult with
-          half-fare reduction and a specified origin and destination.
+          The price service calculates the cheapest prices for an adult
+          and a specified origin and destination.
+
+          Includes the normal and the super fare prices of a trip for second
+          and first class with and without half-fare reduction.
+
           The external ids for origin and destination can be retrieved
-          with the locations service.<br><br>
+          with the locations service.
 
           Either the "tripId" or "originId", "destinationId", "date", and "time"
-          must be defined.'
+          must be defined.
 
         operationId: prices
         parameters:
@@ -202,13 +237,15 @@ paths:
   /offers:
     x-swagger-router-controller: offers
     get:
+      tags:
+        - booking
       description:
-        'The offers service calculates offers for a specified origin
+        The offers service calculates offers for a specified origin
         and destination. The external ids for origin and destination can
-        be retrieved with the locations service.<br><br>
+        be retrieved with the locations service.
 
         Either the "tripId" or "originId", "destinationId", "date", and "time"
-        must be defined.'
+        must be defined.
 
       operationId: offers
       parameters:
@@ -281,9 +318,11 @@ paths:
   /offers/{offerId}/prebook:
     x-swagger-router-controller: prebookings
     get:
+      tags:
+        - booking
       description:
-        'Prebook an offer during checkout process for 15 minutes. Normally
-        called when adding an item to the shopping cart.'
+        Prebook an offer during checkout process for 15 minutes. Normally
+        called when adding an item to the shopping cart.
 
       operationId: prebook
       parameters:
@@ -304,8 +343,11 @@ paths:
   /prebookings/{prebookingId}/confirm:
     x-swagger-router-controller: bookings
     get:
+      tags:
+        - booking
       description:
-        'Book the pre-booked offer.'
+        Book the pre-booked offer.
+
       operationId: confirm
       parameters:
         - name: prebookingId
@@ -325,8 +367,11 @@ paths:
   /bookings/{bookingId}/fulfil:
     x-swagger-router-controller: bookings
     get:
+      tags:
+        - booking
+        - afterSales
       description:
-        'Fulfill the booking which traditionally means producing a tickets.
+        Fulfill the booking which traditionally means producing a tickets.
         However other ways of fullfilment are possible such as storing the
         booking on a central database. In this case only a reference to the
         booking is returned.'
@@ -356,8 +401,11 @@ paths:
   /bookings/{bookingId}/cancel:
     x-swagger-router-controller: bookings
     get:
+      tags:
+        - afterSales
       description:
-        'Cancel the booking (technical; not for refunding).'
+        Cancel the booking (technical; not for refunding).
+
       operationId: cancel
       parameters:
         - name: bookingId
@@ -377,11 +425,13 @@ paths:
   /bookings/{bookingId}/refund:
     x-swagger-router-controller: bookings
     get:
+      tags:
+        - afterSales
       description:
-        'Refund the booking. Two types of refund are to be supported, full and
+        Refund the booking. Two types of refund are to be supported, full and
         partial.
-        <br><br>
-        ToDo: Fully specify (alias,...).'
+
+        Yet to be fully specified (alias,...).
 
       operationId: refund
       parameters:
@@ -505,18 +555,29 @@ definitions:
   price:
     type: object
     required:
-      - description
-      - price
+      - normalPrices
       - _links
     properties:
-      description:
-        description: 'A description of the priced element.'
-        type: string
-        default: 'Normal fare ticket'
-      price:
-        description: "Price of the trip"
-        type: integer
-        default: 22
+      normalPrices:
+        description:
+          Includes the normal fare prices of a trip for second and first class
+          with and without half-fare reduction. Thus, in total four prices are
+          returned.
+
+          The prices are in Swiss cents.
+        type: array
+        items:
+          type: integer
+      superSaverPrices:
+        description:
+          Includes the super fare prices of a trip for second and first class
+          with and without half-fare reduction. Thus, in total four prices are
+          returned if super fare prices exist.
+
+          The prices are in Swiss cents.
+        type: array
+        items:
+          type: integer
       _links:
         $ref: '#/definitions/price_links'
 
@@ -524,11 +585,8 @@ definitions:
     type: object
     required:
       - self
-      - offer
     properties:
      self:
-       $ref: '#/definitions/uri'
-     offer:
        $ref: '#/definitions/uri'
 
   offer:

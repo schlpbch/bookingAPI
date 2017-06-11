@@ -1,8 +1,7 @@
 /**
  * Created by kevinkreuzer on 22.03.17.
  */
-
-export default class ConnectionService {
+export default class TripsService {
     constructor(bookingStore, tabService, $http, errorLogService, authService) {
         this.bookingStore = bookingStore
         this.tabService = tabService
