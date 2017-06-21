@@ -12,7 +12,7 @@ export default class TripsService {
 
     getOffers(item) {
         let headers = this.authService.getAuthHeader()
-        this.$http.get('../redirect_' + item._links.offers.href + '&age=42&reduction=none', {headers})
+        this.$http.get(item._links.offers.href + '&age=42&reduction=none', {headers})
             .then((res) => {
                 this.bookingStore.offers = res.data
                 this.tabService.goToNextTab()

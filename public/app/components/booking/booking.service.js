@@ -12,7 +12,7 @@ export default class BookingService {
     }
 
     printBooking(item) {
-        window.location.href = '../redirect_' + item._links.fulfil.href
+        window.location.href = item._links.fulfil.href
     }
 
     cancelBooking(item) {

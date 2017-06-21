@@ -13,7 +13,21 @@ export default class ReiseWunschService {
 
     getTrips(originId, destinationId, isArrival, date, time) {
         let headers = this.authService.getAuthHeader()
-        this.$http.get(`../redirect_api/trips?originId=${originId.value}&destinationId=${destinationId.value}&date=2017-05-05&time=10:00`,
+
+        var today = new Date();
+        var yyyy = today.getFullYear();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+
+        if(dd<10) {
+          dd='0'+dd;
+        }
+        if(mm<10){
+          mm='0'+mm;
+        }
+        var today = yyyy + '-' + mm + '-' + dd;
+
+        this.$http.get(`../redirect_api/trips?originId=${originId.value}&destinationId=${destinationId.value}&date=${today}&time=19:00`,
             {headers})
             .then((res) => {
                 this.bookingStore.trips = res.data

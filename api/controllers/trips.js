@@ -101,7 +101,7 @@ function trips (req, res) {
 
 // TODO: Refactor into helper class
 function constructSelfUrl (trip) {
-  let url = 'api/trips?'
+  let url = '../api/trips?'
   url += 'originId=' + encodeURI(trip.segments[0].origin.id)
   url += '&destinationId=' + encodeURI(trip.segments[0].destination.id)
   url += '&date=' + encodeURI(trip.segments[0].origin.date)
@@ -110,7 +110,7 @@ function constructSelfUrl (trip) {
 }
 
 function constructPricesUrl (trip) {
-  let url = 'api/prices?'
+  let url = '../api/prices?'
   url += 'originId=' + encodeURI(trip.segments[0].origin.id)
   url += '&destinationId=' + encodeURI(trip.segments[0].destination.id)
   url += '&date=' + encodeURI(trip.segments[0].origin.date)
@@ -119,7 +119,7 @@ function constructPricesUrl (trip) {
 }
 
 function constructOffersUrl (trip) {
-  let url = 'api/offers?'
+  let url = '../api/offers?'
   url += 'originId=' + encodeURI(trip.segments[0].origin.id)
   url += '&destinationId=' + encodeURI(trip.segments[0].destination.id)
   url += '&date=' + encodeURI(trip.segments[0].origin.date)

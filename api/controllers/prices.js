@@ -19,13 +19,12 @@ function prices (req, res) {
       href: req.originalUrl
     }
 
-    var prices = {
-      normalPrices: [830, 1660, 1460, 2920],
-      superSaverPrices: [420, 840, 740, 1460],
+    var prices = [{
+      price: 830,
       _links: {
         self
       }
-    }
+    }]
 
     res.json(prices)
   }
