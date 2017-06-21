@@ -1,6 +1,6 @@
 {
   "name": "bookingAPI",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "private": true,
   "description": "A simple API to book tickets for public transport in Switzerland.",
   "keywords": [
