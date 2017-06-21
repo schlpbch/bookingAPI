@@ -21,6 +21,7 @@
     "angular-material": "^1.1.4",
     "angular-messages": "^1.6.4",
     "angular-route": "^1.6.4",
+    "dateformat": "^2.0.0",
     "express": "^4.15.3",
     "morgan": "^1.8.2",
     "ngclipboard": "^1.1.1",
