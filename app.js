@@ -13,8 +13,12 @@ var config = {
     appRoot: __dirname // required config
 }
 const environmentConfiguration = environmentConfigLoader.loadEnvironmentConfig()
-console.info('Backend Reise: ', environmentConfiguration.backendReise)
-console.info('Backend Orch: ', environmentConfiguration.backendOrch)
+console.info('Backend locations: ', environmentConfiguration['backend_locations'])
+console.info('Backend trips: ', environmentConfiguration['backend_trips'])
+console.info('Backend prices: ', environmentConfiguration['backend_prices'])
+console.info('Backend offers: ', environmentConfiguration['backend_offers'])
+console.info('Backend prebookings: ', environmentConfiguration['backend_prebookings'])
+console.info('Backend bookings: ', environmentConfiguration['backend_bookings'])
 
 SwaggerExpress.create(config, function (err, swaggerExpress) {
     if (err) {

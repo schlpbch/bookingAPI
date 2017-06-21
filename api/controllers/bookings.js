@@ -19,15 +19,15 @@ function confirm (req, res) {
       },
       'fulfil': {
         title: 'Get ticket in PDF format',
-        href: 'api/bookings/3001/fulfil?type=pdf'
+        href: '../api/bookings/3001/fulfil?type=pdf'
       },
       'cancel': {
         title: 'Cancel the booking',
-        href: 'api/bookings/3001/cancel'
+        href: '../api/bookings/3001/cancel'
       },
       'refund': {
         title: 'Refund the booking',
-        href: 'api/bookings/3001/refund'
+        href: '../api/bookings/3001/refund'
       }
     }
   }]

@@ -10,11 +10,11 @@ function prebook (req, res) {
     description: 'Trip from Bern to Thun at 14.06.2017 20:04 for 16.60 CHF',
     _links: {
       'self': {
-        href: 'prebookings/2001'
+        href: '../api/prebookings/2001'
       },
       'confirm': {
         title: 'Confirm prebooking',
-        href: 'api/prebookings/2001/confirm'
+        href: '../api/prebookings/2001/confirm'
       }
     }
   }]
