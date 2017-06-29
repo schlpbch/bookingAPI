@@ -1,6 +1,6 @@
 {
   "name": "bookingAPI",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "private": true,
   "description": "A simple API to book tickets for public transport in Switzerland.",
   "keywords": [
@@ -21,6 +21,7 @@
     "angular-material": "^1.1.4",
     "angular-messages": "^1.6.4",
     "angular-route": "^1.6.4",
+    "dateformat": "^2.0.0",
     "express": "^4.15.3",
     "morgan": "^1.8.2",
     "ngclipboard": "^1.1.1",

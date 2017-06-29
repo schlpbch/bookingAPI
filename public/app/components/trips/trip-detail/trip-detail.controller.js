@@ -20,16 +20,12 @@ export default class ConnectionDetailController {
 
   getPrices () {
     let headers = this.connectionService.authService.getAuthHeader()
-    let url = '../redirect_' + this.trip._links.prices.href
+    let url = this.trip._links.prices.href
     this.connectionService.$http.get(url, {
       headers
     })
       .then((res) => {
-        if (res.data.superSaverPrices === undefined) {
-          this.price = res.data.normalPrices[0]
-        } else {
-          this.price = res.data.superSaverPrices[0]
-        }
+        this.price = res.data[0].price
         this.loadingPrices = false
       }, (error) => {
         this.connectionService.errorLogService.logError(error)
