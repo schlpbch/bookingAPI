@@ -105,16 +105,14 @@ paths:
         and destination in trip and departure/arrival board requests.
 
       operationId: locations
-      "parameters": [
-        {
-          "name": "q",
-          "in": "query",
-          "description": "Token to search for locations.",
-          "required": true,
-          "type": "string",
-          "default": "Ber"
-        }
-      ]
+      "parameters":
+        -
+          default: Ber
+          description: "Token to search for locations."
+          in: query
+          name: q
+          required: true
+          type: string
       "responses": {
         "200": {
           "description": "The location.",
@@ -159,51 +157,114 @@ paths:
         retrieved with the locations service.
 
       operationId: trips
-      "parameters": [
-        {
-          "name": "originId",
-          "in": "query",
-          "description": "The id of the origin of the trip.",
-          "required": true,
-          "type": "integer",
-          "default": 8507000,
-          "format": "int32"
+      "parameters":
+        -
+          default: 8507000
+          description: "The id of the origin of the trip."
+          format: int32
+          in: query
+          name: originId
+          required: true
+          type: integer
+        -
+          default: 8503000
+          description: "The id of the destination of the trip."
+          format: int32
+          in: query
+          name: destinationId
+          required: true
+          type: integer
+        -
+          default: 8500218
+          description: "The id of the via of the trip."
+          format: int32
+          in: query
+          name: viaId
+          required: false
+          type: integer
+        -
+          default: "2017-06-27"
+          description: "The desired departure date."
+          in: query
+          name: date
+          required: true
+          type: string
+        -
+          default: "20:22"
+          description: "The desired departure time."
+          in: query
+          name: time
+          required: true
+          type: string
+
+      "responses": {
+        "200": {
+          "description": "A list of possible trips matching the specified travel wishes.",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TripRS"
+            }
+          }
         },
-        {
-          "name": "destinationId",
-          "in": "query",
-          "description": "The id of the destination of the trip.",
-          "required": true,
-          "type": "integer",
-          "default": 8503000,
-          "format": "int32"
+        "401": {
+          "description": "Unauthorized"
         },
-        {
-          "name": "viaId",
-          "in": "query",
-          "description": "The id of the via of the trip.",
-          "required": false,
-          "type": "integer",
-          "default": 8500218,
-          "format": "int32"
+        "500": {
+          "description": "Internal server error."
         },
-        {
-          "name": "date",
-          "in": "query",
-          "description": "The desired departure date.",
-          "required": true,
-          "type": "string",
-          "default": "2017-06-27"
+        "204": {
+          "description": "No matching trip found.",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TripRS"
+            }
+          }
         },
-        {
-          "name": "time",
-          "in": "query",
-          "description": "The desired departure time.",
-          "required": true,
-          "type": "string",
-          "default": "20:22"
+        "403": {
+          "description": "Forbidden"
+        },
+        "404": {
+          "description": "Not Found"
         }
-      ]
+      }
+
+
+  /trips/{tripId}:
+    x-swagger-router-controller: trips
+    get:
+      tags:
+        - journeyPlanning
+      description:
+        The trips service calculates different trips for a specified origin
+        and destination. The external ids for origin and destination can be
+        retrieved with the locations service.
+
+      operationId: trips
+      "parameters":
+        -
+          default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
+          description: "The tripId for this journey."
+          in: path
+          name: tripId
+          required: true
+          type: string
+        -
+          default: "2017-06-27"
+          description: "The desired departure date."
+          in: query
+          name: date
+          required: true
+          type: string
+        -
+          default: "20:22"
+          description: "The desired departure time."
+          in: query
+          name: time
+          required: true
+          type: string
+
       "responses": {
         "200": {
           "description": "A list of possible trips matching the specified travel wishes.",
@@ -258,51 +319,109 @@ paths:
           must be defined.
 
         operationId: prices
-        "parameters": [
-                  {
-                    "name": "originId",
-                    "in": "query",
-                    "description": "The id of the origin.",
-                    "required": true,
-                    "type": "integer",
-                    "default": 8507000,
-                    "format": "int32"
-                  },
-                  {
-                    "name": "destinationId",
-                    "in": "query",
-                    "description": "The id of the destination.",
-                    "required": true,
-                    "type": "integer",
-                    "default": 8503000,
-                    "format": "int32"
-                  },
-                  {
-                    "name": "viaId",
-                    "in": "query",
-                    "description": "The id of the via of the trip.",
-                    "required": false,
-                    "type": "integer",
-                    "default": 8500218,
-                    "format": "int32"
-                  },
-                  {
-                    "name": "date",
-                    "in": "query",
-                    "description": "The desired departure date.",
-                    "required": true,
-                    "type": "string",
-                    "default": "2017-06-27"
-                  },
-                  {
-                    "name": "time",
-                    "in": "query",
-                    "description": "The desired departure time.",
-                    "required": true,
-                    "type": "string",
-                    "default": "20:22"
-                  }
-        ]
+        "parameters":
+        -
+          default: 8507000
+          description: "The id of the origin."
+          format: int32
+          in: query
+          name: originId
+          required: true
+          type: integer
+        -
+          default: 8503000
+          description: "The id of the destination."
+          format: int32
+          in: query
+          name: destinationId
+          required: true
+          type: integer
+        -
+          default: 8500218
+          description: "The id of the via."
+          format: int32
+          in: query
+          name: viaId
+          required: false
+          type: integer
+        -
+          default: "2017-06-27"
+          description: "The desired departure date."
+          in: query
+          name: date
+          required: true
+          type: string
+        -
+          default: "20:22"
+          description: "The desired departure time."
+          in: query
+          name: time
+          required: true
+          type: string
+
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PriceRS"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+
+  /prices/{tripId}:
+      x-swagger-router-controller: prices
+      get:
+        tags:
+          - booking
+        description:
+          The price service calculates the cheapest prices for an adult
+          and a specified origin and destination.
+
+          Includes the normal and the super fare prices of a trip for second
+          and first class with and without half-fare reduction.
+
+          The external ids for origin and destination can be retrieved
+          with the locations service.
+
+          Either the "tripId" or "originId", "destinationId", "date", and "time"
+          must be defined.
+
+        operationId: prices
+        "parameters":
+          -
+            default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
+            description: "The tripId for this journey."
+            in: path
+            name: tripId
+            required: true
+            type: string
+          -
+            default: "2017-06-27"
+            description: "The desired departure date."
+            in: query
+            name: date
+            required: true
+            type: string
+          -
+            default: "20:22"
+            description: "The desired departure time."
+            in: query
+            name: time
+            required: true
+            type: string
+
         "responses": {
           "200": {
             "description": "OK",
@@ -339,67 +458,136 @@ paths:
 
       operationId: offers
       parameters:
-        - name: originId
-          in: query
-          description: "The id of the origin."
-          required: false
-          type: integer
+        -
           default: 8507000
-        - name: destinationId
+          description: "The id of the origin."
+          format: int32
+          in: query
+          name: originId
+          required: true
+          type: integer
+        -
+          default: 8503000
           description: "The id of the destination."
-          required: false
+          format: int32
           in: query
-          type: integer
-          default: 8508500
-        - name: viaId
-          description: "The id of the via."
+          name: destinationId
           required: false
-          in: query
           type: integer
+        -
           default: 8500218
-        - name: date
+          description: "The id of the via."
+          format: int32
           in: query
-          description: "The desired departure date."
+          name: viaId
           required: false
-          type: string
-          format: date
-          default: '2017-01-14'
-        - name: time
-          in: query
-          description: "The desired departure time."
-          required: false
-          type: string
-          format: datetime
-          default: '20:04'
-      # ToDo; Scale for more than one traveller
-        - name: age
-          in: query
-          description: 'Age of the traveller.'
           type: integer
+        -
+          default: "2017-06-27"
+          description: "The desired departure date."
+          in: query
+          name: date
+          required: true
+          type: string
+        -
+          default: "20:22"
+          description: "The desired departure time."
+          in: query
+          name: time
+          required: false
+          type: string
+        -
           default: 42
-          minimum: 0
-          maximum: 120
-        - name: reduction
+          description: "Age of the traveller."
+          format: int32
           in: query
-          description: 'Reductions that can be applied'
-          type: string
-          default: 'half-fare-2nd'
+          name: age
+          required: false
+          type: integer
+        -
+          collectionFormat: multi
+          description: "Reduction: {none, half-fare, ga-1st, ga-2nd}"
           enum:
-           - none
-           - half-fare-2nd
-           - half-fare-1st
-           - ga-2nd
-           - ga-1st
-        - name: productId
+            - none
+            - half-fare
+            - ga-1st
+            - ga-2nd
           in: query
-          description: "The productId identifying the product"
-          type: string
+          items:
+            type: string
+          name: reduction
           required: false
-        - name: tripId
+          type: array
+
+      responses:
+        200:
+          description: "A list of offers."
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/offer'
+        default:
+          description: "unexpected error"
+
+
+  /offers/{tripId}:
+    x-swagger-router-controller: offers
+    get:
+      tags:
+        - booking
+      description:
+        The offers service calculates offers for a specified origin
+        and destination. The external ids for origin and destination can
+        be retrieved with the locations service.
+
+        Either the "tripId" or "originId", "destinationId", "date", and "time"
+        must be defined.
+
+      operationId: offers
+      parameters:
+        -
+          default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
+          description: "The tripId for this journey."
+          in: path
+          name: tripId
+          required: true
+          type: string
+        -
+          default: "2017-06-27"
+          description: "The desired departure date."
           in: query
-          description: "The id of a trip."
+          name: date
+          required: true
+          type: string
+        -
+          default: "20:22"
+          description: "The desired departure time."
+          in: query
+          name: time
           required: false
           type: string
+        -
+          default: 42
+          description: "Age of the traveller."
+          format: int32
+          in: query
+          name: age
+          required: false
+          type: integer
+        -
+          collectionFormat: multi
+          description: "Reduction: {none, half-fare, ga-1st, ga-2nd}"
+          enum:
+            - none
+            - half-fare
+            - ga-1st
+            - ga-2nd
+          in: query
+          items:
+            type: string
+          name: reduction
+          required: false
+          type: array
 
       responses:
         200:
@@ -422,12 +610,27 @@ paths:
 
       operationId: prebook
       parameters:
-        - name: offerId
-          in: path
+        -
           description: "The offer ID to be pre-booked for later booking."
+          in: path
+          name: offerId
           required: true
           type: string
-          default: '1001' # for simpler mock testing only
+        -
+          default: Hans
+          description: "The travellers first name."
+          in: query
+          name: firstname
+          required: true
+          type: string
+        -
+          default: Mustermann
+          description: "The travellers last name."
+          in: query
+          name: lastname
+          required: true
+          type: string
+
       responses:
         200:
           description: "The pre-booked offer."
