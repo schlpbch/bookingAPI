@@ -655,6 +655,7 @@ paths:
           required: true
           type: string
           default: '2001' # for simpler mock testing only
+
       responses:
         200:
           description: "The booked offer."
