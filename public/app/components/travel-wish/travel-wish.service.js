@@ -16,9 +16,9 @@ export default class ReiseWunschService {
 
     let now = new Date()
     let isoDate = dateFormat(now, `isoDate`)
-    let isoTime = dateFormat(now, `isoTime`)
+    let isoTime = dateFormat(now, `HH:MM`)
 
-    this.$http.get(`../redirect_api/trips?originId=${originId.value}&destinationId=${destinationId.value}&date=${isoDate}$&time=${isoTime}`, {
+    this.$http.get(`../redirect_api/trips?originId=${originId.value}&destinationId=${destinationId.value}&date=${isoDate}&time=${isoTime}`, {
       headers
     })
       .then((res) => {

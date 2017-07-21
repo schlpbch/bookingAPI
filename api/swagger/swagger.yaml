@@ -517,7 +517,8 @@ paths:
             type: string
           name: reduction
           required: false
-          type: array
+          type: string
+          default: 'half-fare'
 
       responses:
         200:
@@ -587,7 +588,8 @@ paths:
             type: string
           name: reduction
           required: false
-          type: array
+          type: string
+          default: 'half-fare'
 
       responses:
         200:
