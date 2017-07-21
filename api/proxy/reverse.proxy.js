@@ -8,8 +8,9 @@ const createReverseProxy = (app, environmentConfiguration) => {
     const proxyAPIRequest = (env, clientRequest, clientResponse) => {
         let headers = clientRequest.headers
         let url = clientRequest.url.replace(REDIRECT_API, environmentConfiguration['backend_' + env] + '/api/')
-        //TODO: Use Certificate solution instead of rejectUnauthorized: false
 
+        //TODO: Use Certificate solution instead of rejectUnauthorized: false
+        delete headers.host;
         request(url, {headers, rejectUnauthorized: false}, function (err, res, body) {
             var manipulatedBody = body.toString();
             for (var e in environmentConfiguration) {
