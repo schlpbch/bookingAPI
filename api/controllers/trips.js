@@ -39,11 +39,11 @@ function trips (req, res) {
       title: 'Request offers for a trip.',
       href: constructOffersUrl(trip1)
     },
-    'link2WebshopB2C': {
+    'offers-online': {
       title: 'Link into web shop B2C.',
       href: constructWebshopB2CUrl(trip1)
     },
-    'link2MobileB2C': {
+    'offers-mobile': {
       title: 'Link into mobile app B2C.',
       href: constructMobileB2CUrl(trip1)
     }
@@ -83,11 +83,11 @@ function trips (req, res) {
       title: 'Request offers for a trip.',
       href: constructOffersUrl(trip2)
     },
-    'link2WebshopB2C': {
+    'offers-online': {
       title: 'Link into web shop B2C.',
       href: 'https://www.sbb.ch/en/buying/pages/fahrplan/fahrplan.xhtml?suche=true&ab=true&language=en&vias=%5B%22%22%5D&webshopPreviewMode=active&von=Bern&nach=Thun&datum=Sun%2C+14.06.2017&zeit=20%3A34'
     },
-    'link2MobileB2C': {
+    'offers-mobile': {
       title: 'Link into mobile app B2C.',
       href: 'https://apptest.sbbmobile.ch/offer?recon=T$A=1@O=Genève@L=8501008@a=128@$A=1@O=Bern@L=8507000@a=128@$201605161012$201605161156$IR 2517$&date=2017-06-14'
     }
