@@ -11,8 +11,8 @@ export default class BookingService {
         this.authService = authService
     }
 
-    printBooking(item) {
-        window.location.href = item._links.fulfil.href
+    printBooking(item, type) {
+        window.location.href = item._links['fulfil-' + type].href
     }
 
     cancelBooking(item) {
