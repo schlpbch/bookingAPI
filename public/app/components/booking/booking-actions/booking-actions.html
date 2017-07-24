@@ -1,5 +1,7 @@
 <md-card-actions layout="row" layout-align="end center">
   <md-button class="md-primary" ng-click="$ctrl.bookingService.cancelBooking($ctrl.booking)">Cancel</md-button>
   <md-button class="md-primary" ng-click="$ctrl.bookingService.refundBooking($ctrl.booking)">Refund</md-button>
-  <md-button class="md-primary md-raised" ng-click="$ctrl.bookingService.printBooking($ctrl.booking)">Ticket</md-button>
+  <md-button class="md-primary md-raised" ng-click="$ctrl.bookingService.printBooking($ctrl.booking, 'pdf')">Ticket PDF</md-button>
+  <md-button class="md-primary md-raised" ng-click="$ctrl.bookingService.printBooking($ctrl.booking, 'png')">Ticket PNG</md-button>
+  <md-button class="md-primary md-raised" ng-click="$ctrl.bookingService.printBooking($ctrl.booking, 'pkpass')">Ticket PKPASS</md-button>
 </md-card-actions>
