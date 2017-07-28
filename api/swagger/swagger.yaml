@@ -399,6 +399,18 @@ paths:
       operationId: offers
       parameters:
         -
+          in: header
+          name: X-Geschaeftsfall-ID
+          type: string
+          required: true
+          default: 'aaee8345-966b-49a8-9640-60e0c4354536'
+        -
+          in: header
+          name: X-Vertrag-ID
+          type: string
+          required: true
+          default: 'STS001'
+        -
           default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
           description: "The tripId for this journey."
           in: query
@@ -489,6 +501,18 @@ paths:
       operationId: prebook
       parameters:
         -
+          in: header
+          name: X-Geschaeftsfall-ID
+          type: string
+          required: true
+          default: 'aaee8345-966b-49a8-9640-60e0c4354536'
+        -
+          in: header
+          name: X-Vertrag-ID
+          type: string
+          required: true
+          default: 'STS001'
+        -
           description: "The offer ID to be pre-booked for later booking."
           in: query
           name: offerId
@@ -527,6 +551,18 @@ paths:
 
       operationId: confirm
       parameters:
+        -
+          in: header
+          name: X-Geschaeftsfall-ID
+          type: string
+          required: true
+          default: 'aaee8345-966b-49a8-9640-60e0c4354536'
+        -
+          in: header
+          name: X-Vertrag-ID
+          type: string
+          required: true
+          default: 'STS001'
         - name: prebookingId
           in: query
           description: "The pre-book ID to be booked."
