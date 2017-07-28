@@ -400,16 +400,30 @@ paths:
       parameters:
         -
           in: header
-          name: X-Geschaeftsfall-ID
+          name: X-Conversation-Id
           type: string
           required: true
           default: 'aaee8345-966b-49a8-9640-60e0c4354536'
         -
           in: header
-          name: X-Vertrag-ID
+          name: X-Contract-Id
           type: string
           required: true
           default: 'STS001'
+        -
+          description: "Language (todo by wooky): {de, en, fr, it}"
+          enum:
+            - de
+            - en
+            - fr
+            - it
+          in: header
+          items:
+            type: string
+          name: Accept-Language
+          required: false
+          type: string
+          default: 'de'
         -
           default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
           description: "The tripId for this journey."
@@ -502,13 +516,13 @@ paths:
       parameters:
         -
           in: header
-          name: X-Geschaeftsfall-ID
+          name: X-Conversation-Id
           type: string
           required: true
           default: 'aaee8345-966b-49a8-9640-60e0c4354536'
         -
           in: header
-          name: X-Vertrag-ID
+          name: X-Contract-Id
           type: string
           required: true
           default: 'STS001'
@@ -553,22 +567,50 @@ paths:
       parameters:
         -
           in: header
-          name: X-Geschaeftsfall-ID
+          name: X-Conversation-Id
           type: string
           required: true
           default: 'aaee8345-966b-49a8-9640-60e0c4354536'
         -
           in: header
-          name: X-Vertrag-ID
+          name: X-Contract-Id
           type: string
           required: true
           default: 'STS001'
+        -
+          description: "Language (todo by wooky): {de, en, fr, it}"
+          enum:
+            - de
+            - en
+            - fr
+            - it
+          in: header
+          items:
+            type: string
+          name: Accept-Language
+          required: false
+          type: string
+          default: 'de'
         - name: prebookingId
           in: query
           description: "The pre-book ID to be booked."
           required: true
           type: string
           default: '2001' # for simpler mock testing only
+        -
+          description: "Language (todo by wooky): {de, en, fr, it}"
+          enum:
+            - de
+            - en
+            - fr
+            - it
+          in: query
+          items:
+            type: string
+          name: language
+          required: false
+          type: string
+          default: 'de'
 
       responses:
         200:
@@ -578,7 +620,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{bookingId}/tickets/{type}:
+  /bookings/{bookingId}/tickets:
     x-swagger-router-controller: bookings
     get:
       tags:
@@ -599,14 +641,15 @@ paths:
           type: string
           default: '3001' # for simpler mock testing only
         - name: type
-          description: "Type of the tickets: {pdf, png}"
+          description: "Type of the tickets: {pdf, png, pkpass}"
           required: true
-          in: path
+          in: query
           type: string
           default: 'pdf'
           enum:
             - pdf
             - png
+            - pkpass
       responses:
         200:
           description: "The booked tickets."

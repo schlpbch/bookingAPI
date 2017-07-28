@@ -14,6 +14,7 @@ function offers (req, res) {
   if (!(q.tripId === undefined) || !(q.originId === undefined) || !(q.date === undefined)) {
       let offerDV = {
           offerId: '1001',
+          productId: 125,
           description: 'Offer normal fare',
           price: 1660,
           qualityOfService: '2nd',
@@ -34,6 +35,7 @@ function offers (req, res) {
       }
       let offerSparbillett = {
           offerId: '1002',
+          productId: 4004,
           description: 'Offer super saver fare',
           price: 840,
           qualityOfService: '2nd',

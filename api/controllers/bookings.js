@@ -19,15 +19,15 @@ function confirm (req, res) {
       },
       'fulfil-pdf': {
         title: 'Get ticket in PDF format',
-        href: '../api/bookings/3001/tickets/pdf'
+        href: '../api/bookings/3001/tickets?type=pdf'
       },
       'fulfil-png': {
           title: 'Get ticket in PDF format',
-          href: '../api/bookings/3001/tickets/png'
+          href: '../api/bookings/3001/tickets?type=png'
       },
       'fulfil-pkpass': {
           title: 'Get ticket in PDF format',
-          href: '../api/bookings/3001/tickets/pkpass'
+          href: '../api/bookings/3001/tickets?type=pkpass'
       }
     },
     "actions": [{
