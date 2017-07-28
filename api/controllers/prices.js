@@ -11,21 +11,26 @@ function tripPrices (req, res) {
 
 function prices (req, res) {
   let q = req.query
-  if (!(q.tripId === undefined) || !(q.originId === undefined && q.destinationId === undefined && q.date === undefined)) {
+    if (!(q.tripId === undefined) || !(q.originId === undefined && q.destinationId === undefined) || !(q.date === undefined)) {
       var self = {
           href: req.originalUrl
       }
 
       var prices = [{
           price: 830,
-          _links: {
-              self
+          links: {
+              self,
+              offers: {
+                  title: "Request offers for a trip.",
+                  href: '../api/offers?tripId=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89QWFyYXVATD04NTAyMTEzQGE9MTI4QCQyMDE3MDgyNzIwMzQkMjAxNzA4MjcyMTEzJElSIDIxODkgJCQxJMKnVCRBPTFATz1BYXJhdUBMPTg1MDIxMTNAYT0xMjhAJEE9MUBPPVrDvHJpY2ggSEJATD04NTAzMDAwQGE9MTI4QCQyMDE3MDgyNzIxMjQkMjAxNzA4MjcyMTUyJElSIDIyODcgJCQxJA==&date=2017-06-14&time=20%3A04'
+              }
+
           }
       }]
 
       res.json(prices)
   } else {
-      let message = 'Either the "tripId" or "originId", "destinationId", "date" and "time" must be defined'
+      let message = 'Either the "tripId" or "originId", "destinationId" and "date" must be defined'
       res.status(400).send(message)
   }
 }

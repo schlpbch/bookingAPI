@@ -13,23 +13,32 @@ function confirm (req, res) {
   var bookings = [{
     bookingId: '3001',
     description: 'Trip from Bern to Thun at 14.01.2017 20:04.',
-    _links: {
+    links: {
       'self': {
         href: 'bookings/3001'
       },
-      'fulfil': {
+      'fulfil-pdf': {
         title: 'Get ticket in PDF format',
-        href: '../api/bookings/3001/fulfil?type=pdf'
+        href: '../api/bookings/3001/tickets/pdf'
       },
-      'cancel': {
-        title: 'Cancel the booking',
-        href: '../api/bookings/3001/cancel'
+      'fulfil-png': {
+          title: 'Get ticket in PDF format',
+          href: '../api/bookings/3001/tickets/png'
       },
-      'refund': {
-        title: 'Refund the booking',
-        href: '../api/bookings/3001/refund'
+      'fulfil-pkpass': {
+          title: 'Get ticket in PDF format',
+          href: '../api/bookings/3001/tickets/pkpass'
       }
-    }
+    },
+    "actions": [{
+        "class": "cancel",
+        "href": "../api/cancellations?bookingId=3001",
+        "method": "PUT"
+    },{
+        "class": "refund",
+        "href": "../api/refundings?bookingId=3001",
+        "method": "PUT"
+    }]
   }]
 
   res.json(bookings)

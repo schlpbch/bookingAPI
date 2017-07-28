@@ -241,7 +241,7 @@ paths:
         and destination. The external ids for origin and destination can be
         retrieved with the locations service.
 
-      operationId: trips
+      operationId: trip
       "parameters":
         -
           default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
@@ -269,10 +269,7 @@ paths:
         "200": {
           "description": "A list of possible trips matching the specified travel wishes.",
           "schema": {
-            "type": "array",
-            "items": {
               "$ref": "#/definitions/TripRS"
-            }
           }
         },
         "401": {
@@ -321,12 +318,19 @@ paths:
         operationId: prices
         "parameters":
         -
+          default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
+          description: "The tripId for this journey."
+          in: query
+          name: tripId
+          required: false
+          type: string
+        -
           default: 8507000
           description: "The id of the origin."
           format: int32
           in: query
           name: originId
-          required: true
+          required: false
           type: integer
         -
           default: 8503000
@@ -334,7 +338,7 @@ paths:
           format: int32
           in: query
           name: destinationId
-          required: true
+          required: false
           type: integer
         -
           default: 8500218
@@ -358,69 +362,6 @@ paths:
           name: time
           required: true
           type: string
-
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PriceRS"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-
-  /prices/{tripId}:
-      x-swagger-router-controller: prices
-      get:
-        tags:
-          - booking
-        description:
-          The price service calculates the cheapest prices for an adult
-          and a specified origin and destination.
-
-          Includes the normal and the super fare prices of a trip for second
-          and first class with and without half-fare reduction.
-
-          The external ids for origin and destination can be retrieved
-          with the locations service.
-
-          Either the "tripId" or "originId", "destinationId", "date", and "time"
-          must be defined.
-
-        operationId: prices
-        "parameters":
-          -
-            default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
-            description: "The tripId for this journey."
-            in: path
-            name: tripId
-            required: true
-            type: string
-          -
-            default: "2017-06-27"
-            description: "The desired departure date."
-            in: query
-            name: date
-            required: true
-            type: string
-          -
-            default: "20:22"
-            description: "The desired departure time."
-            in: query
-            name: time
-            required: true
-            type: string
 
         "responses": {
           "200": {
@@ -453,18 +394,24 @@ paths:
         and destination. The external ids for origin and destination can
         be retrieved with the locations service.
 
-        Either the "tripId" or "originId", "destinationId", "date", and "time"
-        must be defined.
+        Either the "tripId" or "originId" and "date" must be defined.
 
       operationId: offers
       parameters:
+        -
+          default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
+          description: "The tripId for this journey."
+          in: query
+          name: tripId
+          required: false
+          type: string
         -
           default: 8507000
           description: "The id of the origin."
           format: int32
           in: query
           name: originId
-          required: true
+          required: false
           type: integer
         -
           default: 8503000
@@ -530,80 +477,9 @@ paths:
         default:
           description: "unexpected error"
 
-
-  /offers/{tripId}:
-    x-swagger-router-controller: offers
-    get:
-      tags:
-        - booking
-      description:
-        The offers service calculates offers for a specified origin
-        and destination. The external ids for origin and destination can
-        be retrieved with the locations service.
-
-        Either the "tripId" or "originId", "destinationId", "date", and "time"
-        must be defined.
-
-      operationId: offers
-      parameters:
-        -
-          default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
-          description: "The tripId for this journey."
-          in: path
-          name: tripId
-          required: true
-          type: string
-        -
-          default: "2017-06-27"
-          description: "The desired departure date."
-          in: query
-          name: date
-          required: true
-          type: string
-        -
-          default: "20:22"
-          description: "The desired departure time."
-          in: query
-          name: time
-          required: false
-          type: string
-        -
-          default: 42
-          description: "Age of the traveller."
-          format: int32
-          in: query
-          name: age
-          required: false
-          type: integer
-        -
-          collectionFormat: multi
-          description: "Reduction: {none, half-fare, ga-1st, ga-2nd}"
-          enum:
-            - none
-            - half-fare
-            - ga-1st
-            - ga-2nd
-          in: query
-          items:
-            type: string
-          name: reduction
-          required: false
-          type: string
-          default: 'half-fare'
-
-      responses:
-        200:
-          description: "A list of offers."
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/offer'
-        default:
-          description: "unexpected error"
-
-  /offers/{offerId}/prebook:
+  /prebookings:
     x-swagger-router-controller: prebookings
-    get:
+    post:
       tags:
         - booking
       description:
@@ -614,7 +490,7 @@ paths:
       parameters:
         -
           description: "The offer ID to be pre-booked for later booking."
-          in: path
+          in: query
           name: offerId
           required: true
           type: string
@@ -641,9 +517,9 @@ paths:
         default:
           description: "unexpected error"
 
-  /prebookings/{prebookingId}/confirm:
+  /bookings:
     x-swagger-router-controller: bookings
-    get:
+    put:
       tags:
         - booking
       description:
@@ -652,7 +528,7 @@ paths:
       operationId: confirm
       parameters:
         - name: prebookingId
-          in: path
+          in: query
           description: "The pre-book ID to be booked."
           required: true
           type: string
@@ -666,7 +542,7 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{bookingId}/fulfil:
+  /bookings/{bookingId}/tickets/{type}:
     x-swagger-router-controller: bookings
     get:
       tags:
@@ -688,7 +564,8 @@ paths:
           default: '3001' # for simpler mock testing only
         - name: type
           description: "Type of the tickets: {pdf, png}"
-          in: query
+          required: true
+          in: path
           type: string
           default: 'pdf'
           enum:
@@ -700,9 +577,9 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{bookingId}/cancel:
+  /cancellations:
     x-swagger-router-controller: bookings
-    get:
+    put:
       tags:
         - afterSales
       description:
@@ -711,7 +588,7 @@ paths:
       operationId: cancel
       parameters:
         - name: bookingId
-          in: path
+          in: query
           description: "Booking ID to cancel."
           required: true
           type: string
@@ -724,9 +601,9 @@ paths:
         default:
           description: "unexpected error"
 
-  /bookings/{bookingId}/refund:
+  /refundings:
     x-swagger-router-controller: bookings
-    get:
+    put:
       tags:
         - afterSales
       description:
@@ -738,13 +615,14 @@ paths:
       operationId: refund
       parameters:
         - name: bookingId
-          in: path
+          in: query
           description: "Booking ID to refund."
           required: true
           type: string
           default: '3001' # for simpler mock testing only
         - name: type
           description: "Type of refund: {full, partial}"
+          required: true
           in: query
           type: string
           default: "full"
