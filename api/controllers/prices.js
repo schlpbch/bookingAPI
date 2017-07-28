@@ -17,6 +17,7 @@ function prices (req, res) {
       }
 
       var prices = [{
+          //TODO: Supersaver aufnehmen
           price: 830,
           links: {
               self,

@@ -26,7 +26,7 @@ function offers (req, res) {
           "actions": [{
               "class": "prebook",
               "href": "../api/prebookings?offerId=1001",
-              "method": "POST",
+              "method": "PUT",
               "fields": [
                   {"name": "firstname", "type": "string"},
                   {"name": "lastname", "type": "string"}
@@ -47,7 +47,7 @@ function offers (req, res) {
           "actions": [{
               "class": "prebook",
               "href": "../api/prebookings?offerId=1002",
-              "method": "POST",
+              "method": "PUT",
               "fields": [
                   {"name": "firstname", "type": "string"},
                   {"name": "lastname", "type": "string"}

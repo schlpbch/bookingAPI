@@ -505,7 +505,7 @@ paths:
 
   /prebookings:
     x-swagger-router-controller: prebookings
-    post:
+    put:
       tags:
         - booking
       description:
