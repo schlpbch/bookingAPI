@@ -9,5 +9,8 @@ LABEL org.label-schema.vendor="SBB" \
       org.label-schema.vcs-url="https://github.com/schlpbch/bookingAPI" \
       org.label-schema.build-date=$BUILD_DATE
 
+# Fix permissions for runtime
+RUN chmod -R 777 /usr/src/app
+
 CMD npm run prod
 EXPOSE 8080
