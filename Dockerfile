@@ -11,6 +11,8 @@ LABEL org.label-schema.vendor="SBB" \
 
 # Fix permissions for runtime
 #RUN chmod -R 777 ./
+RUN chmod -R 777 ./public/app
 
-CMD chmod -R 777 ./public/app & npm run prod
+CMD npm run prod
+
 EXPOSE 8080
