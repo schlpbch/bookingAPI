@@ -2,6 +2,7 @@
  * Created by kevinkreuzer on 12.05.17.
  */
 module.exports = {
+    backend_bookingapi: process.env.BACKEND_BOOKINGAPI || 'http://localhost:8080',
     backend_locations: process.env.BACKEND_LOCATIONS || 'http://localhost:8080',
     backend_prices: process.env.BACKEND_PRICES || 'http://localhost:8080',
     backend_trips: process.env.BACKEND_TRIPS || 'http://localhost:8080',
