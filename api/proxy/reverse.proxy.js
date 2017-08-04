@@ -19,6 +19,9 @@ const createReverseProxy = (app, environmentConfiguration) => {
                     manipulatedBody = manipulatedBody.replace(regExp, environmentConfiguration['backend_bookingapi'] + "/redirect_api/");
                 }
             }
+            if(res.headers['content-type'] != undefined) {
+                clientResponse.setHeader('Content-Type', res.headers['content-type']);
+            }
             clientResponse.send(manipulatedBody);
         });
     };
