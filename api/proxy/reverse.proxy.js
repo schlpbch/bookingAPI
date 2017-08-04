@@ -16,7 +16,7 @@ const createReverseProxy = (app, environmentConfiguration) => {
             for (var e in environmentConfiguration) {
                 if(e.startsWith("backend")) {
                     var regExp = new RegExp(environmentConfiguration[e] + "/api/", "g");
-                    manipulatedBody = manipulatedBody.replace(regExp, "http://localhost:8080/redirect_api/");
+                    manipulatedBody = manipulatedBody.replace(regExp, environmentConfiguration['backend_bookingapi'] + "/redirect_api/");
                 }
             }
             clientResponse.send(manipulatedBody);
