@@ -12,33 +12,18 @@ module.exports = {
 function confirm (req, res) {
   var bookings = [{
     bookingId: '3001',
-    description: 'Trip from Bern to Thun at 14.01.2017 20:04.',
     links: {
-      'self': {
-        href: 'bookings/3001'
-      },
       'fulfil-pdf': {
-        title: 'Get ticket in PDF format',
         href: '../api/bookings/3001/tickets?type=pdf'
       },
       'fulfil-png': {
-          title: 'Get ticket in PDF format',
           href: '../api/bookings/3001/tickets?type=png'
       },
       'fulfil-pkpass': {
-          title: 'Get ticket in PDF format',
           href: '../api/bookings/3001/tickets?type=pkpass'
       }
     },
-    "actions": [{
-        "class": "cancel",
-        "href": "../api/cancellations?bookingId=3001",
-        "method": "PUT"
-    },{
-        "class": "refund",
-        "href": "../api/refundings?bookingId=3001",
-        "method": "PUT"
-    }]
+    "actions": []
   }]
 
   res.json(bookings)

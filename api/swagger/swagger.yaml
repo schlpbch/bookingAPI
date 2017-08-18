@@ -318,36 +318,18 @@ paths:
         operationId: prices
         "parameters":
         -
+          in: header
+          name: X-Conversation-Id
+          type: string
+          required: true
+          default: 'aaee8345-966b-49a8-9640-60e0c4354536'
+        -
           default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
           description: "The tripId for this journey."
           in: query
           name: tripId
-          required: false
+          required: true
           type: string
-        -
-          default: 8507000
-          description: "The id of the origin."
-          format: int32
-          in: query
-          name: originId
-          required: false
-          type: integer
-        -
-          default: 8503000
-          description: "The id of the destination."
-          format: int32
-          in: query
-          name: destinationId
-          required: false
-          type: integer
-        -
-          default: 8500218
-          description: "The id of the via."
-          format: int32
-          in: query
-          name: viaId
-          required: false
-          type: integer
         -
           default: "2017-06-27"
           description: "The desired departure date."
@@ -470,6 +452,20 @@ paths:
           required: false
           type: string
         -
+          default: Hans
+          description: "The travellers first name."
+          in: query
+          name: firstname
+          required: false
+          type: string
+        -
+          default: Mustermann
+          description: "The travellers last name."
+          in: query
+          name: lastname
+          required: false
+          type: string
+        -
           default: 42
           description: "Age of the traveller."
           format: int32
@@ -532,20 +528,6 @@ paths:
           name: offerId
           required: true
           type: string
-        -
-          default: Hans
-          description: "The travellers first name."
-          in: query
-          name: firstname
-          required: true
-          type: string
-        -
-          default: Mustermann
-          description: "The travellers last name."
-          in: query
-          name: lastname
-          required: true
-          type: string
 
       responses:
         200:
@@ -597,6 +579,12 @@ paths:
           required: true
           type: string
           default: '2001' # for simpler mock testing only
+        - name: amountPaid
+          in: query
+          description: "The amount paid for the ticket."
+          required: true
+          type: string
+          default: '10000' # for simpler mock testing only
         -
           description: "Language (todo by wooky): {de, en, fr, it}"
           enum:

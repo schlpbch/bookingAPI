@@ -71,27 +71,27 @@ function trips (req, res) {
     }]
   }
 
-  var links2 = {
-      'self': {
-          href: constructSelfUrl(trip2)
-      },
-      'prices': {
-          title: 'Request the cheapest prices for a trip.',
-          href: constructPricesUrl(trip2)
-      },
-      'offers': {
-          title: 'Request offers for a trip.',
-          href: constructOffersUrl(trip2)
-      },
-      'offers-online': {
-          title: 'Link into web shop B2C.',
-          href: constructWebshopB2CUrl(trip2)
-      },
-      'offers-mobile': {
-          title: 'Link into mobile app B2C.',
-          href: constructMobileB2CUrl(trip2)
-      }
-  }
+    var links2 = {
+        "self": {
+            "href": constructSelfUrl(trip2)
+        },
+        "prices": {
+            "title": "Request the cheapest prices for a trip.",
+            "href": constructPricesUrl(trip2)
+        },
+        "offers": {
+            "title": "Request offers for a trip.",
+            "href": constructOffersUrl(trip2)
+        },
+        "offers-online": {
+            "title": "Link into web shop B2C.",
+            "href": constructWebshopB2CUrl(trip2)
+        },
+        "offers-mobile": {
+            "title": "Link into mobile app B2C.",
+            "href": constructMobileB2CUrl(trip2)
+        }
+    }
 
   trip2['_links'] = links2
 
@@ -123,24 +123,24 @@ function trip (req, res) {
     }
 
     var links1 = {
-        'self': {
-            href: constructSelfUrl(trip1)
+        "self": {
+            "href": constructSelfUrl(trip1)
         },
-        'prices': {
-            title: 'Request the cheapest prices for a trip.',
-            href: constructPricesUrl(trip1)
+        "prices": {
+            "title": "Request the cheapest prices for a trip.",
+            "href": constructPricesUrl(trip1)
         },
-        'offers': {
-            title: 'Request offers for a trip.',
-            href: constructOffersUrl(trip1)
+        "offers": {
+            "title": "Request offers for a trip.",
+            "href": constructOffersUrl(trip1)
         },
-        'offers-online': {
-            title: 'Link into web shop B2C.',
-            href: constructWebshopB2CUrl(trip1)
+        "offers-online": {
+            "title": "Link into web shop B2C.",
+            "href": constructWebshopB2CUrl(trip1)
         },
-        'offers-mobile': {
-            title: 'Link into mobile app B2C.',
-            href: constructMobileB2CUrl(trip1)
+        "offers-mobile": {
+            "title": "Link into mobile app B2C.",
+            "href": constructMobileB2CUrl(trip1)
         }
     }
 
