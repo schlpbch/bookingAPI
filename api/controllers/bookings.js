@@ -3,33 +3,32 @@
 const path = require('path')
 
 module.exports = {
-  confirm,
-  fulfil,
-  cancel,
-  refund
+    putBookingUsingPUT, getTicketUsingGET, putCancellationUsingPUT
 }
 
-function confirm (req, res) {
+function putBookingUsingPUT (req, res) {
   var bookings = [{
     bookingId: '3001',
-    links: {
+    "_links": {
       'fulfil-pdf': {
+          "method": "GET",
         href: '../api/bookings/3001/tickets?type=pdf'
       },
       'fulfil-png': {
+          "method": "GET",
           href: '../api/bookings/3001/tickets?type=png'
       },
       'fulfil-pkpass': {
+          "method": "GET",
           href: '../api/bookings/3001/tickets?type=pkpass'
       }
-    },
-    "actions": []
+    }
   }]
 
   res.json(bookings)
 }
 
-function fulfil (req, res) {
+function getTicketUsingGET (req, res) {
   if (req.query.type === 'pdf') {
     var options = {
       root: path.join(__dirname, '/../../public/app/components')
@@ -40,15 +39,7 @@ function fulfil (req, res) {
   }
 }
 
-function cancel (req, res) {
-  var bookingId = {
-    bookingId: '3001'
-  }
-  res.json(bookingId)
-}
-
-function refund (req, res) {
-  // TODO: Fully specify behaviour
+function putCancellationUsingPUT (req, res) {
   var bookingId = {
     bookingId: '3001'
   }

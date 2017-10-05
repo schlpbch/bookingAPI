@@ -24,8 +24,20 @@ export default class AuthService {
 
     getAuthHeader() {
         return {
-            'Authorization': 'Bearer ' + this._extractTokenFromStorage()
+            'Authorization' : 'Bearer ' + this._extractTokenFromStorage(),
+            'X-Contract-Id' : 'SBB_PAR_ID_4711',
+            'X-Conversation-Id' : this._generateUUID(),
+            'Accept-Language': 'en'
         }
+    }
+
+    _generateUUID() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      }
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     }
 
     _storeToken(tokenWithPrefix) {

@@ -1,10 +1,10 @@
 'use strict'
 
 module.exports = {
-  trips, trip
+    getTripsUsingGET_1, getTripsUsingGET
 }
 
-function trips (req, res) {
+function getTripsUsingGET_1 (req, res) {
   // TODO: trip with multiple segments
 
   var trip1 = {
@@ -28,9 +28,6 @@ function trips (req, res) {
   }
 
   var links1 = {
-    'self': {
-      href: constructSelfUrl(trip1)
-    },
     'prices': {
       title: 'Request the cheapest prices for a trip.',
       href: constructPricesUrl(trip1)
@@ -72,23 +69,20 @@ function trips (req, res) {
   }
 
     var links2 = {
-        "self": {
-            "href": constructSelfUrl(trip2)
-        },
         "prices": {
-            "title": "Request the cheapest prices for a trip.",
+            "method": "GET",
             "href": constructPricesUrl(trip2)
         },
         "offers": {
-            "title": "Request offers for a trip.",
+            "method": "GET",
             "href": constructOffersUrl(trip2)
         },
         "offers-online": {
-            "title": "Link into web shop B2C.",
+            "method": "GET",
             "href": constructWebshopB2CUrl(trip2)
         },
         "offers-mobile": {
-            "title": "Link into mobile app B2C.",
+            "method": "GET",
             "href": constructMobileB2CUrl(trip2)
         }
     }
@@ -99,7 +93,7 @@ function trips (req, res) {
   res.json(trips)
 }
 
-function trip (req, res) {
+function getTripsUsingGET (req, res) {
     // TODO: trip with multiple segments
 
     var trip1 = {
@@ -123,23 +117,20 @@ function trip (req, res) {
     }
 
     var links1 = {
-        "self": {
-            "href": constructSelfUrl(trip1)
-        },
         "prices": {
-            "title": "Request the cheapest prices for a trip.",
+            "method": "GET",
             "href": constructPricesUrl(trip1)
         },
         "offers": {
-            "title": "Request offers for a trip.",
+            "method": "GET",
             "href": constructOffersUrl(trip1)
         },
         "offers-online": {
-            "title": "Link into web shop B2C.",
+            "method": "GET",
             "href": constructWebshopB2CUrl(trip1)
         },
         "offers-mobile": {
-            "title": "Link into mobile app B2C.",
+            "method": "GET",
             "href": constructMobileB2CUrl(trip1)
         }
     }
@@ -147,15 +138,6 @@ function trip (req, res) {
     trip1['_links'] = links1
 
     res.json(trip1)
-}
-
-// TODO: Refactor into helper class
-function constructSelfUrl (trip) {
-  let url = '../api/trips?'
-  url += 'tripId=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89QWFyYXVATD04NTAyMTEzQGE9MTI4QCQyMDE3MDgyNzIwMzQkMjAxNzA4MjcyMTEzJElSIDIxODkgJCQxJMKnVCRBPTFATz1BYXJhdUBMPTg1MDIxMTNAYT0xMjhAJEE9MUBPPVrDvHJpY2ggSEJATD04NTAzMDAwQGE9MTI4QCQyMDE3MDgyNzIxMjQkMjAxNzA4MjcyMTUyJElSIDIyODcgJCQxJA=='
-  url += '&date=' + encodeURI(trip.segments[0].origin.date)
-  url += '&time=' + encodeURIComponent(trip.segments[0].origin.time)
-  return url
 }
 
 function constructPricesUrl (trip) {

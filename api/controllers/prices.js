@@ -1,15 +1,10 @@
 'use strict'
 
 module.exports = {
-  prices,
-  tripPrices
+    getPricesUsingGET
 }
 
-function tripPrices (req, res) {
-  prices(req, res)
-}
-
-function prices (req, res) {
+function getPricesUsingGET (req, res) {
   let q = req.query
     if (!(q.tripId === undefined)) {
       var self = {
@@ -17,65 +12,41 @@ function prices (req, res) {
       }
 
       var prices = [{
-          "description": null,
-          "qualityOfService": "2nd",
+          "qualityOfService": 2,
           "superSaver": false,
           price: 620,
           "_links": {
+              "offers": {
+                  "method": "GET",
+                  "href": "../api/offers?tripId=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89QWFyYXVATD04NTAyMTEzQGE9MTI4QCQyMDE3MDgyNzIwMzQkMjAxNzA4MjcyMTEzJElSIDIxODkgJCQxJMKnVCRBPTFATz1BYXJhdUBMPTg1MDIxMTNAYT0xMjhAJEE9MUBPPVrDvHJpY2ggSEJATD04NTAzMDAwQGE9MTI4QCQyMDE3MDgyNzIxMjQkMjAxNzA4MjcyMTUyJElSIDIyODcgJCQxJA==&date=2017-06-14&time=20%3A04"
+              },
               "offers-mobile": {
+                  "method": "GET",
                   "href": "https://app.sbbmobile.ch/tripoffer?appid=bookingAPI&recon=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA4MjcyMDMwJDIwMTcwODI3MjAzNyRTIDcgICAgICQkMSQ=&date=2017-08-27"
               },
               "offers-online": {
+                  "method": "GET",
                   "href": "https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?webshopPreviewMode=active&recon=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA4MjcyMDMwJDIwMTcwODI3MjAzNyRTIDcgICAgICQkMSQ=&datum=2017-08-27&zeit=2030"
               }
-          },
-          "_actions": [
-              {
-                  "class": "offer",
-                  "href": "../api/offers?tripId=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89QWFyYXVATD04NTAyMTEzQGE9MTI4QCQyMDE3MDgyNzIwMzQkMjAxNzA4MjcyMTEzJElSIDIxODkgJCQxJMKnVCRBPTFATz1BYXJhdUBMPTg1MDIxMTNAYT0xMjhAJEE9MUBPPVrDvHJpY2ggSEJATD04NTAzMDAwQGE9MTI4QCQyMDE3MDgyNzIxMjQkMjAxNzA4MjcyMTUyJElSIDIyODcgJCQxJA==&date=2017-06-14&time=20%3A04",
-                  "method": "GET",
-                  "fields": [
-                      {
-                          "name": "firstname",
-                          "type": "string"
-                      },
-                      {
-                          "name": "lastname",
-                          "type": "string"
-                      }
-                  ]
-              }
-          ]
+          }
       }, {
-          "description": null,
-          "qualityOfService": "2nd",
+          "qualityOfService": 2,
           "superSaver": true,
           price: 310,
           "_links": {
+              "offers": {
+                  "method": "GET",
+                  "href": "../api/offers?tripId=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89QWFyYXVATD04NTAyMTEzQGE9MTI4QCQyMDE3MDgyNzIwMzQkMjAxNzA4MjcyMTEzJElSIDIxODkgJCQxJMKnVCRBPTFATz1BYXJhdUBMPTg1MDIxMTNAYT0xMjhAJEE9MUBPPVrDvHJpY2ggSEJATD04NTAzMDAwQGE9MTI4QCQyMDE3MDgyNzIxMjQkMjAxNzA4MjcyMTUyJElSIDIyODcgJCQxJA==&date=2017-06-14&time=20%3A04"
+              },
               "offers-mobile": {
+                  "method": "GET",
                   "href": "https://app.sbbmobile.ch/tripoffer?appid=bookingAPI&recon=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA4MjcyMDMwJDIwMTcwODI3MjAzNyRTIDcgICAgICQkMSQ=&date=2017-08-27"
               },
               "offers-online": {
+                  "method": "GET",
                   "href": "https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?webshopPreviewMode=active&recon=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA4MjcyMDMwJDIwMTcwODI3MjAzNyRTIDcgICAgICQkMSQ=&datum=2017-08-27&zeit=2030"
               }
-          },
-          "_actions": [
-              {
-                  "class": "offer",
-                  "href": "../api/offers?tripId=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89QWFyYXVATD04NTAyMTEzQGE9MTI4QCQyMDE3MDgyNzIwMzQkMjAxNzA4MjcyMTEzJElSIDIxODkgJCQxJMKnVCRBPTFATz1BYXJhdUBMPTg1MDIxMTNAYT0xMjhAJEE9MUBPPVrDvHJpY2ggSEJATD04NTAzMDAwQGE9MTI4QCQyMDE3MDgyNzIxMjQkMjAxNzA4MjcyMTUyJElSIDIyODcgJCQxJA==&date=2017-06-14&time=20%3A04",
-                  "method": "GET",
-                  "fields": [
-                      {
-                          "name": "firstname",
-                          "type": "string"
-                      },
-                      {
-                          "name": "lastname",
-                          "type": "string"
-                      }
-                  ]
-              }
-          ]
+          }
       }]
 
       res.json(prices)

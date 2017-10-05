@@ -1,19 +1,18 @@
 'use strict'
 
 module.exports = {
-  prebook
+    putPrebookingUsingPUT
 }
 
-function prebook (req, res) {
+function putPrebookingUsingPUT (req, res) {
   var prebooking = [{
-    prebookingId: '2001',
-    links: {
-    },
-    "actions": [{
-        "class": "book",
-        "href": "../api/bookings?prebookingId=2001",
-        "method": "PUT"
-    }]
+    preBookingId: '2001',
+    "_links": {
+        "book": {
+            "method": "PUT",
+            "href": "../api/bookings?preBookingId=2001"
+        }
+    }
   }]
   res.json(prebooking)
 }

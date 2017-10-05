@@ -7,951 +7,852 @@
 
 swagger: '2.0'
 
-## API Information
 info:
-  version: '0.0.14'
-  title: "Simple booking API for public transport"
-  description: "A simple API to book tickets for public transport in Switzerland."
+  description: 'A simple API to find trips, retrieve prices/offers and to book tickets for public transport in Switzerland.'
+  version: 1.2.10
+  title: Simple booking API for public transportaion
   contact:
-    name: Team SVS Vertrieb
+    name: Team SVS Hydra
+    url: 'http://booking.sbb.ch/'
     email: andreas.schlapbach@sbb.ch
-    url: http://booking.sbb.ch/
   license:
     name: SBB
-    url: http://booking.sbb.ch/app/LICENSE.txt
-
-
-## Host, Base Path, Schemes and Content Types
-#host: api.sbb.ch
-#host: localhost:8080
-basePath: /api
-schemes:
-  - http # Nur am Anfang
-  - https
-consumes:
-  - application/json
-produces:
-  - application/json
-  - application/hal+json
-  - application/pdf
-
-## Tags
+    url: 'http://booking.sbb.ch/app/LICENSE.txt'
+basePath: /
 tags:
-  - name: health
-    description:
-      Health and version of the API
-  - name: journeyPlanning
-    description:
-      Journey planning
-  - name: booking
-    description:
-     Journey booking
-  - name: afterSales
-    description:
-     Afters sales operations on bookings
+  - name: locations-controller
+    description: Locations Controller
+  - name: prices-controller
+    description: Prices Controller
+  - name: trips-controller
+    description: Trips Controller
+  - name: offers-controller
+    description: Offers Controller
+  - name: prebookings-controller
+    description: Prebookings Controller
+  - name: bookings-controller
+    description: Bookings Controller
 
-
-## Security
-#securityDefinitions:
-#  oauth:
-#    type: oauth2
-#    flow: implicit
-#    authorizationUrl: https://xyz #To clarify
-#    scopes:
-#      basic: |
-#       to read any and all data related to the B2P API
-#  key:
-#    type: apiKey
-#    in: query
-#    name: access_token
-#security:
-#  - oauth:
-#    - basic
-
-## Paths
 paths:
-  /health/status:
-    x-swagger-router-controller: health
-    get:
-      tags:
-        - health
-      description:
-        The status service can be used to check if the remote server is running
-        and can be reached across the network. Furthermore, the version of the
-        API is returned.
-
-      operationId: status
-      responses:
-        200:
-          description: "The reply from the server."
-          schema:
-            type: string
-        default:
-          description: "unexpected error"
-
-  ### Trip Planning Part
-
-  /locations:
+  /api/locations:
     x-swagger-router-controller: locations
     get:
       tags:
-        - journeyPlanning
-      description:
-        The locations service can be used to perform a pattern-based search to
-        retrieve a list of matching locations in the journey planner database.
-        Possible matches might be stations, points of interest and addresses.
-
-        The result is a list of matching locations which can be used as origin
-        and destination in trip and departure/arrival board requests.
-
-      operationId: locations
-      "parameters":
-        -
+        - locations-controller
+      summary: 'The locations service can be used to perform a pattern-based search to retrieve a list of matching locations in the journey planner database. Possible matches might be stations, points of interest and addresses.'
+      operationId: getLocationsUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: name
+          in: query
+          description: Token to search for locations.
+          required: true
+          type: string
           default: Ber
-          description: "Token to search for locations."
-          in: query
-          name: q
-          required: true
-          type: string
-      "responses": {
-        "200": {
-          "description": "The location.",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/LocationRS"
-            }
-          }
-        },
-        "401": {
-          "description": "Unauthorized"
-        },
-        "500": {
-          "description": "Internal server error."
-        },
-        "204": {
-          "description": "No location found.",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/LocationRS"
-            }
-          }
-        },
-        "403": {
-          "description": "Forbidden"
-        },
-        "404": {
-          "description": "Not Found"
-        }
-      }
-
-  /trips:
-    x-swagger-router-controller: trips
-    get:
-      tags:
-        - journeyPlanning
-      description:
-        The trips service calculates different trips for a specified origin
-        and destination. The external ids for origin and destination can be
-        retrieved with the locations service.
-
-      operationId: trips
-      "parameters":
-        -
-          default: 8507000
-          description: "The id of the origin of the trip."
-          format: int32
-          in: query
-          name: originId
-          required: true
-          type: integer
-        -
-          default: 8503000
-          description: "The id of the destination of the trip."
-          format: int32
-          in: query
-          name: destinationId
-          required: true
-          type: integer
-        -
-          default: 8500218
-          description: "The id of the via of the trip."
-          format: int32
-          in: query
-          name: viaId
-          required: false
-          type: integer
-        -
-          default: "2017-06-27"
-          description: "The desired departure date."
-          in: query
-          name: date
-          required: true
-          type: string
-        -
-          default: "20:22"
-          description: "The desired departure time."
-          in: query
-          name: time
-          required: true
-          type: string
-
-      "responses": {
-        "200": {
-          "description": "A list of possible trips matching the specified travel wishes.",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/TripRS"
-            }
-          }
-        },
-        "401": {
-          "description": "Unauthorized"
-        },
-        "500": {
-          "description": "Internal server error."
-        },
-        "204": {
-          "description": "No matching trip found.",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/TripRS"
-            }
-          }
-        },
-        "403": {
-          "description": "Forbidden"
-        },
-        "404": {
-          "description": "Not Found"
-        }
-      }
-
-
-  /trips/{tripId}:
-    x-swagger-router-controller: trips
-    get:
-      tags:
-        - journeyPlanning
-      description:
-        The trips service calculates different trips for a specified origin
-        and destination. The external ids for origin and destination can be
-        retrieved with the locations service.
-
-      operationId: trip
-      "parameters":
-        -
-          default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
-          description: "The tripId for this journey."
-          in: path
-          name: tripId
-          required: true
-          type: string
-        -
-          default: "2017-06-27"
-          description: "The desired departure date."
-          in: query
-          name: date
-          required: true
-          type: string
-        -
-          default: "20:22"
-          description: "The desired departure time."
-          in: query
-          name: time
-          required: true
-          type: string
-
-      "responses": {
-        "200": {
-          "description": "A list of possible trips matching the specified travel wishes.",
-          "schema": {
-              "$ref": "#/definitions/TripRS"
-          }
-        },
-        "401": {
-          "description": "Unauthorized"
-        },
-        "500": {
-          "description": "Internal server error."
-        },
-        "204": {
-          "description": "No matching trip found.",
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/TripRS"
-            }
-          }
-        },
-        "403": {
-          "description": "Forbidden"
-        },
-        "404": {
-          "description": "Not Found"
-        }
-      }
-
-  ### Booking Part
-
-  /prices:
-      x-swagger-router-controller: prices
-      get:
-        tags:
-          - booking
-        description:
-          The price service calculates the cheapest prices for an adult
-          and a specified origin and destination.
-
-          Includes the normal and the super fare prices of a trip for second
-          and first class with and without half-fare reduction.
-
-          The external ids for origin and destination can be retrieved
-          with the locations service.
-
-          Either the "tripId" or "originId", "destinationId", "date", and "time"
-          must be defined.
-
-        operationId: prices
-        "parameters":
-        -
-          in: header
-          name: X-Conversation-Id
-          type: string
-          required: true
-          default: 'aaee8345-966b-49a8-9640-60e0c4354536'
-        -
-          default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
-          description: "The tripId for this journey."
-          in: query
-          name: tripId
-          required: true
-          type: string
-        -
-          default: "2017-06-27"
-          description: "The desired departure date."
-          in: query
-          name: date
-          required: true
-          type: string
-        -
-          default: "20:22"
-          description: "The desired departure time."
-          in: query
-          name: time
-          required: true
-          type: string
-
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PriceRS"
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-
-  /offers:
+      responses:
+        '200':
+          description: The location
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/LocationRS'
+        '204':
+          description: No location found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/LocationRS'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Input could not be processed (too short or wrong)
+        '500':
+          description: Internal server error
+  /api/offers:
     x-swagger-router-controller: offers
     get:
       tags:
-        - booking
-      description:
-        The offers service calculates offers for a specified origin
-        and destination. The external ids for origin and destination can
-        be retrieved with the locations service.
-
-        Either the "tripId" or "originId" and "date" must be defined.
-
-      operationId: offers
+        - offers-controller
+      summary: |
+        The offers service calculates all possible offers for a specified origin and destination according to our offers logic. For example we offer a day-pass if the fare is cheaper or not much more expensive than a regular point to point ticket.The offered fare is cashed for 20 Minutes.
+        The external ids for origin and destination can be retrieved with the locations service.
+        There is no limitation for the number of passengers. We highly recommend not to ask for more than 5, especially if you send the request for different passenger types.
+        Please note that this service is not designed as a price information service and it has to be used only as part of the booking process. For pure price information please use the 'prices' service.
+        Detailed Information about fares and conditions you can find here: https://www.sbb.ch/en/station-services/services/customerdialogue/fare-conditions-for-your-journey.html
+      operationId: getOffersUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
       parameters:
-        -
+        - name: X-Conversation-Id
           in: header
-          name: X-Conversation-Id
-          type: string
+          description: The Conversation Id of the current business process.
           required: true
-          default: 'aaee8345-966b-49a8-9640-60e0c4354536'
-        -
-          in: header
-          name: X-Contract-Id
           type: string
-          required: true
-          default: 'STS001'
-        -
-          description: "Language (todo by wooky): {de, en, fr, it}"
-          enum:
-            - de
-            - en
-            - fr
-            - it
+          default: aaee8345-966b-49a8-9640-60e0c4354536
+        - name: X-Contract-Id
           in: header
+          description: The contract ID of the partner.
+          required: true
+          type: string
+          default: SBB-B2P-1
+        - name: Accept-Language
+          in: header
+          description: 'The language of the ticket. Available language codes are: DE, FR, IT, EN'
+          required: true
+          type: string
+          default: en
+        - name: tripId
+          in: query
+          description: The tripId for this journey.
+          required: false
+          type: string
+          default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
+        - name: originId
+          in: query
+          description: The id of the origin.
+          required: false
+          type: integer
+          default: 8507000
+          format: int32
+        - name: destinationId
+          in: query
+          description: The id of the destination.
+          required: false
+          type: integer
+          default: 8503000
+          format: int32
+        - name: viaId
+          in: query
+          description: The id of the via.
+          required: false
+          type: integer
+          default: 8500218
+          format: int32
+        - name: date
+          in: query
+          description: The desired departure date.
+          required: true
+          type: string
+          default: '2017-06-27'
+        - name: time
+          in: query
+          description: The desired departure time.
+          required: false
+          type: string
+          default: '20:22'
+        - name: firstname
+          in: query
+          description: The travellers first name.
+          required: false
+          type: string
+          default: Hans
+        - name: lastname
+          in: query
+          description: The travellers last name.
+          required: false
+          type: string
+          default: Mustermann
+        - name: dateOfBirth
+          in: query
+          description: Date of Birth of the traveller.
+          required: false
+          type: string
+          default: '1982-06-28'
+        - name: reduction
+          in: query
+          description: 'Reduction: {none, half-fare, ga-1st, ga-2nd}'
+          required: false
+          type: string
           items:
             type: string
-          name: Accept-Language
-          required: false
-          type: string
-          default: 'de'
-        -
-          default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
-          description: "The tripId for this journey."
-          in: query
-          name: tripId
-          required: false
-          type: string
-        -
-          default: 8507000
-          description: "The id of the origin."
-          format: int32
-          in: query
-          name: originId
-          required: false
-          type: integer
-        -
-          default: 8503000
-          description: "The id of the destination."
-          format: int32
-          in: query
-          name: destinationId
-          required: false
-          type: integer
-        -
-          default: 8500218
-          description: "The id of the via."
-          format: int32
-          in: query
-          name: viaId
-          required: false
-          type: integer
-        -
-          default: "2017-06-27"
-          description: "The desired departure date."
-          in: query
-          name: date
-          required: true
-          type: string
-        -
-          default: "20:22"
-          description: "The desired departure time."
-          in: query
-          name: time
-          required: false
-          type: string
-        -
-          default: Hans
-          description: "The travellers first name."
-          in: query
-          name: firstname
-          required: false
-          type: string
-        -
-          default: Mustermann
-          description: "The travellers last name."
-          in: query
-          name: lastname
-          required: false
-          type: string
-        -
-          default: 42
-          description: "Age of the traveller."
-          format: int32
-          in: query
-          name: age
-          required: false
-          type: integer
-        -
           collectionFormat: multi
-          description: "Reduction: {none, half-fare, ga-1st, ga-2nd}"
+          default: 'half-fare'
           enum:
             - none
             - half-fare
             - ga-1st
             - ga-2nd
-          in: query
-          items:
-            type: string
-          name: reduction
-          required: false
-          type: string
-          default: 'half-fare'
-
       responses:
-        200:
-          description: "A list of offers."
+        '200':
+          description: A list of offers
           schema:
             type: array
             items:
-              $ref: '#/definitions/offer'
-        default:
-          description: "unexpected error"
-
-  /prebookings:
+              $ref: '#/definitions/OfferRS'
+        '204':
+          description: No offer found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/OfferRS'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal server error
+  /api/prebookings:
     x-swagger-router-controller: prebookings
     put:
       tags:
-        - booking
-      description:
-        Prebook an offer during checkout process for 15 minutes. Normally
-        called when adding an item to the shopping cart.
-
-      operationId: prebook
+        - prebookings-controller
+      summary: 'The prebooked offer is exclusively reserved for 30 minutes for the future booking. '
+      operationId: putPrebookingUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
       parameters:
-        -
+        - name: X-Conversation-Id
           in: header
-          name: X-Conversation-Id
-          type: string
+          description: The Conversation Id of the current business process.
           required: true
-          default: 'aaee8345-966b-49a8-9640-60e0c4354536'
-        -
+          type: string
+          default: aaee8345-966b-49a8-9640-60e0c4354536
+        - name: X-Contract-Id
           in: header
-          name: X-Contract-Id
-          type: string
+          description: The contract ID of the partner.
           required: true
-          default: 'STS001'
-        -
-          description: "The offer ID to be pre-booked for later booking."
+          type: string
+          default: SBB-B2P-1
+        - name: offerId
           in: query
-          name: offerId
+          description: The offer ID to be pre-booked for later booking.
           required: true
           type: string
-
       responses:
-        200:
-          description: "The pre-booked offer."
+        '200':
+          description: The prebooked offer
           schema:
-            $ref: '#/definitions/prebook'
-        default:
-          description: "unexpected error"
-
-  /bookings:
+            type: array
+            items:
+              $ref: '#/definitions/PrebookRS'
+        '201':
+          description: Created
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: No entity found
+        '500':
+          description: Internal server error
+  /api/prices:
+    x-swagger-router-controller: prices
+    get:
+      tags:
+        - prices-controller
+      summary: |-
+        Calculates the cheapest prices for an adult with halffare reduction and a specified origin and destination. This can be the regular or the saver fare if such is available.
+        If you are subscribed to our affiliation programm you have to include your ID as an URL parameter, eg. 'WT.i_trsrc=affiliation&WT.mc_id=YOUR_ID'.
+        Detailed Information about fares and conditions you can find here: https://www.sbb.ch/en/station-services/services/customerdialogue/fare-conditions-for-your-journey.html
+      operationId: getPricesUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: X-Conversation-Id
+          in: header
+          description: The Conversation Id of the current business process.
+          required: true
+          type: string
+          default: aaee8345-966b-49a8-9640-60e0c4354536
+        - name: tripId
+          in: query
+          description: The tripId for this journey. It is the Base64 encoded HAFAS reconstruction context. The tripId can also be retrieved with the trips service.
+          required: true
+          type: string
+          default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
+        - name: date
+          in: query
+          description: The desired departure date in format yyyy-MM-dd.
+          required: true
+          type: string
+          default: '2017-06-27'
+        - name: time
+          in: query
+          description: 'The desired departure time in format HH:mm.'
+          required: true
+          type: string
+          default: '20:22'
+      responses:
+        '200':
+          description: A list of prices for the trip
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PriceRS'
+        '204':
+          description: No prices found for the trip
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PriceRS'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal server error
+  /api/trips:
+    x-swagger-router-controller: trips
+    get:
+      tags:
+        - trips-controller
+      summary: The trips service returns different trips for a specified origin and destination (and via). The UIC codes of the origin and destination can be resolved using the locations service.
+      operationId: getTripsUsingGET_1
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: originId
+          in: query
+          description: The origin UIC code of the trip.
+          required: true
+          type: integer
+          default: 8507000
+          format: int32
+        - name: destinationId
+          in: query
+          description: The destination UIC code of the trip.
+          required: true
+          type: integer
+          default: 8503000
+          format: int32
+        - name: viaId
+          in: query
+          description: The UIC code of the via of the trip.
+          required: false
+          type: integer
+          default: 8500218
+          format: int32
+        - name: date
+          in: query
+          description: The desired departure date.
+          required: true
+          type: string
+          default: '2017-09-27'
+        - name: time
+          in: query
+          description: The desired departure time.
+          required: true
+          type: string
+          default: '10:22'
+      responses:
+        '200':
+          description: A list of possible trips matching the specified locations and date/time.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TripRS'
+        '204':
+          description: No matching trip was found.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TripRS'
+        '400':
+          description: Bad request by the client - see header for furhter information.
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal server error - see header for furhter information.
+  '/api/trips/{tripId}':
+    x-swagger-router-controller: trips
+    get:
+      tags:
+        - trips-controller
+      summary: The trips service calculates different trips for a specified reconstruction context. The external ids for origin and destination can be retrieved with the locations service.
+      operationId: getTripsUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: tripId
+          in: path
+          description: The tripId for this journey (currently the HAFAS reconstruction context encoded in Base64).
+          required: true
+          type: string
+          default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
+        - name: date
+          in: query
+          description: The desired departure date.
+          required: true
+          type: string
+          default: '2017-09-27'
+        - name: time
+          in: query
+          description: The desired departure time.
+          required: true
+          type: string
+          default: '10:22'
+      responses:
+        '200':
+          description: The requested trip data.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TripRS'
+        '204':
+          description: No matching trip was found.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TripRS'
+        '400':
+          description: Bad request by the client - see header for furhter information.
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal server error - see header for furhter information.
+  /api/bookings:
     x-swagger-router-controller: bookings
     put:
       tags:
-        - booking
-      description:
-        Book the pre-booked offer.
-
-      operationId: confirm
+        - bookings-controller
+      summary: Book the pre-booked offer. B2P Partners have to make sure that payment was successfully executed prior to the booking operation.
+      operationId: putBookingUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
       parameters:
-        -
+        - name: X-Conversation-Id
           in: header
-          name: X-Conversation-Id
-          type: string
+          description: The Conversation Id of the current business process.
           required: true
-          default: 'aaee8345-966b-49a8-9640-60e0c4354536'
-        -
+          type: string
+          default: aaee8345-966b-49a8-9640-60e0c4354536
+        - name: X-Contract-Id
           in: header
-          name: X-Contract-Id
-          type: string
+          description: The contract ID of the partner.
           required: true
-          default: 'STS001'
-        -
-          description: "Language (todo by wooky): {de, en, fr, it}"
-          enum:
-            - de
-            - en
-            - fr
-            - it
+          type: string
+          default: SBB-B2P-1
+        - name: Accept-Language
           in: header
-          items:
-            type: string
-          name: Accept-Language
-          required: false
-          type: string
-          default: 'de'
-        - name: prebookingId
-          in: query
-          description: "The pre-book ID to be booked."
+          description: 'The language of the ticket. Possible values: DE, EN, IT, FR.'
           required: true
           type: string
-          default: '2001' # for simpler mock testing only
-        - name: amountPaid
+          default: en
+        - name: preBookingId
           in: query
-          description: "The amount paid for the ticket."
+          description: The pre-book ID to be booked.
           required: true
           type: string
-          default: '10000' # for simpler mock testing only
-        -
-          description: "Language (todo by wooky): {de, en, fr, it}"
-          enum:
-            - de
-            - en
-            - fr
-            - it
-          in: query
-          items:
-            type: string
-          name: language
-          required: false
-          type: string
-          default: 'de'
-
       responses:
-        200:
-          description: "The booked offer."
+        '200':
+          description: The booked tickets
           schema:
-            $ref: '#/definitions/book'
-        default:
-          description: "unexpected error"
-
-  /bookings/{bookingId}/tickets:
+            type: array
+            items:
+              $ref: '#/definitions/BookRS'
+        '201':
+          description: Created
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: No entity found
+        '500':
+          description: Internal server error
+  '/api/bookings/{bookingId}/tickets':
     x-swagger-router-controller: bookings
     get:
       tags:
-        - booking
-        - afterSales
-      description:
-        Fulfill the booking which traditionally means producing a tickets.
-        However other ways of fullfilment are possible such as storing the
-        booking on a central database. In this case only a reference to the
-        booking is returned.'
-
-      operationId: fulfil
+        - bookings-controller
+      summary: 'Get the booked tickets. This operation can be called with the same bookingId multiple times to retrive the ticket in different formats up to 30 minutes after the booking call. '
+      operationId: getTicketUsingGET
+      consumes:
+        - application/json
+      produces:
+        - image/png
+        - application/pdf
+        - application/vnd.apple.pkpass
       parameters:
+        - name: X-Conversation-Id
+          in: header
+          description: The Conversation Id of the current business process.
+          required: true
+          type: string
+          default: aaee8345-966b-49a8-9640-60e0c4354536
+        - name: X-Contract-Id
+          in: header
+          description: The contract ID of the partner.
+          required: true
+          type: string
+          default: SBB-B2P-1
+        - name: Accept-Language
+          in: header
+          description: 'The language of the ticket. Possible values: DE, EN, IT, FR.'
+          required: true
+          type: string
+          default: en
         - name: bookingId
           in: path
-          description: "The booking ID."
+          description: The booking ID. It can be retreived with the booking service.
           required: true
           type: string
-          default: '3001' # for simpler mock testing only
         - name: type
-          description: "Type of the tickets: {pdf, png, pkpass}"
-          required: true
           in: query
+          description: 'Type of the tickets: {pdf, png, pkpass}'
+          required: true
           type: string
-          default: 'pdf'
+          default: pdf
           enum:
             - pdf
             - png
             - pkpass
       responses:
-        200:
-          description: "The booked tickets."
-        default:
-          description: "unexpected error"
-
-  /cancellations:
+        '200':
+          description: The booked tickets.
+          schema:
+            type: array
+            items:
+              type: string
+              format: byte
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: No entity found
+        '415':
+          description: Unsupported media type.
+        '418':
+          description: I'm a teapot.
+        '500':
+          description: Internal server error
+  /api/cancellations:
     x-swagger-router-controller: bookings
     put:
       tags:
-        - afterSales
-      description:
-        Cancel the booking (technical; not for refunding).
-
-      operationId: cancel
+        - bookings-controller
+      summary: Cancel the booking (technical; not for refunding).
+      operationId: putCancellationUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
       parameters:
+        - name: X-Conversation-Id
+          in: header
+          description: The Conversation Id of the current business process.
+          required: true
+          type: string
+          default: aaee8345-966b-49a8-9640-60e0c4354536
+        - name: X-Contract-Id
+          in: header
+          description: The contract ID of the partner.
+          required: true
+          type: string
+          default: SBB-B2P-1
+        - name: Accept-Language
+          in: header
+          description: The language of the ticket.
+          required: true
+          type: string
+          default: en
         - name: bookingId
           in: query
-          description: "Booking ID to cancel."
+          description: Booking ID to cancel.
           required: true
           type: string
-          default: '3001' # for simpler mock testing only
       responses:
-        200:
-          description: "The canceled booking ID."
+        '200':
+          description: The canceled booking id.
           schema:
             type: string
-        default:
-          description: "unexpected error"
-
-  /refundings:
-    x-swagger-router-controller: bookings
-    put:
-      tags:
-        - afterSales
-      description:
-        Refund the booking. Two types of refund are to be supported, full and
-        partial.
-
-        Yet to be fully specified (alias,...).
-
-      operationId: refund
-      parameters:
-        - name: bookingId
-          in: query
-          description: "Booking ID to refund."
-          required: true
-          type: string
-          default: '3001' # for simpler mock testing only
-        - name: type
-          description: "Type of refund: {full, partial}"
-          required: true
-          in: query
-          type: string
-          default: "full"
-          enum:
-           - full
-           - partial # todo: define properly
-      responses:
-        200:
-          description: "The refunded booking ID."
-          schema:
-            type: string
-        default:
-          description: "unexpected error"
-
-## Definitions
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: No entity found
+        '500':
+          description: Internal server error
 
 definitions:
-  LocationRS:
+  ValidityAreaRS:
+    type: object
+    properties:
+      leadingArea:
+        example: The 'Libero' Area in case the trip is from Bern to Zurich
+        description: The area that is included in the fare at beginning of the trip.
+        $ref: '#/definitions/AreaRS'
+      tailingArea:
+        example: The 'Libero' Area in case the trip is from Zurich to Bern
+        description: The area that is included in the fare at the end of the trip.
+        $ref: '#/definitions/AreaRS'
+    description: Contains area information at the departure or destination (or both) of the trip
+  PrebookRS:
     type: object
     required:
-      - id
-      - name
-      - lon
-      - lat
-      - type
+      - preBookingId
     properties:
-      id:
-        description: 'UIC code of the location.'
-        type: string
-        default: '8507000'
-      name:
-        description: 'Name of the location.'
-        type: string
-        default: 'Bern'
-      lon:
-        description: 'Longitude of centre coordinate.'
-        type: number
-        format: double
-        default: 7.439122
-      lat:
-        description: 'Latitude of centre coordinate.'
-        type: number
-        format: double
-        default: 46.948825
-      type:
-        description: 'Type of the location.'
-        type: string
-        default: 'STATION'
       _links:
-        type: array
-        items:
-          $ref: '#/definitions/link'
-
-  # ToDo: Refine properly with Team VTP
+        type: object
+        description: Context information required by the services.
+        additionalProperties:
+          $ref: '#/definitions/LinkRS'
+      preBookingId:
+        type: integer
+        format: int64
+        example: 47110815
+        description: ID after prebooking the offer.
+    description: The cheapest price for a given trip with its characteristics.
   TripRS:
     type: object
     required:
       - tripId
     properties:
-      tripId:
-        description: "Id of a trip"
-        type: string
-      trips:
-        type: array
-        items:
-          $ref: '#/definitions/leg'
       _links:
+        type: object
+        description: Context information required by the services.
+        additionalProperties:
+          $ref: '#/definitions/LinkRS'
+      segments:
         type: array
+        description: The segments of the trip and its stops.
         items:
-          $ref: '#/definitions/link'
-
-  leg:
-    type: object
-    required:
-      - origin
-      - destination
-    properties:
-      origin:
-        $ref: '#/definitions/stop'
-      destination:
-        $ref: '#/definitions/stop'
-
-  stop:
+          $ref: '#/definitions/SegmentRS'
+      tripId:
+        type: string
+        example: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
+        description: Id of a trip as Base64 encoded HAFAS reconstruction context.
+    description: A one-way trip from an origin to a destination (may contains a via) with its segments and stops.
+  LocationRS:
     type: object
     required:
       - id
       - name
-      - date
-      - time
     properties:
+      _links:
+        type: object
+        description: Context information required by the services.
+        additionalProperties:
+          $ref: '#/definitions/LinkRS'
       id:
-        description: 'The UIC code of the stop.'
-        type: string
-        default: '8507785'
-      name:
-        description: 'The name of the stop.'
-        type: string
-        default: 'Bern'
-      date:
-        description: 'The date of the departure/arrival.'
-        type: string
-        format: date
-        default: '2017-01-14'
-      time:
-        description: 'The time of the departure/arrival.'
-        type: string
-        format: dateTime
-        default: '20:14'
-
-  PriceRS:
-    type: object
-    required:
-      - normalPrices
-      - _links
-    properties:
-      normalPrices:
-        description:
-          Includes the normal fare prices of a trip for second and first class
-          with and without half-fare reduction. Thus, in total four prices are
-          returned.
-
-          The prices are in Swiss cents.
-        type: array
-        items:
-          type: integer
-      superSaverPrices:
-        description:
-          Includes the super fare prices of a trip for second and first class
-          with and without half-fare reduction. Thus, in total four prices are
-          returned if super fare prices exist.
-
-          The prices are in Swiss cents.
-        type: array
-        items:
-          type: integer
-      _links:
-        $ref: '#/definitions/price_links'
-
-  price_links:
-    type: object
-    required:
-      - self
-    properties:
-     self:
-       $ref: '#/definitions/uri'
-
-  offer:
-    type: object
-    required:
-      - offerId
-      - description
-      - price
-      - qualityOfService
-    properties:
-      offerId:
-        description: "ID of the offer for pre-booking."
-        type: string
-        default: '1001'
-      description:
-        description: "Description of the offer."
-        type: string
-      price:
-        description: "Price of the offer."
         type: integer
-        default: 22
-      qualityOfService:
-        description: "Quality of service of the offer."
+        format: int64
+        example: 8507785
+        description: UIC code of the location.
+      lat:
+        type: number
+        format: double
+        example: 46.948825
+        description: Latitude of centre coordinate.
+      lon:
+        type: number
+        format: double
+        example: 7.439122
+        description: Longitude of centre coordinate.
+      name:
         type: string
-        default: '2nd'
-        enum:
-         - 'none'
-         - '1st'
-         - '2nd'
-      _links:
-        $ref: '#/definitions/offer_links'
-
-  offer_links:
+        example: Bern Hauptbahnhof
+        description: Name of the location.
+      type:
+        type: string
+        example: STATION
+        description: Type of the location.
+    description: A location with it characteristics.
+  AreaRS:
     type: object
     required:
-      - self
-      - prebook
+      - areaCode
+      - areaName
+      - zoneCodes
     properties:
-      self:
-        $ref: '#/definitions/uri'
-      prebook:
-        $ref: '#/definitions/uri'
-
-  prebook:
-    type: object
-    required:
-     - prebookingId
-    properties:
-      prebookingId:
-        description: "ID of the pre-booked offer."
+      areaCode:
+        type: integer
+        format: int32
+        example: 470
+        description: The code of the Area.
+      areaName:
         type: string
-        default: '2001'
-      description:
-        description: "Description of the pre-booked offer."
-        type: string
-      _links:
-        $ref: '#/definitions/prebook_links'
-
-  prebook_links:
-    type: object
-    required:
-      - self
-      - book
-    properties:
-      self:
-        $ref: '#/definitions/uri'
-      book:
-        $ref: '#/definitions/uri'
-
-  book:
-    type: object
-    required:
-     - bookingId
-    properties:
-      bookingId:
-        description: "Id of the booking"
-        type: string
-        default: '3001'
-      description:
-        description: "Description of the booked offer."
-        type: string
-      _links:
-        $ref: '#/definitions/book_links'
-
-  book_links:
-    type: object
-    required:
-      - self
-      - fulfil
-      - cancel
-    properties:
-      self:
-        $ref: '#/definitions/uri'
-      fulfil:
-        $ref: '#/definitions/uri'
-      cancel:
-        $ref: '#/definitions/uri'
-
-
-  ### REST level 3 support
-
-  uri:
+        example: Libero
+        description: The name of the Area.
+      zoneCodes:
+        type: array
+        example: '100,101'
+        description: Zone codes of the area.
+        items:
+          type: string
+  LinkRS:
     type: object
     required:
       - href
+      - method
     properties:
       href:
         type: string
-
-  link:
+        description: URL to the linked resource (no parameters needed).
+      method:
+        type: string
+        example: GET
+        description: HTTP method to call the action
+    description: Context information required by the services.
+  OfferRS:
     type: object
     required:
-     - rel
-     - href
+      - description
+      - offerId
+      - price
+      - productId
+      - qualityOfService
+      - title
     properties:
-      rel:
+      _links:
+        type: object
+        description: Context information required by the services.
+        additionalProperties:
+          $ref: '#/definitions/LinkRS'
+      description:
         type: string
-        description: "Action"
-      href:
+        example: 'One-way, return or round-trip ticket (ticket machines /ticket counter) in Switzerland in 1st or 2nd class. Validity period of a single journey: 1 day. Validity period for a return journey: 1 day (up to 115km) or 1 day per stretch (upwards of 116km, return journey possible a max. of 10 days after the outward journey). E-Ticket: 1 day each for one-way and return ticket. Reduced price for Half-Fare travelcard holders and children aged 6 to 16.'
+        description: A short description of the offer with characteristics and rules that may apply.
+      offerId:
         type: string
-        description: "URL to execute the action"
+        example: '174114741'
+        description: ID of the current offer that can be used for prebooking.
+      price:
+        type: integer
+        format: int32
+        example: 2200
+        description: Price of the current offer with the given characteristics.
+      productId:
+        type: integer
+        format: int32
+        example: 125
+        description: ID of the product that the offer is based on.
+      qualityOfService:
+        type: integer
+        format: int32
+        example: 2
+        description: The quality of service for this offer.
+        enum:
+          - 1
+          - 2
+      title:
+        type: string
+        example: 'Individual Tickets: Bern-Zürich HB 2nd '
+        description: A short title that describes what the offer is for.
+      validityArea:
+        description: The area in which the offer is additionally valid.
+        $ref: '#/definitions/ValidityAreaRS'
+    description: An actual offer for a specific trip with the given characteristics. The fare however is only guaranteed after prebooking.
+  StopRS:
+    type: object
+    required:
+      - date
+      - id
+      - name
+      - time
+    properties:
+      date:
+        type: string
+        example: '2017-01-14'
+        description: The date of the departure/arrival (depending of the position of the stop in the segment).
+      id:
+        type: integer
+        format: int64
+        example: 8503000
+        description: The UIC code of the stop.
+      name:
+        type: string
+        example: Bern
+        description: The name of the stop.
+      time:
+        type: string
+        example: '20:14'
+        description: The time of the departure/arrival (depending of the position of the stop in the segment).
+    description: A stop within a segment of a trip.
+  PriceRS:
+    type: object
+    required:
+      - price
+      - qualityOfService
+      - superSaver
+    properties:
+      _links:
+        type: object
+        description: Context information required by the services.
+        additionalProperties:
+          $ref: '#/definitions/LinkRS'
+      price:
+        type: integer
+        format: int32
+        example: 2200
+        description: Cheapest price for this trip with the given characteristics.
+      qualityOfService:
+        type: integer
+        format: int32
+        example: 2
+        description: The quality of service for this price.
+      superSaver:
+        type: boolean
+        example: false
+        description: Whether this is the price for a normal or a supersaver offer (bound to a connection; other restrictions may apply).
+    description: The cheapest price for a given trip with its characteristics.
+  SegmentRS:
+    type: object
+    properties:
+      destination:
+        description: The destinations of the segment.
+        $ref: '#/definitions/StopRS'
+      origin:
+        description: The origin of the segment.
+        $ref: '#/definitions/StopRS'
+  BookRS:
+    type: object
+    required:
+      - bookingId
+    properties:
+      _links:
+        type: object
+        description: Context information required by the services.
+        additionalProperties:
+          $ref: '#/definitions/LinkRS'
+      bookingId:
+        type: integer
+        format: int64
+        example: 247110815
+        description: ID of the booked ticket.
+    description: The booked (and paid) offer.
