@@ -18,7 +18,7 @@ info:
   license:
     name: SBB
     url: 'http://booking.sbb.ch/app/LICENSE.txt'
-basePath: /
+basePath: /api
 tags:
   - name: locations-controller
     description: Locations Controller
@@ -34,7 +34,7 @@ tags:
     description: Bookings Controller
 
 paths:
-  /api/locations:
+  /locations:
     x-swagger-router-controller: locations
     get:
       tags:
@@ -77,7 +77,7 @@ paths:
           description: Input could not be processed (too short or wrong)
         '500':
           description: Internal server error
-  /api/offers:
+  /offers:
     x-swagger-router-controller: offers
     get:
       tags:
@@ -206,7 +206,7 @@ paths:
           description: Not Found
         '500':
           description: Internal server error
-  /api/prebookings:
+  /prebookings:
     x-swagger-router-controller: prebookings
     put:
       tags:
@@ -254,7 +254,7 @@ paths:
           description: No entity found
         '500':
           description: Internal server error
-  /api/prices:
+  /prices:
     x-swagger-router-controller: prices
     get:
       tags:
@@ -316,7 +316,7 @@ paths:
           description: Not Found
         '500':
           description: Internal server error
-  /api/trips:
+  /trips:
     x-swagger-router-controller: trips
     get:
       tags:
@@ -384,7 +384,7 @@ paths:
           description: Not Found
         '500':
           description: Internal server error - see header for furhter information.
-  '/api/trips/{tripId}':
+  '/trips/{tripId}':
     x-swagger-router-controller: trips
     get:
       tags:
@@ -437,7 +437,7 @@ paths:
           description: Not Found
         '500':
           description: Internal server error - see header for furhter information.
-  /api/bookings:
+  /bookings:
     x-swagger-router-controller: bookings
     put:
       tags:
@@ -491,7 +491,7 @@ paths:
           description: No entity found
         '500':
           description: Internal server error
-  '/api/bookings/{bookingId}/tickets':
+  '/bookings/{bookingId}/tickets':
     x-swagger-router-controller: bookings
     get:
       tags:
@@ -558,7 +558,7 @@ paths:
           description: I'm a teapot.
         '500':
           description: Internal server error
-  /api/cancellations:
+  /cancellations:
     x-swagger-router-controller: bookings
     put:
       tags:
