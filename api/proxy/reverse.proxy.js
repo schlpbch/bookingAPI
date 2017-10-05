@@ -4,14 +4,27 @@
 'use strict'
 const request = require('request')
 const REDIRECT_API = '/redirect_api/'
+
+function _generateUUID() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
 const createReverseProxy = (app, environmentConfiguration) => {
-    const proxyAPIRequest = (env, clientRequest, clientResponse) => {
+    const proxyAPIRequest = (httpMethod, env, clientRequest, clientResponse) => {
         let headers = clientRequest.headers
         let url = clientRequest.url.replace(REDIRECT_API, environmentConfiguration['backend_' + env] + '/api/')
 
         //TODO: Use Certificate solution instead of rejectUnauthorized: false
         delete headers.host;
-        request(url, {headers, rejectUnauthorized: false}, function (err, res, body) {
+        headers['X-Contract-Id'] = 'SBB_PAR_ID_4711';
+        headers['X-Conversation-Id'] = _generateUUID();
+        headers['Accept-Language'] = 'en';
+        request(url, {headers, method: httpMethod, rejectUnauthorized: false}, function (err, res, body) {
             var manipulatedBody = body.toString();
             for (var e in environmentConfiguration) {
                 if(e.startsWith("backend")) {
@@ -27,27 +40,31 @@ const createReverseProxy = (app, environmentConfiguration) => {
     };
 
     app.get(REDIRECT_API + 'locations*', function (clientRequest, clientResponse) {
-        proxyAPIRequest('locations', clientRequest, clientResponse)
+        proxyAPIRequest('GET', 'locations', clientRequest, clientResponse)
     });
 
     app.get(REDIRECT_API + 'prices*', function (clientRequest, clientResponse) {
-        proxyAPIRequest('prices', clientRequest, clientResponse)
+        proxyAPIRequest('GET', 'prices', clientRequest, clientResponse)
     });
 
     app.get(REDIRECT_API + 'trips*', function (clientRequest, clientResponse) {
-        proxyAPIRequest('trips', clientRequest, clientResponse)
+        proxyAPIRequest('GET', 'trips', clientRequest, clientResponse)
     });
 
     app.get(REDIRECT_API + 'offers*', function (clientRequest, clientResponse) {
-        proxyAPIRequest('offers', clientRequest, clientResponse)
+        proxyAPIRequest('GET', 'offers', clientRequest, clientResponse)
     });
 
-    app.get(REDIRECT_API + 'prebookings*', function (clientRequest, clientResponse) {
-        proxyAPIRequest('prebookings', clientRequest, clientResponse)
+    app.put(REDIRECT_API + 'prebookings*', function (clientRequest, clientResponse) {
+        proxyAPIRequest('PUT', 'prebookings', clientRequest, clientResponse)
+    });
+
+    app.put(REDIRECT_API + 'bookings*', function (clientRequest, clientResponse) {
+        proxyAPIRequest('PUT', 'bookings', clientRequest, clientResponse)
     });
 
     app.get(REDIRECT_API + 'bookings*', function (clientRequest, clientResponse) {
-        proxyAPIRequest('bookings', clientRequest, clientResponse)
+        proxyAPIRequest('GET', 'bookings', clientRequest, clientResponse)
     });
 
     app.get('/basicAuth/login', function (clientRequest, clientResponse) {
