@@ -1,5 +1,7 @@
 'use strict'
 
+var dateFormat = require('dateformat')
+
 module.exports = {
     getTripsUsingGET_1, getTripsUsingGET
 }
@@ -167,8 +169,9 @@ function constructWebshopB2CUrl (trip) {
   let url = 'https://www.sbb.ch/en/buying/pages/fahrplan/fahrplan.xhtml?'
   url += 'webshopPreviewMode=active'
   url += '&von=' + encodeURI(trip.segments[0].origin.name)
-  url += '&recon=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89QWFyYXVATD04NTAyMTEzQGE9MTI4QCQyMDE3MDgyNzIwMzQkMjAxNzA4MjcyMTEzJElSIDIxODkgJCQxJMKnVCRBPTFATz1BYXJhdUBMPTg1MDIxMTNAYT0xMjhAJEE9MUBPPVrDvHJpY2ggSEJATD04NTAzMDAwQGE9MTI4QCQyMDE3MDgyNzIxMjQkMjAxNzA4MjcyMTUyJElSIDIyODcgJCQxJA=='
-  url += '&datum=' + 'Sun%2C+14.06.2017' // Aargh what a messed up date encoding
+  url += '&nach=' + encodeURI(trip.segments[0].destination.name)
+  //url += '&recon=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89QWFyYXVATD04NTAyMTEzQGE9MTI4QCQyMDE3MDgyNzIwMzQkMjAxNzA4MjcyMTEzJElSIDIxODkgJCQxJMKnVCRBPTFATz1BYXJhdUBMPTg1MDIxMTNAYT0xMjhAJEE9MUBPPVrDvHJpY2ggSEJATD04NTAzMDAwQGE9MTI4QCQyMDE3MDgyNzIxMjQkMjAxNzA4MjcyMTUyJElSIDIyODcgJCQxJA=='
+  url += '&datum=' + encodeURIComponent(dateFormat(trip.segments[0].origin.date, 'dd.mm.yyyy'))
   url += '&zeit=' + encodeURIComponent(trip.segments[0].origin.time)
   return url
 }
