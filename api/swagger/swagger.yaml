@@ -9,12 +9,12 @@ swagger: '2.0'
 
 info:
   description: 'A simple API to find trips, retrieve prices/offers and to book tickets for public transport in Switzerland.'
-  version: 1.2.10
-  title: Simple booking API for public transportaion
+  version: 0.9
+  title: Simple booking API for public transportation
   contact:
     name: Team SVS Hydra
     url: 'http://booking.sbb.ch/'
-    email: andreas.schlapbach@sbb.ch
+    email: frank.pfleger@sbb.ch
   license:
     name: SBB
     url: 'http://booking.sbb.ch/app/LICENSE.txt'
