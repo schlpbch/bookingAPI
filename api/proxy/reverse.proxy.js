@@ -28,7 +28,7 @@ const createReverseProxy = (app, environmentConfiguration) => {
             if (res.headers['content-type'] != undefined) {
                 clientResponse.setHeader('Content-Type', res.headers['content-type']);
             }
-            if(res.headers['content-type'] === "image/png" || res.headers['content-type'] === "application/pdf") {
+            if(res.headers['content-type'] === "image/png" || res.headers['content-type'] === "application/pdf" || res.headers['content-type'] === "application/vnd.apple.pkpass") {
                 clientResponse.send(body);
             } else {
                 var manipulatedBody = body.toString();
