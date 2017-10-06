@@ -10,7 +10,6 @@ LABEL org.label-schema.vendor="SBB" \
       org.label-schema.build-date=$BUILD_DATE
 
 # Fix permissions for runtime
-#RUN chmod -R 777 ./
 RUN chmod -R 777 ./public/app
 
 CMD npm run prod
