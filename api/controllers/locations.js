@@ -1,10 +1,10 @@
 'use strict'
 
 module.exports = {
-  locations
+    getLocationsUsingGET
 }
 
-function locations (req, res) {
+function getLocationsUsingGET (req, res) {
   var locationBernHB = {
     id: '8507000',
     name: 'Bern HB',

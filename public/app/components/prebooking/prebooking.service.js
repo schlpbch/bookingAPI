@@ -13,7 +13,7 @@ export default class PreebookingService {
 
     getBooking(item) {
         let headers = this.authService.getAuthHeader()
-        this.$http.get(item._links.confirm.href, {headers})
+        this.$http.put(item._links.book.href, {headers})
             .then(res => {
                 this.bookingStore.bookings = res.data
                 this.tabService.goToNextTab()
