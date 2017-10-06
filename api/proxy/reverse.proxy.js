@@ -24,19 +24,24 @@ const createReverseProxy = (app, environmentConfiguration) => {
         headers['X-Contract-Id'] = 'SBB_PAR_ID_4711';
         headers['X-Conversation-Id'] = _generateUUID();
         headers['Accept-Language'] = 'en';
-        request(url, {headers, method: httpMethod, rejectUnauthorized: false}, function (err, res, body) {
-            var manipulatedBody = body.toString();
-            for (var e in environmentConfiguration) {
-                if(e.startsWith("backend")) {
-                    var regExp = new RegExp(environmentConfiguration[e] + "/api/", "g");
-                    manipulatedBody = manipulatedBody.replace(regExp, environmentConfiguration['backend_bookingapi'] + "/redirect_api/");
-                }
-            }
-            if(res.headers['content-type'] != undefined) {
+        request(url, {headers, method: httpMethod, rejectUnauthorized: false, encoding: null}, function (err, res, body) {
+            if (res.headers['content-type'] != undefined) {
                 clientResponse.setHeader('Content-Type', res.headers['content-type']);
             }
-            clientResponse.send(manipulatedBody);
+            if(res.headers['content-type'] === "image/png" || res.headers['content-type'] === "application/pdf" || res.headers['content-type'] === "application/vnd.apple.pkpass") {
+                clientResponse.send(body);
+            } else {
+                var manipulatedBody = body.toString();
+                for (var e in environmentConfiguration) {
+                    if (e.startsWith("backend")) {
+                        var regExp = new RegExp(environmentConfiguration[e] + "/api/", "g");
+                        manipulatedBody = manipulatedBody.replace(regExp, environmentConfiguration['backend_bookingapi'] + "/redirect_api/");
+                    }
+                }
+                clientResponse.send(manipulatedBody);
+            }
         });
+
     };
 
     app.get(REDIRECT_API + 'locations*', function (clientRequest, clientResponse) {
