@@ -1,31 +1,57 @@
 'use strict'
 
 module.exports = {
-  prices,
-  tripPrices
+    getPricesUsingGET
 }
 
-function tripPrices (req, res) {
-  prices(req, res)
-}
-
-function prices (req, res) {
+function getPricesUsingGET (req, res) {
   let q = req.query
-  if ((q.tripId === undefined) && (q.originId === undefined || q.destinationId === undefined || q.date === undefined)) {
-    let message = 'Either the "tripId" or "originId", "destinationId", "date" and "time" must be defined'
-    res.status(400).send(message)
-  } else {
-    var self = {
-      href: req.originalUrl
-    }
-
-    var prices = [{
-      price: 830,
-      _links: {
-        self
+    if (!(q.tripId === undefined)) {
+      var self = {
+          href: req.originalUrl
       }
-    }]
 
-    res.json(prices)
+      var prices = [{
+          "qualityOfService": 2,
+          "superSaver": false,
+          price: 620,
+          "_links": {
+              "offers": {
+                  "method": "GET",
+                  "href": "../api/offers?tripId=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89QWFyYXVATD04NTAyMTEzQGE9MTI4QCQyMDE3MDgyNzIwMzQkMjAxNzA4MjcyMTEzJElSIDIxODkgJCQxJMKnVCRBPTFATz1BYXJhdUBMPTg1MDIxMTNAYT0xMjhAJEE9MUBPPVrDvHJpY2ggSEJATD04NTAzMDAwQGE9MTI4QCQyMDE3MDgyNzIxMjQkMjAxNzA4MjcyMTUyJElSIDIyODcgJCQxJA==&date=2017-06-14&time=20%3A04"
+              },
+              "offers-mobile": {
+                  "method": "GET",
+                  "href": "https://app.sbbmobile.ch/tripoffer?appid=bookingAPI&recon=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA4MjcyMDMwJDIwMTcwODI3MjAzNyRTIDcgICAgICQkMSQ=&date=2017-08-27"
+              },
+              "offers-online": {
+                  "method": "GET",
+                  "href": "https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?webshopPreviewMode=active&recon=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA4MjcyMDMwJDIwMTcwODI3MjAzNyRTIDcgICAgICQkMSQ=&datum=2017-08-27&zeit=2030"
+              }
+          }
+      }, {
+          "qualityOfService": 2,
+          "superSaver": true,
+          price: 310,
+          "_links": {
+              "offers": {
+                  "method": "GET",
+                  "href": "../api/offers?tripId=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89QWFyYXVATD04NTAyMTEzQGE9MTI4QCQyMDE3MDgyNzIwMzQkMjAxNzA4MjcyMTEzJElSIDIxODkgJCQxJMKnVCRBPTFATz1BYXJhdUBMPTg1MDIxMTNAYT0xMjhAJEE9MUBPPVrDvHJpY2ggSEJATD04NTAzMDAwQGE9MTI4QCQyMDE3MDgyNzIxMjQkMjAxNzA4MjcyMTUyJElSIDIyODcgJCQxJA==&date=2017-06-14&time=20%3A04"
+              },
+              "offers-mobile": {
+                  "method": "GET",
+                  "href": "https://app.sbbmobile.ch/tripoffer?appid=bookingAPI&recon=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA4MjcyMDMwJDIwMTcwODI3MjAzNyRTIDcgICAgICQkMSQ=&date=2017-08-27"
+              },
+              "offers-online": {
+                  "method": "GET",
+                  "href": "https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?webshopPreviewMode=active&recon=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA4MjcyMDMwJDIwMTcwODI3MjAzNyRTIDcgICAgICQkMSQ=&datum=2017-08-27&zeit=2030"
+              }
+          }
+      }]
+
+      res.json(prices)
+  } else {
+      let message = 'The "tripId" must be defined'
+      res.status(400).send(message)
   }
 }

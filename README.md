@@ -137,6 +137,10 @@ To run the *mock* server as docker container, do:
  - Expose journey planning as a route of its own
 - Setup API Management
 - Setup Security (JSON Web Token)
+- Products API
+- Cache-Control
+- SuperSaver Prices
+- Validity-Information for Prebookings (20 min offers 30 min prebookings)
 
 ## Done
 - <del>Clarify legalese</del>

@@ -1,6 +1,6 @@
 {
   "name": "bookingAPI",
-  "version": "0.0.14",
+  "version": "0.9",
   "private": true,
   "description": "A simple API to book tickets for public transport in Switzerland.",
   "keywords": [
@@ -38,6 +38,7 @@
     "browserify": "^14.4.0",
     "browserify-css": "^0.10.1",
     "concurrently": "^3.4.0",
+    "cross-env": "^5.0.1",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.2.0",
@@ -57,7 +58,7 @@
     "predev": "browserify -t browserify-css public/app/components/app.js -o public/app/bundle.js -d -t [ babelify --presets [ es2015 react ] ]",
     "dev": "node app.js",
     "preprod": "browserify -t browserify-css public/app/components/app.js -t [ babelify --presets [ es2015 react ] ] | uglifyjs > public/app/bundle.js",
-    "prod": "ENVIRONMENT=production node app.js",
+    "prod": "cross-env ENVIRONMENT=production node app.js",
     "test": "mocha -u exports -R spec test/api/controllers"
   }
 }

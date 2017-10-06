@@ -10,7 +10,7 @@ export default class LocationService {
 
   getStations (query) {
     let headers = this.authService.getAuthHeader()
-    return this.$http.get(`../redirect_api/locations?q=${query}`, {
+    return this.$http.get(`../redirect_api/locations?name=${query}`, {
       headers
     })
   }
