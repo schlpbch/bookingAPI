@@ -9,7 +9,7 @@ swagger: '2.0'
 
 info:
   description: 'A simple API to find trips, retrieve prices/offers and to book tickets for public transport in Switzerland.'
-  version: 0.9
+  version: 0.9.1
   title: Simple booking API for public transportation
   contact:
     name: Team SVS Hydra
