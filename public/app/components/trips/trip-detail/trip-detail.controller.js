@@ -20,9 +20,9 @@ export default class ConnectionDetailController {
 
   getPrices () {
     let headers = this.connectionService.authService.getAuthHeader()
-    let url = this.trip._links.prices.href
-    let urlReplace = url.replace('\$\{passengerInfos\}', "42,7")
-    this.connectionService.$http.get(urlReplace, {
+    // should be on the ui as an option
+    let url = this.trip._links.prices.href + "&passengers=42,7"
+    this.connectionService.$http.get(url, {
       headers
     })
       .then((res) => {
