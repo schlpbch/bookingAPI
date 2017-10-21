@@ -12,9 +12,16 @@ export default class OffersService {
   }
 
   getPrebooking (item) {
-    let headers = this.authService.getAuthHeader()
+    var headers = this.authService.getAuthHeader()
     let url = item._links.prebook.href
-    let body = item._links.prebook.body
+    var body = item._links.prebook.body
+    body = body.replace('\$\{firstname\}', "john")
+    body = body.replace('\$\{lastname\}', "big")
+    body = body.replace('1970\-01\-01', "1975-01-01")
+    body = body.replace('\$\{firstname\}', "john")
+    body = body.replace('\$\{lastname\}', "little")
+    body = body.replace('1970\-01\-01', "2010-01-01")
+    headers["body"] = body
     this.$http.put(url, {
       headers
     })
