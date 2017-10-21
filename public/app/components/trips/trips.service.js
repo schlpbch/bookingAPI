@@ -12,7 +12,10 @@ export default class TripsService {
 
     getOffers(item) {
         let headers = this.authService.getAuthHeader()
-        this.$http.get(item._links.offers.href + '&firstname=Zsakul&lastname=Kaleip&age=42&reduction=none', {headers})
+        let url = item._links.offers.href
+        // cooler ist https://github.com/bennadel/httpi
+        let urlReplace = url.replace('\$\{passengers\}', "paxa;42;none,paxb;7;none")
+        this.$http.get(urlReplace, {headers})
             .then((res) => {
                 this.bookingStore.offers = res.data
                 this.tabService.goToNextTab()

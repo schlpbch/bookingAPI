@@ -1,11 +1,31 @@
 <md-card class="md-3-line">
-  <md-card-title>
-    <md-card-title-text>
-      <span class="md-subhead">offerId: {{$ctrl.offer.offerId}}</span>
-      <span class="md-headline">{{$ctrl.offer.title}}</span>
-      <span>Price:  {{($ctrl.offer.price / 100) | number: 2}} CHF</span>
-    </md-card-title-text>
-  </md-card-title>
+
+  <md-card-header>
+    <md-card-avatar>
+      <md-icon>train</md-icon>
+    </md-card-avatar>
+    <md-card-header-text>
+      <span class="md-title">Price:  {{($ctrl.offer.totalPrice / 100) | number: 2}} CHF</span>
+      <span class="md-subhead">Quality of service:  {{$ctrl.offer.qualityOfService}}</span>
+    </md-card-header-text>
+  </md-card-header>
+
+  <md-card-content>
+
+      <md-list flex>
+        <md-list-item class="md-3-line" ng-repeat="suboffer in $ctrl.offer.offers" ng-click="null">
+          <md-icon>portrait</md-icon>
+          <div class="md-list-item-text" layout="column">
+            <h3>{{suboffer.title}}</h3>
+            <h4>Offer Id: {{suboffer.offerId}}, product Id: {{suboffer.productId}}</h4>
+            <p>Offered to: {{suboffer.passengerId}}</p>
+          </div>
+        </md-list-item>
+        <md-divider ></md-divider>
+      </md-list>
+
+  </md-card-content>
+
   <md-card-actions layout="row" layout-align="end center">
     <md-button class="md-raised md-primary" ng-click="$ctrl.offersService.getPrebooking($ctrl.offer)">Prebook</md-button>
   </md-card-actions>

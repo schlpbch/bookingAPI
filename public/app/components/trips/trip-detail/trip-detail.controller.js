@@ -21,7 +21,8 @@ export default class ConnectionDetailController {
   getPrices () {
     let headers = this.connectionService.authService.getAuthHeader()
     let url = this.trip._links.prices.href
-    this.connectionService.$http.get(url, {
+    let urlReplace = url.replace('\$\{passengerInfos\}', "42,7")
+    this.connectionService.$http.get(urlReplace, {
       headers
     })
       .then((res) => {
