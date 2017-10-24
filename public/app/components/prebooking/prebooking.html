@@ -1,5 +1,5 @@
 <md-tab label="Prebookings" ng-disabled="$ctrl.bookingStore.prebookings === null">
   <md-content class="md-padding">
-    <api-prebooking-detail ng-repeat="prebooking in $ctrl.bookingStore.prebookings" prebooking="prebooking"></api-prebooking-detail>
+    <api-prebooking-detail prebooking="$ctrl.bookingStore.prebookings.prebookings"></api-prebooking-detail>
   </md-content>
 </md-tab>

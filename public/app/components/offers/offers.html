@@ -1,5 +1,5 @@
 <md-tab label="Offers" ng-disabled="$ctrl.bookingStore.offers === null">
   <md-content class="md-padding">
-    <api-offer-detail ng-repeat="offer in $ctrl.bookingStore.offers" offer="offer"></api-offer-detail ng-repeat="offer in $ctrl.bookingStore.offers" offer="offer">
+    <api-offer-detail ng-repeat="offercontainer in $ctrl.bookingStore.offercontainers" offercontainer="offercontainer"></api-offer-detail>
   </md-content>
 </md-tab>

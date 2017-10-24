@@ -2,31 +2,32 @@
 
   <md-card-header>
     <md-card-avatar>
-      <md-icon>local_offer</md-icon>
+      <a title="{{$ctrl.offercontainer}}"><md-icon>local_offer</md-icon></a>
     </md-card-avatar>
     <md-card-header-text>
-      <span class="md-title">Total price:  {{($ctrl.offer.totalPrice / 100) | number: 2}} CHF</span>
-      <span class="md-subhead">Quality of service:  {{$ctrl.offer.qualityOfService}}</span>
+      <span class="md-title">Total price:  {{($ctrl.offercontainer.totalPrice / 100) | number: 2}} CHF</span>
+      <span class="md-subhead">Quality of service:  {{$ctrl.offercontainer.qualityOfService}}</span>
     </md-card-header-text>
   </md-card-header>
 
   <md-card-content>
 
       <md-list flex>
-        <md-list-item class="md-3-line" ng-repeat="suboffer in $ctrl.offer.offers" ng-click="null">
+        <md-list-item class="md-3-line" ng-repeat="offer in $ctrl.offercontainer.offers" ng-click="null">
           <md-icon>arrow_forward</md-icon>
           <div class="md-list-item-text" layout="column">
-            <h3>{{suboffer.title}}</h3>
-            <h4>Offer Id: {{suboffer.offerId}}, product Id: {{suboffer.productId}}, price: {{suboffer.price / 100 | number: 2}} CHF</h4>
-            <p>Offered to: {{suboffer.passengerId}}</p>
+            <h3>{{offer.title}}</h3>
+            <h4>Offer Id: {{offer.offerId}}, product Id: {{offer.productId}}, price: {{offer.price / 100 |
+              number: 2}} CHF</h4>
+            <p>Offered to: {{offer.passengerId}}</p>
           </div>
         </md-list-item>
-        <md-divider ></md-divider>
+        <md-divider></md-divider>
       </md-list>
 
   </md-card-content>
 
   <md-card-actions layout="row" layout-align="end center">
-    <md-button class="md-raised md-primary" ng-click="$ctrl.offersService.getPrebooking($ctrl.offer)">Prebook</md-button>
+    <md-button class="md-raised md-primary" ng-click="$ctrl.offersService.getPrebooking($ctrl.offercontainer)">Prebook</md-button>
   </md-card-actions>
 </md-card>

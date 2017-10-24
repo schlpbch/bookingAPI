@@ -18,6 +18,9 @@ export default class OffersService {
     data = data.replace('\$\{firstname\}', "john")
     data = data.replace('\$\{lastname\}', "big")
     data = data.replace('1970\-01\-01', "1975-01-01")
+    data = data.replace('\$\{firstname\}', "john")
+    data = data.replace('\$\{lastname\}', "little")
+    data = data.replace('1970\-01\-01', "1975-01-02")
     this.$http.put(url, data, {
       headers
     })
