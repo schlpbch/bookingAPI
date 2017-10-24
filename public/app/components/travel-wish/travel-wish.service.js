@@ -15,8 +15,8 @@ export default class ReiseWunschService {
     let headers = this.authService.getAuthHeader()
 
     let now = new Date()
-    let isoDate = dateFormat(now, `isoDate`)
-    let isoTime = dateFormat(now, `HH:MM`)
+    let isoDate = dateFormat(date == null ? now : date, `isoDate`)
+    let isoTime = dateFormat(time == null ? now : time, `HH:MM`)
 
     this.$http.get(`../redirect_api/trips?originId=${originId.value}&destinationId=${destinationId.value}&date=${isoDate}&time=${isoTime}`, {
       headers
