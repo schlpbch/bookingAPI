@@ -11,7 +11,7 @@
 
   <md-card-content>
 
-    <div ng-if="$ctrl.prebooking === undefined">
+    <div ng-if="$ctrl.prebooking.prebookings === undefined">
       <md-content flex layout-padding>
         <p>Prebooking not possible</p>
       </md-content>
@@ -19,7 +19,7 @@
 
     <md-list>
 
-      <md-list-item ng-repeat="prebookedItem in $ctrl.prebooking">
+      <md-list-item ng-repeat="prebookedItem in $ctrl.prebooking.prebookings">
         <md-icon>local_offer</md-icon>
         <p> id: {{prebookedItem.preBookingId}} </p>
       </md-list-item>
@@ -29,7 +29,7 @@
     <md-divider></md-divider>
 
     <md-card-actions layout="row" layout-align="end center">
-      <md-button ng-disabled="$ctrl.prebooking === undefined" class="md-raised md-primary" ng-click="$ctrl.prebookingService.getBooking($ctrl.prebooking)">Book</md-button>
+      <md-button ng-disabled="$ctrl.prebooking.prebookings === undefined" class="md-raised md-primary" ng-click="$ctrl.prebookingService.getBooking($ctrl.prebooking)">Book</md-button>
     </md-card-actions>
 
   </md-card-content>

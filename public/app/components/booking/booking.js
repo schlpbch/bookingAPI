@@ -2,7 +2,7 @@
  * Created by kevinkreuzer on 22.03.17.
  */
 import bookingController from './booking.controller'
-import bookingActionsController from './booking-actions/booking-actions.controller'
+import bookingDetailController from './booking-detail/booking-detail.controller'
 import bookingService from './booking.service'
 
 let moduleName = 'bookingModule'
@@ -16,14 +16,8 @@ angular.module(moduleName, [])
     bindings: {
       booking: '<'
     },
+    controller: bookingDetailController,
     templateUrl: 'components/booking/booking-detail/booking-detail.html'
-  })
-  .component('apiBookingActions', {
-    bindings: {
-      booking: '<'
-    },
-    controller: bookingActionsController,
-    templateUrl: 'components/booking/booking-actions/booking-actions.html'
   })
   .service('bookingService', bookingService)
 

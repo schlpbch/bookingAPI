@@ -23,7 +23,7 @@ const createReverseProxy = (app, environmentConfiguration) => {
         if (clientRequest._body) {
             data = clientRequest.body
         }
-        let url = clientRequest.url.replace(REDIRECT_API, environmentConfiguration['backend_' + env] + '/api/')
+        var url = clientRequest.url.replace(REDIRECT_API, environmentConfiguration['backend_' + env] + '/api/')
 
         let gfid = _generateUUID();
 
@@ -33,9 +33,22 @@ const createReverseProxy = (app, environmentConfiguration) => {
         headers['X-Conversation-Id'] = gfid;
         headers['Accept-Language'] = 'en';
 
+        // i know, quick and dirty!
+        if (url.indexOf("?contentType=") !== -1) {
+            let start = url.indexOf("?contentType=")
+            let end = url.length
+            let contentType = url.substring(start, end).replace("\?contentType\=", '')
+            headers['Accept'] = contentType;
+
+            console.log('contentType', contentType)
+
+            url = url.substring(0, start)
+        }
+
         console.log('gfid', gfid)
         console.log('die url', url)
         console.log('wir senden', data)
+
         request(url, {
             headers,
             method: httpMethod,
