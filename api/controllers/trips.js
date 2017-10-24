@@ -32,18 +32,22 @@ function getTripsUsingGET_1 (req, res) {
   var links1 = {
     'prices': {
       title: 'Request the cheapest prices for a trip.',
+      "contentType": "application/json",
       href: constructPricesUrl(trip1)
     },
     'offers': {
       title: 'Request offers for a trip.',
+      "contentType": "application/json",
       href: constructOffersUrl(trip1)
     },
     'offers-online': {
       title: 'Link into web shop B2C.',
+      "contentType": "application/json",
       href: constructWebshopB2CUrl(trip1)
     },
     'offers-mobile': {
       title: 'Link into mobile app B2C.',
+      "contentType": "application/json",
       href: constructMobileB2CUrl(trip1)
     }
   }
@@ -73,18 +77,22 @@ function getTripsUsingGET_1 (req, res) {
     var links2 = {
         "prices": {
             "method": "GET",
+            "contentType": "application/json",
             "href": constructPricesUrl(trip2)
         },
         "offers": {
             "method": "GET",
+            "contentType": "application/json",
             "href": constructOffersUrl(trip2)
         },
         "offers-online": {
             "method": "GET",
+            "contentType": "application/json",
             "href": constructWebshopB2CUrl(trip2)
         },
         "offers-mobile": {
             "method": "GET",
+            "contentType": "application/json",
             "href": constructMobileB2CUrl(trip2)
         }
     }
@@ -121,18 +129,22 @@ function getTripsUsingGET (req, res) {
     var links1 = {
         "prices": {
             "method": "GET",
+            "contentType": "application/json",
             "href": constructPricesUrl(trip1)
         },
         "offers": {
             "method": "GET",
+            "contentType": "application/json",
             "href": constructOffersUrl(trip1)
         },
         "offers-online": {
             "method": "GET",
+            "contentType": "application/json",
             "href": constructWebshopB2CUrl(trip1)
         },
         "offers-mobile": {
             "method": "GET",
+            "contentType": "application/json",
             "href": constructMobileB2CUrl(trip1)
         }
     }
