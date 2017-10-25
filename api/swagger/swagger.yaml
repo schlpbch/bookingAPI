@@ -459,7 +459,7 @@ paths:
           in: query
           description: The pre-book IDs to be booked.
           required: true
-          type: array
+          type: integer # should be array, but doesnt work with swagger
           items:
             type: integer
             format: int64
@@ -580,9 +580,9 @@ paths:
           type: string
           default: SBB-B2P-1
         - in: body
-          name: prebookingRequest
+          name: body
           description: The prebooking information.
-          required: true
+          required: false # should be mandatory, but swagger doesnt see the body
           schema:
             type: array
             items:

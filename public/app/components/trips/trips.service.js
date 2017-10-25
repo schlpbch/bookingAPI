@@ -14,7 +14,7 @@ export default class TripsService {
         let headers = this.authService.getAuthHeader()
         let url = item._links.offers.href
         // cooler ist https://github.com/bennadel/httpi
-        let urlReplace = url.replace('\$\{passengerInfos\}', "paxa;42;none,paxb;17;none")
+        let urlReplace = url.replace('\$\{passengerInfos\}', "paxa;42;none")
         this.$http.get(urlReplace, {headers})
             .then((res) => {
                 this.bookingStore.offercontainers = res.data
