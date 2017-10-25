@@ -19,10 +19,7 @@ function _generateUUID() {
 const createReverseProxy = (app, environmentConfiguration) => {
     const proxyAPIRequest = (httpMethod, env, clientRequest, clientResponse) => {
         let headers = clientRequest.headers
-        var data = null;
-        if (clientRequest._body) {
-            data = clientRequest.body
-        }
+
         var url = clientRequest.url.replace(REDIRECT_API, environmentConfiguration['backend_' + env] + '/api/')
 
         let gfid = _generateUUID();
@@ -44,10 +41,6 @@ const createReverseProxy = (app, environmentConfiguration) => {
 
             url = url.substring(0, start)
         }
-
-        console.log('gfid', gfid)
-        console.log('die url', url)
-        console.log('wir senden', data)
 
         request(url, {
             headers,

@@ -57,7 +57,7 @@
     "browsersync": "browser-sync start --startPath='./public/app' --server --files './public/*.html, ./public/bundle.js'",
     "watchify": "watchify -t browserify-css public/app/components/app.js -o public/app/bundle.js -d -t [ babelify --presets [ es2015 react ] ]",
     "predev": "browserify -t browserify-css public/app/components/app.js -o public/app/bundle.js -d -t [ babelify --presets [ es2015 react ] ]",
-    "dev": "cross-env node app.js",
+    "dev": "node app.js",
     "preprod": "browserify -t browserify-css public/app/components/app.js -t [ babelify --presets [ es2015 react ] ] | uglifyjs > public/app/bundle.js",
     "prod": "cross-env ENVIRONMENT=production node app.js",
     "test": "mocha -u exports -R spec test/api/controllers"
