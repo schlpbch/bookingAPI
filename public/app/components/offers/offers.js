@@ -14,7 +14,7 @@ angular.module(moduleName, [])
   })
   .component('apiOfferDetail', {
     bindings: {
-      offer: '<'
+      offercontainer: '<'
     },
     controller: offerDetailController,
     templateUrl: 'components/offers/offer-detail/offer-detail.html'

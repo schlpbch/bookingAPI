@@ -46,6 +46,23 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: user-id
+          in: header
+          description: The User-Id after authentication set by WSG.
+          required: false
+          type: string
+        - name: X-Conversation-Id
+          in: header
+          description: The Conversation Id of the current business process.
+          required: true
+          type: string
+          default: cafebabe-0815-4711-1234-ffffdeadbeef
+        - name: X-Contract-Id
+          in: header
+          description: The contract ID of the partner.
+          required: true
+          type: string
+          default: SBB-B2P-1
         - name: name
           in: query
           description: Token to search for locations.
@@ -58,13 +75,13 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/LocationRS'
+              $ref: '#/definitions/Location'
         '204':
           description: No location found
           schema:
             type: array
             items:
-              $ref: '#/definitions/LocationRS'
+              $ref: '#/definitions/Location'
         '400':
           description: Bad request
         '401':
@@ -87,6 +104,7 @@ paths:
         The external ids for origin and destination can be retrieved with the locations service.
         There is no limitation for the number of passengers. We highly recommend not to ask for more than 5, especially if you send the request for different passenger types.
         Please note that this service is not designed as a price information service and it has to be used only as part of the booking process. For pure price information please use the 'prices' service.
+        If you are subscribed to our affiliation programm you have to include your ID as an URL parameter, eg. 'WT.i_trsrc=affiliation&WT.mc_id=YOUR_ID'.
         Detailed Information about fares and conditions you can find here: https://www.sbb.ch/en/station-services/services/customerdialogue/fare-conditions-for-your-journey.html
       operationId: getOffersUsingGET
       consumes:
@@ -94,12 +112,17 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: user-id
+          in: header
+          description: The User-Id after authentication set by WSG.
+          required: false
+          type: string
         - name: X-Conversation-Id
           in: header
           description: The Conversation Id of the current business process.
           required: true
           type: string
-          default: aaee8345-966b-49a8-9640-60e0c4354536
+          default: cafebabe-0815-4711-1234-ffffdeadbeef
         - name: X-Contract-Id
           in: header
           description: The contract ID of the partner.
@@ -142,7 +165,7 @@ paths:
         - name: date
           in: query
           description: The desired departure date.
-          required: true
+          required: false
           type: string
           default: '2017-06-27'
         - name: time
@@ -151,51 +174,25 @@ paths:
           required: false
           type: string
           default: '20:22'
-        - name: firstname
+        - name: passengers
           in: query
-          description: The travellers first name.
+          description: 'The passengers id, age and reduction {none, half-fare, ga-1st, ga-2nd}.'
           required: false
           type: string
-          default: Hans
-        - name: lastname
-          in: query
-          description: The travellers last name.
-          required: false
-          type: string
-          default: Mustermann
-        - name: dateOfBirth
-          in: query
-          description: Date of Birth of the traveller.
-          required: false
-          type: string
-          default: '1982-06-28'
-        - name: reduction
-          in: query
-          description: 'Reduction: {none, half-fare, ga-1st, ga-2nd}'
-          required: false
-          type: string
-          items:
-            type: string
-          collectionFormat: multi
-          default: 'half-fare'
-          enum:
-            - none
-            - half-fare
-            - ga-1st
-            - ga-2nd
+          default: paxa;42;half-fare
       responses:
         '200':
           description: A list of offers
           schema:
             type: array
             items:
-              $ref: '#/definitions/OfferRS'
+              $ref: '#/definitions/OfferContainer'
         '204':
           description: No offer found
           schema:
             type: array
             items:
-              $ref: '#/definitions/OfferRS'
+              $ref: '#/definitions/OfferContainer'
         '400':
           description: Bad request
         '401':
@@ -204,54 +201,6 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-        '500':
-          description: Internal server error
-  /prebookings:
-    x-swagger-router-controller: prebookings
-    put:
-      tags:
-        - prebookings-controller
-      summary: 'The prebooked offer is exclusively reserved for 30 minutes for the future booking. '
-      operationId: putPrebookingUsingPUT
-      consumes:
-        - application/json
-      produces:
-        - '*/*'
-      parameters:
-        - name: X-Conversation-Id
-          in: header
-          description: The Conversation Id of the current business process.
-          required: true
-          type: string
-          default: aaee8345-966b-49a8-9640-60e0c4354536
-        - name: X-Contract-Id
-          in: header
-          description: The contract ID of the partner.
-          required: true
-          type: string
-          default: SBB-B2P-1
-        - name: offerId
-          in: query
-          description: The offer ID to be pre-booked for later booking.
-          required: true
-          type: string
-      responses:
-        '200':
-          description: The prebooked offer
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/PrebookRS'
-        '201':
-          description: Created
-        '400':
-          description: Bad request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: No entity found
         '500':
           description: Internal server error
   /prices:
@@ -269,43 +218,55 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: user-id
+          in: header
+          description: The User-Id after authentication set by WSG.
+          required: false
+          type: string
         - name: X-Conversation-Id
           in: header
           description: The Conversation Id of the current business process.
           required: true
           type: string
-          default: aaee8345-966b-49a8-9640-60e0c4354536
-        - name: tripId
+          default: cafebabe-0815-4711-1234-ffffdeadbeef
+        - name: X-Contract-Id
+          in: header
+          description: The contract ID of the partner.
+          required: true
+          type: string
+          default: SBB-B2P-1
+        - name: tripIds
           in: query
           description: The tripId for this journey. It is the Base64 encoded HAFAS reconstruction context. The tripId can also be retrieved with the trips service.
           required: true
           type: string
+          items:
+            type: string
+          collectionFormat: multi
           default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
-        - name: date
+        - name: passengers
           in: query
-          description: The desired departure date in format yyyy-MM-dd.
-          required: true
+          description: The age of the passenger (default 42). (Can be multiple)
+          required: false
           type: string
-          default: '2017-06-27'
-        - name: time
-          in: query
-          description: 'The desired departure time in format HH:mm.'
-          required: true
-          type: string
-          default: '20:22'
+          items:
+            type: integer
+            format: int32
+          collectionFormat: multi
+          default: '42'
       responses:
         '200':
           description: A list of prices for the trip
           schema:
             type: array
             items:
-              $ref: '#/definitions/PriceRS'
+              $ref: '#/definitions/Price'
         '204':
           description: No prices found for the trip
           schema:
             type: array
             items:
-              $ref: '#/definitions/PriceRS'
+              $ref: '#/definitions/Price'
         '400':
           description: Bad request
         '401':
@@ -328,6 +289,23 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: user-id
+          in: header
+          description: The User-Id after authentication set by WSG.
+          required: false
+          type: string
+        - name: X-Conversation-Id
+          in: header
+          description: The Conversation Id of the current business process.
+          required: true
+          type: string
+          default: cafebabe-0815-4711-1234-ffffdeadbeef
+        - name: X-Contract-Id
+          in: header
+          description: The contract ID of the partner.
+          required: true
+          type: string
+          default: SBB-B2P-1
         - name: originId
           in: query
           description: The origin UIC code of the trip.
@@ -367,13 +345,13 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/TripRS'
+              $ref: '#/definitions/Trip'
         '204':
           description: No matching trip was found.
           schema:
             type: array
             items:
-              $ref: '#/definitions/TripRS'
+              $ref: '#/definitions/Trip'
         '400':
           description: Bad request by the client - see header for furhter information.
         '401':
@@ -396,37 +374,42 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: user-id
+          in: header
+          description: The User-Id after authentication set by WSG.
+          required: false
+          type: string
+        - name: X-Conversation-Id
+          in: header
+          description: The Conversation Id of the current business process.
+          required: true
+          type: string
+          default: cafebabe-0815-4711-1234-ffffdeadbeef
+        - name: X-Contract-Id
+          in: header
+          description: The contract ID of the partner.
+          required: true
+          type: string
+          default: SBB-B2P-1
         - name: tripId
           in: path
           description: The tripId for this journey (currently the HAFAS reconstruction context encoded in Base64).
           required: true
           type: string
           default: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
-        - name: date
-          in: query
-          description: The desired departure date.
-          required: true
-          type: string
-          default: '2017-09-27'
-        - name: time
-          in: query
-          description: The desired departure time.
-          required: true
-          type: string
-          default: '10:22'
       responses:
         '200':
           description: The requested trip data.
           schema:
             type: array
             items:
-              $ref: '#/definitions/TripRS'
+              $ref: '#/definitions/Trip'
         '204':
           description: No matching trip was found.
           schema:
             type: array
             items:
-              $ref: '#/definitions/TripRS'
+              $ref: '#/definitions/Trip'
         '400':
           description: Bad request by the client - see header for furhter information.
         '401':
@@ -449,12 +432,17 @@ paths:
       produces:
         - '*/*'
       parameters:
+        - name: user-id
+          in: header
+          description: The User-Id after authentication set by WSG.
+          required: false
+          type: string
         - name: X-Conversation-Id
           in: header
           description: The Conversation Id of the current business process.
           required: true
           type: string
-          default: aaee8345-966b-49a8-9640-60e0c4354536
+          default: cafebabe-0815-4711-1234-ffffdeadbeef
         - name: X-Contract-Id
           in: header
           description: The contract ID of the partner.
@@ -469,16 +457,18 @@ paths:
           default: en
         - name: preBookingId
           in: query
-          description: The pre-book ID to be booked.
+          description: The pre-book IDs to be booked.
           required: true
-          type: string
+          type: integer # should be array, but doesnt work with swagger
+          items:
+            type: integer
+            format: int64
+          collectionFormat: multi
       responses:
         '200':
           description: The booked tickets
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/BookRS'
+            $ref: '#/definitions/Booking'
         '201':
           description: Created
         '400':
@@ -491,53 +481,55 @@ paths:
           description: No entity found
         '500':
           description: Internal server error
-  '/bookings/{bookingId}/tickets':
+  '/bookings/{bookingId}/tickets/{ticketId}':
     x-swagger-router-controller: bookings
     get:
       tags:
         - bookings-controller
-      summary: 'Get the booked tickets. This operation can be called with the same bookingId multiple times to retrive the ticket in different formats up to 30 minutes after the booking call. '
+      summary: Get the booked tickets. This operation can be called with the same bookingId multiple times to retrive the ticket in different formats up to 30 minutes after the booking call.
       operationId: getTicketUsingGET
       consumes:
         - application/json
       produces:
-        - image/png
+        - text/html
         - application/pdf
         - application/vnd.apple.pkpass
       parameters:
+        - name: user-id
+          in: header
+          description: The User-Id after authentication set by WSG.
+          required: false
+          type: string
         - name: X-Conversation-Id
           in: header
           description: The Conversation Id of the current business process.
           required: true
           type: string
-          default: aaee8345-966b-49a8-9640-60e0c4354536
+          default: cafebabe-0815-4711-1234-ffffdeadbeef
         - name: X-Contract-Id
           in: header
           description: The contract ID of the partner.
           required: true
           type: string
           default: SBB-B2P-1
-        - name: Accept-Language
+        - name: Accept
           in: header
-          description: 'The language of the ticket. Possible values: DE, EN, IT, FR.'
+          description: The requested type of the ticket.
           required: true
           type: string
-          default: en
+          default: application/pdf
         - name: bookingId
           in: path
           description: The booking ID. It can be retreived with the booking service.
           required: true
-          type: string
-        - name: type
-          in: query
-          description: 'Type of the tickets: {pdf, png, pkpass}'
+          type: integer
+          format: int64
+        - name: ticketId
+          in: path
+          description: The ticket ID that contains the document.
           required: true
-          type: string
-          default: pdf
-          enum:
-            - pdf
-            - png
-            - pkpass
+          type: integer
+          format: int64
       responses:
         '200':
           description: The booked tickets.
@@ -558,48 +550,52 @@ paths:
           description: I'm a teapot.
         '500':
           description: Internal server error
-  /cancellations:
-    x-swagger-router-controller: bookings
+  /prebookings:
+    x-swagger-router-controller: prebookings
     put:
       tags:
-        - bookings-controller
-      summary: Cancel the booking (technical; not for refunding).
-      operationId: putCancellationUsingPUT
+        - prebookings-controller
+      summary: 'The prebooked offer is exclusively reserved for 30 minutes for the future booking. '
+      operationId: putPrebookingUsingPUT
       consumes:
         - application/json
       produces:
         - '*/*'
       parameters:
+        - name: user-id
+          in: header
+          description: The User-Id after authentication set by WSG.
+          required: false
+          type: string
         - name: X-Conversation-Id
           in: header
           description: The Conversation Id of the current business process.
           required: true
           type: string
-          default: aaee8345-966b-49a8-9640-60e0c4354536
+          default: cafebabe-0815-4711-1234-ffffdeadbeef
         - name: X-Contract-Id
           in: header
           description: The contract ID of the partner.
           required: true
           type: string
           default: SBB-B2P-1
-        - name: Accept-Language
-          in: header
-          description: The language of the ticket.
-          required: true
-          type: string
-          default: en
-        - name: bookingId
-          in: query
-          description: Booking ID to cancel.
-          required: true
-          type: string
+        - in: body
+          name: body
+          description: The prebooking information.
+          required: false # should be mandatory, but swagger doesnt see the body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PrebookRequest'
       responses:
         '200':
-          description: The canceled booking id.
+          description: The prebooked offer
           schema:
-            type: string
+            $ref: '#/definitions/PrebookingContainer'
         '201':
           description: Created
+        '400':
+          description: Bad request
         '401':
           description: Unauthorized
         '403':
@@ -608,37 +604,9 @@ paths:
           description: No entity found
         '500':
           description: Internal server error
-
+          
 definitions:
-  ValidityAreaRS:
-    type: object
-    properties:
-      leadingArea:
-        example: The 'Libero' Area in case the trip is from Bern to Zurich
-        description: The area that is included in the fare at beginning of the trip.
-        $ref: '#/definitions/AreaRS'
-      tailingArea:
-        example: The 'Libero' Area in case the trip is from Zurich to Bern
-        description: The area that is included in the fare at the end of the trip.
-        $ref: '#/definitions/AreaRS'
-    description: Contains area information at the departure or destination (or both) of the trip
-  PrebookRS:
-    type: object
-    required:
-      - preBookingId
-    properties:
-      _links:
-        type: object
-        description: Context information required by the services.
-        additionalProperties:
-          $ref: '#/definitions/LinkRS'
-      preBookingId:
-        type: integer
-        format: int64
-        example: 47110815
-        description: ID after prebooking the offer.
-    description: The cheapest price for a given trip with its characteristics.
-  TripRS:
+  Trip:
     type: object
     required:
       - tripId
@@ -647,53 +615,53 @@ definitions:
         type: object
         description: Context information required by the services.
         additionalProperties:
-          $ref: '#/definitions/LinkRS'
+          $ref: '#/definitions/Link'
       segments:
         type: array
         description: The segments of the trip and its stops.
         items:
-          $ref: '#/definitions/SegmentRS'
+          $ref: '#/definitions/Segment'
       tripId:
         type: string
         example: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
         description: Id of a trip as Base64 encoded HAFAS reconstruction context.
     description: A one-way trip from an origin to a destination (may contains a via) with its segments and stops.
-  LocationRS:
+  Stop:
     type: object
     required:
+      - date
       - id
       - name
+      - time
     properties:
-      _links:
-        type: object
-        description: Context information required by the services.
-        additionalProperties:
-          $ref: '#/definitions/LinkRS'
+      date:
+        example: '2017-01-14'
+        description: The date of the departure/arrival (depending of the position of the stop in the segment).
+        type: string
       id:
         type: integer
         format: int64
-        example: 8507785
-        description: UIC code of the location.
-      lat:
-        type: number
-        format: double
-        example: 46.948825
-        description: Latitude of centre coordinate.
-      lon:
-        type: number
-        format: double
-        example: 7.439122
-        description: Longitude of centre coordinate.
+        example: 8503000
+        description: The UIC code of the stop.
       name:
         type: string
-        example: Bern Hauptbahnhof
-        description: Name of the location.
-      type:
+        example: Bern
+        description: The name of the stop.
+      time:
+        example: '20:14'
+        description: The time of the departure/arrival (depending of the position of the stop in the segment).
         type: string
-        example: STATION
-        description: Type of the location.
-    description: A location with it characteristics.
-  AreaRS:
+    description: A stop within a segment of a trip.
+  Segment:
+    type: object
+    properties:
+      destination:
+        description: The destinations of the segment.
+        $ref: '#/definitions/Stop'
+      origin:
+        description: The origin of the segment.
+        $ref: '#/definitions/Stop'
+  Area:
     type: object
     required:
       - areaCode
@@ -715,43 +683,58 @@ definitions:
         description: Zone codes of the area.
         items:
           type: string
-  LinkRS:
+  OfferContainer:
     type: object
     required:
-      - href
-      - method
-    properties:
-      href:
-        type: string
-        description: URL to the linked resource (no parameters needed).
-      method:
-        type: string
-        example: GET
-        description: HTTP method to call the action
-    description: Context information required by the services.
-  OfferRS:
-    type: object
-    required:
-      - description
-      - offerId
-      - price
-      - productId
+      - offers
       - qualityOfService
-      - title
+      - totalPrice
     properties:
       _links:
         type: object
         description: Context information required by the services.
         additionalProperties:
-          $ref: '#/definitions/LinkRS'
+          $ref: '#/definitions/Link'
+      offers:
+        type: array
+        example: '174114741'
+        description: List of offers that have to be prebooked together
+        items:
+          $ref: '#/definitions/Offer'
+      qualityOfService:
+        type: integer
+        format: int32
+        example: 174114741
+        description: 'The quality of service of all offers in the container. '
+      totalPrice:
+        type: integer
+        format: int32
+        example: 174114741
+        description: Total price of all offers in the container
+    description: Contains offers that have to be prebooked together in the prebooking step. The container cannot have mixed 1 and 2 quality of service offers.
+  Offer:
+    type: object
+    required:
+      - description
+      - passengerId
+      - price
+      - productId
+      - qualityOfService
+      - title
+    properties:
       description:
         type: string
         example: 'One-way, return or round-trip ticket (ticket machines /ticket counter) in Switzerland in 1st or 2nd class. Validity period of a single journey: 1 day. Validity period for a return journey: 1 day (up to 115km) or 1 day per stretch (upwards of 116km, return journey possible a max. of 10 days after the outward journey). E-Ticket: 1 day each for one-way and return ticket. Reduced price for Half-Fare travelcard holders and children aged 6 to 16.'
         description: A short description of the offer with characteristics and rules that may apply.
       offerId:
-        type: string
-        example: '174114741'
+        type: integer
+        format: int64
+        example: 174114741
         description: ID of the current offer that can be used for prebooking.
+      passengerId:
+        type: string
+        example: paxa
+        description: The id of the passenger for which the offer was created
       price:
         type: integer
         format: int32
@@ -776,35 +759,9 @@ definitions:
         description: A short title that describes what the offer is for.
       validityArea:
         description: The area in which the offer is additionally valid.
-        $ref: '#/definitions/ValidityAreaRS'
+        $ref: '#/definitions/ValidityArea'
     description: An actual offer for a specific trip with the given characteristics. The fare however is only guaranteed after prebooking.
-  StopRS:
-    type: object
-    required:
-      - date
-      - id
-      - name
-      - time
-    properties:
-      date:
-        type: string
-        example: '2017-01-14'
-        description: The date of the departure/arrival (depending of the position of the stop in the segment).
-      id:
-        type: integer
-        format: int64
-        example: 8503000
-        description: The UIC code of the stop.
-      name:
-        type: string
-        example: Bern
-        description: The name of the stop.
-      time:
-        type: string
-        example: '20:14'
-        description: The time of the departure/arrival (depending of the position of the stop in the segment).
-    description: A stop within a segment of a trip.
-  PriceRS:
+  Price:
     type: object
     required:
       - price
@@ -815,7 +772,7 @@ definitions:
         type: object
         description: Context information required by the services.
         additionalProperties:
-          $ref: '#/definitions/LinkRS'
+          $ref: '#/definitions/Link'
       price:
         type: integer
         format: int32
@@ -830,29 +787,179 @@ definitions:
         type: boolean
         example: false
         description: Whether this is the price for a normal or a supersaver offer (bound to a connection; other restrictions may apply).
+      tripId:
+        type: string
+        example: VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89UGFwaWVybcO8aGxlQEw9ODUwNzA5NkBhPTEyOEAkMjAxNzA2MjcyMDMwJDIwMTcwNjI3MjAzNyRTIDcgICAgICQkMSQ=
+        description: The tripId for the current price.
     description: The cheapest price for a given trip with its characteristics.
-  SegmentRS:
-    type: object
-    properties:
-      destination:
-        description: The destinations of the segment.
-        $ref: '#/definitions/StopRS'
-      origin:
-        description: The origin of the segment.
-        $ref: '#/definitions/StopRS'
-  BookRS:
+  Link:
     type: object
     required:
-      - bookingId
+      - body
+      - contentType
+      - href
+      - method
+    properties:
+      body:
+        type: string
+        example: '[{ ''preBookingId'': ''4711'' }]'
+        description: Prefilled data when the next action requires a body (POST/PUT).
+      contentType:
+        type: string
+        example: application/json
+        description: Possible content types of the resource.
+      href:
+        type: string
+        description: URL to the linked resource (no parameters needed).
+      method:
+        type: string
+        example: GET
+        description: HTTP method to call the action
+    description: Context information required by the services.
+  Location:
+    type: object
+    required:
+      - id
+      - name
     properties:
       _links:
         type: object
         description: Context information required by the services.
         additionalProperties:
-          $ref: '#/definitions/LinkRS'
+          $ref: '#/definitions/Link'
+      id:
+        type: integer
+        format: int64
+        example: 8507785
+        description: UIC code of the location.
+      lat:
+        type: number
+        format: double
+        example: 46.948825
+        description: Latitude of centre coordinate.
+      lon:
+        type: number
+        format: double
+        example: 7.439122
+        description: Longitude of centre coordinate.
+      name:
+        type: string
+        example: Bern Hauptbahnhof
+        description: Name of the location.
+      type:
+        type: string
+        example: STATION
+        description: Type of the location.
+    description: A location with it characteristics.
+  ValidityArea:
+    type: object
+    properties:
+      leadingArea:
+        example: The 'Libero' Area in case the trip is from Bern to Zurich
+        description: The area that is included in the fare at beginning of the trip.
+        $ref: '#/definitions/Area'
+      tailingArea:
+        example: The 'Libero' Area in case the trip is from Zurich to Bern
+        description: The area that is included in the fare at the end of the trip.
+        $ref: '#/definitions/Area'
+    description: Contains area information at the departure or destination (or both) of the trip.
+  TicketInfo:
+    type: object
+    required:
+      - ticketId
+    properties:
+      _links:
+        type: object
+        description: Context information required by the services.
+        additionalProperties:
+          $ref: '#/definitions/Link'
+      ticketId:
+        type: string
+        example: 4a3e8345-966b-49a8-9640-60e0c4354562
+        description: ID of the booked ticket.
+    description: The ticket data request.
+  PrebookRequest:
+    type: object
+    required:
+      - offerId
+      - passenger
+    properties:
+      offerId:
+        type: integer
+        format: int64
+        example: 47110815
+        description: ID after prebooking the offer.
+      passenger:
+        example: '{ "id": "paxa", "firstname": "Hans", "lastname": "Mustermann", "dateOfBirth": "1980-05-20" }'
+        description: Passengerdata required to prebook the offer.
+        $ref: '#/definitions/Passenger'
+    description: The prebooking request.
+  PrebookingContainer:
+    type: object
+    required:
+      - prebookings
+    properties:
+      _links:
+        type: object
+        description: Context information required by the services.
+        additionalProperties:
+          $ref: '#/definitions/Link'
+      prebookings:
+        type: array
+        example: TODO 174114741
+        description: List of prebookings that have to be booked together.
+        items:
+          $ref: '#/definitions/Prebooking'
+    description: Contains prebookings that have to be booked together in the booking step.
+  Prebooking:
+    type: object
+    required:
+      - preBookingId
+    properties:
+      preBookingId:
+        type: integer
+        format: int64
+        example: 47110815
+        description: ID after prebooking the offer.
+    description: The prebooking information for a specific offer.
+  Booking:
+    type: object
+    required:
+      - bookingId
+    properties:
       bookingId:
         type: integer
         format: int64
         example: 247110815
-        description: ID of the booked ticket.
+        description: ID of the booked tickets.
+      tickets:
+        type: array
+        items:
+          $ref: '#/definitions/TicketInfo'
     description: The booked (and paid) offer.
+  Passenger:
+    type: object
+    required:
+      - dateOfBirth
+      - firstname
+      - id
+      - lastname
+    properties:
+      dateOfBirth:
+        type: string
+        format: date-time
+        example: '1980-05-20'
+        description: Passengers date of birth (has to match the age provided when requesting the offer).
+      firstname:
+        type: string
+        example: Hans
+        description: Firstname of the passenger.
+      id:
+        type: string
+        example: '1'
+        description: ID of the passenger used when requesting the offer.
+      lastname:
+        type: string
+        example: Mustermann
+        description: Lastname of the passenger.
+    description: Passengerdata required to prebook an offer.
