@@ -11,14 +11,10 @@ const createReverseProxy = (app, environmentConfiguration) => {
     const proxyAPIRequest = (httpMethod, env, clientRequest, clientResponse) => {
         let headers = clientRequest.headers
 
-        var url = clientRequest.url.replace(REDIRECT_API, environmentConfiguration['backend_' + env] + '/api/')
-
-        // let gfid = conversationService.getUuid();
-        console.log("gfid="+headers['x-conversation-id'])
-
         //TODO: Use Certificate solution instead of rejectUnauthorized: false
         delete headers.host;
 
+        var url = clientRequest.url.replace(REDIRECT_API, environmentConfiguration['backend_' + env] + '/api/')
         // i know, quick and dirty!
         if (url.indexOf("?contentType=") !== -1) {
             let start = url.indexOf("?contentType=")
