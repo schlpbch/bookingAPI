@@ -7,28 +7,17 @@ const REDIRECT_API = '/redirect_api/'
 let bodyParser = require('body-parser');
 
 
-function _generateUUID() {
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-    }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-}
-
 const createReverseProxy = (app, environmentConfiguration) => {
     const proxyAPIRequest = (httpMethod, env, clientRequest, clientResponse) => {
         let headers = clientRequest.headers
 
         var url = clientRequest.url.replace(REDIRECT_API, environmentConfiguration['backend_' + env] + '/api/')
 
-        let gfid = _generateUUID();
+        // let gfid = conversationService.getUuid();
+        console.log("gfid="+headers['x-conversation-id'])
 
         //TODO: Use Certificate solution instead of rejectUnauthorized: false
         delete headers.host;
-        headers['X-Contract-Id'] = 'SBB_PAR_ID_4711';
-        headers['X-Conversation-Id'] = gfid;
-        headers['Accept-Language'] = 'en';
 
         // i know, quick and dirty!
         if (url.indexOf("?contentType=") !== -1) {
