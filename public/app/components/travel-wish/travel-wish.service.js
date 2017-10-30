@@ -3,15 +3,17 @@
 var dateFormat = require('dateformat')
 
 export default class ReiseWunschService {
-  constructor ($http, bookingStore, tabService, errorLogService, authService) {
+  constructor ($http, bookingStore, conversationService, tabService, errorLogService, authService) {
     this.$http = $http
     this.bookingStore = bookingStore
     this.tabService = tabService
     this.errorLogService = errorLogService
     this.authService = authService
+    this.conversationService = conversationService;
   }
 
   getTrips (originId, destinationId, isArrival, date, time) {
+    this.conversationService.resetUuid()
     let headers = this.authService.getAuthHeader()
 
     let now = new Date()

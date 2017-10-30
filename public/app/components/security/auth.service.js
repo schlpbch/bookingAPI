@@ -3,13 +3,15 @@
  */
 const AUTH_KEY = 'bookingAPI.auth'
 const UNAUTHORIZED_USERNAME = 'Dummy User'
+
 export default class AuthService {
 
-    constructor($http, config, $window, jwtHelper) {
+    constructor($http, config, $window, jwtHelper, conversationService) {
         this.$http = $http
         this.config = config
         this.$window = $window
         this.jwtHelper = jwtHelper
+        this.conversationService = conversationService
     }
 
     login(username, password) {
@@ -32,12 +34,7 @@ export default class AuthService {
     }
 
     _generateUUID() {
-      function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-          .toString(16)
-          .substring(1);
-      }
-      return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+      return this.conversationService.getUuid();
     }
 
     _storeToken(tokenWithPrefix) {
