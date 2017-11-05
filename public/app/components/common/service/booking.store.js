@@ -3,7 +3,7 @@ export default class BookingStore {
   constructor (tabService) {
     this.tabService = tabService
     this._trips = null
-    this._offers = null
+    this._offercontainers = null
     this._prebookings = null
     this._bookings = null
     this._cancellation = null
@@ -18,12 +18,12 @@ export default class BookingStore {
     this._trips = trips
   }
 
-  get offers () {
-    return this._offers
+  get offercontainers () {
+    return this._offercontainers
   }
 
-  set offers (offers) {
-    this._offers = offers
+  set offercontainers (offercontainers) {
+    this._offercontainers = offercontainers
   }
 
   get prebookings () {

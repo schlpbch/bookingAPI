@@ -1,11 +1,37 @@
 <md-card class="md-3-line">
-  <md-card-title>
-    <md-card-title-text>
-      <span class="md-subhead">prebookingId: {{$ctrl.prebooking.preBookingId}}</span>
-      <span class="md-headline">{{$ctrl.prebooking.description}}</span>
-    </md-card-title-text>
-  </md-card-title>
-  <md-card-actions layout="row" layout-align="end center">
-    <md-button class="md-raised md-primary" ng-click="$ctrl.prebookingService.getBooking($ctrl.prebooking)">Book</md-button>
-  </md-card-actions>
+
+  <md-card-header>
+    <md-card-avatar>
+      <a title="{{$ctrl.prebooking}}"><md-icon>library_books</md-icon></a>
+    </md-card-avatar>
+    <md-card-header-text>
+      <span class="md-title">Prebookings</span>
+    </md-card-header-text>
+  </md-card-header>
+
+  <md-card-content>
+
+    <div ng-if="$ctrl.prebooking.prebookings === undefined">
+      <md-content flex layout-padding>
+        <p>Prebooking not possible</p>
+      </md-content>
+    </div>
+
+    <md-list>
+
+      <md-list-item ng-repeat="prebookedItem in $ctrl.prebooking.prebookings">
+        <md-icon>local_offer</md-icon>
+        <p> id: {{prebookedItem.preBookingId}} </p>
+      </md-list-item>
+
+    </md-list>
+
+    <md-divider></md-divider>
+
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button ng-disabled="$ctrl.prebooking.prebookings === undefined" class="md-raised md-primary" ng-click="$ctrl.prebookingService.getBooking($ctrl.prebooking)">Book</md-button>
+    </md-card-actions>
+
+  </md-card-content>
+
 </md-card>

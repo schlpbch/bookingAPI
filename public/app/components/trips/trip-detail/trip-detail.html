@@ -1,18 +1,27 @@
 <md-card class="md-3-line">
+
   <md-card-title>
     <md-card-title-text>
-      <span class="md-subhead">tripId: {{$ctrl.trip.tripId}}</span>
+      <span class="md-subhead">
+        <div style="position:absolute; top:0; left:-500px;">
+          <textarea id="tripId" type="text" rows="1" cols="2">{{$ctrl.trip.tripId}}</textarea>
+        </div>
+        <a href=""><md-icon ngclipboard data-clipboard-target="#tripId">assignment return</md-icon></a>
+        <a title="{{$ctrl.trip.tripId}}">tripId:
+          {{$ctrl.trip.tripId.substring(0,20) + '  ...  ' + $ctrl.trip.tripId.substring($ctrl.trip.tripId.length-20,$ctrl.trip.tripId.length)}}
+        </a>
+      </span>
       <span class="md-headline">
         <md-icon>train</md-icon>
         {{$ctrl.trip.segments[0].origin.name}} &ndash;
-        {{$ctrl.trip.segments[0].destination.name}}
-     </span>
+        {{$ctrl.trip.segments[$ctrl.trip.segments.length-1].destination.name}}
+      </span>
       <ul class="md-body-1">
         <li>
           {{$ctrl.trip.segments[0].origin.time}} &ndash; {{$ctrl.trip.segments[0].origin.name}}, Platform {{$ctrl.trip.segments[0].origin.platform}}
         </li>
         <li>
-          {{$ctrl.trip.segments[0].destination.time}} &ndash; {{$ctrl.trip.segments[0].destination.name}}, Platform {{$ctrl.trip.segments[0].destination.platform}}
+          {{$ctrl.trip.segments[$ctrl.trip.segments.length-1].destination.time}} &ndash; {{$ctrl.trip.segments[$ctrl.trip.segments.length-1].destination.name}}, Platform {{$ctrl.trip.segments[$ctrl.trip.segments.length-1].destination.platform}}
         </li>
       </ul>
       <div class="md-body-2" layout="row" layout-align="end center">

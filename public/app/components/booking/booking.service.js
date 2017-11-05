@@ -12,7 +12,7 @@ export default class BookingService {
     }
 
     printBooking(item, type) {
-        window.location.href = item._links['fulfil-' + type].href
+        window.open(item._links.fulfil.href + "?contentType="+type, "_blank");
     }
 
     cancelBooking(item) {

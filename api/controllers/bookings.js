@@ -7,36 +7,37 @@ module.exports = {
 }
 
 function putBookingUsingPUT (req, res) {
-  var bookings = [{
-    bookingId: '3001',
-    "_links": {
-      'fulfil-pdf': {
-          "method": "GET",
-        href: '../api/bookings/3001/tickets?type=pdf'
-      },
-      'fulfil-png': {
-          "method": "GET",
-          href: '../api/bookings/3001/tickets?type=png'
-      },
-      'fulfil-pkpass': {
-          "method": "GET",
-          href: '../api/bookings/3001/tickets?type=pkpass'
-      }
-    }
-  }]
+  var bookings = {
+      "bookingId":305218974,
+      "tickets":[
+          {
+              "ticketId":"5491473",
+              "_links":{
+                  "fulfil":{
+                      "href":"../api/bookings/305218974/tickets/5491473",
+                      "method":"GET",
+                      "contentType":"application/pdf,text/html,application/pkpass,image/png",
+                      "body":null
+                  }
+              }
+          }
+      ]
+  }
 
   res.json(bookings)
 }
 
-function getTicketUsingGET (req, res) {
-  if (req.query.type === 'pdf') {
-    var options = {
-      root: path.join(__dirname, '/../../public/app/components')
+function getTicketUsingGET(req, res) {
+
+    if (req.query.contentType === 'application/pdf') {
+        var options = {
+            root: path.join(__dirname, '/../../public/app/components')
+        }
+        res.sendFile('tickets/ticketB1.pdf', options)
+    } else {
+        console.log("Unsupported content type in mock mode " + req.query)
+        res.send("Only PDF ticket is supported")
     }
-    res.sendFile('tickets/ticketB1.pdf', options)
-  } else {
-    res.sendStatus(415)
-  }
 }
 
 function putCancellationUsingPUT (req, res) {
