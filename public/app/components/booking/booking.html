@@ -1,8 +1,5 @@
 <md-tab label="Bookings" ng-disabled="$ctrl.bookingStore.bookings === null">
   <md-content class="md-padding">
-    <md-card class="md-3-line" ng-repeat="booking in $ctrl.bookingStore.bookings">
-      <api-booking-detail booking="booking"></api-booking-detail>
-      <api-booking-actions booking="booking"></api-booking-actions>
-    </md-card>
+      <api-booking-detail booking="$ctrl.bookingStore.bookings"></api-booking-detail>
   </md-content>
 </md-tab>

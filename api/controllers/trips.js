@@ -31,19 +31,23 @@ function getTripsUsingGET_1 (req, res) {
 
   var links1 = {
     'prices': {
-      title: 'Request the cheapest prices for a trip.',
+      "method": 'GET',
+      "contentType": "application/json",
       href: constructPricesUrl(trip1)
     },
     'offers': {
-      title: 'Request offers for a trip.',
+      "method": 'GET',
+      "contentType": "application/json",
       href: constructOffersUrl(trip1)
     },
     'offers-online': {
-      title: 'Link into web shop B2C.',
+      "method": 'GET',
+      "contentType": "text/html",
       href: constructWebshopB2CUrl(trip1)
     },
     'offers-mobile': {
-      title: 'Link into mobile app B2C.',
+      "method": 'GET',
+      "contentType": "text/html",
       href: constructMobileB2CUrl(trip1)
     }
   }
@@ -73,18 +77,22 @@ function getTripsUsingGET_1 (req, res) {
     var links2 = {
         "prices": {
             "method": "GET",
+            "contentType": "application/json",
             "href": constructPricesUrl(trip2)
         },
         "offers": {
             "method": "GET",
+            "contentType": "application/json",
             "href": constructOffersUrl(trip2)
         },
         "offers-online": {
             "method": "GET",
+            "contentType": "text/html",
             "href": constructWebshopB2CUrl(trip2)
         },
         "offers-mobile": {
             "method": "GET",
+            "contentType": "text/html",
             "href": constructMobileB2CUrl(trip2)
         }
     }
@@ -121,18 +129,22 @@ function getTripsUsingGET (req, res) {
     var links1 = {
         "prices": {
             "method": "GET",
+            "contentType": "application/json",
             "href": constructPricesUrl(trip1)
         },
         "offers": {
             "method": "GET",
+            "contentType": "application/json",
             "href": constructOffersUrl(trip1)
         },
         "offers-online": {
             "method": "GET",
+            "contentType": "text/html",
             "href": constructWebshopB2CUrl(trip1)
         },
         "offers-mobile": {
             "method": "GET",
+            "contentType": "text/html",
             "href": constructMobileB2CUrl(trip1)
         }
     }
@@ -145,16 +157,13 @@ function getTripsUsingGET (req, res) {
 function constructPricesUrl (trip) {
   let url = '../api/prices?'
   url += 'tripId=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89QWFyYXVATD04NTAyMTEzQGE9MTI4QCQyMDE3MDgyNzIwMzQkMjAxNzA4MjcyMTEzJElSIDIxODkgJCQxJMKnVCRBPTFATz1BYXJhdUBMPTg1MDIxMTNAYT0xMjhAJEE9MUBPPVrDvHJpY2ggSEJATD04NTAzMDAwQGE9MTI4QCQyMDE3MDgyNzIxMjQkMjAxNzA4MjcyMTUyJElSIDIyODcgJCQxJA=='
-  url += '&date=' + encodeURI(trip.segments[0].origin.date)
-  url += '&time=' + encodeURIComponent(trip.segments[0].origin.time)
   return url
 }
 
 function constructOffersUrl (trip) {
   let url = '../api/offers?'
   url += 'tripId=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89QWFyYXVATD04NTAyMTEzQGE9MTI4QCQyMDE3MDgyNzIwMzQkMjAxNzA4MjcyMTEzJElSIDIxODkgJCQxJMKnVCRBPTFATz1BYXJhdUBMPTg1MDIxMTNAYT0xMjhAJEE9MUBPPVrDvHJpY2ggSEJATD04NTAzMDAwQGE9MTI4QCQyMDE3MDgyNzIxMjQkMjAxNzA4MjcyMTUyJElSIDIyODcgJCQxJA=='
-  url += '&date=' + encodeURI(trip.segments[0].origin.date)
-  url += '&time=' + encodeURIComponent(trip.segments[0].origin.time)
+  url += '&passengers=${passengerInfos}"'
   return url
 }
 
@@ -168,9 +177,7 @@ function constructWebshopB2CUrl (trip) {
 
   let url = 'https://www.sbb.ch/en/buying/pages/fahrplan/fahrplan.xhtml?'
   url += 'webshopPreviewMode=active'
-  url += '&von=' + encodeURI(trip.segments[0].origin.name)
-  url += '&nach=' + encodeURI(trip.segments[0].destination.name)
-  //url += '&recon=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89QWFyYXVATD04NTAyMTEzQGE9MTI4QCQyMDE3MDgyNzIwMzQkMjAxNzA4MjcyMTEzJElSIDIxODkgJCQxJMKnVCRBPTFATz1BYXJhdUBMPTg1MDIxMTNAYT0xMjhAJEE9MUBPPVrDvHJpY2ggSEJATD04NTAzMDAwQGE9MTI4QCQyMDE3MDgyNzIxMjQkMjAxNzA4MjcyMTUyJElSIDIyODcgJCQxJA=='
+  url += '&recon=VCRBPTFATz1CZXJuQEw9ODUwNzAwMEBhPTEyOEAkQT0xQE89QWFyYXVATD04NTAyMTEzQGE9MTI4QCQyMDE3MDgyNzIwMzQkMjAxNzA4MjcyMTEzJElSIDIxODkgJCQxJMKnVCRBPTFATz1BYXJhdUBMPTg1MDIxMTNAYT0xMjhAJEE9MUBPPVrDvHJpY2ggSEJATD04NTAzMDAwQGE9MTI4QCQyMDE3MDgyNzIxMjQkMjAxNzA4MjcyMTUyJElSIDIyODcgJCQxJA=='
   url += '&datum=' + encodeURIComponent(dateFormat(trip.segments[0].origin.date, 'dd.mm.yyyy'))
   url += '&zeit=' + encodeURIComponent(trip.segments[0].origin.time)
   return url

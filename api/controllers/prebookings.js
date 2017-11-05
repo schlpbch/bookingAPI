@@ -5,14 +5,22 @@ module.exports = {
 }
 
 function putPrebookingUsingPUT (req, res) {
-  var prebooking = [{
-    preBookingId: '2001',
-    "_links": {
-        "book": {
-            "method": "PUT",
-            "href": "../api/bookings?preBookingId=2001"
-        }
-    }
-  }]
+
+  var prebooking = {
+      "prebookings":[
+          {
+              "preBookingId":436127127
+          }
+      ],
+      "_links":{
+          "book":{
+              "href": "../api/bookings?preBookingId=436127127",
+              "method":"PUT",
+              "contentType":"application/json",
+              "body":null
+          }
+      }
+  }
+
   res.json(prebooking)
 }
