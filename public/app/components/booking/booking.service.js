@@ -1,7 +1,3 @@
-/**
- * Created by kevinkreuzer on 22.03.17.
- */
-
 export default class BookingService {
     constructor($http, $mdDialog, bookingStore, errorLogService, authService) {
         this.$http = $http

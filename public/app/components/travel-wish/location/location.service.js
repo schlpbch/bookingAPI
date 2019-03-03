@@ -5,13 +5,9 @@
 export default class LocationService {
   constructor ($http, authService) {
     this.$http = $http
-    this.authService = authService
   }
 
   getStations (query) {
-    let headers = this.authService.getAuthHeader()
-    return this.$http.get(`../api/locations?name=${query}`, {
-      headers
-    })
+    return this.$http.get(`../api/locations?name=${query}`)
   }
 }

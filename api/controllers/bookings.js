@@ -12,6 +12,7 @@ function createB2bSbbInvoiceUsingPOST_1 (req, res) {
   if(GLOBAL.MOCKED) {
     createB2bSbbInvoiceUsingPOST_1Mock(req, res);
   } else {
+    let conversationId = req.headers['x-conversation-id'];
     let invoiceBody = '';
     req.on('data', chunk => {
       invoiceBody += chunk.toString();
@@ -20,7 +21,7 @@ function createB2bSbbInvoiceUsingPOST_1 (req, res) {
       request({
         headers: {
           'Authorization': 'Bearer ' + GLOBAL.getToken(),
-          'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
+          'X-Conversation-Id': conversationId,
           'X-Contract-Id': GLOBAL.CONTRACT_ID,
           'Content-Type': 'application/json',
           'Content-Length': invoiceBody.length
@@ -50,6 +51,7 @@ function postBookingUsingPOST (req, res) {
   if(GLOBAL.MOCKED) {
     postBookingUsingPOSTMock(req, res);
   } else {
+    let conversationId = req.headers['x-conversation-id'];
     let bookingBody = '';
     req.on('data', chunk => {
       bookingBody += chunk.toString();
@@ -58,7 +60,7 @@ function postBookingUsingPOST (req, res) {
       request({
         headers: {
           'Authorization': 'Bearer ' + GLOBAL.getToken(),
-          'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
+          'X-Conversation-Id': conversationId,
           'X-Contract-Id': GLOBAL.CONTRACT_ID,
           'Content-Type': 'application/json',
           'Accept-Language': 'en',

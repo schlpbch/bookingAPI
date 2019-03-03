@@ -14,6 +14,7 @@ function postPrebookingUsingPOST_1 (req, res) {
   if(GLOBAL.MOCKED) {
     postPrebookingUsingPOST_1Mock(req, res);
   } else {
+    let conversationId = req.headers['x-conversation-id'];
     let prebookBody = '';
     req.on('data', chunk => {
       prebookBody += chunk.toString();
@@ -22,7 +23,7 @@ function postPrebookingUsingPOST_1 (req, res) {
       request({
         headers: {
           'Authorization': 'Bearer ' + GLOBAL.getToken(),
-          'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
+          'X-Conversation-Id': conversationId,
           'X-Contract-Id': GLOBAL.CONTRACT_ID,
           'Content-Type': 'application/json',
           'Content-Length': prebookBody.length

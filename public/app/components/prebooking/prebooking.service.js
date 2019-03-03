@@ -1,14 +1,11 @@
-/**
- * Created by kevinkreuzer on 22.03.17.
- */
-
 export default class PreebookingService {
-    constructor(bookingStore, $http, tabService, errorLogService, authService) {
+    constructor(bookingStore, $http, tabService, errorLogService, authService, conversationService) {
         this.bookingStore = bookingStore
         this.$http = $http
         this.tabService = tabService
         this.errorLogService = errorLogService
         this.authService = authService
+        this.conversationService = conversationService
     }
 
     getBooking(item) {
@@ -23,9 +20,9 @@ export default class PreebookingService {
         preBookingId
       ];
 
-      this.$http.post(payurl, paydata)
+      this.$http.post(payurl, paydata, { headers: { 'X-Conversation-Id': this.conversationService.getUuid() }})
         .then(payres => {
-          this.$http.post(bookurl, bookdata)
+          this.$http.post(bookurl, bookdata, { headers: { 'X-Conversation-Id': this.conversationService.getUuid() }})
             .then(res => {
               this.bookingStore.bookings = res.data
               this.tabService.goToNextTab()

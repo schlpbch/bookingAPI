@@ -1,13 +1,16 @@
 export default class OffersService {
-  constructor (bookingStore, tabService, $http, errorLogService, authService) {
+  constructor (bookingStore, tabService, $http, errorLogService, authService, conversationService) {
     this.bookingStore = bookingStore
     this.tabService = tabService
     this.$http = $http
     this.errorLogService = errorLogService
     this.authService = authService
+    this.conversationService = conversationService
   }
 
   getPrebooking (item) {
+    this.conversationService.resetUuid();
+
     let url = '../api/v2/prebookings'
     let data = [
       {
@@ -24,7 +27,7 @@ export default class OffersService {
         }
       }
     ];
-    this.$http.post(url, data)
+    this.$http.post(url, data, { headers: { 'X-Conversation-Id': this.conversationService.getUuid() }})
       .then(res => {
         this.bookingStore.prebookings = res.data
         this.tabService.goToNextTab()

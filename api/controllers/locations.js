@@ -25,7 +25,6 @@ function getLocationsUsingGET (req, res) {
       if (!!err) {
         console.log(err)
       }
-        console.log(body)
       res.json(JSON.parse(body))
     })
   }

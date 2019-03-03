@@ -46,7 +46,7 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
 
     if (!GLOBAL.MOCKED) {
       GLOBAL.getToken = function() {
-        if (GLOBAL.TOKEN_VALIDITY && GLOBAL.TOKEN_VALIDITY > Date.now()) {
+        if (GLOBAL.TOKEN_VALIDITY && (Date.now() + 10000) < GLOBAL.TOKEN_VALIDITY) {
           return GLOBAL.TOKEN;
         } else {
           var form = {
