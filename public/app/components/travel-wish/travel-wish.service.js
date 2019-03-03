@@ -20,7 +20,7 @@ export default class ReiseWunschService {
     let isoDate = dateFormat(date === undefined ? now : date, `isoDate`)
     let isoTime = time === undefined ? dateFormat(now, `HH:MM`) : time
 
-    this.$http.get(`../redirect_api/trips?originId=${originId.value}&destinationId=${destinationId.value}&date=${isoDate}&time=${isoTime}`, {
+    this.$http.get(`../api/trips?originId=${originId.value}&destinationId=${destinationId.value}&date=${isoDate}&time=${isoTime}`, {
       headers
     })
       .then((res) => {

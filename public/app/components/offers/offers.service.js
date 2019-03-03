@@ -8,7 +8,7 @@ export default class OffersService {
   }
 
   getPrebooking (item) {
-    let url = 'http://localhost:8080/api/v2/prebookings'
+    let url = '../api/v2/prebookings'
     let data = [
       {
         "offerPrebookings": [

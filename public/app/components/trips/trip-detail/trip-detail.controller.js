@@ -20,7 +20,7 @@ export default class ConnectionDetailController {
 
   getPrices () {
     let tripId = this.trip.tripId;
-    let url = 'http://localhost:8080/api/v2/prices?tripIds=' + tripId + "&passengers=paxa;42;half-fare"
+    let url = '../api/v2/prices?tripIds=' + tripId + "&passengers=paxa;42;half-fare"
     this.connectionService.$http.get(url, {
     })
       .then((res) => {

@@ -13,7 +13,7 @@ export default class BookingService {
 
     printBooking(bookingId, item, type) {
         let ticketId = item.ticketId;
-        window.open("http://localhost:8080/api/bookings/" + bookingId + "/tickets/" + ticketId + "?contentType="+type, "_blank");
+        window.open("../api/bookings/" + bookingId + "/tickets/" + ticketId + "?contentType="+type, "_blank");
     }
 
     cancelBooking(item) {

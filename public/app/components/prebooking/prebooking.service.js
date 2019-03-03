@@ -13,12 +13,12 @@ export default class PreebookingService {
 
     getBooking(item) {
       let preBookingId = item.prebookings[0].preBookingId;
-      let payurl = 'http://localhost:8080/api/v2/payments/b2b/sbb/invoice'
+      let payurl = '../api/v2/payments/b2b/sbb/invoice'
       let paydata = {
         prebookingIds: [preBookingId]
       }
 
-      let bookurl = 'http://localhost:8080/api/bookings'
+      let bookurl = '../api/bookings'
       let bookdata = [
         preBookingId
       ];

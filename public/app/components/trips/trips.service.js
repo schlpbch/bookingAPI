@@ -8,7 +8,7 @@ export default class TripsService {
     }
 
     getOffers(item) {
-      let url = 'http://localhost:8080/api/trip-offers?tripId=' + item.tripId + "&passengers=paxa;42;half-fare"
+      let url = '../api/trip-offers?tripId=' + item.tripId + "&passengers=paxa;42;half-fare"
       this.$http.get(url)
           .then((res) => {
               this.bookingStore.offercontainers = res.data
