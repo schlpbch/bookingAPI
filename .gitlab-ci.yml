@@ -26,11 +26,11 @@ os-latest:
   image: ayufan/openshift-cli
   stage: os-latest
   variables:
-    OPENSHIFT_PROJECT: booking
-    APP: $CI_PROJECT_NAME
-    APP_HOST: $CI_PROJECT_NAME-dev.$OPENSHIFT_DOMAIN
+    OPENSHIFT_PROJECT: frankpfleger
+    APP: booking
+    APP_HOST: booking.$OPENSHIFT_DOMAIN
   environment:
-    name: $CI_PROJECT_NAME
-    url: http://$CI_PROJECT_NAME-dev.$OPENSHIFT_DOMAIN
+    name: booking
+    url: http://booking.$OPENSHIFT_DOMAIN
   only:
   - develop
