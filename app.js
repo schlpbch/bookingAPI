@@ -45,8 +45,8 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
       var form = {
         grant_type: 'client_credentials',
         scope: '',
-        client_id: 'X',
-        client_secret: 'X'
+        client_id: '',
+        client_secret: ''
       }
 
       var formData = querystring.stringify(form)
