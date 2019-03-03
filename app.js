@@ -36,7 +36,7 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
   createReverseProxy(app, environmentConfiguration)
   app.listen(environmentConfiguration.appPort)
 
-  GLOBAL.MOCKED = false
+  GLOBAL.MOCKED = true
 
   if (swaggerExpress.runner.swagger.paths['/offers']) {
     console.log('try this: http://localhost:' + environmentConfiguration.appPort + '/app')
