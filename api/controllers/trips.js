@@ -23,10 +23,7 @@ function getTripsUsingGET_1 (req, res) {
       },
       uri: 'https://b2p-int.api.sbb.ch/api/trips?' + query
     }, function (err, response, body) {
-      if (!!err) {
-        console.log(err)
-      }
-      res.json(JSON.parse(body))
+      res.send(body)
     });
   }
 }

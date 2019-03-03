@@ -22,10 +22,7 @@ function getPricesUsingGET (req, res) {
       },
       uri: 'https://b2p-int.api.sbb.ch/api/v2/prices?' + query
     }, function (err, response, body) {
-      if (!!err) {
-        console.log(err)
-      }
-      res.json(JSON.parse(body))
+      res.send(body)
     });
   }
 }
