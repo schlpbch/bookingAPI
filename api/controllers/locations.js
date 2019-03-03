@@ -2,7 +2,6 @@
 
 GLOBAL._ = require('underscore')
 const request = require('request')
-const querystring = require('querystring')
 
 module.exports = {
   getLocationsUsingGET
@@ -12,7 +11,7 @@ function getLocationsUsingGET (req, res) {
   if (GLOBAL.MOCKED) {
     getLocationsUsingGETMock(req, res)
   } else {
-    let query = querystring.stringify(req.query)
+    let name = req.query.name
 
     request({
       headers: {
@@ -20,7 +19,7 @@ function getLocationsUsingGET (req, res) {
         'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
         'X-Contract-Id': GLOBAL.CONTRACT_ID
       },
-      uri: 'https://b2p-int.api.sbb.ch/api/locations?' + query
+      uri: 'https://b2p-int.api.sbb.ch/api/locations?name=' + name
     }, function (err, response, body) {
       if (!!err) {
         console.log(err)
