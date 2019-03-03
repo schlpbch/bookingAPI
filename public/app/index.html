@@ -14,26 +14,6 @@
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <!-- Google Analytics -->
-  <!-- TODO: Build custom version of autotrack -->
-  <script>
-    window.ga = window.ga || function() {
-      (ga.q = ga.q || []).push(arguments)
-    };
-    ga.l = +new Date;
-    ga('create', 'UA-99587308-1', 'auto');
-
-    // Support for autotrack
-    ga('require', 'cleanUrlTracker');
-    ga('require', 'eventTracker');
-    ga('require', 'urlChangeTracker');
-
-    ga('send', 'pageview');
-  </script>
-  <script async src='https://www.google-analytics.com/analytics.js'></script>
-  <script async src="autotrack.js"></script>
-  <!-- End Google Analytics -->
-
 </head>
 
 <body ng-cloak layout="column" ng-controller="AppCtrl">
