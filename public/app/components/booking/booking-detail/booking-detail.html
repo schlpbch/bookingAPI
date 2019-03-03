@@ -18,9 +18,9 @@
           <md-icon>receipt</md-icon>
           <p> Ticket: {{ticket.ticketId}} </p>
 
-          <md-button class="md-primary md-raised" ng-click="$ctrl.bookingService.printBooking(ticket, 'application/pdf')">Ticket PDF</md-button>
-          <md-button class="md-primary md-raised" ng-click="$ctrl.bookingService.printBooking(ticket, 'text/html')">Ticket PNG</md-button>
-          <md-button class="md-primary md-raised" ng-click="$ctrl.bookingService.printBooking(ticket, 'application/vnd.apple.pkpass')">Ticket PKPASS</md-button>
+          <md-button class="md-primary md-raised" ng-click="$ctrl.bookingService.printBooking($ctrl.booking.bookingId, ticket, 'application/pdf')">Ticket PDF</md-button>
+          <md-button class="md-primary md-raised" ng-click="$ctrl.bookingService.printBooking($ctrl.booking.bookingId, ticket, 'text/html')">Ticket PNG</md-button>
+          <md-button class="md-primary md-raised" ng-click="$ctrl.bookingService.printBooking($ctrl.booking.bookingId, ticket, 'application/vnd.apple.pkpass')">Ticket PKPASS</md-button>
 
         </md-list-item>
 

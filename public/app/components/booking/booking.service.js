@@ -11,8 +11,9 @@ export default class BookingService {
         this.authService = authService
     }
 
-    printBooking(item, type) {
-        window.open(item._links.fulfil.href + "?contentType="+type, "_blank");
+    printBooking(bookingId, item, type) {
+        let ticketId = item.ticketId;
+        window.open("http://localhost:8080/api/bookings/" + bookingId + "/tickets/" + ticketId + "?contentType="+type, "_blank");
     }
 
     cancelBooking(item) {

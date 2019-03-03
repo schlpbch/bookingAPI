@@ -8,11 +8,11 @@
       </md-switch>
       <md-input-container>
         <label>Date</label>
-        <md-datepicker ng-model="$ctrl.date" md-placeholder="2017/12/02" required></md-datepicker>
+        <md-datepicker ng-model="$ctrl.date" md-placeholder="2019/03/05" required></md-datepicker>
       </md-input-container>
       <md-input-container>
         <label>Time</label>
-        <input name="zeit" ng-model="$ctrl.time" placeholder="08:00" required>
+        <input name="zeit" ng-model="$ctrl.time" placeholder="17:00" required>
       </md-input-container>
       <br/>
       <md-button class="md-raised md-primary" ng-click="$ctrl.travelWishService.getTrips($ctrl.originId, $ctrl.destinationId, $ctrl.isArrival, $ctrl.date, $ctrl.time)">Find

@@ -1,12 +1,38 @@
 'use strict'
 
+GLOBAL._ = require('underscore');
+const request = require('request')
+const querystring = require('querystring')
+
 module.exports = {
     getPricesUsingGET
 }
 
 function getPricesUsingGET (req, res) {
+  if(GLOBAL.MOCKED) {
+    getPricesUsingGETMock(req, res);
+  } else {
+    let query = querystring.stringify(req.query);
+
+    request({
+      headers: {
+        'Authorization': 'Bearer ' + GLOBAL.TOKEN,
+        'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
+        'X-Contract-Id': GLOBAL.CONTRACT_ID
+      },
+      uri: 'https://b2p-int.api.sbb.ch/api/v2/prices?' + query
+    }, function (err, response, body) {
+      if (!!err) {
+        console.log(err)
+      }
+      res.json(JSON.parse(body))
+    });
+  }
+}
+
+function getPricesUsingGETMock (req, res) {
   let q = req.query
-    if (!(q.tripId === undefined)) {
+    if (!(q.tripIds === undefined)) {
       var self = {
           href: req.originalUrl
       }

@@ -1,12 +1,37 @@
 'use strict'
 
-var dateFormat = require('dateformat')
+GLOBAL._ = require('underscore');
+const dateFormat = require('dateformat')
+const request = require('request')
+const querystring = require('querystring')
 
 module.exports = {
-    getTripsUsingGET_1, getTripsUsingGET
+  getTripsUsingGET_1, getTripsUsingGET
 }
 
 function getTripsUsingGET_1 (req, res) {
+  if(GLOBAL.MOCKED) {
+    getTripsUsingGET_1Mock(req, res);
+  } else {
+    let query = querystring.stringify(req.query);
+
+    request({
+      headers: {
+        'Authorization': 'Bearer ' + GLOBAL.TOKEN,
+        'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
+        'X-Contract-Id': GLOBAL.CONTRACT_ID
+      },
+      uri: 'https://b2p-int.api.sbb.ch/api/trips?' + query
+    }, function (err, response, body) {
+      if (!!err) {
+        console.log(err)
+      }
+      res.json(JSON.parse(body))
+    });
+  }
+}
+
+function getTripsUsingGET_1Mock (req, res) {
   // TODO: trip with multiple segments
 
   var trip1 = {

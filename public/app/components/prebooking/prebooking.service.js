@@ -12,13 +12,28 @@ export default class PreebookingService {
     }
 
     getBooking(item) {
-        let headers = this.authService.getAuthHeader()
-        this.$http.put(item._links.book.href, {headers})
+      let preBookingId = item.prebookings[0].preBookingId;
+      let payurl = 'http://localhost:8080/api/v2/payments/b2b/sbb/invoice'
+      let paydata = {
+        prebookingIds: [preBookingId]
+      }
+
+      let bookurl = 'http://localhost:8080/api/bookings'
+      let bookdata = [
+        preBookingId
+      ];
+
+      this.$http.post(payurl, paydata)
+        .then(payres => {
+          this.$http.post(bookurl, bookdata)
             .then(res => {
-                this.bookingStore.bookings = res.data
-                this.tabService.goToNextTab()
+              this.bookingStore.bookings = res.data
+              this.tabService.goToNextTab()
             }, (error) => {
-                this.errorLogService.logError(error)
+              this.errorLogService.logError(error)
             })
+        }, (error) => {
+          this.errorLogService.logError(error)
+        })
     }
 }
