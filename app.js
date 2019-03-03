@@ -36,39 +36,49 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
   createReverseProxy(app, environmentConfiguration)
   app.listen(environmentConfiguration.appPort)
 
-  GLOBAL.MOCKED = true
+  GLOBAL.MOCKED = false
 
   if (swaggerExpress.runner.swagger.paths['/offers']) {
     console.log('try this: http://localhost:' + environmentConfiguration.appPort + '/app')
 
+    GLOBAL.CONTRACT_ID = 'ACP1024'
+    GLOBAL.CONVERSATION_ID = uuid()
+
     if (!GLOBAL.MOCKED) {
-      var form = {
-        grant_type: 'client_credentials',
-        scope: '',
-        client_id: '',
-        client_secret: ''
-      }
+      GLOBAL.getToken = function() {
+        if (GLOBAL.TOKEN_VALIDITY && GLOBAL.TOKEN_VALIDITY > Date.now()) {
+          return GLOBAL.TOKEN;
+        } else {
+          var form = {
+            grant_type: 'client_credentials',
+            scope: '',
+            client_id: 'fcff3351',
+            client_secret: '34a6e641f06b68a1d8cff4e5169a0fa9'
+          }
 
-      var formData = querystring.stringify(form)
-      var contentLength = formData.length
+          var formData = querystring.stringify(form)
+          var contentLength = formData.length
 
-      request({
-        headers: {
-          'Content-Length': contentLength,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        uri: 'https://sso-int.sbb.ch/auth/realms/SBB_Public/protocol/openid-connect/token',
-        body: formData,
-        method: 'POST'
-      }, function (err, response, body) {
-        if (!!err) {
-          console.log(err)
+          request({
+            headers: {
+              'Content-Length': contentLength,
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            uri: 'https://sso-int.sbb.ch/auth/realms/SBB_Public/protocol/openid-connect/token',
+            body: formData,
+            method: 'POST'
+          }, function (err, response, body) {
+            if (!!err) {
+              console.log(err)
+            }
+            GLOBAL.TOKEN = JSON.parse(body).access_token
+            GLOBAL.TOKEN_VALIDITY = Date.now() + JSON.parse(body).expires_in
+          })
+
+          return GLOBAL.TOKEN;
         }
-        GLOBAL.TOKEN = JSON.parse(body).access_token
-        GLOBAL.CONTRACT_ID = 'ACP1024'
-        GLOBAL.CONVERSATION_ID = uuid()
-        console.log(GLOBAL.TOKEN)
-      })
+      }
+      GLOBAL.getToken();
     }
   }
 })

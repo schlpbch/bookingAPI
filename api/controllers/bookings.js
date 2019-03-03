@@ -19,7 +19,7 @@ function createB2bSbbInvoiceUsingPOST_1 (req, res) {
     req.on('end', () => {
       request({
         headers: {
-          'Authorization': 'Bearer ' + GLOBAL.TOKEN,
+          'Authorization': 'Bearer ' + GLOBAL.getToken(),
           'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
           'X-Contract-Id': GLOBAL.CONTRACT_ID,
           'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ function postBookingUsingPOST (req, res) {
     req.on('end', () => {
       request({
         headers: {
-          'Authorization': 'Bearer ' + GLOBAL.TOKEN,
+          'Authorization': 'Bearer ' + GLOBAL.getToken(),
           'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
           'X-Contract-Id': GLOBAL.CONTRACT_ID,
           'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ function getTicketUsingGET(req, res) {
   } else {
     request({
       headers: {
-        'Authorization': 'Bearer ' + GLOBAL.TOKEN,
+        'Authorization': 'Bearer ' + GLOBAL.getToken(),
         'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
         'X-Contract-Id': GLOBAL.CONTRACT_ID,
         'Accept': req.query.contentType

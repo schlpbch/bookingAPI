@@ -16,7 +16,7 @@ function getLocationsUsingGET (req, res) {
 
     request({
       headers: {
-        'Authorization': 'Bearer ' + GLOBAL.TOKEN,
+        'Authorization': 'Bearer ' + GLOBAL.getToken(),
         'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
         'X-Contract-Id': GLOBAL.CONTRACT_ID
       },
@@ -25,6 +25,7 @@ function getLocationsUsingGET (req, res) {
       if (!!err) {
         console.log(err)
       }
+        console.log(body)
       res.json(JSON.parse(body))
     })
   }

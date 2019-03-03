@@ -21,7 +21,7 @@ function postPrebookingUsingPOST_1 (req, res) {
     req.on('end', () => {
       request({
         headers: {
-          'Authorization': 'Bearer ' + GLOBAL.TOKEN,
+          'Authorization': 'Bearer ' + GLOBAL.getToken(),
           'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
           'X-Contract-Id': GLOBAL.CONTRACT_ID,
           'Content-Type': 'application/json',
