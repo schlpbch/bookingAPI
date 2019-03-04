@@ -32,4 +32,4 @@ os-latest:
     name: booking
     url: http://booking.$OPENSHIFT_DOMAIN
   only:
-  - livedemo
+  - develop
