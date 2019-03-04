@@ -12,14 +12,14 @@ export default class LocationController {
   }
 
   querySearch (query) {
-    this.stationService.getStations(query)
+    return this.stationService.getStations(query)
       .then(res => {
         this.stations = res.data.map(location => ({
           display: location.name,
           value: location.id
         }))
+        return this.stations
       })
-    return this.stations
   }
 
   searchTextChange (text) {
