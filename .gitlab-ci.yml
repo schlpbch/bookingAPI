@@ -9,7 +9,6 @@ variables:
   DOCKER_REGISTRY: 172.30.232.187:5000
 
 stages:
-- build
 - os-latest
 
 .deploy: &deploy
@@ -33,4 +32,4 @@ os-latest:
     name: booking
     url: http://booking.$OPENSHIFT_DOMAIN
   only:
-  - develop
+  - livedemo
