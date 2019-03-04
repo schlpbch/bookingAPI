@@ -1,6 +1,6 @@
 'use strict'
 
-GLOBAL._ = require('underscore');
+global._ = require('underscore');
 const request = require('request')
 const uuid = require('uuid/v4')
 
@@ -9,22 +9,22 @@ module.exports = {
 }
 
 function postPrebookingUsingPOST_1 (req, res) {
-  GLOBAL.CONVERSATION_ID = uuid()
+  global.CONVERSATION_ID = uuid()
 
-  if(GLOBAL.MOCKED) {
+  if(global.MOCKED) {
     postPrebookingUsingPOST_1Mock(req, res);
   } else {
-    let conversationId = req.headers['x-conversation-id'];
-    let prebookBody = '';
+    let conversationId = req.headers['x-conversation-id']
+    let prebookBody = ''
     req.on('data', chunk => {
-      prebookBody += chunk.toString();
-    });
+      prebookBody += chunk.toString()
+    })
     req.on('end', () => {
       request({
         headers: {
-          'Authorization': 'Bearer ' + GLOBAL.getToken(),
+          'Authorization': 'Bearer ' + global.getToken(),
           'X-Conversation-Id': conversationId,
-          'X-Contract-Id': GLOBAL.CONTRACT_ID,
+          'X-Contract-Id': global.CONTRACT_ID,
           'Content-Type': 'application/json',
           'Content-Length': prebookBody.length
         },
@@ -36,8 +36,8 @@ function postPrebookingUsingPOST_1 (req, res) {
           console.log(err)
         }
         res.json(JSON.parse(body))
-      });
-    });
+      })
+    })
   }
 }
 

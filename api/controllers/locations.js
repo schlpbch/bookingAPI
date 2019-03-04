@@ -1,6 +1,6 @@
 'use strict'
 
-GLOBAL._ = require('underscore')
+global._ = require('underscore')
 const request = require('request')
 
 module.exports = {
@@ -8,18 +8,18 @@ module.exports = {
 }
 
 function getLocationsUsingGET (req, res) {
-  if (GLOBAL.MOCKED) {
+  if (global.MOCKED) {
     getLocationsUsingGETMock(req, res)
   } else {
-      let name = req.query.name
+      let locationName = req.query.name
 
       request({
           headers: {
-              'Authorization': 'Bearer ' + GLOBAL.getToken(),
-              'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
-              'X-Contract-Id': GLOBAL.CONTRACT_ID
+              'Authorization': 'Bearer ' + global.getToken(),
+              'X-Conversation-Id': global.CONVERSATION_ID,
+              'X-Contract-Id': global.CONTRACT_ID
           },
-          uri: 'https://b2p-int.api.sbb.ch/api/locations?name=' + name
+          uri: 'https://b2p-int.api.sbb.ch/api/locations?name=' + locationName
       }, function (err, response, body) {
           res.send(body)
       })

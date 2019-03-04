@@ -1,6 +1,6 @@
 'use strict'
 
-GLOBAL._ = require('underscore');
+global._ = require('underscore');
 const request = require('request')
 const path = require('path')
 
@@ -9,20 +9,20 @@ module.exports = {
 }
 
 function createB2bSbbInvoiceUsingPOST_1 (req, res) {
-  if(GLOBAL.MOCKED) {
+  if(global.MOCKED) {
     createB2bSbbInvoiceUsingPOST_1Mock(req, res);
   } else {
-    let conversationId = req.headers['x-conversation-id'];
-    let invoiceBody = '';
+    let conversationId = req.headers['x-conversation-id']
+    let invoiceBody = ''
     req.on('data', chunk => {
-      invoiceBody += chunk.toString();
-    });
+      invoiceBody += chunk.toString()
+    })
     req.on('end', () => {
       request({
         headers: {
-          'Authorization': 'Bearer ' + GLOBAL.getToken(),
+          'Authorization': 'Bearer ' + global.getToken(),
           'X-Conversation-Id': conversationId,
-          'X-Contract-Id': GLOBAL.CONTRACT_ID,
+          'X-Contract-Id': global.CONTRACT_ID,
           'Content-Type': 'application/json',
           'Content-Length': invoiceBody.length
         },
@@ -34,8 +34,8 @@ function createB2bSbbInvoiceUsingPOST_1 (req, res) {
           console.log(err)
         }
         res.json(JSON.parse(body))
-      });
-    });
+      })
+    })
   }
 }
 
@@ -48,7 +48,7 @@ function putBookingUsingPUT (req, res) {
 }
 
 function postBookingUsingPOST (req, res) {
-  if(GLOBAL.MOCKED) {
+  if(global.MOCKED) {
     postBookingUsingPOSTMock(req, res);
   } else {
     let conversationId = req.headers['x-conversation-id'];
@@ -59,9 +59,9 @@ function postBookingUsingPOST (req, res) {
     req.on('end', () => {
       request({
         headers: {
-          'Authorization': 'Bearer ' + GLOBAL.getToken(),
+          'Authorization': 'Bearer ' + global.getToken(),
           'X-Conversation-Id': conversationId,
-          'X-Contract-Id': GLOBAL.CONTRACT_ID,
+          'X-Contract-Id': global.CONTRACT_ID,
           'Content-Type': 'application/json',
           'Accept-Language': 'en',
           'Content-Length': bookingBody.length
@@ -101,14 +101,14 @@ function postBookingUsingPOSTMock (req, res) {
 }
 
 function getTicketUsingGET(req, res) {
-  if(GLOBAL.MOCKED) {
+  if(global.MOCKED) {
     getTicketUsingGETMock(req, res);
   } else {
     request({
       headers: {
-        'Authorization': 'Bearer ' + GLOBAL.getToken(),
-        'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
-        'X-Contract-Id': GLOBAL.CONTRACT_ID,
+        'Authorization': 'Bearer ' + global.getToken(),
+        'X-Conversation-Id': global.CONVERSATION_ID,
+        'X-Contract-Id': global.CONTRACT_ID,
         'Accept': req.query.contentType
       },
       uri: 'https://b2p-int.api.sbb.ch/' + req.path

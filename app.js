@@ -1,5 +1,5 @@
 'use strict'
-GLOBAL._ = require('underscore')
+global._ = require('underscore')
 const querystring = require('querystring')
 const uuid = require('uuid/v4')
 const request = require('request')
@@ -36,18 +36,18 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
   createReverseProxy(app, environmentConfiguration)
   app.listen(environmentConfiguration.appPort)
 
-  GLOBAL.MOCKED = false
+  global.MOCKED = false
 
   if (swaggerExpress.runner.swagger.paths['/offers']) {
     console.log('try this: http://localhost:' + environmentConfiguration.appPort + '/app')
 
-    GLOBAL.CONTRACT_ID = 'ACP1024'
-    GLOBAL.CONVERSATION_ID = uuid()
+    global.CONTRACT_ID = 'ACP1024'
+    global.CONVERSATION_ID = uuid()
 
-    if (!GLOBAL.MOCKED) {
-      GLOBAL.getToken = function() {
-        if (GLOBAL.TOKEN_VALIDITY && (Date.now() + 10000) < GLOBAL.TOKEN_VALIDITY) {
-          return GLOBAL.TOKEN;
+    if (!global.MOCKED) {
+      global.getToken = function() {
+        if (global.TOKEN_VALIDITY && (Date.now() + 10000) < global.TOKEN_VALIDITY) {
+          return global.TOKEN;
         } else {
           var form = {
             grant_type: 'client_credentials',
@@ -71,14 +71,14 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
             if (!!err) {
               console.log(err)
             }
-            GLOBAL.TOKEN = JSON.parse(body).access_token
-            GLOBAL.TOKEN_VALIDITY = Date.now() + JSON.parse(body).expires_in
+            global.TOKEN = JSON.parse(body).access_token
+            global.TOKEN_VALIDITY = Date.now() + JSON.parse(body).expires_in
           })
 
-          return GLOBAL.TOKEN;
+          return global.TOKEN;
         }
       }
-      GLOBAL.getToken();
+      global.getToken();
     }
   }
 })
