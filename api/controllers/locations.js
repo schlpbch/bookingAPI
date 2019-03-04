@@ -11,18 +11,18 @@ function getLocationsUsingGET (req, res) {
   if (GLOBAL.MOCKED) {
     getLocationsUsingGETMock(req, res)
   } else {
-    let name = req.query.name
+      let name = req.query.name
 
-    request({
-      headers: {
-        'Authorization': 'Bearer ' + GLOBAL.getToken(),
-        'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
-        'X-Contract-Id': GLOBAL.CONTRACT_ID
-      },
-      uri: 'https://b2p-int.api.sbb.ch/api/locations?name=' + name
-    }, function (err, response, body) {
-      res.send(body)
-    })
+      request({
+          headers: {
+              'Authorization': 'Bearer ' + GLOBAL.getToken(),
+              'X-Conversation-Id': GLOBAL.CONVERSATION_ID,
+              'X-Contract-Id': GLOBAL.CONTRACT_ID
+          },
+          uri: 'https://b2p-int.api.sbb.ch/api/locations?name=' + name
+      }, function (err, response, body) {
+          res.send(body)
+      })
   }
 }
 

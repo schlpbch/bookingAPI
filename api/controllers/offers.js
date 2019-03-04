@@ -24,7 +24,7 @@ function getOffersUsingGET_1 (req, res) {
       uri: 'https://b2p-int.api.sbb.ch/api/trip-offers?' + query
     }, function (err, response, body) {
       res.send(body)
-    });
+    })
   }
 }
 
