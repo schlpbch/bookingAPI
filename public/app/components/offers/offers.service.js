@@ -20,10 +20,10 @@ export default class OffersService {
           }
         ],
         "passenger": {
-          "dateOfBirth": "1983-08-23",
-          "firstname": "Frank",
+          "dateOfBirth": "1980-01-01",
+          "firstname": "The",
           "id": item.offers[0].passengerId,
-          "lastname": "Pfleger"
+          "lastname": "Trasier"
         }
       }
     ];
