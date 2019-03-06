@@ -36,8 +36,8 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
   createReverseProxy(app, environmentConfiguration)
   app.listen(environmentConfiguration.appPort)
 
-  let clientId = 'fcff3351'
-  let clientSecret = '34a6e641f06b68a1d8cff4e5169a0fa9'
+  let clientId = '***'
+  let clientSecret = '***'
 
   if (swaggerExpress.runner.swagger.paths['/offers']) {
     console.log('try this: http://localhost:' + environmentConfiguration.appPort + '/app')
