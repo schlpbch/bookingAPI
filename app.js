@@ -36,13 +36,15 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
   createReverseProxy(app, environmentConfiguration)
   app.listen(environmentConfiguration.appPort)
 
-  global.MOCKED = false
+  let clientId = 'fcff3351'
+  let clientSecret = '34a6e641f06b68a1d8cff4e5169a0fa9'
 
   if (swaggerExpress.runner.swagger.paths['/offers']) {
     console.log('try this: http://localhost:' + environmentConfiguration.appPort + '/app')
 
     global.CONTRACT_ID = 'ACP1024'
     global.CONVERSATION_ID = uuid()
+    global.MOCKED = clientSecret.length <= 3
 
     if (!global.MOCKED) {
       global.getToken = function() {
@@ -52,8 +54,8 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
           var form = {
             grant_type: 'client_credentials',
             scope: '',
-            client_id: 'fcff3351',
-            client_secret: '34a6e641f06b68a1d8cff4e5169a0fa9'
+            client_id: clientId,
+            client_secret: clientSecret
           }
 
           var formData = querystring.stringify(form)
