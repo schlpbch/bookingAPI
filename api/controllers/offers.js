@@ -1,7 +1,31 @@
 'use strict'
 
+global._ = require('underscore');
+const request = require('request')
+const querystring = require('querystring')
+
 module.exports = {
-    getOffersUsingGET
+    getOffersUsingGET, getOffersUsingGET_1
+}
+
+function getOffersUsingGET_1 (req, res) {
+  if(global.MOCKED) {
+    getOffersUsingGET(req, res);
+  } else {
+    let query = querystring.stringify(req.query)
+
+    request({
+      headers: {
+        'Authorization': 'Bearer ' + global.getToken(),
+        'X-Conversation-Id': global.CONVERSATION_ID,
+        'X-Contract-Id': global.CONTRACT_ID,
+        'Accept-Language': 'en'
+      },
+      uri: 'https://b2p-int.api.sbb.ch/api/trip-offers?' + query
+    }, function (err, response, body) {
+      res.send(body)
+    })
+  }
 }
 
 function getOffersUsingGET (req, res) {

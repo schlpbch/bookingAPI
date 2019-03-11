@@ -4,7 +4,7 @@
 'use strict'
 const request = require('request')
 const REDIRECT_API = '/redirect_api/'
-let bodyParser = require('body-parser');
+let bodyParser = require('body-parser')
 
 
 const createReverseProxy = (app, environmentConfiguration) => {

@@ -1,26 +1,33 @@
-/**
- * Created by kevinkreuzer on 22.03.17.
- */
-
 export default class OffersService {
-  constructor (bookingStore, tabService, $http, errorLogService, authService) {
+  constructor (bookingStore, tabService, $http, errorLogService, authService, conversationService) {
     this.bookingStore = bookingStore
     this.tabService = tabService
     this.$http = $http
     this.errorLogService = errorLogService
     this.authService = authService
+    this.conversationService = conversationService
   }
 
   getPrebooking (item) {
-    let headers = this.authService.getAuthHeader()
-    let url = item._links.prebook.href
-    var data = item._links.prebook.body
-    data = data.replace('\$\{firstname\}', "john")
-    data = data.replace('\$\{lastname\}', "big")
-    data = data.replace('1970\-01\-01', "1975-01-01")
-    this.$http.put(url, data, {
-      headers
-    })
+    this.conversationService.resetUuid();
+
+    let url = '../api/v2/prebookings'
+    let data = [
+      {
+        "offerPrebookings": [
+          {
+            "offerId": item.offers[0].offerId
+          }
+        ],
+        "passenger": {
+          "dateOfBirth": "1980-01-01",
+          "firstname": "The",
+          "id": item.offers[0].passengerId,
+          "lastname": "Trasier"
+        }
+      }
+    ];
+    this.$http.post(url, data, { headers: { 'X-Conversation-Id': this.conversationService.getUuid() }})
       .then(res => {
         this.bookingStore.prebookings = res.data
         this.tabService.goToNextTab()

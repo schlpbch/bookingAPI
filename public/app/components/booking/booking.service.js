@@ -1,7 +1,3 @@
-/**
- * Created by kevinkreuzer on 22.03.17.
- */
-
 export default class BookingService {
     constructor($http, $mdDialog, bookingStore, errorLogService, authService) {
         this.$http = $http
@@ -11,8 +7,9 @@ export default class BookingService {
         this.authService = authService
     }
 
-    printBooking(item, type) {
-        window.open(item._links.fulfil.href + "?contentType="+type, "_blank");
+    printBooking(bookingId, item, type) {
+        let ticketId = item.ticketId;
+        window.open("../api/bookings/" + bookingId + "/tickets/" + ticketId + "?contentType="+type, "_blank");
     }
 
     cancelBooking(item) {

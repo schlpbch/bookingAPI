@@ -1,12 +1,85 @@
 'use strict'
 
+global._ = require('underscore');
+const request = require('request')
 const path = require('path')
 
 module.exports = {
-    putBookingUsingPUT, getTicketUsingGET, putCancellationUsingPUT
+  postBookingUsingPOST, createB2bSbbInvoiceUsingPOST_1, putBookingUsingPUT, getTicketUsingGET, putCancellationUsingPUT
+}
+
+function createB2bSbbInvoiceUsingPOST_1 (req, res) {
+  if(global.MOCKED) {
+    createB2bSbbInvoiceUsingPOST_1Mock(req, res);
+  } else {
+    let conversationId = req.headers['x-conversation-id']
+    let invoiceBody = ''
+    req.on('data', chunk => {
+      invoiceBody += chunk.toString()
+    })
+    req.on('end', () => {
+      request({
+        headers: {
+          'Authorization': 'Bearer ' + global.getToken(),
+          'X-Conversation-Id': conversationId,
+          'X-Contract-Id': global.CONTRACT_ID,
+          'Content-Type': 'application/json',
+          'Content-Length': invoiceBody.length
+        },
+        uri: 'https://b2p-int.api.sbb.ch/api/v2/payments/b2b/sbb/invoice',
+        method: 'POST',
+        body: invoiceBody
+      }, function (err, response, body) {
+        if (!!err) {
+          console.log(err)
+        }
+        res.json(JSON.parse(body))
+      })
+    })
+  }
+}
+
+function createB2bSbbInvoiceUsingPOST_1Mock (req, res) {
+  res.json({})
 }
 
 function putBookingUsingPUT (req, res) {
+  postBookingUsingPOST(req, res);
+}
+
+function postBookingUsingPOST (req, res) {
+  if(global.MOCKED) {
+    postBookingUsingPOSTMock(req, res);
+  } else {
+    let conversationId = req.headers['x-conversation-id'];
+    let bookingBody = '';
+    req.on('data', chunk => {
+      bookingBody += chunk.toString();
+    });
+    req.on('end', () => {
+      request({
+        headers: {
+          'Authorization': 'Bearer ' + global.getToken(),
+          'X-Conversation-Id': conversationId,
+          'X-Contract-Id': global.CONTRACT_ID,
+          'Content-Type': 'application/json',
+          'Accept-Language': 'en',
+          'Content-Length': bookingBody.length
+        },
+        uri: 'https://b2p-int.api.sbb.ch/api/bookings',
+        method: 'POST',
+        body: bookingBody
+      }, function (err, response, body) {
+        if (!!err) {
+          console.log(err)
+        }
+        res.json(JSON.parse(body))
+      });
+    });
+  }
+}
+
+function postBookingUsingPOSTMock (req, res) {
   var bookings = {
       "bookingId":305218974,
       "tickets":[
@@ -28,7 +101,28 @@ function putBookingUsingPUT (req, res) {
 }
 
 function getTicketUsingGET(req, res) {
+  if(global.MOCKED) {
+    getTicketUsingGETMock(req, res);
+  } else {
+    request({
+      headers: {
+        'Authorization': 'Bearer ' + global.getToken(),
+        'X-Conversation-Id': global.CONVERSATION_ID,
+        'X-Contract-Id': global.CONTRACT_ID,
+        'Accept': req.query.contentType
+      },
+      uri: 'https://b2p-int.api.sbb.ch/' + req.path
+    }, function (err, response, body) {
+      if (!!err) {
+        console.log(err)
+      }
+      res.set('Content-Type', req.query.contentType)
+      res.send(body)
+    });
+  }
+}
 
+function getTicketUsingGETMock(req, res) {
     if (req.query.contentType === 'application/pdf') {
         var options = {
             root: path.join(__dirname, '/../../public/app/components')

@@ -19,11 +19,9 @@ export default class ConnectionDetailController {
   }
 
   getPrices () {
-    let headers = this.connectionService.authService.getAuthHeader()
-    // should be on the ui as an option
-    let url = this.trip._links.prices.href + "&passengers=42"
+    let tripId = this.trip.tripId;
+    let url = '../api/v2/prices?tripIds=' + tripId + "&passengers=paxa;42;half-fare"
     this.connectionService.$http.get(url, {
-      headers
     })
       .then((res) => {
         this.price = res.data[0].price
