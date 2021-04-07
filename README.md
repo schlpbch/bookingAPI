@@ -2,6 +2,7 @@
 [![](https://images.microbadger.com/badges/image/schlpbch/bookingapi.svg)](https://microbadger.com/images/schlpbch/bookingapi "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/schlpbch/bookingapi.svg)](https://microbadger.com/images/schlpbch/bookingapi "Get your own version badge on microbadger.com")
 [![dependencies Status](https://david-dm.org/schlpbch/bookingapi/status.svg)](https://david-dm.org/schlpbch/bookingapi)
+
 ## About
 
 This a simple Node.js based mock server to test the [bookingAPI](api/swagger/swagger.yaml). The mock implementation is intended for fast protoyping and to get the API right (Getting APIs right is *hard*).
@@ -14,17 +15,18 @@ Once the API is right, the API will be implemented of SBB's distribution system 
 
 More to come...
 
-Here  you can find a initial functional [road map](docs/roadmap.md).
-
 ## Installing
+
 The easiest way is to pull the docker image:
 
 ```bash
 docker pull schlpbch/bookingapi
 ```
+
 The latest docker image is always available at https://hub.docker.com/r/schlpbch/bookingapi/.
 
 ## Running the Mock Server
+
 The easiest way is to run the docker image:
 
 ```bash
@@ -58,21 +60,8 @@ To start simply use
 The server uses self signed certificates, they must be replaced
 with real ones for production!
 
-## Live App and Documentation
+## Developing
 
-The Web App is available at:
-
-- [http://booking.sbb.ch/app/](http://booking.sbb.ch/app/)
-
-Thanks to **SwaggerUI** the up-to-date documentation is always available at:
-
-- [http://booking.sbb.ch/docs/](http://booking.sbb.ch/docs/)
-
-and the latest JSON can be accessed at:
-
-- [http://booking.sbb.ch/api-docs](http://booking.sbb.ch/api-docs)
-
-Developing
 First, **Nodejs** and **npm** which comes with it is needed. Then to install all the modules, simply run:
 
 ```bash
@@ -80,6 +69,12 @@ First, **Nodejs** and **npm** which comes with it is needed. Then to install all
 ```
 
 This will install the package defined in [package.json](package.json) file.
+
+To run the App, do:
+
+```bash
+  npm run dev
+```
 
 To edit the API interactively, do:
 
@@ -90,7 +85,6 @@ To edit the API interactively, do:
 The browser will then provide you with tab to edit the specification.
 
 To run Swagger in mock mode, start with:
-
 
 ```bash
   swagger project start -m
@@ -118,9 +112,11 @@ or more simple:
 front-end part. This bundle includes source maps for debugging.
 
 *To run the app in production* please run the following command
+
 ```bash
   npm run prod
 ```
+
 which minifies the bundle and excludes source maps as we do not
 want to deliver our code in plain text.
 
@@ -130,23 +126,3 @@ To run the *mock* server as docker container, do:
   docker build .
   docker run -d -p 8080:8080 --name api-mock-srv <containerId>
 ```
-
-## ToDo
-- Integrate [Swagger Middleware](https://github.com/BigstickCarpet/swagger-express-middleware/blob/master/docs/samples/walkthrough2.md) to easily pre-populate data
-- Get the API right
- - Expose journey planning as a route of its own
-- Setup API Management
-- Setup Security (JSON Web Token)
-- Products API
-- Cache-Control
-- SuperSaver Prices
-- Validity-Information for Prebookings (20 min offers 30 min prebookings)
-
-## Done
-- <del>Clarify legalese</del>
-- <del>Align with FSM specification</del>
-- <del>Complete wiring Wep App with API</del>
-- <del>Translate API to English</del>
-- <del>Write a client to verify the usability of the API (APIs are UIs for developers).</del>
-- <del>Align with Fahrplan team</del>
-- <del>Align with Open Data (better Open API) team<del>
